@@ -1,0 +1,10 @@
+product_family,evidence_source,evidence_type,observation,confidence,publication_status
+Satin/evening/opera gloves,1688 screenshots,PLATFORM_EVIDENCE,"Hero and recommendation modules show satin, long and evening glove styles",HIGH,"Can describe as product category; no capacity claim"
+Lace bridal/formal gloves,1688 screenshots,PLATFORM_EVIDENCE,"Black, white and colored lace variants recur in product cards and categories",HIGH,"Can describe as product category; verify active SKUs"
+Mesh/sheer/tulle gloves,1688 screenshots,PLATFORM_EVIDENCE,"Sheer mesh gloves with pearl/detail decoration are shown",HIGH,"Can describe as product category; verify materials"
+Fingerless/half-finger gloves,1688 screenshots + keyword export,PLATFORM_EVIDENCE,"Fingerless styles appear in store; 1456 of 1989 keyword rows contain fingerless or half-finger language",MEDIUM,"Separate bridal and non-bridal intent before targeting"
+Veils/head accessories,1688 screenshots,PLATFORM_EVIDENCE,"Veil/headwear appears in store navigation and product modules",MEDIUM,"Secondary category pending SKU confirmation"
+Factory profile,1688 screenshots,PLATFORM_EVIDENCE,"Store shows Jiangshan Meilai Clothing Factory, Zhejiang Quzhou Jiangshan location and 2010 establishment",MEDIUM,"Verify legal English name and date"
+Factory scale,1688 screenshots,PLATFORM_EVIDENCE,"Profile displays 500 m2, 19 employees, 101-500万 annual transaction range",LOW-MEDIUM,"Do not publish until confirmed"
+Custom/private label,1688 screenshots,PLATFORM_EVIDENCE,"Profile displays custom MOQ 300 pairs and private-label MOQ 1000 pairs",LOW-MEDIUM,"Confirm current terms by product"
+Production line,1688 screenshots,PLATFORM_EVIDENCE,"Production view displays 15 staff, monthly output 21-50万 and five-day raw material procurement",LOW-MEDIUM,"Do not publish exact figures until confirmed"
