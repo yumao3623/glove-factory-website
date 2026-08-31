@@ -17,3 +17,7 @@ Consumer ecommerce, cart, checkout, payment, accounts, order management, CRM, da
 ## DEFERRED
 
 Individual PDPs, conditional style child pages, second-language routes, secure reference-image upload, CMS, advanced filtering, downloadable spec library, and automated CRM sync. Each requires evidence and an ADR before implementation.
+
+## Implementation aid boundary
+
+Phase 3 may use Build Web Apps skills as implementation/testing aids, while `PROJECT_SPEC_V1.md` remains authoritative. The presence of Frontend App Builder, Frontend Testing/Debugging, React Best Practices or shadcn/ui does not permit Stripe, payment, Supabase, Postgres, database, ecommerce or another out-of-scope feature. Such a change requires a new reviewed ADR and explicit scope approval.

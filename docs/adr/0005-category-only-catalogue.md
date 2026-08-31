@@ -13,4 +13,4 @@ Full PDP catalogue, or no product-level presentation.
 Lower maintenance and no thin/duplicate PDP risk; individual products are less shareable/searchable. Data model reserves slugs for a future migration.
 
 ## Change trigger
-More than 30 active products, unique approved specs/images for most products, buyer need for shareable SKU links, and a named catalogue owner.
+Reconsider only when the evidence supports product-level information gain: unique approved specifications and imagery for a meaningful share of the catalogue, a demonstrated buyer need for shareable SKU/product URLs, acceptable thin/duplicate-content risk, and a named catalogue owner who can maintain pages. A catalogue larger than roughly 30 active products is a supporting scale signal, not a necessary or sufficient trigger.

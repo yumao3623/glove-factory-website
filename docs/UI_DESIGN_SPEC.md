@@ -1,8 +1,12 @@
 # UI Design Specification
 
-## Recommended direction: Editorial Utility
+## Recommended direction: Editorial Utility (`FROZEN`)
 
-Use a restrained B2B interface with fashion sensitivity: real glove and veil photography, quiet navy/ink text, white and cool-neutral surfaces, and a single accessible blue CTA. The UI should feel credible to a sourcing manager while preserving the elegance of occasionwear. The generated UI/UX reference recommends Trust & Authority, Playfair Display plus Inter, and neutral professional blue; these are directional inputs, not a mandate to copy any template.
+Use a restrained B2B interface with fashion sensitivity: real glove and veil photography, quiet navy/ink text, white and cool-neutral surfaces, and a single accessible CTA. The UI should feel credible to a sourcing manager while preserving the elegance of occasionwear. The generated UI/UX reference recommends Trust & Authority, Playfair Display plus Inter, and neutral professional blue; these are directional inputs, not a mandate to copy any template.
+
+### Provisional design tokens (`PROVISIONAL_DESIGN_TOKENS`)
+
+Playfair Display + Inter, ink `#0F172A`, slate `#334155`, background `#F8FAFC`, text `#020617`, and CTA candidate `#0369A1` are starting tokens only. Phase 3 may make a bounded visual comparison with real approved product images, then freeze exact fonts, palette and CTA treatment through a Human Visual Gate. Any alternative must preserve contrast, performance, readability and the Editorial Utility personality.
 
 ### Alternative directions considered
 
@@ -14,8 +18,8 @@ Use a restrained B2B interface with fashion sensitivity: real glove and veil pho
 
 - Max content width 1200-1280px with consistent horizontal gutters; full-width bands only for hero/trust transitions.
 - 8px spacing unit; common vertical rhythm 16/24/32/48/64px. No decorative card nesting; cards represent individual products or framed tools only.
-- Typography: one expressive serif for display headings only if performance/licensing is approved; highly legible sans-serif for body, metadata and forms. Minimum body size 16px on mobile and 1.5 line-height.
-- Palette direction: ink `#0F172A`, slate `#334155`, background `#F8FAFC`, text `#020617`, CTA blue `#0369A1`; verify 4.5:1 contrast and provide focus rings.
+- Typography: one expressive serif for display headings only if performance/licensing is approved; highly legible sans-serif for body, metadata and forms. Minimum body size 16px on mobile and 1.5 line-height. Exact font choice is provisional.
+- Palette direction: cool neutral with one accessible CTA accent; candidate values are listed above and must be contrast-tested before freeze. Provide focus rings.
 - Images are the primary visual evidence. Use stable aspect ratios, object-fit rules and descriptive captions where a detail needs interpretation.
 
 ## Navigation and page behavior

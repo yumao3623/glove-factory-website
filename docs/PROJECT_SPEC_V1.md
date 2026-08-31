@@ -20,7 +20,7 @@ This is the single implementation contract for Phase 3. Phase 3 must not change 
 
 `FALLBACK_POSITIONING`: **Bridal, Evening & Costume Gloves Manufacturer**, to be used only if the factory elects to defer veil/kids publication.
 
-Homepage H1 direction is the primary positioning phrase. It is not a brand name. Use an approved English company name only after the factory supplies it; until then use a placeholder in metadata/spec tests, never an invented identity.
+The positioning concept is frozen, but exact homepage H1 copy is `COPY_FREEZE_PENDING_VISUAL_REVIEW`. Phase 3 may compare “Occasion” and “Special Occasion” wording, hierarchy and line length with real product photography, provided the same range intent and route ownership are retained. It is not a brand name. Use an approved English company name only after the factory supplies it; until then use a placeholder in metadata/spec tests, never an invented identity.
 
 ## 2. Final sitemap and page ownership
 
@@ -57,7 +57,7 @@ Each candidate child (`/opera-gloves/satin/`, `/bridal-gloves/lace/`, `/bridal-g
 1. At least 8 active, distinct products in the child with approved status.
 2. At least 3 approved images per representative product and at least 12 usable child images overall.
 3. A distinct search intent is observed in a current SERP sample: at least 6 of the top 10 organic results materially match the child intent, and the parent page cannot answer it without a dedicated experience.
-4. At least 400 words of unique, factory-confirmed content plus unique metadata and internal links.
+4. Sufficient unique, factory-confirmed content, imagery and specifications exist to satisfy the child intent independently, without filler, duplication or keyword padding. A planning estimate may be recorded, but no word count is a pass/fail rule.
 5. No material cannibalization with a parent or another child, documented in the keyword ownership map.
 6. A named owner agrees to maintain the page when products change.
 
@@ -65,7 +65,7 @@ If any condition fails, render the style as a section/filter on the parent and k
 
 ## 5. Product page model
 
-V1 is **category-only B2B catalogue**. Do not build individual indexable PDPs. Collection cards expose approved name, image, style/material, dimensions and “Request a Quote” context from `PRODUCT_DATA_MODEL.md`; unresolved values are omitted or marked pending. Reconsider PDPs only when the ADR 0005 triggers are met: >30 active products, unique approved specs/images for most, buyer need for shareable SKU links and a catalogue owner.
+V1 is **category-only B2B catalogue**. Do not build individual indexable PDPs. Collection cards expose approved name, image, style/material, dimensions and “Request a Quote” context from `PRODUCT_DATA_MODEL.md`; unresolved values are omitted or marked pending. Reconsider PDPs only when the ADR 0005 evidence triggers are met: product-level information gain, unique approved specs/images for a meaningful share, demonstrated shareable-URL demand, acceptable thin-content risk and a catalogue owner. Roughly 30 active products is supporting scale evidence only.
 
 ## 6. Data and assets
 
@@ -85,7 +85,7 @@ Follow `SEO_TECHNICAL_SPEC.md`: HTTPS and one host, trailing slash, one canonica
 
 ## 10. UI direction
 
-Implement `Editorial Utility` from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, accessible blue CTA, serif display plus sans body, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. shadcn is a reference/component source, not architecture.
+Implement `Editorial Utility` from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. Fonts, exact hex values and CTA treatment are provisional design tokens pending a human visual gate with real product imagery. shadcn is a reference/component source, not architecture.
 
 ## 11. Analytics taxonomy
 
@@ -95,7 +95,11 @@ Define events now; wire GA4 only after launch consent and property approval: `rf
 
 Only `FACTORY_CONFIRMED` scope, general customization availability and overseas enquiry ownership are publishable now. MOQ, sample terms, lead times, capacity, certifications, exact specs, legal identity and public contacts remain pending as defined in `PUBLISHING_BOUNDARIES.md`.
 
-## 13. Phase 3 acceptance criteria
+## 13. Phase 3 implementation-aid policy
+
+This specification is the source of truth. Build Web Apps skills/plugins may be used as implementation or testing aids: Frontend App Builder, Frontend Testing/Debugging, React Best Practices and shadcn/ui. Their existence does not authorize scope expansion. Stripe, payment, Supabase, Postgres, any database, ecommerce or other out-of-scope capability requires a new reviewed ADR and explicit V1 scope change.
+
+## 14. Phase 3 acceptance criteria
 
 - Every route matches `ROUTE_REGISTRY.md`; no duplicate keyword owner or unapproved child route.
 - Build is static/server-rendered for primary content and produces valid metadata, sitemap, robots, 404 and redirects.

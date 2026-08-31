@@ -6,9 +6,9 @@ Branch: `codex/phase-2-architecture-freeze`
 
 ## FROZEN DECISIONS
 
-- Homepage positioning: **Occasion Gloves & Wedding Veils Manufacturer**.
+- Homepage positioning concept: **Occasion Gloves & Wedding Veils Manufacturer**; exact H1 is `COPY_FREEZE_PENDING_VISUAL_REVIEW`.
 - V1 sitemap: `/`, `/products/`, five family collections, `/custom-manufacturing/`, `/factory/` (Factory + About), `/contact/`, `/privacy/`.
-- Canonical routes and ownership are frozen in `docs/ROUTE_REGISTRY.md`.
+- Canonical routes and ownership are frozen in `docs/ROUTE_REGISTRY.md`; exclusion records explicitly distinguish `DO_NOT_CREATE` from `REDIRECT_301_ONLY`.
 - Child styles are not top-level owners; generic lace/mesh/fingerless/wholesale routes are excluded or redirected.
 - V1 uses category-only B2B catalogue pages; no individual PDPs.
 - `V1_DATABASE = NONE`; no Supabase or other database.
@@ -16,11 +16,11 @@ Branch: `codex/phase-2-architecture-freeze`
 - RFQ: one serverless endpoint plus external transactional email provider; no V1 upload.
 - English-only launch; future localization requires an ADR and operating owner.
 - Stack: Next.js App Router, TypeScript, Tailwind CSS, audited shadcn primitives, static/server rendering.
-- UI direction: Editorial Utility, specified in `docs/UI_DESIGN_SPEC.md`.
+- UI direction: Editorial Utility, specified in `docs/UI_DESIGN_SPEC.md`; exact fonts, colors and CTA treatment remain provisional tokens pending visual review.
 
 ## CONDITIONAL DECISIONS
 
-`/opera-gloves/satin/`, `/bridal-gloves/lace/`, `/bridal-gloves/sheer-tulle/` and `/bridal-gloves/fingerless/` become indexable only when all six child threshold conditions in `PROJECT_SPEC_V1.md` pass. Individual PDPs are deferred until ADR 0005 triggers pass. File upload, second language, CMS, advanced facets and CRM sync are deferred.
+`/opera-gloves/satin/`, `/bridal-gloves/lace/`, `/bridal-gloves/sheer-tulle/` and `/bridal-gloves/fingerless/` become indexable only when all six child threshold conditions in `PROJECT_SPEC_V1.md` pass. The content condition is qualitative and explicitly rejects filler; no fixed word count is a gate. Individual PDPs are deferred until ADR 0005 evidence triggers pass. File upload, second language, CMS, advanced facets and CRM sync are deferred.
 
 ## PENDING FACTS / BLOCKERS BEFORE PUBLICATION
 
@@ -39,9 +39,9 @@ Consumer ecommerce, checkout/payment, accounts/orders/CRM, database/Supabase, au
 
 ## Required answers
 
-1. Homepage positioning: **Occasion Gloves & Wedding Veils Manufacturer** (fallback: Bridal, Evening & Costume Gloves Manufacturer).
+1. Homepage positioning concept: **Occasion Gloves & Wedding Veils Manufacturer** (fallback: Bridal, Evening & Costume Gloves Manufacturer); exact H1 remains pending visual/copy review.
 2. Final sitemap: as listed above and in `ROUTE_REGISTRY.md`.
-3. Frozen routes: all `FROZEN` rows in the registry; aliases are noindex/redirect only.
+3. Frozen routes: all `FROZEN` rows in the registry; aliases/exclusions carry explicit implementation actions and are not accidental HTML pages.
 4. Conditional child pages: Satin Opera, Bridal Lace, Sheer/Tulle Bridal and Fingerless Bridal, under the explicit threshold.
 5. Individual product pages: **No for V1**.
 6. Database: **NONE**.

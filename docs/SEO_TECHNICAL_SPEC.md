@@ -12,7 +12,7 @@
 - Title template: `{Page topic} | {Approved English company name}`. Until identity is confirmed, use a placeholder in specs and never invent a brand.
 - Every indexable page has a unique 50-60 character target title where practical and a 140-160 character factual meta description; no keyword lists or unsupported promises.
 - Exactly one H1 states the page topic. H2s cover product range, evidence/capability, procurement details and next step in task order; H3s are subordinate, never styling hooks.
-- Homepage H1 direction: `Occasion Gloves & Wedding Veils Manufacturer` (company name is not required in the H1).
+- Homepage positioning direction: `Occasion Gloves & Wedding Veils Manufacturer`; exact H1 is `COPY_FREEZE_PENDING_VISUAL_REVIEW` and must retain the same range intent after visual/copy review.
 
 ## Crawl and index
 
