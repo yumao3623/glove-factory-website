@@ -1,35 +1,44 @@
 # Facts and Assumptions Register
 
-## CONFIRMED (from the project brief or user-provided files)
+## CONFIRMED
 
 - The intended site is an English B2B lead-generation site, not a first-phase online retail checkout.
 - Core audience candidates include wholesalers, importers, distributors, bridal shops, brands, e-commerce sellers and sourcing buyers.
 - Google organic search is the primary acquisition channel.
 - Development is prohibited until the user explicitly approves the next phase.
 
-## PLATFORM_EVIDENCE (visible on 1688 screenshots or returned platform page)
+## FACTORY_CONFIRMED
 
-- Store name shown: 江山市美来服饰厂 (Jiangshan Meilai Clothing/Accessories Factory; final English name is not confirmed).
-- Location shown: Zhejiang, Quzhou, Jiangshan, Shimen Town, Jingtang Village, Jingtang Road 37.
-- Establishment shown as 2010 / 2010-08-13 in profile views.
-- Store catalog shows 166 products, including a gloves category with 108 items in one view.
-- Visible product families include satin gloves, lace gloves, mesh/sheer gloves, long opera-style gloves, fingerless gloves, veils and related bridal accessories.
-- Profile views display platform metrics such as repeat buyers, response rate, return rate, on-time rate, equipment count and OEM; these are platform displays and need verification before publication.
-- Factory profile view displays 500 m², 19 employees, annual transaction range 101-500万, custom MOQ 300 pairs, private-label MOQ 1,000 pairs, and sample/processing options. These are not yet approved public claims.
-- Production-line view displays 15 production staff, monthly output 21-50万, five-day raw-material procurement and sewing-related special processes. These are not yet approved public claims.
+- Active normal-production scope includes Bridal / Wedding Gloves; Long / Evening / Satin / Opera-style Gloves; Lace Gloves; Mesh / Sheer / Tulle / Fingerless styles; Costume / Stage / Cosplay-type Gloves; Kids / Girls Dress Gloves, including Princess styles; and Wedding / Bridal Veils.
+- General customization is available across all active product families above, including Wedding / Bridal Veils.
+- Existing responsible personnel can handle early overseas website enquiries. This removes enquiry ownership as an architecture blocker.
 
-## INFERENCE (working hypotheses only)
+## FACTORY_PLATFORM_EVIDENCE
 
-- Bridal/formal gloves are the strongest fit for the requested B2B positioning because they recur across storefront hero modules, categories, recommendations and factory descriptions.
-- Satin, lace, mesh/sheer and long gloves are likely core product clusters; fingerless/half-finger terms are large in the keyword export but may include unrelated winter, work, sports and motorcycle intent.
-- The site should likely lead with wholesale/OEM capability and product evidence, then route buyers to category pages and a quote form.
-- A product-led architecture is safer than a generic fashion/accessories site until export history, materials and capacity are verified.
+- The factory's 1688 storefront shows satin, lace, sheer/mesh, long/opera, fingerless, bridal, kids/dress, costume/decorative and veil products.
+- Visible 1688 cumulative sales include 5万+ for a long sheer/lace occasion style, 2.4万+ for a kids satin bow/formal style, 1.2万+ for a long lace fingerless wedding style and 1.1万+ for a 55 cm satin style. These values are volatile platform displays observed on 2026-08-31.
+- Kids / Girls / Princess-style formal gloves are therefore not treated as an edge product line.
+- These observations support factory product experience, active assortment and relative domestic-platform traction only. They do not establish global sales, export sales, international demand or bestseller status.
 
-## UNKNOWN / do not publish without confirmation
+## PLATFORM_EVIDENCE
 
-- Final English company/brand name, legal entity and preferred romanization.
-- Export countries, export history, named customers, certifications and compliance claims.
-- Exact MOQ by product/material/color, sample fee, sample lead time, bulk lead time and monthly capacity.
-- Material composition, test standards, packaging options, private-label scope and quality-control process.
-- Whether the displayed platform metrics remain current and may legally be reused on an independent site.
-- Who owns and responds to overseas enquiries, business email and supported languages.
+- Store name shown: 江山市美来服饰厂. A final publishable English legal/brand identity is not confirmed.
+- Location and establishment information, catalogue counts, profile metrics, equipment count, OEM badges and production-line figures are visible on 1688 but remain platform displays until separately confirmed for publication.
+- Profile views display 500 m2, 19 employees, annual transaction range 101-500万, custom MOQ 300 pairs, private-label MOQ 1,000 pairs and sample/processing options. These are not approved public claims.
+- Production-line views display 15 production staff, monthly output 21-50万, five-day raw-material procurement and sewing processes. These are not approved public claims.
+
+## INFERENCE
+
+- V1 product navigation should be organized by product/occasion family rather than by wholesale/manufacturer modifier pages.
+- Product keywords can attract qualified commercial discovery, while factory evidence and RFQ modules convert B2B visitors on the same canonical page.
+- Satin, Lace, Sheer / Tulle and Fingerless work better as material/style children or facets across multiple top-level families.
+- Kids Dress Gloves deserve an independent top-level candidate because factory-platform traction and live SERPs span flower-girl, formal, princess, communion, pageant and costume use rather than one parent family.
+
+## PENDING / UNKNOWN
+
+- Publishable English legal company name, brand spelling and preferred romanization.
+- Exact public contact method: Email, WhatsApp, Phone or another channel.
+- Exact customization boundaries by product, including pattern, color, sizing, logo, packaging and customer-supplied-material rules.
+- Exact MOQ, sample fee, sample lead time, bulk lead time and monthly capacity.
+- Exact material composition/specifications, testing standards, certifications, packaging and quality-control claims.
+- Export countries/history, named customers and permission to reuse specific 1688 metrics on the independent site.

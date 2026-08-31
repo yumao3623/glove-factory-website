@@ -1,11 +1,15 @@
-# Factory Questions Before Public Copy
+# Factory Questions Before Architecture Freeze or Public Claims
 
-These are the only unresolved questions that can materially change positioning, pricing or legal safety.
+Active product scope, general customization availability, overseas enquiry ownership and the active status of Wedding / Bridal Veils are `FACTORY_CONFIRMED`. They are no longer blockers.
 
-1. What legal English company name and brand spelling should appear on the website?
-2. Which product families are actively manufactured today: satin, lace, mesh/sheer, opera/long, fingerless, veils and other accessories? Which should be excluded?
-3. What are the real MOQ, sample fee, sample lead time and bulk lead time for each priority family? Are the 300-pair / 1,000-pair platform figures current?
-4. What OEM/private-label services are actually available (pattern, material, color, size, logo, packaging), and which require customer-supplied materials?
-5. Which materials, testing standards and certifications can be documented and published? Are any platform badges or ratings reusable on the independent site?
-6. Can the factory confirm current production capacity, equipment count, staffing and quality-control steps, with permission to publish exact figures?
-7. Which countries/regions and buyer types should sales prioritize, and who owns overseas enquiries (email, WhatsApp/phone, response hours, languages)?
+The remaining questions do not block Phase 1.1 research. They must be answered only when a Phase 2 decision or public claim depends on them:
+
+1. What publishable English legal company name, brand spelling and romanization may the website use?
+2. Which Email, WhatsApp, Phone or other channel will be the exact public enquiry method?
+3. What are the exact customization boundaries by family: pattern, color, sizing, logo, packaging, customer-supplied materials and exclusions?
+4. What MOQ applies by product/customization type, and which values may be published?
+5. What sample availability, fee and lead time may be published?
+6. What bulk lead time and capacity ranges may be published?
+7. Which exact material composition, dimensions, specifications, testing standards, certifications, packaging and quality-control claims are documented and approved for publication?
+
+Until confirmed, these remain `UNKNOWN` or `PLATFORM_EVIDENCE`. They block only the relevant public statement, conversion promise or final page specification; they do not block the Phase 1.1 architecture recommendation.
