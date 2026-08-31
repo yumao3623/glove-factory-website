@@ -4,9 +4,16 @@
 
 Identify which English query clusters can bring qualified wholesale/OEM buyers for the actual product families. Competitors are SEO competitors discovered from SERPs, not the 1688 screenshots.
 
+## PROVISIONAL_RESEARCH_SCOPE
+
+- Primary SEO research locale: **United States / English**.
+- Secondary validation locale: **United Kingdom / English**.
+- This is a Phase 1 research constraint, not a final commercial market decision.
+- Open factory questions about MOQ, lead time, capacity, exact OEM scope and certifications remain `UNKNOWN` or `PLATFORM_EVIDENCE`. They do not block Keyword/SERP/Competitor Research unless they directly determine core-category eligibility, permission to make a public claim, or ability to serve the target buyer.
+
 ## Method
 
-1. Confirm target markets and language variant (start with US/UK English unless the factory chooses another priority).
+1. Apply `PROVISIONAL_RESEARCH_SCOPE`: US English primary and UK English secondary validation.
 2. Use the seed clusters in `research/keywords/KEYWORD_RESEARCH_SEED.md` in Semrush and Google Search for the target locale/device.
 3. For every representative query, record top 10 organic domains, URL, page type, title/H1, product family, B2B signal, proof modules, CTA and content gaps.
 4. Cluster only when Google shows materially similar intent and page forms; split bridal/formal from winter/work/sports fingerless intent.
@@ -32,4 +39,4 @@ Identify which English query clusters can bring qualified wholesale/OEM buyers f
 
 ## Stop conditions
 
-Do not freeze a primary keyword, write final SEO copy, or start UI architecture until: target market is chosen, the factory answers the highest-impact questions, at least one SERP pass is complete, and competing page types are documented.
+Do not freeze a primary keyword, write final SEO copy, or start UI architecture until: the provisional locale scope is documented, at least one SERP pass is complete, competing page types are documented, and any unresolved factory question that directly changes core-category eligibility, public claims, or target-buyer serviceability is resolved.
