@@ -1,11 +1,11 @@
-# Factory Questions Before Public Copy
+# Factory Questions Before Architecture Freeze or Public Claims
 
-These are the only unresolved questions that can materially change positioning, pricing or legal safety.
+Phase 1 does not require generic MOQ, capacity, equipment-count, staffing, certification or lead-time answers. Keep those as `UNKNOWN` or `PLATFORM_EVIDENCE` unless a public page will make a specific promise. The questions below are retained because they directly affect Architecture Freeze or publishable commercial claims.
 
-1. What legal English company name and brand spelling should appear on the website?
-2. Which product families are actively manufactured today: satin, lace, mesh/sheer, opera/long, fingerless, veils and other accessories? Which should be excluded?
-3. What are the real MOQ, sample fee, sample lead time and bulk lead time for each priority family? Are the 300-pair / 1,000-pair platform figures current?
-4. What OEM/private-label services are actually available (pattern, material, color, size, logo, packaging), and which require customer-supplied materials?
-5. Which materials, testing standards and certifications can be documented and published? Are any platform badges or ratings reusable on the independent site?
-6. Can the factory confirm current production capacity, equipment count, staffing and quality-control steps, with permission to publish exact figures?
-7. Which countries/regions and buyer types should sales prioritize, and who owns overseas enquiries (email, WhatsApp/phone, response hours, languages)?
+1. What legal English company name/brand spelling and overseas enquiry owner/channel may be published?
+2. Which product families and meaningful style/SKU breadth are actively manufactured now: satin/long opera, lace bridal, sheer/tulle bridal, fingerless bridal, and veils/accessories? Which must be excluded from V1?
+3. Are veils and related bridal accessories an actively manufactured strategic range that can enter the first-version product architecture, or only a cross-sell/deferred range?
+4. What customization/OEM/private-label services may be publicly claimed for the selected glove families: pattern, materials, colours, sizing, logo, packaging, customer-supplied materials, and exclusions?
+5. Which material composition, product specification, testing/certification or quality claims are documented and approved for public use? Which platform facts may not be reused?
+
+When public copy later needs MOQ, samples, production lead time, capacity or certification, obtain a dated factory confirmation for that exact statement first.
