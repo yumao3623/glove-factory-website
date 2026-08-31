@@ -1,0 +1,54 @@
+# Environment files and local configuration
+.env
+.env.*
+!.env.example
+
+# Credentials, tokens, secrets, and private keys
+credentials
+credentials.*
+**/credentials
+**/credentials.*
+tokens
+tokens.*
+**/tokens
+**/tokens.*
+secrets
+secrets.*
+**/secrets
+**/secrets.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+.npmrc
+.pypirc
+
+# Dependencies and generated output
+node_modules/
+.next/
+dist/
+build/
+coverage/
+
+# Logs, caches, and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+~$*
+.cache/
+.tmp/
+tmp/
+temp/
+
+# Editor and operating-system metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
