@@ -1,14 +1,16 @@
 # Infrastructure Registry
 
-| Resource | Phase 0 status | Decision |
-| --- | --- | --- |
-| Database / Supabase | NONE | Not needed for a brochure/catalogue + enquiry form MVP. |
-| Git repository | Local Git exists | No remote configured; recommend private `glove-factory-website` after approval. |
-| Hosting | NONE | Research only; choose after architecture and form requirements. |
-| Domain / DNS / CDN | NONE | Do not register yet. |
-| Business email | UNKNOWN | Confirm mailbox owner before form integration. |
-| Contact form | NONE | Compare provider options in next phase; no provider created. |
-| Google Search Console / GA4 | NONE | Configure at launch after domain ownership is available. |
-| Environment variables | NONE | `.env` files and secrets are not present. |
+| Resource | Status | Phase 2 decision / boundary |
+|---|---|---|
+| GitHub repository | DECIDED | `yumao3623/glove-factory-website`; phase branch and checkpoint tag are used. |
+| Hosting | DECIDED | Vercel for V1; Cloudflare Pages is fallback. No project created. |
+| Domain | PENDING_DOMAIN | Factory must provide/approve domain; do not purchase in Phase 2. |
+| DNS/CDN | PENDING_DOMAIN | Configure with chosen host only after domain approval; HTTPS and one canonical host required. |
+| Business email | PENDING_ACCOUNT | Exact public mailbox/owner not supplied. |
+| RFQ/Form | DECIDED | Serverless endpoint + external transactional email provider; provider/account/API key pending. |
+| Analytics | DEFERRED | Define events now; create GA4 only at launch with consent/privacy review. |
+| Google Search Console | DEFERRED | Verify the approved domain at launch; no property created. |
+| Database / Supabase | NOT_REQUIRED | `V1_DATABASE = NONE`; no Supabase project or schema. |
+| Environment variables/secrets | NOT_REQUIRED | None created; Phase 3 must use platform secret storage, never commit secrets. |
 
-No production resource, paid service, database or credential was created in Phase 0.
+No production resource, paid service, database, domain or credential was created in Phase 2.
