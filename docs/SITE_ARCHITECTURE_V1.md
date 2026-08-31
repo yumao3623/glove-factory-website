@@ -1,4 +1,6 @@
-# Site Architecture V1
+# Site Architecture V1 (Phase 1.1 Historical Recommendation)
+
+> This file records the reviewed Phase 1.1 provisional recommendation. The Phase 2 freeze is authoritative in `PROJECT_SPEC_V1.md` and `ROUTE_REGISTRY.md`.
 
 ## Status and evidence
 
