@@ -42,7 +42,7 @@ Confirmed:
 Changed:
 
 - Veils changed from `DEFER` to V1 core because active production and customization are now `FACTORY_CONFIRMED` and keyword/SERP evidence is strong.
-- Kids / Girls / Princess Dress Gloves changed from an edge line to an independent V1 candidate because 1688 platform traction and clean kids SERPs align.
+- Kids / Girls Dress Gloves changed from an edge line to an independent V1 candidate because 1688 platform traction and clean kids SERPs align; `princess gloves` remains supporting style/use-case terminology.
 - Costume / Stage Gloves entered the top-level recommendation, with scope controls because the generic SERP is broad.
 - Separate Bridal Wholesale and other modifier pages were removed. Product pages now carry B2B evidence and RFQ conversion.
 - Homepage positioning changed from a single glove-family focus to options covering the confirmed business range.

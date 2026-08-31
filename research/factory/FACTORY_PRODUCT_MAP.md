@@ -13,7 +13,7 @@ This map was revised during Phase 1.1 on 2026-08-31. `FACTORY_CONFIRMED` records
 | Lace Gloves | `FACTORY_CONFIRMED`: normally produced and customizable. | Lace styles recur in the catalogue and visible sales data. | Material/style child across Bridal, Opera, Kids and Costume; generic query remains mixed. |
 | Mesh / Sheer / Tulle / Fingerless Styles | `FACTORY_CONFIRMED`: normally produced and customizable. | Mesh, sheer and fingerless styles appear in catalogue and sales evidence. | Style/material children or filters, not one generic top-level family. |
 | Costume / Stage / Cosplay-type Gloves | `FACTORY_CONFIRMED`: normally produced and customizable. | Stage, Halloween, cosplay and decorative titles appear with domestic-platform sales. | Top-level V1 candidate with scope-controlled wording. |
-| Kids / Girls / Princess / Dress Gloves | `FACTORY_CONFIRMED`: normally produced and customizable. | A kids satin bow/formal product shows 2.4万+ cumulative 1688 sales; other kids/princess/flower-girl styles are present. | Top-level V1 candidate; flower-girl, princess, formal and costume uses overlap. |
+| Kids / Girls Dress Gloves | `FACTORY_CONFIRMED`: normally produced and customizable. | A kids satin bow/formal product shows 2.4万+ cumulative 1688 sales; other kids/princess/flower-girl styles are present. | Top-level V1 candidate; flower-girl, princess, formal and costume uses overlap. |
 | Wedding / Bridal Veils | `FACTORY_CONFIRMED`: normally produced and customizable. | Veils appear in storefront navigation and visible product listings. | Top-level V1 product family. |
 
 ## Confirmed commercial scope

@@ -9,7 +9,7 @@
 
 ## FACTORY_CONFIRMED
 
-- Active normal-production scope includes Bridal / Wedding Gloves; Long / Evening / Satin / Opera-style Gloves; Lace Gloves; Mesh / Sheer / Tulle / Fingerless styles; Costume / Stage / Cosplay-type Gloves; Kids / Girls / Princess / Dress Gloves; and Wedding / Bridal Veils.
+- Active normal-production scope includes Bridal / Wedding Gloves; Long / Evening / Satin / Opera-style Gloves; Lace Gloves; Mesh / Sheer / Tulle / Fingerless styles; Costume / Stage / Cosplay-type Gloves; Kids / Girls Dress Gloves, including Princess styles; and Wedding / Bridal Veils.
 - General customization is available across all active product families above, including Wedding / Bridal Veils.
 - Existing responsible personnel can handle early overseas website enquiries. This removes enquiry ownership as an architecture blocker.
 

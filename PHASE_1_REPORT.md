@@ -17,7 +17,7 @@ The revised V1 recommendation is five top-level families:
 1. Bridal / Wedding Gloves
 2. Opera / Evening / Formal Gloves
 3. Costume / Stage Gloves
-4. Kids / Girls / Princess Dress Gloves
+4. Kids / Girls Dress Gloves
 5. Wedding / Bridal Veils
 
 ### 2. What supports each decision?
