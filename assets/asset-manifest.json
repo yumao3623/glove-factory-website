@@ -1,0 +1,99 @@
+{
+  "schema": "ASSET_PIPELINE.md",
+  "reviewed_at": "2026-08-31",
+  "assets": [
+    {
+      "asset_id": "factory-workshop-01",
+      "path": "assets/factory/original/factory-workshop-01.png",
+      "role": "factory-process",
+      "source": "user-provided attachment: codex-clipboard-81063e60-28f3-4af6-815a-e0c76c76086b.png",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "publication_boundary": "prototype-only until reuse permission is confirmed",
+      "alt": "Factory workshop with workers cutting and preparing fabric",
+      "dimensions": "1920x1080",
+      "sha256": "9e7764e924c319bb8b3e8ee4178f2bec04a4cfbb96edd0e84aa3aeb1938c9501"
+    },
+    {
+      "asset_id": "factory-workshop-02",
+      "path": "assets/factory/original/factory-workshop-02.png",
+      "role": "factory-process",
+      "source": "user-provided attachment: codex-clipboard-1a270526-ea18-4e90-bdfb-4beac4bd76db.png",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "publication_boundary": "prototype-only until reuse permission is confirmed",
+      "alt": "Factory sewing workshop with operators at workstations",
+      "dimensions": "1920x1080",
+      "sha256": "f0f2e30bb336a457b69778f8d9428481970fbff942589f7950540aeba32d2d39"
+    },
+    {
+      "asset_id": "bridal-lace-gloves",
+      "role": "product-candidate-set",
+      "source": "1688 marketplace ZIP: 镂空手套..._728908046635_images.zip",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "selected_review_ids": ["镂空手套结婚婚纱长款蕾丝绣花钉珠露指-01", "镂空手套结婚婚纱长款蕾丝绣花钉珠露指-02", "镂空手套结婚婚纱长款蕾丝绣花钉珠露指-14", "镂空手套结婚婚纱长款蕾丝绣花钉珠露指-15"],
+      "publication_boundary": "do not publish until image reuse permission is confirmed"
+    },
+    {
+      "asset_id": "sheer-long-lace-gloves",
+      "role": "product-candidate-set",
+      "source": "1688 marketplace ZIP: 新品跨境长款网纱..._856992679458_images.zip",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "selected_review_ids": ["新品跨境长款网纱手套婚纱礼服欧美万圣-01", "新品跨境长款网纱手套婚纱礼服欧美万圣-02", "新品跨境长款网纱手套婚纱礼服欧美万圣-06", "新品跨境长款网纱手套婚纱礼服欧美万圣-07"],
+      "publication_boundary": "do not publish until image reuse permission is confirmed"
+    },
+    {
+      "asset_id": "kids-satin-bow-gloves",
+      "role": "product-candidate-set",
+      "source": "1688 marketplace ZIP: 厂家直销儿童缎面蝴蝶结..._737751870967_images.zip",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "selected_review_ids": ["厂家直销儿童缎面蝴蝶结手套儿童演出派-01", "厂家直销儿童缎面蝴蝶结手套儿童演出派-02", "厂家直销儿童缎面蝴蝶结手套儿童演出派-03", "厂家直销儿童缎面蝴蝶结手套儿童演出派-04", "厂家直销儿童缎面蝴蝶结手套儿童演出派-05", "厂家直销儿童缎面蝴蝶结手套儿童演出派-06"],
+      "publication_boundary": "do not publish until image reuse permission is confirmed"
+    },
+    {
+      "asset_id": "long-satin-opera-gloves",
+      "role": "product-candidate-set",
+      "source": "1688 marketplace ZIP: 加长缎面礼服手套..._814978872980_images.zip",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "selected_review_ids": ["加长缎面礼服手套婚礼晚礼服配件cos-01", "加长缎面礼服手套婚礼晚礼服配件cos-02", "加长缎面礼服手套婚礼晚礼服配件cos-03", "加长缎面礼服手套婚礼晚礼服配件cos-04", "加长缎面礼服手套婚礼晚礼服配件cos-05", "加长缎面礼服手套婚礼晚礼服配件cos-06"],
+      "publication_boundary": "do not publish until image reuse permission is confirmed"
+    },
+    {
+      "asset_id": "wedding-veil",
+      "role": "product-candidate-set",
+      "source": "1688 marketplace ZIP: 夏季新品头纱..._742127569207_images.zip",
+      "permission_status": "REQUIRES_PERMISSION_CONFIRMATION",
+      "visual_status": "VISUAL_GATE_APPROVED_CANDIDATE",
+      "selected_review_ids": ["夏季新品头纱万圣节新娘蕾丝花边头饰欧-01", "夏季新品头纱万圣节新娘蕾丝花边头饰欧-02", "夏季新品头纱万圣节新娘蕾丝花边头饰欧-05", "夏季新品头纱万圣节新娘蕾丝花边头饰欧-07"],
+      "publication_boundary": "do not publish until image reuse permission is confirmed"
+    },
+    {
+      "asset_id": "fringe-satin-gloves",
+      "role": "research-reference",
+      "source": "1688 marketplace ZIP: 流苏长款色丁手套..._846736575326_images.zip",
+      "permission_status": "UNKNOWN",
+      "visual_status": "REJECT_FOR_PRODUCTION",
+      "reason": "visible 1688 watermark / marketplace attribution in supplied images"
+    },
+    {
+      "asset_id": "princess-print-satin-gloves",
+      "role": "research-reference",
+      "source": "1688 marketplace ZIP: 跨境_欧美热卖印花冰雪艾莎..._776815144156_images.zip",
+      "permission_status": "UNKNOWN",
+      "visual_status": "REJECT_FOR_PRODUCTION",
+      "reason": "source/title explicitly invokes Frozen/Elsa IP context; no Disney/IP authorization"
+    },
+    {
+      "asset_id": "marketplace-product-posters",
+      "role": "research-reference",
+      "source": "selected poster/detail images across supplied ZIPs",
+      "permission_status": "UNKNOWN",
+      "visual_status": "RESEARCH_ONLY",
+      "reason": "Chinese marketing copy, dimensions, claims, packaging or marketplace-style layouts"
+    }
+  ]
+}
