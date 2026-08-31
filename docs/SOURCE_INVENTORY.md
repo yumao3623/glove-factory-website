@@ -17,6 +17,8 @@
 | `C:/Users/毛彧/Desktop/SOP.png` | PLATFORM_EVIDENCE / process reference | Mind map supplied by user; useful for workflow, not proof of factory capability. |
 | User-provided 1688 screenshots (20 PNG attachments) | PLATFORM_EVIDENCE | Primary visual evidence for store categories, products, profile, production line and contact data. |
 | `https://jsmeilai.1688.com/` | PLATFORM_EVIDENCE | Public request returned HTTP 200 and a JS application shell; not sufficient for complete extraction. |
+| `https://jsmeilai.1688.com/page/offerlist.html` | FACTORY_PLATFORM_EVIDENCE | Authenticated 1688 offer-list / sales-ranking page observed read-only on 2026-08-31. Visible titles and cumulative domestic-platform sales support active assortment, factory product experience and relative platform traction only. They are not export, global or international sales evidence. No cookie, token, password or session secret was read or stored. |
+| User manual keyword review dated 2026-08-31 | THIRD_PARTY_SEMRUSH_INTERFACE / PLATFORM_EVIDENCE | User-transcribed US volume, global volume and KD values from `sem.3ue.com`. The source remains a third-party Semrush-style interface, not official Semrush first-party data. Blank fields remain unavailable and are not inferred. |
 | `https://github.com/yumao3623/shadcn-landing-page` | UNKNOWN / future visual reference | Record only; do not clone or treat as architecture. |
 | `https://zippystarter.com/tools/shadcn-ui-theme-generator` | UNKNOWN / future visual reference | Record only; do not use to choose site structure before SEO research. |
 

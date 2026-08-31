@@ -1,133 +1,138 @@
-# Phase 1 Report: Keyword, SERP, and Competitor Research
+# Phase 1 Report: Keyword, SERP, Competitor and Manual Review
 
 Date: 2026-08-31
 
 ## Scope and evidence discipline
 
-`PROVISIONAL_RESEARCH_SCOPE`: United States / English is the primary SEO research locale; United Kingdom / English is secondary validation. This is a research scope, not a decision that the factory will target either market.
+`PROVISIONAL_RESEARCH_SCOPE`: United States / English is primary; United Kingdom / English is secondary validation. This is an SEO research scope, not a final commercial-market decision.
 
-Factory product fit remains `PLATFORM_EVIDENCE` from the supplied 1688 storefront screenshots and Phase 0 product map, unless separately marked `CONFIRMED`. Keyword metrics are visible estimates from `THIRD_PARTY_SEMRUSH_INTERFACE` (`sem.3ue.com`), not official Semrush first-party data. Google live SERP is a separate, volatile `PLATFORM_EVIDENCE` source. Neither source confirms factory capabilities.
+Active product scope, general customization and overseas enquiry ownership are `FACTORY_CONFIRMED`. 1688 titles and cumulative sales are `FACTORY_PLATFORM_EVIDENCE` for domestic-platform assortment, product experience and relative traction only. They are not global, export or international sales. Keyword metrics are from `THIRD_PARTY_SEMRUSH_INTERFACE`, not official Semrush first-party data. Google live SERP is a separate volatile `PLATFORM_EVIDENCE` source. Architecture decisions remain `INFERENCE` and all URLs are `PROVISIONAL_ROUTE`.
 
-The live bulk interface accepted a 100-keyword candidate batch. Some low-frequency modifier rows exposed no metric or a request to refresh metrics. Such values are recorded as unavailable; they are not treated as zero demand. The 1,989-row original export remains a seed dataset, not a set of 1,989 individually researched queries.
-
-## Answers to the Phase 1 questions
+## Phase 1 findings
 
 ### 1. Which 3-5 product families are most worth doing SEO for?
 
-The recommended SEO priorities are:
+The revised V1 recommendation is five top-level families:
 
-1. **Bridal / Wedding Gloves**: `bridal gloves` (1,300 US volume, KD 13) and `wedding gloves` (1,600, KD 17) have aligned retail-commercial SERPs and high Phase 0 product fit.
-2. **Opera / Evening Gloves**: `opera gloves` (2,900, KD 17) is the dominant established name for the long-formal family. The page must explicitly avoid leather and winter positioning.
-3. **Satin Opera Gloves**: `satin opera gloves` (880, KD 4) has a materially focused product/category SERP and warrants a child landing rather than being hidden under generic opera.
-4. **Lace Bridal Gloves**: `bridal lace gloves`, `lace bridal gloves`, and `lace wedding gloves` have qualified bridal product/collection SERPs and high Phase 0 product fit.
-5. **Sheer / Tulle Bridal Gloves**: lower-volume but qualified terms such as `sheer wedding gloves` and `tulle gloves` align with relevant visual product evidence and focused commercial SERPs.
+1. Bridal / Wedding Gloves
+2. Opera / Evening / Formal Gloves
+3. Costume / Stage Gloves
+4. Kids / Girls / Princess Dress Gloves
+5. Wedding / Bridal Veils
 
-### 2. What is the basis for each product-family decision?
+### 2. What supports each decision?
 
-This is an `INFERENCE` from demand, SERP form, and Phase 0 product-fit evidence. The bulk-interface metrics support demand and query wording; Google live SERP supports intent and page form; the supplied storefront/product map supports only product-fit hypothesis. It is not a confirmation that every family is actively manufactured or approved for public claim.
+| Family | Factory evidence | Keyword / SERP evidence | Decision |
+| --- | --- | --- | --- |
+| Bridal / Wedding Gloves | Active production and customization `FACTORY_CONFIRMED`; recurring 1688 lace, sheer and bridal products | Wedding Gloves US 1.6K; Bridal Gloves US 1.3K; commercial collection SERPs | Core; one canonical owner |
+| Opera / Evening / Formal Gloves | Active production and customization `FACTORY_CONFIRMED`; long satin/lace products show platform traction | Opera Gloves US 2.9K / KD 17; Satin Opera US 880 / KD 4; commercial retail SERPs | Core; merge occasion synonyms |
+| Costume / Stage Gloves | Active production and customization `FACTORY_CONFIRMED`; Halloween/stage/decorative platform evidence | Costume Gloves US 590 / KD 22; broad commercial SERP | Core with strict scope controls |
+| Kids / Girls Dress Gloves | Active production and customization `FACTORY_CONFIRMED`; kids satin bow style displays 2.4万+ cumulative 1688 sales | Princess Gloves US 590; clean girls dress/formal and flower-girl SERPs | Independent core recommendation |
+| Wedding / Bridal Veils | Active production and customization `FACTORY_CONFIRMED`; listed assortment evidence | Wedding Veils US 6.6K / global 30.3K; commercial SERP | Core; Wedding wording primary |
 
-### 3. What real English names do US users use?
+### 3. What English names do US users use?
 
-US and UK SERPs use **bridal gloves**, **wedding gloves**, **opera gloves**, **evening gloves**, **satin opera gloves**, **long satin gloves**, **elbow length gloves**, **bridal lace gloves**, **lace wedding gloves**, **sheer wedding gloves**, and **tulle gloves**. The terminology evidence is documented in `research/keywords/PRODUCT_TERMINOLOGY_MAP.csv`.
+Natural family language is `bridal gloves` / `wedding gloves`; `opera gloves` with `evening gloves`, `formal gloves` and `elbow length gloves`; `costume gloves`; `girls dress gloves`, `girls formal gloves` and `flower girl gloves`; and `wedding veils` with `bridal veils` as a secondary synonym.
 
-The English product language is not a direct translation exercise. For example, broad **mesh gloves** does not reliably mean bridal mesh gloves, while **opera gloves** is the natural long-formal term but can attract leather-related results.
+`Satin`, `Lace`, `Sheer`, `Tulle` and `Fingerless` are real product terms, but they are material/style or child language rather than five separate top-level families. `Princess gloves` is useful but mixed across children, adults, party, wedding and character/IP-adjacent intent.
 
 ### 4. Which high-volume terms are unsuitable?
 
-- **wedding veils** (6,600) and **bridal veils** (4,400) have demand, but current product fit is only medium-confidence platform evidence. They are deferred until the active range is confirmed.
-- **lace gloves** (2,900) is mixed fashion/DIY/non-bridal traffic, so it does not own a generic category.
-- **mesh gloves** (1,000) mixes industrial, hunting, motocross, and fashion results; it is quarantined.
-- Generic **fingerless gloves** and **fingerless gloves wholesale** are overwhelmingly winter/work/tactical/non-target, despite large seed-dataset representation.
-- Brand, marketplace, `near me`, Amazon, Etsy, winter, thermal, work, cycling, motorcycle, medical, and leather terms remain excluded unless a later, specific evidence case changes that decision.
+- `fingerless gloves` is dominated by winter, work, leather, sport, motorcycle and other non-target intent.
+- `lace gloves` has US 2.9K / global 8.3K but mixes fashion, DIY, costume and other uses.
+- `long gloves` has US 1.9K / global 5.6K but mixes leather and generic intent.
+- `mesh gloves` mixes industrial, chainmail, sport and fashion uses.
+- `wholesale gloves` is about US 480 but its SERP is nitrile, latex, disposable and work-glove led.
+- `bridal veils` is valid, but its wider universe includes Bridal Veil Falls / Yosemite place-name pollution; `wedding veils` is cleaner.
 
 ### 5. Which B2B money keywords are most valuable?
 
-The most relevant qualified procurement terms are **bridal gloves wholesale**, **wholesale bridal gloves**, and **opera gloves wholesale**. US and UK Google results contain wholesale category and product pages, even when the third-party interface showed an unavailable or low exact metric. These are B2B opportunities because of explicit buyer task and SERP page form, not because of inferred volume.
+The best qualified expressions are `wholesale bridal gloves` (about US 20), `wholesale opera gloves` (about US 20), `bridal veil wholesale` (about US 10) and `wedding veils wholesale` (about US 10). Their value is buyer qualification, not traffic scale.
 
-`custom bridal gloves` is deliberately not a primary B2B money term: the observed SERP is consumer bespoke/personalized retail. A future Custom Manufacturing page can support qualified buyers, but must not claim it will rank for that consumer-personalization query.
+They should appear naturally in B2B evidence, product-range context and RFQ paths on the canonical product page. They do not justify separate wholesale/manufacturer/supplier page variants.
 
-### 6. Which keywords should share one canonical page?
+### 6. Which keywords share a canonical page?
 
-**Share one canonical owner:**
+- `bridal gloves` and `wedding gloves` -> `/bridal-gloves/`
+- `opera gloves`, `evening gloves`, `formal gloves`, `elbow length gloves` and qualified `long gloves` -> `/opera-gloves/`
+- `wedding veils` and product-intent `bridal veils` -> `/wedding-veils/`
+- `girls dress gloves`, `girls formal gloves`, `flower girl gloves`, qualified `princess gloves` and `girls wedding gloves` -> `/kids-dress-gloves/`
 
-- `bridal gloves` + `wedding gloves` -> `/bridal-wedding-gloves`
-- bridal-qualified lace variants -> `/bridal-wedding-gloves/lace`
-- bridal-qualified sheer/tulle variants -> `/bridal-wedding-gloves/sheer-tulle`
-- bridal-qualified fingerless variants -> `/bridal-wedding-gloves/fingerless`, only if active style breadth is confirmed
+### 7. Which must be split?
 
-### 7. Which keywords must be split into separate pages?
+The five product families need separate owners because their buyer tasks and result sets differ. Satin Opera may become a child under Opera if approved assortment breadth supports an indexable page. Bridal Lace, Sheer/Tulle and Fingerless may become children or substantial modules under Bridal; they must not become generic top-level owners.
 
-**Keep separate:**
+### 8. What is the final Fingerless decision?
 
-- `bridal gloves wholesale` / `wholesale bridal gloves` -> `/wholesale-bridal-gloves`, conditional on approved commercial terms
-- `opera gloves` / `evening gloves` -> `/opera-evening-gloves`
-- `satin opera gloves` / `long satin gloves` -> `/opera-evening-gloves/satin`
+**Subcategory/style.** Qualified `fingerless bridal gloves` is relevant and commercial, but generic fingerless demand is dominated by non-target uses. It is neither a core category nor fully excluded.
 
-The split is based on query task and current page form, not wording alone. Generic lace, mesh, or fingerless queries have no canonical page owner.
+### 9. Which manufacturer and wholesale competitors were found?
 
-### 8. What is the final fingerless decision?
+No reviewed site can be responsibly classified as a proven comparable `MANUFACTURER_COMPETITOR` from the inspected public evidence.
 
-**Decision: subcategory.** `fingerless bridal gloves` has a qualified bridal retail SERP (390 US volume, KD 8), while generic fingerless demand in the seed is dominated by cashmere, thermal, winter, work, motorcycle, cycling, leather, medical, and brand intent. It should be a Bridal/Lace/Sheer child or controlled filter, not a first-level category and not a generic `fingerless gloves` SEO target.
-
-### 9. Which real manufacturer / wholesale competitors were found?
-
-**Manufacturer competitors:** none can be responsibly classified from the public evidence inspected. A retailer or wholesaler's product assortment and claims are not evidence that it is a comparable factory.
-
-**Wholesale competitors:** `weddingfactorydirect.com`, `mariellonline.com`, `wonatrading.com`, and `cbflowerscrafts.com`. They recur in relevant wholesale SERPs and use wholesale categories, product grids, length/material taxonomy, pricing or buyer gating.
+Recurring `WHOLESALER_COMPETITOR` sites are `weddingfactorydirect.com`, `mariellonline.com`, `wonatrading.com` and `cbflowerscrafts.com`. They demonstrate wholesale category, material/length taxonomy, product-grid, pricing/gating and buyer-action patterns.
 
 ### 10. Which important SEO competitors were found?
 
-`corneliajames.com` and `graceloveslace.com` recur across bridal, opera, satin, lace, and fingerless commercial queries with focused collection/product pages.
+`corneliajames.com` and `graceloveslace.com` recur across bridal, opera, satin, lace and fingerless commercial results with focused collection/product pages. Amazon, Etsy, Faire and DHgate occupy SERP space but are marketplaces, not comparable owned B2B sites.
 
-### 11. What pages obtain their main non-brand organic visibility?
+### 11. Which pages drive competitor non-brand visibility?
 
-The evidence supports page-level, not domain-traffic, conclusions. The visible non-brand entry points are wholesale glove category/product pages for wholesale competitors and occasion/material/bridal collections for retailers. The current third-party domain-organic module was not available for a reliable top-pages/estimated-traffic reading, so no domain totals, rankings, or backlink claims have been invented.
+The available evidence is page-level: wholesale glove category/product pages for wholesalers and bridal/occasion/material collection pages for retailers. The third-party domain organic module did not provide reliable Top Pages, traffic, position or backlink data, so domain totals and backlink claims remain unavailable rather than inferred.
 
-### 12. What content, trust, and conversion gaps are visible in the SERPs?
+### 12. What content, trust and conversion gaps are visible?
 
-- Wholesale results are often catalog-heavy, price-gated, or weak on sourcing evidence. A future B2B page could differentiate with factual product scope, qualification route, and approved proof.
-- Retail pages commonly explain material, length, fit, and styling. A supplier page should add only factory-confirmed specifications and customization boundaries.
-- Competitor pages expose limited verified process/factory evidence in this pass. This is an opportunity to publish approved evidence, not permission to invent capacity, OEM, quality, certification, delivery, or sustainability claims.
+- Wholesale pages are often catalogue-heavy or price-gated and weak on verified manufacturing evidence.
+- Retail pages explain material, length, fit and styling but usually do not serve B2B sourcing evaluation.
+- A future page can combine a clear product range with approved customization boundaries, factory proof and an RFQ path.
+- This gap does not authorize unconfirmed MOQ, capacity, certifications, lead time, material, sustainability or quality claims.
 
-### 13. What is the recommended first-version site architecture?
+### 13. What is the recommended V1 architecture?
 
-Recommended candidate pages are Home, Products Hub, Bridal/Wedding Gloves, conditional Bridal Wholesale, Opera/Evening Gloves, Satin Opera child, Bridal Lace child, Sheer/Tulle child, conditional Bridal Fingerless child, conditional Custom Manufacturing, conditional Factory/About, and Contact/Request Quote.
+Recommended: `/`, `/products/`, `/bridal-gloves/`, `/opera-gloves/`, `/costume-gloves/`, `/kids-dress-gloves/`, `/wedding-veils/`, `/custom-manufacturing/`, `/factory/` and `/contact/`. Every route is `PROVISIONAL_ROUTE`.
 
-Do not create a generic Lace Gloves, Mesh Gloves, or Fingerless Gloves page. Defer Veils/Bridal Accessories as a V1 core category. The full page-purpose, evidence, CTA, internal-link, index-status, and confidence matrix is in `docs/SITE_ARCHITECTURE_V1.md`; page ownership is in `research/seo/KEYWORD_TO_PAGE_MAP.csv`.
+Do not create generic Lace, Mesh, Satin or Fingerless top-level pages, or near-duplicate wholesale/manufacturer/supplier variants. Detailed ownership and evidence needs are in `docs/SITE_ARCHITECTURE_V1.md` and `research/seo/KEYWORD_TO_PAGE_MAP.csv`.
 
 ### 14. Is a blog needed now?
 
-**Do not launch a broad Blog/Guides hub now.** The research supports a future factual guide opportunity around length selection or satin/lace/tulle comparison, but no approved editorial evidence owner or ongoing content program exists. A keyword alone does not justify a page.
+No. A broad Blog/Guides hub is not justified until there is an approved editorial program, factual source material and an owner. Future topics such as glove length or material comparison can be reconsidered after the product architecture is frozen.
 
-### 15. Should veils / bridal accessories enter V1 core structure?
+### 15. Should Veils / Bridal Accessories enter V1 core?
 
-**Do not include Veils / Bridal Accessories in the V1 core architecture yet.** Demand is real, but Phase 0 supports only medium-confidence platform evidence that this is an active, strategic factory range. The architecture can be reconsidered when active SKU/manufacturing scope is confirmed.
+Yes for **Wedding / Bridal Veils**. Active production and customization are now `FACTORY_CONFIRMED`; `wedding veils` shows US 6.6K / global 30.3K and a commercial SERP. Broader unspecified Bridal Accessories do not automatically receive a page.
 
 ### 16. What still needs factory confirmation?
 
-The remaining narrow questions are in `docs/FACTORY_QUESTIONS.md`:
+Publishable English identity, exact public contact method, exact customization boundaries, MOQ, samples, lead time, capacity, material/specification details and certifications. These do not block Phase 1.1; each blocks only the architecture or public promise that depends on it.
 
-1. Publishable legal English company/brand identity and enquiry owner/channel.
-2. Active product-family and meaningful SKU-style breadth for the proposed glove pages.
-3. Whether veils/accessories are an actively manufactured strategic range or a deferred cross-sell range.
-4. Permitted customization/OEM/private-label scope and exclusions.
-5. Approved materials, specifications, testing/certification, and quality claims.
+### 17. Is the project ready for Phase 2?
 
-MOQ, samples, lead time, capacity, equipment count, and certification claims remain `UNKNOWN` or `PLATFORM_EVIDENCE` until dated factory confirmation is obtained. They do not block keyword/SERP/competitor research; they block only a page or public promise that depends on them.
+It is ready for a **human Phase 2 Architecture Freeze gate review**. It is not permission to start Phase 2, UI, code, deployment or publication. Phase 2 must freeze homepage positioning, routes, child-page thresholds and factual publishing boundaries.
 
-### 17. Is the project ready to enter Phase 2?
+## Manual Review Revision
 
-**Conditional readiness only.** Phase 1 supplies a defensible provisional architecture and page ownership map. It is sufficient to hold an Architecture Freeze gate after the five factual confirmations above. It does not authorize Phase 2 work, site design, UI, code, deployment, or publication before that review.
+1. **V1 top-level products:** Bridal/Wedding Gloves; Opera/Evening/Formal Gloves; Costume/Stage Gloves; Kids/Girls Dress Gloves; Wedding/Bridal Veils.
+2. **Wedding Veils:** upgraded to V1 core.
+3. **Kids / Princess Gloves:** independent Kids Dress category; Princess is supporting terminology, not the owner.
+4. **Costume Gloves:** top-level, but only with supported-style and licensed-character scope controls.
+5. **Opera / Evening / Formal:** one canonical family under `/opera-gloves/`.
+6. **Bridal / Wedding Gloves:** one canonical family under `/bridal-gloves/`.
+7. **Satin / Lace / Sheer / Fingerless:** child, facet or substantial module; no generic top-level owner.
+8. **Homepage scope:** the full confirmed occasion-glove and veil range; final positioning/H1 stays open for Phase 2.
+9. **SEO strategy:** formally adopt `High-fit Product Keyword -> Product / Collection Landing Page -> B2B Manufacturing Evidence -> RFQ Conversion`.
+10. **Phase 2 readiness:** ready for Architecture Freeze review once the human gate accepts these revisions; no Phase 2 work has started.
 
-## Deliverables and traceability
+## Homepage positioning options
 
-- Product language: `research/keywords/PRODUCT_TERMINOLOGY_MAP.csv`
-- Curated keyword universe and clusters: `research/keywords/KEYWORD_UNIVERSE.csv`, `research/keywords/KEYWORD_CLUSTER_MAP.csv`
-- Live SERP records and findings: `research/serp/SERP_ANALYSIS.csv`, `research/serp/SERP_FINDINGS.md`
-- Competitor evidence: `research/competitors/COMPETITOR_MATRIX.csv`, `research/competitors/COMPETITOR_ANALYSIS.md`
-- Canonical ownership: `research/seo/KEYWORD_TO_PAGE_MAP.csv`
-- Architecture and decisions: `docs/SITE_ARCHITECTURE_V1.md`, `docs/PHASE_1_DECISIONS.md`
+- Fashion & Occasion Gloves Manufacturer
+- Bridal, Evening & Costume Gloves Manufacturer
+- Gloves & Bridal Accessories Manufacturer
+- Occasion Gloves & Wedding Veils Manufacturer
 
-## Phase 1 stop
+These are positioning options, not approved H1 copy.
 
-Phase 1 research is complete pending human Phase 1 Gate Review. No pull request, merge, site development, production change, or Phase 2 execution is included in this checkpoint.
+## Deliverables and stop
+
+Phase 1.1 updates the factory evidence, keyword terminology/universe/clusters, live SERP findings, keyword-to-page ownership, architecture, decisions and factory questions. `docs/PHASE_1_MANUAL_REVIEW.md` provides the revision trail.
+
+Stop after the Phase 1.1 commit and push. Do not create a PR or tag, merge `main`, start Phase 2 or develop the website.
