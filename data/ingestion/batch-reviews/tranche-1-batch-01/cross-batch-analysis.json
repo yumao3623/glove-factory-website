@@ -1,0 +1,104 @@
+{
+  "schema": "product-batch-cross-batch-analysis/v1",
+  "batch": "tranche-1-batch-01",
+  "historicalFingerprintCount": 10,
+  "relationshipCount": 4,
+  "humanDecisionCount": 4,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": [
+        "814984964565",
+        "737751870967"
+      ],
+      "status": "POSSIBLE_DUPLICATE",
+      "exactSharedImageHashes": [
+        "5db775e58e1e060cb6fccfba292f3d18b568f279e0ea32a09a20f74a5f761194",
+        "7834df1a87e46470763646d99565665c56647462cf19016d8400d1e833dcbfbe",
+        "c963833e7a74e6e97bba63b66352636c7b5b624020d53f6f6c59aab8604c49d7",
+        "4bc2e163cdb1e89e6af2a9c053550cb40aee9ac0d6f6bd31902aed98c3fdcf7c",
+        "f7aacbc3a9bc187e066e207f35f8cace99982d4754f505543c5b18ce2878f88e",
+        "876c6135fb0844c8a865ecec367c55b868af9a275ba6f1c96380ed22d8d5a1cd",
+        "4337506ca70b7861b2ccba18589fff619d435dd6a390ecd9d90b2df3faf204d6",
+        "64f02a19ea3352acccebe0e2efb74c964732d1987d7d9ac9ae64b5c26a5c3f09",
+        "1b728554f3b232ba08ec63a51677cff9335b8476592768375695aea5319e6f1f",
+        "87de4a4fce3948cd34998344b24141dfd6950ce19d725148d1be005fa850d70c"
+      ],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction",
+        "both titles include children’s audience wording"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple exact shared source binaries strongly suggest the same marketplace product presentation, but listing ownership and normalized product grouping still require Human Gate. Human Gate decision recorded: SAME_PRODUCT_DIFFERENT_LISTING.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "sharedImageReferenceCount": 28,
+      "sharedSkuImageReferenceCount": 26,
+      "humanDecision": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION",
+      "normalizedProductGroupId": "kids-dress-gloves-group-737751870967"
+    },
+    {
+      "sourceListingIds": [
+        "956309661690",
+        "730186552239"
+      ],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [
+        "cc5277157f3e3fdc732212d1bfab7913f22469035ac4db7962f67717338cad24"
+      ],
+      "sharedEvidence": [
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "An exact shared SKU/source image suggests the same product evidence with potentially different marketplace variation sets; do not merge without Human Gate. Human Gate decision recorded: POSSIBLE_VARIATION.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "sharedImageReferenceCount": 2,
+      "sharedSkuImageReferenceCount": 2,
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": [
+        "844530638864",
+        "730186552239"
+      ],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [
+        "f614c1ef7becad8433c7234dbc7eba9a1daea1c0d6d9978e25d90d16730a7642"
+      ],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "An exact shared SKU/source image suggests the same product evidence with potentially different marketplace variation sets; do not merge without Human Gate. Human Gate decision recorded: POSSIBLE_VARIATION.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "sharedImageReferenceCount": 2,
+      "sharedSkuImageReferenceCount": 2,
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": [
+        "844530638864",
+        "857043957533"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    }
+  ]
+}

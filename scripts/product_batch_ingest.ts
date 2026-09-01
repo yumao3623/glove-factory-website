@@ -3,19 +3,21 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, realpathSync,
 import { fileURLToPath } from "node:url";
 import { basename, dirname, extname, join, resolve, sep } from "node:path";
 import sharp from "sharp";
-import { analyzeCrossListingRelationships, archivePathIsSafe, assetReviewFlags, buildDraft, collectJsonFiles, hasCompleteStorefrontProvenance, isRegularFile, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, productFamilies, relativeToRoot, roleForArchivePath, sha256File, sourceReviewFlags, supportedImageExtensions, supportedMetadataExtensions, triageImages, type HumanReviewDecision, type IntakeAsset, type ListingIntake, type ProductDraft, validateApprovedProduct } from "../lib/product-ingestion";
+import { analyzeCrossBatchRelationships, analyzeCrossListingRelationships, archivePathIsSafe, assetReviewFlags, buildDraft, buildListingRelationshipFingerprint, collectJsonFiles, hasCompleteStorefrontProvenance, isRegularFile, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, productFamilies, relativeToRoot, roleForArchivePath, sha256File, sourceReviewFlags, supportedImageExtensions, supportedMetadataExtensions, triageImages, type CrossListingRelationship, type HumanRelationshipDecision, type HumanReviewDecision, type IntakeAsset, type ListingIntake, type ListingRelationshipFingerprint, type ProductDraft, validateApprovedProduct } from "../lib/product-ingestion";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const workspaceRoot = join(root, ".product-ingestion");
 const authorizedStorefront = "https://jsmeilai.1688.com/";
 const maximumPilotArchives = 8;
 const listingRegistryPath = join(root, "data", "ingestion", "listing-registry.json");
+const relationshipFingerprintPath = join(root, "data", "ingestion", "listing-relationship-fingerprints.json");
 type DurableRegistryEntry = {
   listingId: string;
   batch: string;
   rawArchiveSha256: string;
   normalizedDraftId: string;
   normalizedProductFamily: ProductDraft["suggestedFamily"];
+  normalizedProductGroupId?: string;
   familyDecision: "ACCEPTED" | "PENDING_HUMAN_REVIEW" | "QUARANTINE_DEFER";
   humanGateClassification: ProductDraft["humanGate"]["classification"];
   humanGateOverall: ProductDraft["humanGate"]["overall"];
@@ -23,7 +25,7 @@ type DurableRegistryEntry = {
 };
 
 function usage(): never {
-  throw new Error("Usage: npm run ingest:batch -- <init|inspect|export-review|validate-approved> [--batch <ascii-name>] [--storefront https://jsmeilai.1688.com/]");
+  throw new Error("Usage: npm run ingest:batch -- <init|inspect|export-review|refresh-relationship-fingerprints|validate-approved> [--batch <ascii-name>] [--storefront https://jsmeilai.1688.com/]");
 }
 
 function argument(name: string): string | null {
@@ -61,9 +63,17 @@ function readListingRegistry(): DurableRegistryEntry[] {
   const entries = (value as { entries: Array<DurableRegistryEntry & { listingId?: unknown; batch?: unknown; rawArchiveSha256?: unknown }> }).entries;
   for (const entry of entries) {
     if (!entry || typeof entry.listingId !== "string" || !/^\d{6,}$/.test(entry.listingId) || typeof entry.batch !== "string" || !/^[a-z0-9][a-z0-9-]{2,63}$/.test(entry.batch) || typeof entry.rawArchiveSha256 !== "string" || !/^[a-f0-9]{64}$/.test(entry.rawArchiveSha256)) throw new Error("Each listing registry entry requires a valid listingId, batch, and rawArchiveSha256.");
+    if (entry.normalizedProductGroupId !== undefined && (typeof entry.normalizedProductGroupId !== "string" || !/^[a-z0-9][a-z0-9-]{2,63}$/.test(entry.normalizedProductGroupId))) throw new Error("Each normalizedProductGroupId must be a stable lowercase ASCII identifier.");
   }
   if (new Set(entries.map((entry) => entry.listingId)).size !== entries.length || new Set(entries.map((entry) => entry.rawArchiveSha256)).size !== entries.length) throw new Error("data/ingestion/listing-registry.json must not repeat a listingId or rawArchiveSha256.");
   return entries as DurableRegistryEntry[];
+}
+
+function readRelationshipFingerprints(): ListingRelationshipFingerprint[] {
+  if (!isRegularFile(relationshipFingerprintPath)) throw new Error("Missing data/ingestion/listing-relationship-fingerprints.json; refresh durable historical relationship evidence before inspecting a new batch.");
+  const value: unknown = JSON.parse(readFileSync(relationshipFingerprintPath, "utf8"));
+  if (!value || typeof value !== "object" || (value as { schema?: unknown }).schema !== "product-listing-relationship-fingerprints/v1" || !Array.isArray((value as { entries?: unknown }).entries)) throw new Error("data/ingestion/listing-relationship-fingerprints.json must have the known schema and an entries array.");
+  return (value as { entries: ListingRelationshipFingerprint[] }).entries;
 }
 
 function humanDecisions(path: string, batch: string): Map<string, HumanReviewDecision> {
@@ -195,6 +205,10 @@ async function inspect() {
   }
   const drafts = intakes.map(buildDraft);
   const relationships = analyzeCrossListingRelationships(drafts);
+  const historicalFingerprints = readRelationshipFingerprints();
+  const relationshipDecisions = humanRelationshipDecisions(join(paths.review, "human-decisions.json"), batch);
+  const priorBatchFingerprints = historicalFingerprints.filter((fingerprint) => fingerprint.batch !== batch);
+  const crossBatchRelationships = applyHumanRelationshipDecisions(analyzeCrossBatchRelationships(drafts, priorBatchFingerprints), relationshipDecisions);
   const quarantined = drafts.filter((draft) => draft.status === "QUARANTINED");
   const cleanup = intakes.flatMap((intake) => triageImages(intake.images, intake.humanReviewDecision?.imageReviewNotes).filter((image) => image.disposition === "CLEANUP_REQUIRED").map((image) => ({ sourceZipFilename: intake.originalZipFilename, imageSha256: image.sha256, originalFilename: image.originalFilename, roles: image.roles, reason: image.reason })));
   writeJson(join(paths.draft, "drafts.json"), { schema: "product-batch-drafts/v1", batch, records: drafts.filter((draft) => draft.status === "PENDING_REVIEW") });
@@ -202,7 +216,8 @@ async function inspect() {
   writeJson(join(paths.cleanup, "cleanup-queue.json"), { schema: "product-batch-cleanup/v1", batch, records: cleanup });
   writeJson(join(paths.review, "intake-ledger.json"), { schema: "product-batch-intake-ledger/v1", batch, authorizedStorefront, permissionGrant: "Verified authorized storefront plus listing URL/ID, raw archive hash and image hash automatically inherit the documented store-level reuse permission. This does not approve production visual suitability.", listings: intakes });
   writeJson(join(paths.review, "cross-listing-analysis.json"), { schema: "product-batch-cross-listing-analysis/v1", batch, relationshipCount: relationships.length, automaticMerges: 0, relationships });
-  writeJson(join(paths.review, "review-summary.json"), { schema: "product-batch-review-summary/v1", batch, archiveCount: intakes.length, draftCount: drafts.filter((draft) => draft.status === "PENDING_REVIEW").length, quarantineCount: quarantined.length, cleanupCount: cleanup.length, permissionInheritedImageCount: intakes.flatMap((intake) => intake.images).filter((image) => image.reusePermissionStatus === "STORE_LEVEL_PERMISSION_INHERITED").length, provenanceExceptionCount: drafts.flatMap((draft) => draft.humanGateExceptions).filter((exception) => exception.includes("provenance")).length, humanGateExceptionCount: drafts.flatMap((draft) => draft.humanGateExceptions).length, crossListingRelationshipCount: relationships.length, crossListingHumanReviewCount: relationships.filter((relationship) => relationship.status === "HUMAN_REVIEW" || relationship.status === "POSSIBLE_DUPLICATE" || relationship.status === "POSSIBLE_VARIATION").length, automaticMerges: 0, publicationState: "NO_DRAFT_OR_ASSET_IS_PUBLISHABLE", requiredHumanGate: ["Resolve only provenance, IP/third-party, product-mapping, or image-cleanup exceptions.", "Confirm claims only when the intended website record needs them.", "Create approved ProductRecord data separately; inspection output never becomes application data."] });
+  writeJson(join(paths.review, "cross-batch-analysis.json"), { schema: "product-batch-cross-batch-analysis/v1", batch, historicalFingerprintCount: priorBatchFingerprints.length, relationshipCount: crossBatchRelationships.length, humanDecisionCount: relationshipDecisions.length, automaticMerges: 0, relationships: crossBatchRelationships });
+  writeJson(join(paths.review, "review-summary.json"), { schema: "product-batch-review-summary/v1", batch, archiveCount: intakes.length, draftCount: drafts.filter((draft) => draft.status === "PENDING_REVIEW").length, quarantineCount: quarantined.length, cleanupCount: cleanup.length, permissionInheritedImageCount: intakes.flatMap((intake) => intake.images).filter((image) => image.reusePermissionStatus === "STORE_LEVEL_PERMISSION_INHERITED").length, provenanceExceptionCount: drafts.flatMap((draft) => draft.humanGateExceptions).filter((exception) => exception.includes("provenance")).length, humanGateExceptionCount: drafts.flatMap((draft) => draft.humanGateExceptions).length, crossListingRelationshipCount: relationships.length, crossListingHumanReviewCount: relationships.filter((relationship) => relationship.status === "HUMAN_REVIEW" || relationship.status === "POSSIBLE_DUPLICATE" || relationship.status === "POSSIBLE_VARIATION").length, crossBatchRelationshipCount: crossBatchRelationships.length, crossBatchHumanReviewCount: crossBatchRelationships.filter((relationship) => !relationship.humanDecision && (relationship.status === "HUMAN_REVIEW" || relationship.status === "POSSIBLE_DUPLICATE" || relationship.status === "POSSIBLE_VARIATION")).length, crossBatchHumanDecisionCount: relationshipDecisions.length, automaticMerges: 0, publicationState: "NO_DRAFT_OR_ASSET_IS_PUBLISHABLE", requiredHumanGate: ["Resolve only provenance, IP/third-party, product-mapping, or image-cleanup exceptions.", "Review cross-batch relationships before normalizing multiple listings into one website product.", "Confirm claims only when the intended website record needs them.", "Create approved ProductRecord data separately; inspection output never becomes application data."] });
   console.log(`Inspected ${intakes.length} archive(s). Draft and quarantine outputs remain local under ${relativeToRoot(root, paths.batchRoot)}.`);
 }
 
@@ -216,11 +231,65 @@ function exportReview() {
   }
   mkdirSync(destination, { recursive: true });
   cpSync(paths.review, destination, { recursive: true, force: true });
-  updateListingRegistry(batch, paths);
+  const relationshipDecisions = humanRelationshipDecisions(join(paths.review, "human-decisions.json"), batch);
+  updateListingRegistry(batch, paths, relationshipDecisions);
+  refreshRelationshipFingerprints();
   console.log(`Exported checksum-based review evidence to ${relativeToRoot(root, destination)}. Do not export raw ZIPs, extraction, drafts, or quarantines.`);
 }
 
-function updateListingRegistry(batch: string, paths: ReturnType<typeof pathsFor>) {
+function relationshipDecisionKey(ids: [string, string]): string {
+  return [...ids].sort().join("::");
+}
+
+function humanRelationshipDecisions(path: string, batch: string): HumanRelationshipDecision[] {
+  if (!isRegularFile(path)) return [];
+  const value: unknown = JSON.parse(readFileSync(path, "utf8"));
+  if (!value || typeof value !== "object" || (value as { schema?: unknown }).schema !== "product-batch-human-decisions/v1" || (value as { batch?: unknown }).batch !== batch) throw new Error("review/human-decisions.json relationshipDecisions must use the known schema and matching batch name.");
+  const rawDecisions = (value as { relationshipDecisions?: unknown }).relationshipDecisions;
+  if (rawDecisions === undefined) return [];
+  if (!Array.isArray(rawDecisions)) throw new Error("review/human-decisions.json relationshipDecisions must be an array.");
+  const decisions = rawDecisions as HumanRelationshipDecision[];
+  for (const decision of decisions) {
+    if (!Array.isArray(decision.sourceListingIds) || decision.sourceListingIds.length !== 2 || decision.sourceListingIds.some((id) => typeof id !== "string" || !/^\d{6,}$/.test(id))) throw new Error("Each relationship decision requires two numeric sourceListingIds.");
+    if (!["SAME_PRODUCT_DIFFERENT_LISTING", "POSSIBLE_VARIATION", "KEEP_SEPARATE"].includes(decision.decision)) throw new Error(`Relationship ${decision.sourceListingIds.join("/")} has an unknown decision.`);
+    if (!["DUPLICATE_MARKETPLACE_PRESENTATION", "RELATED_LISTING", "KEEP_SEPARATE"].includes(decision.relationshipLabel)) throw new Error(`Relationship ${decision.sourceListingIds.join("/")} has an unknown relationshipLabel.`);
+    if (decision.decision === "SAME_PRODUCT_DIFFERENT_LISTING" && (decision.relationshipLabel !== "DUPLICATE_MARKETPLACE_PRESENTATION" || !decision.normalizedProductGroupId || !/^[a-z0-9][a-z0-9-]{2,63}$/.test(decision.normalizedProductGroupId))) throw new Error(`Relationship ${decision.sourceListingIds.join("/")} requires a stable normalizedProductGroupId.`);
+    if (decision.decision === "POSSIBLE_VARIATION" && decision.relationshipLabel !== "RELATED_LISTING") throw new Error(`Relationship ${decision.sourceListingIds.join("/")} must use RELATED_LISTING.`);
+    if (decision.decision === "KEEP_SEPARATE" && decision.relationshipLabel !== "KEEP_SEPARATE") throw new Error(`Relationship ${decision.sourceListingIds.join("/")} must use KEEP_SEPARATE.`);
+  }
+  if (new Set(decisions.map((decision) => relationshipDecisionKey(decision.sourceListingIds))).size !== decisions.length) throw new Error("review/human-decisions.json must not repeat a relationship pair.");
+  return decisions;
+}
+
+function applyHumanRelationshipDecisions(relationships: CrossListingRelationship[], decisions: HumanRelationshipDecision[]): CrossListingRelationship[] {
+  const byPair = new Map(decisions.map((decision) => [relationshipDecisionKey(decision.sourceListingIds), decision]));
+  for (const decision of decisions) if (!relationships.some((relationship) => relationshipDecisionKey(relationship.sourceListingIds) === relationshipDecisionKey(decision.sourceListingIds))) throw new Error(`Human relationship decision ${decision.sourceListingIds.join("/")} has no matching analyzed relationship.`);
+  return relationships.map((relationship) => {
+    const decision = byPair.get(relationshipDecisionKey(relationship.sourceListingIds));
+    if (!decision) return relationship;
+    const status = decision.decision === "SAME_PRODUCT_DIFFERENT_LISTING" ? "POSSIBLE_DUPLICATE" : decision.decision;
+    const recommendation = decision.decision === "SAME_PRODUCT_DIFFERENT_LISTING" ? "SAME_PRODUCT_DIFFERENT_LISTING" : decision.decision === "POSSIBLE_VARIATION" ? "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET" : "KEEP_SEPARATE";
+    return { ...relationship, status, recommendation, action: "DO_NOT_MERGE", humanDecision: decision.decision, relationshipLabel: decision.relationshipLabel, normalizedProductGroupId: decision.normalizedProductGroupId, rationale: `${relationship.rationale} Human Gate decision recorded: ${decision.decision}.` };
+  });
+}
+
+function refreshRelationshipFingerprints() {
+  const registry = readListingRegistry();
+  const entries: ListingRelationshipFingerprint[] = [];
+  for (const registryEntry of registry) {
+    const batchRoot = pathsFor(registryEntry.batch);
+    const sources = [join(batchRoot.draft, "drafts.json"), join(batchRoot.quarantine, "quarantine.json")];
+    const drafts = sources.flatMap((source) => isRegularFile(source) ? ((JSON.parse(readFileSync(source, "utf8")) as { records?: ProductDraft[] }).records ?? []) : []);
+    const draft = drafts.find((candidate) => candidate.draftId === registryEntry.normalizedDraftId);
+    if (!draft) throw new Error(`Missing local normalized draft ${registryEntry.normalizedDraftId} for registry listing ${registryEntry.listingId}.`);
+    entries.push(buildListingRelationshipFingerprint(draft, registryEntry.batch, registryEntry.rawArchiveSha256, registryEntry.normalizedProductFamily));
+  }
+  mkdirSync(dirname(relationshipFingerprintPath), { recursive: true });
+  writeJson(relationshipFingerprintPath, { schema: "product-listing-relationship-fingerprints/v1", purpose: "Lightweight tracked historical image/SKU hash and title evidence for cross-batch relationship review. Raw images remain Git-ignored.", entries: entries.sort((left, right) => left.batch.localeCompare(right.batch) || left.listingId.localeCompare(right.listingId)) });
+  console.log(`Refreshed ${entries.length} durable relationship fingerprint(s).`);
+}
+
+function updateListingRegistry(batch: string, paths: ReturnType<typeof pathsFor>, relationshipDecisions: HumanRelationshipDecision[]) {
   const ledger = JSON.parse(readFileSync(join(paths.review, "intake-ledger.json"), "utf8")) as { listings?: ListingIntake[] };
   const drafts = [
     ...(JSON.parse(readFileSync(join(paths.draft, "drafts.json"), "utf8")) as { records?: ProductDraft[] }).records ?? [],
@@ -232,14 +301,22 @@ function updateListingRegistry(batch: string, paths: ReturnType<typeof pathsFor>
     const draft = drafts.find((candidate) => candidate.sourceListingIds.includes(intake.listingId!));
     if (!draft) throw new Error(`Cannot update listing registry for ${batch}: missing normalized draft for ${intake.listingId}.`);
     const decision = intake.humanReviewDecision;
-    return { listingId: intake.listingId, batch, rawArchiveSha256: intake.rawArchiveSha256, normalizedDraftId: draft.draftId, normalizedProductFamily: draft.suggestedFamily, familyDecision: decision?.disposition === "QUARANTINE_DEFER" ? "QUARANTINE_DEFER" : decision?.acceptedFamily ? "ACCEPTED" : "PENDING_HUMAN_REVIEW", humanGateClassification: draft.humanGate.classification, humanGateOverall: draft.humanGate.overall, status: draft.status };
+    const group = relationshipDecisions.find((relationship) => relationship.decision === "SAME_PRODUCT_DIFFERENT_LISTING" && relationship.sourceListingIds.includes(intake.listingId!));
+    return { listingId: intake.listingId, batch, rawArchiveSha256: intake.rawArchiveSha256, normalizedDraftId: draft.draftId, normalizedProductFamily: draft.suggestedFamily, ...(group?.normalizedProductGroupId ? { normalizedProductGroupId: group.normalizedProductGroupId } : {}), familyDecision: decision?.disposition === "QUARANTINE_DEFER" ? "QUARANTINE_DEFER" : decision?.acceptedFamily ? "ACCEPTED" : "PENDING_HUMAN_REVIEW", humanGateClassification: draft.humanGate.classification, humanGateOverall: draft.humanGate.overall, status: draft.status };
   });
   if (new Set(additions.map((entry) => entry.listingId)).size !== additions.length || new Set(additions.map((entry) => entry.rawArchiveSha256)).size !== additions.length) throw new Error(`Cannot update listing registry for ${batch}: normalized entries repeat a listingId or rawArchiveSha256.`);
   const existing = readListingRegistry();
   const conflicts = additions.flatMap((entry) => listingRegistryConflicts(existing, batch, entry.listingId, entry.rawArchiveSha256));
   if (conflicts.length) throw new Error(`Cannot update listing registry for ${batch}: an entry conflicts with another batch (${conflicts.map((entry) => `${entry.batch}:${entry.listingId}`).join(", ")}).`);
   const otherBatches = existing.filter((entry) => entry.batch !== batch);
-  writeJson(listingRegistryPath, { schema: "product-listing-registry/v1", purpose: "Durable cumulative identity and Human Gate state for processed real source listings. Raw archives and derived local files remain Git-ignored.", entries: [...otherBatches, ...additions].sort((left, right) => left.batch.localeCompare(right.batch) || left.listingId.localeCompare(right.listingId)) });
+  const combined = [...otherBatches, ...additions];
+  for (const relationship of relationshipDecisions) {
+    if (relationship.decision !== "SAME_PRODUCT_DIFFERENT_LISTING") continue;
+    const members = combined.filter((entry) => relationship.sourceListingIds.includes(entry.listingId));
+    if (members.length !== 2) throw new Error(`Cannot update listing registry for ${batch}: relationship ${relationship.sourceListingIds.join("/")} does not resolve to two registered listings.`);
+    members.forEach((entry) => { entry.normalizedProductGroupId = relationship.normalizedProductGroupId; });
+  }
+  writeJson(listingRegistryPath, { schema: "product-listing-registry/v1", purpose: "Durable cumulative identity and Human Gate state for processed real source listings. Raw archives and derived local files remain Git-ignored.", entries: combined.sort((left, right) => left.batch.localeCompare(right.batch) || left.listingId.localeCompare(right.listingId)) });
 }
 
 function validateApproved() {
@@ -260,6 +337,7 @@ async function main() {
   if (command === "init") init();
   else if (command === "inspect") await inspect();
   else if (command === "export-review") exportReview();
+  else if (command === "refresh-relationship-fingerprints") refreshRelationshipFingerprints();
   else if (command === "validate-approved") validateApproved();
   else usage();
 }

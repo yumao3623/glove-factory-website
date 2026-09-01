@@ -1,0 +1,248 @@
+{
+  "schema": "product-batch-cross-listing-analysis/v1",
+  "batch": "tranche-1-batch-01",
+  "relationshipCount": 15,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": [
+        "962080651234",
+        "814984964565"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "962080651234",
+        "733010943271"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "962080651234",
+        "819967426657"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "962080651234",
+        "956309661690"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "962080651234",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "814984964565",
+        "733010943271"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence",
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "814984964565",
+        "819967426657"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "814984964565",
+        "956309661690"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "814984964565",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "733010943271",
+        "819967426657"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "733010943271",
+        "956309661690"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "733010943271",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence",
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "819967426657",
+        "956309661690"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "819967426657",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "956309661690",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    }
+  ]
+}

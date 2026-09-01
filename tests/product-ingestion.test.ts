@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedProduct } from "../lib/product-ingestion";
+import { analyzeCrossBatchRelationships, analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, buildListingRelationshipFingerprint, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedProduct } from "../lib/product-ingestion";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -14,16 +14,40 @@ test("keeps raw and derived ingestion state outside Git while retaining an expli
 });
 
 test("keeps a durable cumulative registry for the reviewed real listings", () => {
-  const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; rawArchiveSha256: string; batch: string; normalizedDraftId: string; normalizedProductFamily: string | null; familyDecision: string; status: string }> };
+  const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; rawArchiveSha256: string; batch: string; normalizedDraftId: string; normalizedProductFamily: string | null; normalizedProductGroupId?: string; familyDecision: string; status: string }> };
   assert.equal(registry.schema, "product-listing-registry/v1");
-  assert.equal(registry.entries.length, 10);
-  assert.equal(new Set(registry.entries.map((entry) => entry.listingId)).size, 10);
+  assert.equal(registry.entries.length, 16);
+  assert.equal(new Set(registry.entries.map((entry) => entry.listingId)).size, 16);
   assert.equal(registry.entries.find((entry) => entry.listingId === "776815144156")?.status, "QUARANTINED");
   assert.equal(registry.entries.find((entry) => entry.listingId === "728772172182")?.status, "PENDING_REVIEW");
   assert.equal(registry.entries.find((entry) => entry.listingId === "730186552239")?.familyDecision, "ACCEPTED");
   assert.equal(registry.entries.find((entry) => entry.listingId === "730186552239")?.normalizedProductFamily, "opera-gloves");
+  assert.equal(registry.entries.find((entry) => entry.listingId === "737751870967")?.normalizedProductGroupId, "kids-dress-gloves-group-737751870967");
+  assert.equal(registry.entries.find((entry) => entry.listingId === "814984964565")?.normalizedProductGroupId, "kids-dress-gloves-group-737751870967");
   assert.ok(registry.entries.every((entry) => entry.normalizedDraftId.startsWith("draft-")));
   assert.ok(registry.entries.every((entry) => /^\d{6,}$/.test(entry.listingId) && /^[a-f0-9]{64}$/.test(entry.rawArchiveSha256)));
+});
+
+test("keeps cross-batch relationship fingerprints recoverable without raw binaries", () => {
+  const fingerprints = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-relationship-fingerprints.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; batch: string; rawArchiveSha256: string; imageSha256s: string[]; imageReferenceCounts: Record<string, number> }> };
+  assert.equal(fingerprints.schema, "product-listing-relationship-fingerprints/v1");
+  assert.equal(fingerprints.entries.length, 16);
+  assert.equal(new Set(fingerprints.entries.map((entry) => entry.listingId)).size, 16);
+  assert.ok(fingerprints.entries.every((entry) => /^\d{6,}$/.test(entry.listingId) && /^[a-f0-9]{64}$/.test(entry.rawArchiveSha256) && entry.imageSha256s.length > 0));
+  assert.ok(fingerprints.entries.every((entry) => Object.values(entry.imageReferenceCounts).every((count) => Number.isInteger(count) && count > 0)));
+  assert.equal(JSON.stringify(fingerprints).includes("rawImageBytes"), false);
+});
+
+test("exports the reviewed batch relationship decisions without public catalogue data", () => {
+  const review = JSON.parse(readFileSync(resolve(root, "data/ingestion/batch-reviews/tranche-1-batch-01/cross-batch-analysis.json"), "utf8")) as { relationshipCount: number; humanDecisionCount: number; automaticMerges: number; relationships: Array<{ sourceListingIds: string[]; humanDecision?: string; relationshipLabel?: string; normalizedProductGroupId?: string; action: string }> };
+  assert.equal(review.relationshipCount, 4);
+  assert.equal(review.humanDecisionCount, 4);
+  assert.equal(review.automaticMerges, 0);
+  assert.equal(review.relationships.find((relationship) => relationship.sourceListingIds.includes("814984964565"))?.humanDecision, "SAME_PRODUCT_DIFFERENT_LISTING");
+  assert.equal(review.relationships.find((relationship) => relationship.sourceListingIds.includes("814984964565"))?.relationshipLabel, "DUPLICATE_MARKETPLACE_PRESENTATION");
+  assert.equal(review.relationships.find((relationship) => relationship.sourceListingIds.includes("814984964565"))?.normalizedProductGroupId, "kids-dress-gloves-group-737751870967");
+  assert.ok(review.relationships.filter((relationship) => relationship.humanDecision === "POSSIBLE_VARIATION").every((relationship) => relationship.action === "DO_NOT_MERGE"));
+  assert.equal(existsSync(resolve(root, "data/products/approved/.gitkeep")), true);
 });
 
 test("blocks a listing ID or archive hash reused by a different batch", () => {
@@ -130,6 +154,69 @@ test("cross-listing analysis preserves different constructions as separate draft
   const [relationship] = analyzeCrossListingRelationships([draft("111111", "长款褶皱色丁包指手套",), draft("222222", "长款勾指色丁露指袖套")]);
   assert.equal(relationship?.status, "KEEP_SEPARATE");
   assert.equal(relationship?.action, "DO_NOT_MERGE");
+});
+
+test("cross-batch fingerprints retain lightweight hash and reference evidence", () => {
+  const draft = buildDraft({
+    listingId: "814984964565",
+    originalZipFilename: "test_814984964565_images.zip",
+    rawArchiveSha256: "a".repeat(64),
+    sourceStorefront: "https://jsmeilai.1688.com/",
+    permissionStatus: "STORE_LEVEL_PERMISSION_INHERITED",
+    sourceMetadata: { storeName: null, storefrontUrl: "https://jsmeilai.1688.com/", listingTitle: "儿童缎面蝴蝶结长款手套", listingUrl: "https://detail.1688.com/offer/814984964565.html" },
+    images: [
+      { originalFilename: "主图_01.jpg", archivePath: "主图/主图_01.jpg", sha256: "b".repeat(64), bytes: 128, extension: ".jpg", reviewFlags: [], role: "main" },
+      { originalFilename: "主图_02.jpg", archivePath: "主图/主图_02.jpg", sha256: "b".repeat(64), bytes: 128, extension: ".jpg", reviewFlags: [], role: "main" },
+      { originalFilename: "SKU_01.jpg", archivePath: "SKU/SKU_01.jpg", sha256: "c".repeat(64), bytes: 128, extension: ".jpg", reviewFlags: [], role: "sku" },
+    ],
+    metadataFiles: [],
+    unsupportedFiles: [],
+  });
+  const fingerprint = buildListingRelationshipFingerprint(draft, "tranche-test", "d".repeat(64));
+  assert.deepEqual(fingerprint.imageSha256s, ["b".repeat(64), "c".repeat(64)]);
+  assert.equal(fingerprint.imageReferenceCounts["b".repeat(64)], 2);
+  assert.deepEqual(fingerprint.skuImageSha256s, ["c".repeat(64)]);
+  assert.equal(fingerprint.skuImageReferenceCounts["c".repeat(64)], 1);
+  assert.equal(buildListingRelationshipFingerprint(draft, "tranche-test", "d".repeat(64), "kids-dress-gloves").normalizedProductFamily, "kids-dress-gloves");
+});
+
+test("cross-batch analysis reports exact evidence without merging listings", () => {
+  const draft = buildDraft({
+    listingId: "814984964565",
+    originalZipFilename: "test_814984964565_images.zip",
+    rawArchiveSha256: "a".repeat(64),
+    sourceStorefront: "https://jsmeilai.1688.com/",
+    permissionStatus: "STORE_LEVEL_PERMISSION_INHERITED",
+    sourceMetadata: { storeName: null, storefrontUrl: "https://jsmeilai.1688.com/", listingTitle: "儿童缎面蝴蝶结长款手套", listingUrl: "https://detail.1688.com/offer/814984964565.html" },
+    images: [{ originalFilename: "SKU_01.jpg", archivePath: "SKU/SKU_01.jpg", sha256: "b".repeat(64), bytes: 128, extension: ".jpg", reviewFlags: [], role: "sku" }],
+    metadataFiles: [],
+    unsupportedFiles: [],
+  });
+  const historical = { listingId: "737751870967", batch: "pilot-2026-09-01", rawArchiveSha256: "c".repeat(64), normalizedDraftId: "draft-737751870967", normalizedProductFamily: "kids-dress-gloves" as const, sourceTitle: "儿童缎面蝴蝶结长款手套", imageSha256s: ["b".repeat(64)], skuImageSha256s: ["b".repeat(64)], imageReferenceCounts: { ["b".repeat(64)]: 1 }, skuImageReferenceCounts: { ["b".repeat(64)]: 1 } };
+  const [relationship] = analyzeCrossBatchRelationships([draft], [historical]);
+  assert.equal(relationship?.status, "POSSIBLE_VARIATION");
+  assert.equal(relationship?.recommendation, "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET");
+  assert.deepEqual(relationship?.exactSharedImageHashes, ["b".repeat(64)]);
+  assert.equal(relationship?.action, "HUMAN_DECISION_REQUIRED");
+});
+
+test("cross-batch comparisons can exclude fingerprints from the current batch", () => {
+  const draft = buildDraft({
+    listingId: "111111",
+    originalZipFilename: "test_111111_images.zip",
+    rawArchiveSha256: "a".repeat(64),
+    sourceStorefront: "https://jsmeilai.1688.com/",
+    permissionStatus: "STORE_LEVEL_PERMISSION_INHERITED",
+    sourceMetadata: { storeName: null, storefrontUrl: "https://jsmeilai.1688.com/", listingTitle: "长款缎面手套", listingUrl: "https://detail.1688.com/offer/111111.html" },
+    images: [{ originalFilename: "主图_01.jpg", archivePath: "主图/主图_01.jpg", sha256: "b".repeat(64), bytes: 128, extension: ".jpg", reviewFlags: [], role: "main" }],
+    metadataFiles: [],
+    unsupportedFiles: [],
+  });
+  const sameBatch = { listingId: "111111", batch: "tranche-test", rawArchiveSha256: "c".repeat(64), normalizedDraftId: "draft-111111", normalizedProductFamily: "opera-gloves" as const, sourceTitle: "长款缎面手套", imageSha256s: ["b".repeat(64)], skuImageSha256s: [], imageReferenceCounts: { ["b".repeat(64)]: 1 }, skuImageReferenceCounts: {} };
+  const otherBatch = { ...sameBatch, listingId: "222222", batch: "pilot-old" };
+  const current = [sameBatch, otherBatch].filter((fingerprint) => fingerprint.batch !== "tranche-test");
+  const relationships = analyzeCrossBatchRelationships([draft], current);
+  assert.deepEqual(relationships.map((relationship) => relationship.sourceListingIds), [["111111", "222222"]]);
 });
 
 test("approved records require reviewed product data and approved asset provenance", () => {
