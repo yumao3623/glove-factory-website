@@ -34,6 +34,13 @@ export type HumanReviewDecision = {
   imageReviewNotes?: ImageReviewNote[];
 };
 
+export type HumanRelationshipDecision = {
+  sourceListingIds: [string, string];
+  decision: "SAME_PRODUCT_DIFFERENT_LISTING" | "POSSIBLE_VARIATION" | "KEEP_SEPARATE";
+  relationshipLabel: "DUPLICATE_MARKETPLACE_PRESENTATION" | "RELATED_LISTING" | "KEEP_SEPARATE";
+  normalizedProductGroupId?: string;
+};
+
 export type ListingIntake = {
   listingId: string | null;
   originalZipFilename: string;
@@ -91,6 +98,7 @@ export type ProductDraft = {
 };
 
 export type CrossListingRelationshipStatus = "KEEP_SEPARATE" | "POSSIBLE_VARIATION" | "POSSIBLE_DUPLICATE" | "HUMAN_REVIEW";
+export type CrossListingRelationshipRecommendation = "SAME_PRODUCT_DIFFERENT_LISTING" | "DUPLICATE_MARKETPLACE_PRESENTATION" | "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET" | "KEEP_SEPARATE" | "HUMAN_REVIEW";
 
 export type CrossListingRelationship = {
   sourceListingIds: [string, string];
@@ -100,6 +108,25 @@ export type CrossListingRelationship = {
   distinguishingEvidence: string[];
   rationale: string;
   action: "DO_NOT_MERGE" | "HUMAN_DECISION_REQUIRED";
+  recommendation?: CrossListingRelationshipRecommendation;
+  sharedImageReferenceCount?: number;
+  sharedSkuImageReferenceCount?: number;
+  humanDecision?: HumanRelationshipDecision["decision"];
+  relationshipLabel?: HumanRelationshipDecision["relationshipLabel"];
+  normalizedProductGroupId?: string;
+};
+
+export type ListingRelationshipFingerprint = {
+  listingId: string;
+  batch: string;
+  rawArchiveSha256: string;
+  normalizedDraftId: string;
+  normalizedProductFamily: ProductFamily | null;
+  sourceTitle: string | null;
+  imageSha256s: string[];
+  skuImageSha256s: string[];
+  imageReferenceCounts: Record<string, number>;
+  skuImageReferenceCounts: Record<string, number>;
 };
 
 const factStatuses = new Set<FactStatus>(["CONFIRMED", "PENDING_CONFIRMATION", "UNKNOWN", "NOT_APPLICABLE"]);
@@ -173,38 +200,68 @@ function titleFeatures(title: string): TitleFeatures {
   };
 }
 
+type RelationshipEvidenceInput = {
+  listingId: string;
+  sourceTitle: string | null;
+  imageSha256s: string[];
+  skuImageSha256s: string[];
+  imageReferenceCounts?: Record<string, number>;
+  skuImageReferenceCounts?: Record<string, number>;
+};
+
+function relationshipForPair(left: RelationshipEvidenceInput, right: RelationshipEvidenceInput): CrossListingRelationship {
+  const leftFeatures = titleFeatures(left.sourceTitle ?? "");
+  const rightFeatures = titleFeatures(right.sourceTitle ?? "");
+  const sharedHashes = [...new Set(left.imageSha256s.filter((hash) => right.imageSha256s.includes(hash)))];
+  const sharedEvidence = ([
+    [leftFeatures.long && rightFeatures.long, "both titles identify a long construction"],
+    [leftFeatures.short && rightFeatures.short, "both titles identify a short construction"],
+    [leftFeatures.satin && rightFeatures.satin, "both titles identify satin construction"],
+    [leftFeatures.laceOrMesh && rightFeatures.laceOrMesh, "both titles identify lace or mesh construction"],
+    [leftFeatures.fingerless && rightFeatures.fingerless, "both titles identify fingerless construction"],
+    [leftFeatures.kids && rightFeatures.kids, "both titles include children’s audience wording"],
+  ] as const).filter(([matches]) => matches).map(([, evidence]) => evidence);
+  const distinguishingEvidence = ([
+    [leftFeatures.long !== rightFeatures.long && (leftFeatures.long || rightFeatures.long) && (leftFeatures.short || rightFeatures.short), "long-versus-short construction evidence"],
+    [leftFeatures.fullFinger !== rightFeatures.fullFinger && (leftFeatures.fullFinger || rightFeatures.fullFinger) && (leftFeatures.fingerless || rightFeatures.fingerless), "full-finger versus fingerless construction evidence"],
+    [leftFeatures.satin !== rightFeatures.satin && (leftFeatures.satin || rightFeatures.satin) && (leftFeatures.laceOrMesh || rightFeatures.laceOrMesh), "satin versus lace/mesh construction evidence"],
+    [leftFeatures.ruched !== rightFeatures.ruched && (leftFeatures.ruched || rightFeatures.ruched), "ruched construction appears in only one title"],
+    [leftFeatures.bowOrEdge !== rightFeatures.bowOrEdge && (leftFeatures.bowOrEdge || rightFeatures.bowOrEdge), "cuff or edge detail appears in only one title"],
+    [leftFeatures.embellished !== rightFeatures.embellished && (leftFeatures.embellished || rightFeatures.embellished), "embellishment evidence appears in only one title"],
+    [leftFeatures.printed !== rightFeatures.printed && (leftFeatures.printed || rightFeatures.printed), "printed construction appears in only one title"],
+  ] as const).filter(([matches]) => matches).map(([, evidence]) => evidence);
+  const sharedSkuHashes = [...new Set(left.skuImageSha256s.filter((hash) => right.skuImageSha256s.includes(hash)))];
+  const sharedImageReferenceCount = sharedHashes.reduce((count, hash) => count + Math.min(left.imageReferenceCounts?.[hash] ?? 1, right.imageReferenceCounts?.[hash] ?? 1), 0);
+  const sharedSkuImageReferenceCount = sharedSkuHashes.reduce((count, hash) => count + Math.min(left.skuImageReferenceCounts?.[hash] ?? 1, right.skuImageReferenceCounts?.[hash] ?? 1), 0);
+  if (sharedHashes.length >= 2) return { sourceListingIds: [left.listingId, right.listingId], status: "POSSIBLE_DUPLICATE", exactSharedImageHashes: sharedHashes, sharedEvidence, distinguishingEvidence, rationale: "Multiple exact shared source binaries strongly suggest the same marketplace product presentation, but listing ownership and normalized product grouping still require Human Gate.", action: "HUMAN_DECISION_REQUIRED", recommendation: "DUPLICATE_MARKETPLACE_PRESENTATION", sharedImageReferenceCount, sharedSkuImageReferenceCount };
+  if (sharedHashes.length === 1 && sharedSkuHashes.length) return { sourceListingIds: [left.listingId, right.listingId], status: "POSSIBLE_VARIATION", exactSharedImageHashes: sharedHashes, sharedEvidence, distinguishingEvidence, rationale: "An exact shared SKU/source image suggests the same product evidence with potentially different marketplace variation sets; do not merge without Human Gate.", action: "HUMAN_DECISION_REQUIRED", recommendation: "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET", sharedImageReferenceCount, sharedSkuImageReferenceCount };
+  if (sharedHashes.length) return { sourceListingIds: [left.listingId, right.listingId], status: "POSSIBLE_DUPLICATE", exactSharedImageHashes: sharedHashes, sharedEvidence, distinguishingEvidence, rationale: "An exact shared source binary is meaningful duplicate evidence, but listing metadata and option evidence still require Human Gate comparison.", action: "HUMAN_DECISION_REQUIRED", recommendation: "SAME_PRODUCT_DIFFERENT_LISTING", sharedImageReferenceCount, sharedSkuImageReferenceCount };
+  if (distinguishingEvidence.length) return { sourceListingIds: [left.listingId, right.listingId], status: "KEEP_SEPARATE", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence, rationale: "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.", action: "DO_NOT_MERGE", recommendation: "KEEP_SEPARATE" };
+  if (sharedEvidence.length >= 2) return { sourceListingIds: [left.listingId, right.listingId], status: "HUMAN_REVIEW", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence: [], rationale: "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically.", action: "HUMAN_DECISION_REQUIRED", recommendation: "HUMAN_REVIEW" };
+  return { sourceListingIds: [left.listingId, right.listingId], status: "KEEP_SEPARATE", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence: [], rationale: "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.", action: "DO_NOT_MERGE", recommendation: "KEEP_SEPARATE" };
+}
+
+export function buildListingRelationshipFingerprint(draft: ProductDraft, batch: string, rawArchiveSha256: string, normalizedProductFamily: ProductFamily | null = draft.suggestedFamily): ListingRelationshipFingerprint {
+  const imageReferenceCounts = Object.fromEntries([...new Set(draft.imageAssetHashes)].map((hash) => [hash, draft.imageAssetHashes.filter((candidate) => candidate === hash).length]));
+  const skuHashes = new Set(draft.imageTriage.filter((image) => image.roles.includes("sku")).map((image) => image.sha256));
+  const skuImageReferenceCounts = Object.fromEntries([...skuHashes].map((hash) => [hash, draft.imageAssetHashes.filter((candidate) => candidate === hash).length]));
+  return { listingId: draft.sourceListingIds[0] ?? draft.draftId, batch, rawArchiveSha256, normalizedDraftId: draft.draftId, normalizedProductFamily, sourceTitle: draft.sourceMetadata.listingTitle, imageSha256s: [...new Set(draft.imageAssetHashes)], skuImageSha256s: [...skuHashes], imageReferenceCounts, skuImageReferenceCounts };
+}
+
+export function analyzeCrossBatchRelationships(drafts: ProductDraft[], fingerprints: ListingRelationshipFingerprint[]): CrossListingRelationship[] {
+  const relationships: CrossListingRelationship[] = [];
+  for (const draft of drafts) {
+    const listingId = draft.sourceListingIds[0] ?? draft.draftId;
+    const currentFingerprint = buildListingRelationshipFingerprint(draft, "current", "current");
+    const current = { listingId, sourceTitle: currentFingerprint.sourceTitle, imageSha256s: currentFingerprint.imageSha256s, skuImageSha256s: currentFingerprint.skuImageSha256s, imageReferenceCounts: currentFingerprint.imageReferenceCounts, skuImageReferenceCounts: currentFingerprint.skuImageReferenceCounts };
+    for (const historical of fingerprints) relationships.push(relationshipForPair(current, { listingId: historical.listingId, sourceTitle: historical.sourceTitle, imageSha256s: historical.imageSha256s, skuImageSha256s: historical.skuImageSha256s, imageReferenceCounts: historical.imageReferenceCounts, skuImageReferenceCounts: historical.skuImageReferenceCounts }));
+  }
+  return relationships.filter((relationship) => relationship.exactSharedImageHashes.length || relationship.status !== "KEEP_SEPARATE");
+}
+
 export function analyzeCrossListingRelationships(drafts: ProductDraft[]): CrossListingRelationship[] {
   const relationships: CrossListingRelationship[] = [];
-  for (let leftIndex = 0; leftIndex < drafts.length; leftIndex += 1) for (let rightIndex = leftIndex + 1; rightIndex < drafts.length; rightIndex += 1) {
-    const left = drafts[leftIndex]!;
-    const right = drafts[rightIndex]!;
-    const leftId = left.sourceListingIds[0] ?? left.draftId;
-    const rightId = right.sourceListingIds[0] ?? right.draftId;
-    const leftFeatures = titleFeatures(left.sourceMetadata.listingTitle ?? "");
-    const rightFeatures = titleFeatures(right.sourceMetadata.listingTitle ?? "");
-    const sharedHashes = [...new Set(left.imageAssetHashes.filter((hash) => right.imageAssetHashes.includes(hash)))];
-    const sharedEvidence = ([
-      [leftFeatures.long && rightFeatures.long, "both titles identify a long construction"],
-      [leftFeatures.short && rightFeatures.short, "both titles identify a short construction"],
-      [leftFeatures.satin && rightFeatures.satin, "both titles identify satin construction"],
-      [leftFeatures.laceOrMesh && rightFeatures.laceOrMesh, "both titles identify lace or mesh construction"],
-      [leftFeatures.fingerless && rightFeatures.fingerless, "both titles identify fingerless construction"],
-      [leftFeatures.kids && rightFeatures.kids, "both titles include children’s audience wording"],
-    ] as const).filter(([matches]) => matches).map(([, evidence]) => evidence);
-    const distinguishingEvidence = ([
-      [leftFeatures.long !== rightFeatures.long && (leftFeatures.long || rightFeatures.long) && (leftFeatures.short || rightFeatures.short), "long-versus-short construction evidence"],
-      [leftFeatures.fullFinger !== rightFeatures.fullFinger && (leftFeatures.fullFinger || rightFeatures.fullFinger) && (leftFeatures.fingerless || rightFeatures.fingerless), "full-finger versus fingerless construction evidence"],
-      [leftFeatures.satin !== rightFeatures.satin && (leftFeatures.satin || rightFeatures.satin) && (leftFeatures.laceOrMesh || rightFeatures.laceOrMesh), "satin versus lace/mesh construction evidence"],
-      [leftFeatures.ruched !== rightFeatures.ruched && (leftFeatures.ruched || rightFeatures.ruched), "ruched construction appears in only one title"],
-      [leftFeatures.bowOrEdge !== rightFeatures.bowOrEdge && (leftFeatures.bowOrEdge || rightFeatures.bowOrEdge), "cuff or edge detail appears in only one title"],
-      [leftFeatures.embellished !== rightFeatures.embellished && (leftFeatures.embellished || rightFeatures.embellished), "embellishment evidence appears in only one title"],
-      [leftFeatures.printed !== rightFeatures.printed && (leftFeatures.printed || rightFeatures.printed), "printed construction appears in only one title"],
-    ] as const).filter(([matches]) => matches).map(([, evidence]) => evidence);
-    if (sharedHashes.length) relationships.push({ sourceListingIds: [leftId, rightId], status: "POSSIBLE_DUPLICATE", exactSharedImageHashes: sharedHashes, sharedEvidence, distinguishingEvidence, rationale: "Exact shared source binary is strong duplication evidence, but listing metadata and option evidence still require Human Gate comparison.", action: "HUMAN_DECISION_REQUIRED" });
-    else if (distinguishingEvidence.length) relationships.push({ sourceListingIds: [leftId, rightId], status: "KEEP_SEPARATE", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence, rationale: "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.", action: "DO_NOT_MERGE" });
-    else if (sharedEvidence.length >= 2) relationships.push({ sourceListingIds: [leftId, rightId], status: "HUMAN_REVIEW", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence: [], rationale: "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically.", action: "HUMAN_DECISION_REQUIRED" });
-    else relationships.push({ sourceListingIds: [leftId, rightId], status: "KEEP_SEPARATE", exactSharedImageHashes: [], sharedEvidence, distinguishingEvidence: [], rationale: "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.", action: "DO_NOT_MERGE" });
-  }
+  for (let leftIndex = 0; leftIndex < drafts.length; leftIndex += 1) for (let rightIndex = leftIndex + 1; rightIndex < drafts.length; rightIndex += 1) relationships.push(relationshipForPair({ listingId: drafts[leftIndex]!.sourceListingIds[0] ?? drafts[leftIndex]!.draftId, sourceTitle: drafts[leftIndex]!.sourceMetadata.listingTitle, imageSha256s: drafts[leftIndex]!.imageAssetHashes, skuImageSha256s: drafts[leftIndex]!.imageTriage.filter((image) => image.roles.includes("sku")).map((image) => image.sha256) }, { listingId: drafts[rightIndex]!.sourceListingIds[0] ?? drafts[rightIndex]!.draftId, sourceTitle: drafts[rightIndex]!.sourceMetadata.listingTitle, imageSha256s: drafts[rightIndex]!.imageAssetHashes, skuImageSha256s: drafts[rightIndex]!.imageTriage.filter((image) => image.roles.includes("sku")).map((image) => image.sha256) }));
   return relationships;
 }
 

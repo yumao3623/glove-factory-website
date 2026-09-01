@@ -27,6 +27,14 @@ During `inspect`, the workflow reads this registry before extraction and rejects
 
 `export-review` refreshes the current batch's registry entries from its intake ledger and normalized draft/quarantine output. Commit the resulting registry with the reviewed checkpoint; do not commit the raw or derived local batch files.
 
+When Human Gate accepts multiple source listings as one normalized ingestion group, the registry may carry the same stable `normalizedProductGroupId` on each source entry. This is provenance-preserving bookkeeping only: each listing keeps its own listing ID, archive checksum and draft mapping, and the group ID does not create or approve a `ProductRecord`.
+
+`data/ingestion/listing-relationship-fingerprints.json` is a second, lightweight tracked ledger for cross-batch relationship evidence. It stores each reviewed listing's batch, archive checksum, normalized draft/family mapping, source title, unique image/SKU SHA-256 values, and per-hash reference counts. It intentionally stores no image bytes, extracted files or local draft/review output. Run `npm run ingest:batch -- refresh-relationship-fingerprints` after a reviewed registry update to rebuild it from the local historical drafts and the durable registry.
+
+Every later `inspect` compares the new batch against these historical fingerprints as well as within-batch drafts. Exact shared binaries produce conservative `POSSIBLE_DUPLICATE` or `POSSIBLE_VARIATION` evidence and remain `HUMAN_DECISION_REQUIRED`; title-only overlap can produce `HUMAN_REVIEW`, while construction conflicts remain `KEEP_SEPARATE`. No relationship automatically merges normalized products. The reported shared-reference metric is the conservative sum of the per-hash minimum references between the two listings; unique hash lists and reference maps preserve the underlying evidence. Perceptual/near-duplicate matching is not performed unless a future fingerprint explicitly adds that evidence, so absence of an exact hash must not be treated as proof of separation.
+
+`export-review` also preserves the lightweight `human-decisions.json`, `cross-listing-analysis.json` and `cross-batch-analysis.json` under `data/ingestion/batch-reviews/<batch>/`. Relationship decisions are explicit (`SAME_PRODUCT_DIFFERENT_LISTING`, `POSSIBLE_VARIATION`, or `KEEP_SEPARATE`) and never trigger an automatic merge or public publication.
+
 ## Human Gate
 
 Before any record or derivative enters `data/products/approved/` or the asset manifest, verify:
