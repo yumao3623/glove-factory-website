@@ -53,3 +53,7 @@ temp/
 Thumbs.db
 Desktop.ini
 .asset-review/
+
+# Local-only source archives and derived Product Batch Ingestion working state.
+# Review summaries and approved catalogue records are committed explicitly.
+.product-ingestion/

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts"
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "ingest:batch": "tsx scripts/product_batch_ingest.ts",
+    "validate:products": "tsx scripts/product_batch_ingest.ts validate-approved"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
