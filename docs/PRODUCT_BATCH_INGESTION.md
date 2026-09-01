@@ -19,6 +19,14 @@ The existing store-level permission for self-owned product images on the confirm
 
 The inspector handles at most eight ZIPs per batch. It processes archive names in deterministic order, extracts only after rejecting unsafe ZIP paths, inventories JPG/JPEG/PNG/WebP files with SHA-256 and intrinsic dimensions, and treats other files as metadata or unsupported review items. Filename risk hints are conservative prompts, not automated approval or rejection.
 
+## Durable cumulative registry
+
+`data/ingestion/listing-registry.json` is the lightweight, tracked cumulative identity and Human Gate registry. It records each processed source listing's ID, batch, raw archive SHA-256, normalized draft mapping, family decision and review status. Raw ZIPs, extracted images and local draft/review files remain under Git-ignored `.product-ingestion/`.
+
+During `inspect`, the workflow reads this registry before extraction and rejects a listing ID or raw archive hash already registered in another batch. Re-inspection of the same batch remains possible; a new batch must use new listing IDs and archive hashes. The registry is bookkeeping only and never creates a `ProductRecord`, approved asset or public catalogue entry.
+
+`export-review` refreshes the current batch's registry entries from its intake ledger and normalized draft/quarantine output. Commit the resulting registry with the reviewed checkpoint; do not commit the raw or derived local batch files.
+
 ## Human Gate
 
 Before any record or derivative enters `data/products/approved/` or the asset manifest, verify:
