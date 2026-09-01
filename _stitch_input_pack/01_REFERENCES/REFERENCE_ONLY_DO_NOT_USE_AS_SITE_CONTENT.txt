@@ -1,0 +1,4 @@
+All image files in this folder are REFERENCE_ONLY.
+DO_NOT_USE_AS_SITE_CONTENT.
+Use only for composition, image density, typography hierarchy, whitespace, page rhythm, and navigation density.
+Do not copy competitor imagery, wording, logos, branding, or exact layouts.

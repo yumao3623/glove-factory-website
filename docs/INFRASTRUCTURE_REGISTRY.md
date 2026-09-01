@@ -4,7 +4,7 @@
 |---|---|---|
 | GitHub repository | DECIDED | `yumao3623/glove-factory-website`; phase branch and checkpoint tag are used. |
 | Hosting | DECIDED | Vercel for V1; Cloudflare Pages is fallback. No project created. |
-| Domain | PENDING_DOMAIN | Factory must provide/approve domain; do not purchase in Phase 2. |
+| Domain | PROVISIONAL_DOMAIN / PENDING_CONFIRMATION | `jsmeilai.com` is the current candidate, supplied for planning context only. Do not configure DNS, hosting, canonical metadata, email, or public links until final approval. |
 | DNS/CDN | PENDING_DOMAIN | Configure with chosen host only after domain approval; HTTPS and one canonical host required. |
 | Business email | PENDING_ACCOUNT | Exact public mailbox/owner not supplied. |
 | RFQ/Form | DECIDED | Serverless endpoint + external transactional email provider; provider/account/API key pending. |
