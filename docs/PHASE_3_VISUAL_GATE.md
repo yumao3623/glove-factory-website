@@ -24,7 +24,7 @@ Variant E, refined image-led editorial, is the approved baseline for this implem
 
 ## Boundaries
 
-No prices, cart, ratings, inventory, PDPs, database, payment, analytics, public contact details or unconfirmed MOQ, lead time, capacity, certification, material or identity claims were added. Product and workshop images remain `REQUIRES_PERMISSION_CONFIRMATION` and are local/development-only.
+No prices, cart, ratings, inventory, PDPs, database, payment, analytics, public contact details or unconfirmed MOQ, lead time, capacity, certification, material or identity claims were added. At this gate, product and workshop images were `REQUIRES_PERMISSION_CONFIRMATION` and local/development-only. Subsequent store-level permission for eligible factory 1688 product images is governed by `ASSET_PIPELINE.md`; it does not alter this gate's historical asset decision or approve workshop/risky assets.
 
 ## Human review remaining
 

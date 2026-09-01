@@ -77,7 +77,7 @@ Use one `/contact/` flow per `RFQ_SPEC.md`. V1 has no upload, cart, checkout, pa
 
 ## 8. Infrastructure
 
-GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. Domain, DNS, business mailbox, form provider account/API key and analytics properties are pending and must not be created in this phase. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
+GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. `jsmeilai.com` is the confirmed official domain, but DNS, Vercel binding, production canonical configuration, business mailbox, form provider account/API key and analytics properties remain pending and must not be created in this phase. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
 
 ## 9. SEO and rendering
 

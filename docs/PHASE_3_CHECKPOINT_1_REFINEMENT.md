@@ -20,7 +20,7 @@ This record evaluates the post-gate Human Review without changing the frozen Pha
 | Development product references | `RETAIN_CURRENT` | Fixture names and descriptions remain marked as development references. They are not treated as approved public product names or specifications. |
 | Future collection templates | `ACCEPT` | Shared primitives are typography, image treatment, navigation, CTA language, RFQ handling and spacing. Future collection layout and media rhythm must be adapted to their own intent and approved material; the Bridal composition is not a mandatory copy-and-relabel template. |
 | Hero image separation | `PARTIALLY_ACCEPT` | The square-edge collage remains an intentional editorial motif, but its black gutters were reduced from `8px` to `4px` in the Homepage and Bridal E heroes. This keeps image hierarchy and honest cropping while avoiding a heavy tile effect, particularly on mobile. |
-| Provisional domain | `ACCEPT` | `jsmeilai.com` is recorded only in the Infrastructure Registry as a candidate pending final approval. Runtime canonical URLs continue to use the local development origin or an explicitly supplied environment variable. |
+| Domain status at the checkpoint | `ACCEPT` | At the time of this checkpoint, `jsmeilai.com` was only a planning candidate. It is now confirmed as the official domain, while runtime canonical URLs correctly continue to use the local development origin or an explicitly supplied environment variable until the publication-integration checkpoint. |
 | Provisional brand display | `ACCEPT` | `JS Meilai` replaces the visual placeholder in the Header and Footer only. It is a development-stage display treatment derived from the current factory/domain context, not an approved English legal identity, canonical host, metadata value or public-contact fact. |
 
 ## Implemented Refinements
@@ -31,7 +31,7 @@ This record evaluates the post-gate Human Review without changing the frozen Pha
 - Reframed workshop sections as `Manufacturing evidence` and limited them to a small visual bridge instead of a broad factory narrative.
 - Retained the Bridal collection's glove-first hero and product grid; the sole veil image remains contextual.
 - Refined only the Homepage and Bridal E hero mosaics with narrower black image gutters; no rounded card treatment, blur, or site-wide media effect was introduced.
-- Recorded `jsmeilai.com` as a provisional domain candidate without creating a production resource or changing canonical output.
+- Recorded `jsmeilai.com` as a domain-planning candidate without creating a production resource or changing canonical output. Its official-domain status was confirmed after this checkpoint; see `INFRASTRUCTURE_REGISTRY.md` for the current state.
 - Replaced the Header and Footer placeholder with the visual-only provisional display `JS Meilai`, held in one local constant for consistency.
 
 ## Deliberate Non-Changes

@@ -37,4 +37,12 @@ Example: `bridal-gloves__BG-001__front__ivory__v1.webp`. Use ASCII lowercase, hy
 - Detect duplicate binaries with SHA-256 and near-duplicate derivatives with perceptual hash; flag for review rather than silently deduplicating.
 - Reject unsupported formats, embedded personal data, watermarks that imply another brand, and images with visible marketplace UI for production use.
 - Verify color and material claims against factory-confirmed data; photography alone cannot establish composition, certification or performance.
-- Run a manual permission review for every external image. No stock image may be presented as the factory's product.
+- Run a manual provenance/risk review for every external image. A documented store-level permission grant may satisfy reuse permission only after the asset is linked to the authorized storefront, listing identifier and immutable source hash. No stock or third-party image may be presented as the factory's product.
+
+## Store-level permission and batch-ingestion boundary
+
+The factory has authorized public display on `jsmeilai.com` of self-owned product images from its confirmed 1688 storefront. Record the storefront identity, authorization date/scope, listing URL or ID, raw archive checksum and image hash before an asset inherits this permission. Historical visual-gate candidates remain at their recorded manifest status until that provenance link and risk review are completed.
+
+Permission inheritance does not approve an asset with a watermark, marketplace UI/poster, Chinese promotional graphic, third-party material, character/brand/IP risk, unclear provenance or product-mapping conflict. Keep raw listing ZIPs and unreviewed extracted originals in an immutable local/archive staging area rather than Git by default. Commit only a checksum-based intake ledger, reviewed evidence summaries and approved site assets.
+
+Batch processing is draft-first: raw source, derived inspection, normalized draft/quarantine and approved public assets must remain separate. Exact binary duplicates may share one presentation asset while preserving every source reference; near-duplicate matches are review candidates only. A safe edge crop is allowed only when reversible, recorded and non-semantic. Do not use generative removal or reconstruction; unresolved images belong in a separate cleanup queue and do not block clean sibling assets.
