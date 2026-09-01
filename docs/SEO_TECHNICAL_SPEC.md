@@ -2,7 +2,7 @@
 
 ## Canonical and host conventions
 
-- HTTPS only; preferred hostname is the eventual approved custom domain (`PENDING_DOMAIN`), with one canonical host and permanent redirects from any alternate host.
+- HTTPS only; the confirmed official domain is `jsmeilai.com`, but its production binding and canonical-host decision remain pending the publication-integration checkpoint. Use one canonical host and permanent redirects from every alternate host before public launch.
 - Canonical URLs are absolute, lowercase, hyphenated and trailing-slash terminated: `/bridal-gloves/`.
 - Query strings, sort orders and filters are non-canonical and `noindex,follow` unless an ADR approves a child landing route.
 - Staging/preview deployments are access-protected and `noindex`; they must not be linked in production or submitted to Search Console.

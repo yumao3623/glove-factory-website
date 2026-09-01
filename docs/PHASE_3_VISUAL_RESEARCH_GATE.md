@@ -25,7 +25,7 @@ Use the top bar to compare Homepage and Bridal collection compositions. The five
 
 ## Real images used
 
-The prototype and board use small research copies of reviewed candidates in [`research/ui/prototype-assets/`](../research/ui/prototype-assets/): bridal lace, sheer lace, long satin opera, kids satin bow, wedding veil and one factory workshop image. Manifest status for every product and factory image is `VISUAL_GATE_APPROVED_CANDIDATE` plus `REQUIRES_PERMISSION_CONFIRMATION`; this authorizes local visual-gate review only, not public publication. No production/public asset import was made.
+The prototype and board use small research copies of reviewed candidates in [`research/ui/prototype-assets/`](../research/ui/prototype-assets/): bridal lace, sheer lace, long satin opera, kids satin bow, wedding veil and one factory workshop image. At this gate, manifest status for every product and factory image was `VISUAL_GATE_APPROVED_CANDIDATE` plus `REQUIRES_PERMISSION_CONFIRMATION`; this authorized local visual-gate review only, not public publication. No production/public asset import was made. Subsequent store-level permission for eligible factory 1688 product images is governed by `ASSET_PIPELINE.md`; it does not promote these historical candidates until provenance and risk validation pass.
 
 Rejected source classes remain excluded: watermarked marketplace images, Chinese marketing panels, factory introduction posters, Frozen/Elsa/IP material and any unreviewed bulk image set.
 

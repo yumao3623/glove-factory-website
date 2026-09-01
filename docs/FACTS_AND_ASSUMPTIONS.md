@@ -6,12 +6,21 @@
 - Core audience candidates include wholesalers, importers, distributors, bridal shops, brands, e-commerce sellers and sourcing buyers.
 - Google organic search is the primary acquisition channel.
 - Development is prohibited until the user explicitly approves the next phase.
+- `jsmeilai.com` is the confirmed official domain. This is not confirmation of DNS, Vercel binding, production canonical configuration, business email, public launch, or the English legal identity.
+- The factory has authorized public display on `jsmeilai.com` of self-owned product images from its own confirmed 1688 storefront. This is a source/store-level permission grant, not a blanket assertion that every marketplace asset is owned, safe or publishable.
 
 ## FACTORY_CONFIRMED
 
 - Active normal-production scope includes Bridal / Wedding Gloves; Long / Evening / Satin / Opera-style Gloves; Lace Gloves; Mesh / Sheer / Tulle / Fingerless styles; Costume / Stage / Cosplay-type Gloves; Kids / Girls Dress Gloves, including Princess styles; and Wedding / Bridal Veils.
 - General customization is available across all active product families above, including Wedding / Bridal Veils.
 - Existing responsible personnel can handle early overseas website enquiries. This removes enquiry ownership as an architecture blocker.
+
+## APPROVED_WORKFLOW_DECISIONS
+
+- Product catalogue work will use a repeatable, static, draft-first Product Batch Ingestion Workflow. Raw 1688 listing archives remain source evidence; a source listing does not mechanically become one website product.
+- The workflow may normalize clear records automatically, but Human Gate is limited to grouped exceptions and batch-level promotion rather than normal-product data entry.
+- The five frozen product families, Route Registry, category-only V1 and `V1_DATABASE = NONE` remain unchanged. The next data phase is a bounded real-product pilot, not a bulk import of the approximately 118 listings.
+- Image cleanup is a separate, non-blocking queue/report. Store permission does not clear watermark, third-party, character/IP, marketplace poster, Chinese promotional graphic, provenance or product-mapping risk.
 
 ## FACTORY_PLATFORM_EVIDENCE
 

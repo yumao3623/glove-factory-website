@@ -60,6 +60,8 @@ Per [ASSET_REVIEW.md](../research/assets/phase-3-review/ASSET_REVIEW.md) and `as
 
 They are not production publishing assets. No image was moved into `public/`; rejected watermarked marketplace images, Chinese promotional panels, factory introduction posters and Frozen/Elsa/Disney/IP material remain excluded.
 
+These were the permission states at the visual gate. Subsequent store-level permission for eligible self-owned factory 1688 product images is governed by `ASSET_PIPELINE.md`; it requires source/provenance validation and does not promote workshop, watermarked, poster, third-party or IP-risk assets.
+
 ## Rendered evidence
 
 All screenshots are local research artifacts in [research/ui/prototype-screenshots-v2/](../research/ui/prototype-screenshots-v2/):
@@ -78,8 +80,8 @@ Human Visual Gate 2 passed with conditions. Variant E, **Refined Image-led Edito
 The following publication decisions remain pending and are not granted by this visual approval:
 
 1. Final public H1 and buyer-facing catalogue copy.
-2. Publication permission for each product and factory image.
-3. Approved English identity, legal details, public contact details and final domain.
+2. Provenance, risk and product-mapping review for every product or factory image selected for publication. Eligible self-owned 1688 product images can inherit the subsequent documented store-level permission; factory/workshop images remain separate.
+3. Approved English identity, legal details and public contact details. `jsmeilai.com` is now the confirmed official domain, but DNS, hosting binding, production canonical configuration and launch remain separate pending decisions.
 4. Any MOQ, sample, lead-time, capacity, certification, material or specification claim.
 
 ## Stop condition
