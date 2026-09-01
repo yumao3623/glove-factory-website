@@ -3,12 +3,24 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, realpathSync,
 import { fileURLToPath } from "node:url";
 import { basename, dirname, extname, join, resolve, sep } from "node:path";
 import sharp from "sharp";
-import { analyzeCrossListingRelationships, archivePathIsSafe, assetReviewFlags, buildDraft, collectJsonFiles, hasCompleteStorefrontProvenance, isRegularFile, listingIdFromFilename, parseSourceMetadata, productFamilies, relativeToRoot, roleForArchivePath, sha256File, sourceReviewFlags, supportedImageExtensions, supportedMetadataExtensions, triageImages, type HumanReviewDecision, type IntakeAsset, type ListingIntake, validateApprovedProduct } from "../lib/product-ingestion";
+import { analyzeCrossListingRelationships, archivePathIsSafe, assetReviewFlags, buildDraft, collectJsonFiles, hasCompleteStorefrontProvenance, isRegularFile, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, productFamilies, relativeToRoot, roleForArchivePath, sha256File, sourceReviewFlags, supportedImageExtensions, supportedMetadataExtensions, triageImages, type HumanReviewDecision, type IntakeAsset, type ListingIntake, type ProductDraft, validateApprovedProduct } from "../lib/product-ingestion";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const workspaceRoot = join(root, ".product-ingestion");
 const authorizedStorefront = "https://jsmeilai.1688.com/";
 const maximumPilotArchives = 8;
+const listingRegistryPath = join(root, "data", "ingestion", "listing-registry.json");
+type DurableRegistryEntry = {
+  listingId: string;
+  batch: string;
+  rawArchiveSha256: string;
+  normalizedDraftId: string;
+  normalizedProductFamily: ProductDraft["suggestedFamily"];
+  familyDecision: "ACCEPTED" | "PENDING_HUMAN_REVIEW" | "QUARANTINE_DEFER";
+  humanGateClassification: ProductDraft["humanGate"]["classification"];
+  humanGateOverall: ProductDraft["humanGate"]["overall"];
+  status: ProductDraft["status"];
+};
 
 function usage(): never {
   throw new Error("Usage: npm run ingest:batch -- <init|inspect|export-review|validate-approved> [--batch <ascii-name>] [--storefront https://jsmeilai.1688.com/]");
@@ -40,6 +52,18 @@ function pathsFor(batch: string) {
 
 function writeJson(path: string, value: unknown) {
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+function readListingRegistry(): DurableRegistryEntry[] {
+  if (!isRegularFile(listingRegistryPath)) return [];
+  const value: unknown = JSON.parse(readFileSync(listingRegistryPath, "utf8"));
+  if (!value || typeof value !== "object" || (value as { schema?: unknown }).schema !== "product-listing-registry/v1" || !Array.isArray((value as { entries?: unknown }).entries)) throw new Error("data/ingestion/listing-registry.json must have the known schema and an entries array.");
+  const entries = (value as { entries: Array<DurableRegistryEntry & { listingId?: unknown; batch?: unknown; rawArchiveSha256?: unknown }> }).entries;
+  for (const entry of entries) {
+    if (!entry || typeof entry.listingId !== "string" || !/^\d{6,}$/.test(entry.listingId) || typeof entry.batch !== "string" || !/^[a-z0-9][a-z0-9-]{2,63}$/.test(entry.batch) || typeof entry.rawArchiveSha256 !== "string" || !/^[a-f0-9]{64}$/.test(entry.rawArchiveSha256)) throw new Error("Each listing registry entry requires a valid listingId, batch, and rawArchiveSha256.");
+  }
+  if (new Set(entries.map((entry) => entry.listingId)).size !== entries.length || new Set(entries.map((entry) => entry.rawArchiveSha256)).size !== entries.length) throw new Error("data/ingestion/listing-registry.json must not repeat a listingId or rawArchiveSha256.");
+  return entries as DurableRegistryEntry[];
 }
 
 function humanDecisions(path: string, batch: string): Map<string, HumanReviewDecision> {
@@ -138,13 +162,25 @@ async function inspect() {
   const archives = readdirSync(paths.raw, { withFileTypes: true }).filter((entry) => entry.isFile() && extname(entry.name).toLowerCase() === ".zip").map((entry) => join(paths.raw, entry.name)).sort((left, right) => left.localeCompare(right, "en"));
   if (!archives.length) throw new Error(`No .zip archives found in ${relativeToRoot(root, paths.raw)}.`);
   if (archives.length > maximumPilotArchives) throw new Error(`Pilot batches are bounded to ${maximumPilotArchives} ZIPs; found ${archives.length}.`);
+  const registry = readListingRegistry();
+  const seenListingIds = new Set<string>();
+  const seenArchiveHashes = new Set<string>();
+  const archiveDetails = archives.map((archive) => ({ archive, filename: basename(archive), listingId: listingIdFromFilename(basename(archive)), rawArchiveSha256: sha256File(archive) }));
+  for (const detail of archiveDetails) {
+    const conflicts = listingRegistryConflicts(registry, batch, detail.listingId, detail.rawArchiveSha256);
+    if (conflicts.length) throw new Error(`${detail.filename} is already registered in another batch (${conflicts.map((entry) => `${entry.batch}:${entry.listingId}`).join(", ")}); do not re-ingest an existing listing or archive.`);
+    if (detail.listingId && seenListingIds.has(detail.listingId)) throw new Error(`${detail.filename} repeats listing ${detail.listingId} within batch ${batch}.`);
+    if (seenArchiveHashes.has(detail.rawArchiveSha256)) throw new Error(`${detail.filename} repeats an archive SHA-256 within batch ${batch}.`);
+    if (detail.listingId) seenListingIds.add(detail.listingId);
+    seenArchiveHashes.add(detail.rawArchiveSha256);
+  }
   rmSync(paths.inspection, { recursive: true, force: true });
   mkdirSync(paths.inspection, { recursive: true });
   const decisions = humanDecisions(join(paths.review, "human-decisions.json"), batch);
   const intakes: ListingIntake[] = [];
-  for (const archive of archives) {
-    const filename = basename(archive);
-    const extractRoot = join(paths.inspection, sha256File(archive).slice(0, 16));
+  for (const detail of archiveDetails) {
+    const { archive, filename, listingId, rawArchiveSha256 } = detail;
+    const extractRoot = join(paths.inspection, rawArchiveSha256.slice(0, 16));
     mkdirSync(extractRoot, { recursive: true });
     const entries = archiveEntries(archive);
     execFileSync("tar", ["-xf", archive, "-C", extractRoot], { encoding: "utf8", windowsHide: true });
@@ -152,8 +188,6 @@ async function inspect() {
     const inventory = await imageInventory(extractRoot, entries);
     const urlFile = entries.find((entry) => basename(entry).toLowerCase() === "_url.txt");
     const sourceMetadata = urlFile ? parseSourceMetadata(readFileSync(join(extractRoot, ...urlFile.replace(/\\/g, "/").split("/")), "utf8")) : undefined;
-    const listingId = listingIdFromFilename(filename);
-    const rawArchiveSha256 = sha256File(archive);
     const sourceStorefront = sourceMetadata?.storefrontUrl ?? storefront;
     const permissionStatus = hasCompleteStorefrontProvenance(listingId, rawArchiveSha256, sourceMetadata, authorizedStorefront) ? "STORE_LEVEL_PERMISSION_INHERITED" : sourceMetadata?.storefrontUrl ? "MISSING_LISTING_PROVENANCE" : "MISSING_AUTHORIZED_STOREFRONT";
     const images = inventory.images.map((image) => ({ ...image, reusePermissionStatus: permissionStatus === "STORE_LEVEL_PERMISSION_INHERITED" && !image.reviewFlags.length ? "STORE_LEVEL_PERMISSION_INHERITED" as const : "PROVENANCE_EXCEPTION" as const }));
@@ -182,7 +216,30 @@ function exportReview() {
   }
   mkdirSync(destination, { recursive: true });
   cpSync(paths.review, destination, { recursive: true, force: true });
+  updateListingRegistry(batch, paths);
   console.log(`Exported checksum-based review evidence to ${relativeToRoot(root, destination)}. Do not export raw ZIPs, extraction, drafts, or quarantines.`);
+}
+
+function updateListingRegistry(batch: string, paths: ReturnType<typeof pathsFor>) {
+  const ledger = JSON.parse(readFileSync(join(paths.review, "intake-ledger.json"), "utf8")) as { listings?: ListingIntake[] };
+  const drafts = [
+    ...(JSON.parse(readFileSync(join(paths.draft, "drafts.json"), "utf8")) as { records?: ProductDraft[] }).records ?? [],
+    ...(JSON.parse(readFileSync(join(paths.quarantine, "quarantine.json"), "utf8")) as { records?: ProductDraft[] }).records ?? [],
+  ];
+  if (!Array.isArray(ledger.listings) || drafts.length !== ledger.listings.length) throw new Error(`Cannot update listing registry for ${batch}: ledger and normalized draft counts do not match.`);
+  const additions: DurableRegistryEntry[] = ledger.listings.map((intake) => {
+    if (!intake.listingId) throw new Error(`Cannot update listing registry for ${batch}: an intake has no listingId.`);
+    const draft = drafts.find((candidate) => candidate.sourceListingIds.includes(intake.listingId!));
+    if (!draft) throw new Error(`Cannot update listing registry for ${batch}: missing normalized draft for ${intake.listingId}.`);
+    const decision = intake.humanReviewDecision;
+    return { listingId: intake.listingId, batch, rawArchiveSha256: intake.rawArchiveSha256, normalizedDraftId: draft.draftId, normalizedProductFamily: draft.suggestedFamily, familyDecision: decision?.disposition === "QUARANTINE_DEFER" ? "QUARANTINE_DEFER" : decision?.acceptedFamily ? "ACCEPTED" : "PENDING_HUMAN_REVIEW", humanGateClassification: draft.humanGate.classification, humanGateOverall: draft.humanGate.overall, status: draft.status };
+  });
+  if (new Set(additions.map((entry) => entry.listingId)).size !== additions.length || new Set(additions.map((entry) => entry.rawArchiveSha256)).size !== additions.length) throw new Error(`Cannot update listing registry for ${batch}: normalized entries repeat a listingId or rawArchiveSha256.`);
+  const existing = readListingRegistry();
+  const conflicts = additions.flatMap((entry) => listingRegistryConflicts(existing, batch, entry.listingId, entry.rawArchiveSha256));
+  if (conflicts.length) throw new Error(`Cannot update listing registry for ${batch}: an entry conflicts with another batch (${conflicts.map((entry) => `${entry.batch}:${entry.listingId}`).join(", ")}).`);
+  const otherBatches = existing.filter((entry) => entry.batch !== batch);
+  writeJson(listingRegistryPath, { schema: "product-listing-registry/v1", purpose: "Durable cumulative identity and Human Gate state for processed real source listings. Raw archives and derived local files remain Git-ignored.", entries: [...otherBatches, ...additions].sort((left, right) => left.batch.localeCompare(right.batch) || left.listingId.localeCompare(right.listingId)) });
 }
 
 function validateApproved() {

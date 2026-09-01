@@ -48,6 +48,16 @@ export type ListingIntake = {
   humanReviewDecision?: HumanReviewDecision;
 };
 
+export type ListingRegistryIdentity = {
+  listingId: string;
+  batch: string;
+  rawArchiveSha256: string;
+};
+
+export function listingRegistryConflicts(entries: readonly ListingRegistryIdentity[], batch: string, listingId: string | null, rawArchiveSha256: string): ListingRegistryIdentity[] {
+  return entries.filter((entry) => entry.batch !== batch && ((listingId !== null && entry.listingId === listingId) || entry.rawArchiveSha256 === rawArchiveSha256));
+}
+
 export type SourceMetadata = {
   storeName: string | null;
   storefrontUrl: string | null;

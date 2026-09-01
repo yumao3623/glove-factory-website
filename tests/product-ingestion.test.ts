@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, hasCompleteStorefrontProvenance, listingIdFromFilename, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedProduct } from "../lib/product-ingestion";
+import { analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedProduct } from "../lib/product-ingestion";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -11,6 +11,26 @@ test("keeps raw and derived ingestion state outside Git while retaining an expli
   const gitignore = readFileSync(resolve(root, ".gitignore"), "utf8");
   assert.match(gitignore, /^\.product-ingestion\/$/m);
   assert.ok(existsSync(resolve(root, "data/products/approved/.gitkeep")));
+});
+
+test("keeps a durable cumulative registry for the reviewed real listings", () => {
+  const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; rawArchiveSha256: string; batch: string; normalizedDraftId: string; normalizedProductFamily: string | null; familyDecision: string; status: string }> };
+  assert.equal(registry.schema, "product-listing-registry/v1");
+  assert.equal(registry.entries.length, 10);
+  assert.equal(new Set(registry.entries.map((entry) => entry.listingId)).size, 10);
+  assert.equal(registry.entries.find((entry) => entry.listingId === "776815144156")?.status, "QUARANTINED");
+  assert.equal(registry.entries.find((entry) => entry.listingId === "728772172182")?.status, "PENDING_REVIEW");
+  assert.equal(registry.entries.find((entry) => entry.listingId === "730186552239")?.familyDecision, "ACCEPTED");
+  assert.equal(registry.entries.find((entry) => entry.listingId === "730186552239")?.normalizedProductFamily, "opera-gloves");
+  assert.ok(registry.entries.every((entry) => entry.normalizedDraftId.startsWith("draft-")));
+  assert.ok(registry.entries.every((entry) => /^\d{6,}$/.test(entry.listingId) && /^[a-f0-9]{64}$/.test(entry.rawArchiveSha256)));
+});
+
+test("blocks a listing ID or archive hash reused by a different batch", () => {
+  const entries = [{ listingId: "123456", batch: "pilot-old", rawArchiveSha256: "a".repeat(64) }];
+  assert.equal(listingRegistryConflicts(entries, "pilot-new", "123456", "b".repeat(64)).length, 1);
+  assert.equal(listingRegistryConflicts(entries, "pilot-new", "999999", "a".repeat(64)).length, 1);
+  assert.equal(listingRegistryConflicts(entries, "pilot-old", "123456", "a".repeat(64)).length, 0);
 });
 
 test("rejects unsafe ZIP paths and retains the source listing identifier from an original filename", () => {

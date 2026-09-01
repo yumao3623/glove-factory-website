@@ -1,0 +1,116 @@
+{
+  "schema": "product-listing-registry/v1",
+  "purpose": "Durable cumulative identity and Human Gate state for processed real source listings. Raw archives and derived local files remain Git-ignored.",
+  "entries": [
+    {
+      "listingId": "730186552239",
+      "batch": "pilot-2026-09-01",
+      "rawArchiveSha256": "84da9e4f8170518366966d49941bb5f00bb5b20e4d9669a1fc309b46a385896b",
+      "normalizedDraftId": "draft-730186552239",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "737751870967",
+      "batch": "pilot-2026-09-01",
+      "rawArchiveSha256": "b8fcea4a17e6b235ed8c81e3313473a660c5a35031f228510b5d815d0b3bae9c",
+      "normalizedDraftId": "draft-737751870967",
+      "normalizedProductFamily": "kids-dress-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "800814497148",
+      "batch": "pilot-2026-09-01",
+      "rawArchiveSha256": "fb933dd5df5a205aec7360ec5ceccba97a5ae1091732cda55709e2cef4ccc9f2",
+      "normalizedDraftId": "draft-800814497148",
+      "normalizedProductFamily": "wedding-veils",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "856992679458",
+      "batch": "pilot-2026-09-01",
+      "rawArchiveSha256": "f14b73fa853a98761ee7d39318634962314439cd34cbfa839a8b22390e4776c4",
+      "normalizedDraftId": "draft-856992679458",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "728772172182",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "b63159e7797b902ece948fbb5984c333c5b9812ad7cf87b191070c554ac8ca85",
+      "normalizedDraftId": "draft-728772172182",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "PENDING_HUMAN_REVIEW",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "728908046635",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "c7273ea7532bc08d4c36acbd963852e76f6568703b92796487f30c978a0b08a1",
+      "normalizedDraftId": "draft-728908046635",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "PENDING_HUMAN_REVIEW",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "733063602867",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "f4efbc2724baad4667f732c1195da5c687d2b1eca443809fde0a41bbf1e2cc02",
+      "normalizedDraftId": "draft-733063602867",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "PENDING_HUMAN_REVIEW",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "735814134529",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "2cfa7ae3499b472cef0354862197fcd247f88e125512599e9a79bd93ffbd4534",
+      "normalizedDraftId": "draft-735814134529",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "PENDING_HUMAN_REVIEW",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "776815144156",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "5ee8391e7c0853083deab4e1d266bf278aa79fcd9e5be961efb344aad680b596",
+      "normalizedDraftId": "draft-776815144156",
+      "normalizedProductFamily": "kids-dress-gloves",
+      "familyDecision": "QUARANTINE_DEFER",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "QUARANTINED",
+      "status": "QUARANTINED"
+    },
+    {
+      "listingId": "857043957533",
+      "batch": "pilot-2026-09-01-cross-listing",
+      "rawArchiveSha256": "3b190e610e7a5624af5bef2ecb49ca10a41b351bf0417c868137e7f22240fee5",
+      "normalizedDraftId": "draft-857043957533",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "PENDING_HUMAN_REVIEW",
+      "humanGateClassification": "PENDING_HUMAN_DECISION",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    }
+  ]
+}
