@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { provisionalBrandDisplay } from "@/lib/site-identity";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-foreground text-background">
       <div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[1.2fr_1fr] lg:px-10">
         <div>
-          <p className="font-serif text-3xl">Gloves <span className="text-background/40">/</span> Veils</p>
+          <p className="font-serif text-3xl">{provisionalBrandDisplay}</p>
           <p className="mt-3 max-w-md text-sm leading-6 text-background/75">Development prototype for a B2B product range. Public company identity and contact details remain pending approval.</p>
         </div>
         <div className="grid grid-cols-2 gap-6 text-sm">

@@ -1,6 +1,6 @@
 # Phase 3 Visual Research Gate 2
 
-**Status: ready for Human Visual Gate 2**
+**Status: Human Visual Gate 2 passed with conditions; Variant E selected for Checkpoint 1 implementation and refinement.**
 **Scope: local rendered visual prototypes; no public publishing approval is implied.**
 
 ## Why the earlier A/B/C concepts failed
@@ -71,14 +71,16 @@ All screenshots are local research artifacts in [research/ui/prototype-screensho
 | Bridal collection desktop | [bridal-d-desktop.png](../research/ui/prototype-screenshots-v2/bridal-d-desktop.png) | [bridal-e-desktop.png](../research/ui/prototype-screenshots-v2/bridal-e-desktop.png) |
 | Bridal collection mobile | [bridal-d-mobile.png](../research/ui/prototype-screenshots-v2/bridal-d-mobile.png) | [bridal-e-mobile.png](../research/ui/prototype-screenshots-v2/bridal-e-mobile.png) |
 
-## Human decisions still required
+## Human Visual Gate 2 outcome
 
-1. Select D, E or direct a bounded hybrid before a production direction is frozen.
-2. Confirm the desired display-serif/sans balance, light-versus-dark opening palette and square CTA treatment.
-3. Select the preferred hero composition and family-discovery hierarchy.
-4. Select the CTA wording for the next implementation checkpoint.
-5. Confirm whether the H1 should remain `Occasion Gloves & Wedding Veils Manufacturer` or use the approved alternative `Special Occasion Gloves & Wedding Veils Manufacturer`.
-6. Confirm publication permission for each product and factory image before any public release.
+Human Visual Gate 2 passed with conditions. Variant E, **Refined Image-led Editorial Utility**, was selected as the Checkpoint 1 implementation direction. The implementation may refine E's spacing, crop, typography proportion, card treatment, mobile density, CTA treatment and factory integration without reopening the frozen route, SEO, product-family, catalogue or V1 database decisions.
+
+The following publication decisions remain pending and are not granted by this visual approval:
+
+1. Final public H1 and buyer-facing catalogue copy.
+2. Publication permission for each product and factory image.
+3. Approved English identity, legal details, public contact details and final domain.
+4. Any MOQ, sample, lead-time, capacity, certification, material or specification claim.
 
 ## Stop condition
 

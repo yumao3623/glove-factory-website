@@ -13,7 +13,7 @@ export const bridalDevelopmentFixtures: DevelopmentFixtureProduct[] = [
     material: { value: null, status: "PENDING_CONFIRMATION", source: "Development fixture only" },
     imageStatus: "NEUTRAL_PLACEHOLDER_NO_PRODUCT_IMAGE",
     productStatus: "DRAFT",
-    shortDescription: "Local visual reference; final style, material and dimensions remain to be confirmed.",
+    shortDescription: "Development reference; final product details remain pending confirmation.",
   },
   {
     id: "dev-bridal-02",
@@ -25,7 +25,7 @@ export const bridalDevelopmentFixtures: DevelopmentFixtureProduct[] = [
     material: { value: null, status: "PENDING_CONFIRMATION", source: "Development fixture only" },
     imageStatus: "NEUTRAL_PLACEHOLDER_NO_PRODUCT_IMAGE",
     productStatus: "DRAFT",
-    shortDescription: "Local visual reference; final style, material and dimensions remain to be confirmed.",
+    shortDescription: "Development reference; final product details remain pending confirmation.",
   },
   {
     id: "dev-bridal-03",
@@ -37,7 +37,7 @@ export const bridalDevelopmentFixtures: DevelopmentFixtureProduct[] = [
     material: { value: null, status: "PENDING_CONFIRMATION", source: "Development fixture only" },
     imageStatus: "NEUTRAL_PLACEHOLDER_NO_PRODUCT_IMAGE",
     productStatus: "DRAFT",
-    shortDescription: "Local visual reference; final style, material and dimensions remain to be confirmed.",
+    shortDescription: "Development reference; final product details remain pending confirmation.",
   },
   {
     id: "dev-bridal-04",
@@ -49,6 +49,6 @@ export const bridalDevelopmentFixtures: DevelopmentFixtureProduct[] = [
     material: { value: null, status: "PENDING_CONFIRMATION", source: "Development fixture only" },
     imageStatus: "NEUTRAL_PLACEHOLDER_NO_PRODUCT_IMAGE",
     productStatus: "DRAFT",
-    shortDescription: "Local visual reference; final style, material and dimensions remain to be confirmed.",
+    shortDescription: "Development reference; final product details remain pending confirmation.",
   },
 ];

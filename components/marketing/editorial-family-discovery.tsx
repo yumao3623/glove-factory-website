@@ -19,9 +19,9 @@ export function EditorialFamilyDiscovery({ variant = "d" }: { variant?: "d" | "e
         <div className="mb-10 flex flex-col justify-between gap-4 lg:mb-14 lg:flex-row lg:items-end">
           <div>
             <p className="section-label">Explore the range</p>
-            <h2 className="mt-3 max-w-2xl font-serif text-4xl leading-[1.04] sm:text-5xl">Five product families, arranged for a clearer sourcing conversation.</h2>
+            <h2 className="mt-3 max-w-2xl font-serif text-4xl leading-[1.04] sm:text-5xl">Explore five occasionwear families.</h2>
           </div>
-          <p className="max-w-md text-sm leading-6 text-stone-600">Each family stays distinct. Only the bridal collection is available as a route in this checkpoint.</p>
+          <p className="max-w-md text-sm leading-6 text-stone-600">Choose a product direction first, then bring the specifications into the enquiry.</p>
         </div>
         {variant === "d" ? <BalancedDiscovery /> : <RefinedDiscovery />}
       </div>
