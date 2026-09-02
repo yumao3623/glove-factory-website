@@ -1,0 +1,434 @@
+{
+  "schema": "product-batch-cross-listing-analysis/v1",
+  "batch": "tranche-2-batch-01",
+  "relationshipCount": 28,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "730659973350"
+      ],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts. Human Gate decision recorded: POSSIBLE_VARIATION.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "691557112631"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "732732478288"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "1002636896918"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "761321664860"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence",
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "691557112631"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "732732478288"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "1002636896918"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "761321664860"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence",
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a short construction"
+      ],
+      "distinguishingEvidence": [
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730659973350",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "691557112631",
+        "732732478288"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "691557112631",
+        "1002636896918"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "691557112631",
+        "761321664860"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "691557112631",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [
+        "b8deb76346e7d15a7edfb17660ccf5b0f61bb53f50358d944df6c85e71506315"
+      ],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "An exact shared source binary is meaningful duplicate evidence, but listing metadata and option evidence still require Human Gate comparison. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "sharedImageReferenceCount": 1,
+      "sharedSkuImageReferenceCount": 0,
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "691557112631",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "732732478288",
+        "1002636896918"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "732732478288",
+        "761321664860"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "732732478288",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "732732478288",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "1002636896918",
+        "761321664860"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "1002636896918",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [],
+      "rationale": "No combined duplicate or variation evidence exists. Preserve separate drafts rather than infer a relationship from general marketplace similarity.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "1002636896918",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "761321664860",
+        "950693682364"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title",
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "761321664860",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "embellishment evidence appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "950693682364",
+        "729142545579"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "cuff or edge detail appears in only one title"
+      ],
+      "rationale": "Structured construction evidence differs and no exact shared source binary exists. Preserve two drafts.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE"
+    }
+  ],
+  "humanDecisionCount": 2
+}

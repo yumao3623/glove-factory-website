@@ -179,6 +179,183 @@
       "humanGateClassification": "HUMAN_ACCEPTED",
       "humanGateOverall": "PENDING_REVIEW",
       "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "1002636896918",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "94f0291caff16a9ac6943e38de7b69b4cee5e7538b5556e6554ddfedf90ccbab",
+      "normalizedDraftId": "draft-1002636896918",
+      "normalizedProductFamily": "kids-dress-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "691557112631",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "aeb771eab270cb6e0108eb3582a454a2773b8e18eecff1b90c5bf3922db77847",
+      "normalizedDraftId": "draft-691557112631",
+      "normalizedProductFamily": "costume-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "729142545579",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "ef349650a7b75d85c94fac09a102311213b912b4d3ec22dc94dafadc4e748a61",
+      "normalizedDraftId": "draft-729142545579",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "730371444820",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "108a5caea693f8f95ad5d3dd60e9757df4c1a2cdddcc89b242ead704f64ecc64",
+      "normalizedDraftId": "draft-730371444820",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "730659973350",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "c72f21252e1db9ab902fc1105318fe704c8322c9de6b86086cec0e58fd48caac",
+      "normalizedDraftId": "draft-730659973350",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "732732478288",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "534b5f0051eb96f4e6098032b68a1e60a483278e73eea282e38f9801821f0e97",
+      "normalizedDraftId": "draft-732732478288",
+      "normalizedProductFamily": "costume-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "761321664860",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "06f450604e7dffc0194b7966f3d92df9aa0246c16f5111d7897ee6633b9b6eb9",
+      "normalizedDraftId": "draft-761321664860",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "950693682364",
+      "batch": "tranche-2-batch-01",
+      "rawArchiveSha256": "4f11013520aa96c958753cc92adb9b0d11ecfe74d2ea395621bba6fd5c6fd41a",
+      "normalizedDraftId": "draft-950693682364",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "728194389811",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "5363eb27a3f5a40d7e36fe53b4ad8ec6a9621ff355266e873dc8e2be70cb3d00",
+      "normalizedDraftId": "draft-728194389811",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "728592614367",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "249c0ab9dc7baf2b575d9851411964c84fa78952da175ad1215ed90e49a46c96",
+      "normalizedDraftId": "draft-728592614367",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "728659873446",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "cdea9026fc6129db7c6387a349f3be839a9e7df91f5c3ba7c1d3e0688c7ca16b",
+      "normalizedDraftId": "draft-728659873446",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "732419024504",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "61d637b032df35d2ee2fba1ddc16e7bd6826f0af42f9ebaeadbbe2ee9061c8cf",
+      "normalizedDraftId": "draft-732419024504",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "732561509757",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "cced3d3289c72c4bcdbeeadc9c4caa13d68f096834aa45f98d081d626f0dae08",
+      "normalizedDraftId": "draft-732561509757",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "741321749838",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "4a7e975fd81c922be57b2882fb22a12d55948a881f84a1439c853c00cb7bfb35",
+      "normalizedDraftId": "draft-741321749838",
+      "normalizedProductFamily": "opera-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "775921736857",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "8cdcb7a721c2ec1a2c365d308b659df246ce857cc3235c796d7a190cc4db76e7",
+      "normalizedDraftId": "draft-775921736857",
+      "normalizedProductFamily": "kids-dress-gloves",
+      "normalizedProductGroupId": "kids-dress-gloves-group-737751870967",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "listingId": "776820765686",
+      "batch": "tranche-2-batch-02",
+      "rawArchiveSha256": "1049890dce049806e660910a4fa0c38d4249371b74337d5b9ca273147d77ad39",
+      "normalizedDraftId": "draft-776820765686",
+      "normalizedProductFamily": "bridal-gloves",
+      "familyDecision": "ACCEPTED",
+      "humanGateClassification": "HUMAN_ACCEPTED",
+      "humanGateOverall": "PENDING_REVIEW",
+      "status": "PENDING_REVIEW"
     }
   ]
 }

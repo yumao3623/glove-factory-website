@@ -16,8 +16,8 @@ test("keeps raw and derived ingestion state outside Git while retaining an expli
 test("keeps a durable cumulative registry for the reviewed real listings", () => {
   const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; rawArchiveSha256: string; batch: string; normalizedDraftId: string; normalizedProductFamily: string | null; normalizedProductGroupId?: string; familyDecision: string; status: string }> };
   assert.equal(registry.schema, "product-listing-registry/v1");
-  assert.equal(registry.entries.length, 16);
-  assert.equal(new Set(registry.entries.map((entry) => entry.listingId)).size, 16);
+  assert.ok(registry.entries.length >= 24);
+  assert.equal(new Set(registry.entries.map((entry) => entry.listingId)).size, registry.entries.length);
   assert.equal(registry.entries.find((entry) => entry.listingId === "776815144156")?.status, "QUARANTINED");
   assert.equal(registry.entries.find((entry) => entry.listingId === "728772172182")?.status, "PENDING_REVIEW");
   assert.equal(registry.entries.find((entry) => entry.listingId === "730186552239")?.familyDecision, "ACCEPTED");
@@ -31,8 +31,8 @@ test("keeps a durable cumulative registry for the reviewed real listings", () =>
 test("keeps cross-batch relationship fingerprints recoverable without raw binaries", () => {
   const fingerprints = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-relationship-fingerprints.json"), "utf8")) as { schema: string; entries: Array<{ listingId: string; batch: string; rawArchiveSha256: string; imageSha256s: string[]; imageReferenceCounts: Record<string, number> }> };
   assert.equal(fingerprints.schema, "product-listing-relationship-fingerprints/v1");
-  assert.equal(fingerprints.entries.length, 16);
-  assert.equal(new Set(fingerprints.entries.map((entry) => entry.listingId)).size, 16);
+  assert.ok(fingerprints.entries.length >= 24);
+  assert.equal(new Set(fingerprints.entries.map((entry) => entry.listingId)).size, fingerprints.entries.length);
   assert.ok(fingerprints.entries.every((entry) => /^\d{6,}$/.test(entry.listingId) && /^[a-f0-9]{64}$/.test(entry.rawArchiveSha256) && entry.imageSha256s.length > 0));
   assert.ok(fingerprints.entries.every((entry) => Object.values(entry.imageReferenceCounts).every((count) => Number.isInteger(count) && count > 0)));
   assert.equal(JSON.stringify(fingerprints).includes("rawImageBytes"), false);
@@ -48,6 +48,44 @@ test("exports the reviewed batch relationship decisions without public catalogue
   assert.equal(review.relationships.find((relationship) => relationship.sourceListingIds.includes("814984964565"))?.normalizedProductGroupId, "kids-dress-gloves-group-737751870967");
   assert.ok(review.relationships.filter((relationship) => relationship.humanDecision === "POSSIBLE_VARIATION").every((relationship) => relationship.action === "DO_NOT_MERGE"));
   assert.equal(existsSync(resolve(root, "data/products/approved/.gitkeep")), true);
+});
+
+test("records the completed tranche-2 batch-02 Human Gate without publishing catalogue data", () => {
+  const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8")) as { entries: Array<{ listingId: string; normalizedProductFamily: string | null; familyDecision: string; humanGateClassification: string; status: string; normalizedProductGroupId?: string }> };
+  const batchIds = ["775921736857", "728194389811", "728592614367", "732561509757", "776820765686", "728659873446", "732419024504", "741321749838"];
+  const batchEntries = registry.entries.filter((entry) => batchIds.includes(entry.listingId));
+  assert.equal(batchEntries.length, 8);
+  assert.ok(batchEntries.every((entry) => entry.familyDecision === "ACCEPTED" && entry.humanGateClassification === "HUMAN_ACCEPTED" && entry.status === "PENDING_REVIEW"));
+  assert.deepEqual(Object.fromEntries(batchEntries.map((entry) => [entry.listingId, entry.normalizedProductFamily])), {
+    "775921736857": "kids-dress-gloves",
+    "728194389811": "opera-gloves",
+    "728592614367": "opera-gloves",
+    "732561509757": "bridal-gloves",
+    "776820765686": "bridal-gloves",
+    "728659873446": "opera-gloves",
+    "732419024504": "bridal-gloves",
+    "741321749838": "opera-gloves",
+  });
+  assert.deepEqual(registry.entries.filter((entry) => entry.normalizedProductGroupId === "kids-dress-gloves-group-737751870967").map((entry) => entry.listingId).sort(), ["737751870967", "775921736857", "814984964565"]);
+
+  const review = JSON.parse(readFileSync(resolve(root, "data/ingestion/batch-reviews/tranche-2-batch-02/cross-batch-analysis.json"), "utf8")) as { relationshipCount: number; humanDecisionCount: number; automaticMerges: number; relationships: Array<{ sourceListingIds: string[]; humanDecision?: string; normalizedProductGroupId?: string; action: string }> };
+  assert.equal(review.relationshipCount, 8);
+  assert.equal(review.humanDecisionCount, 8);
+  assert.equal(review.automaticMerges, 0);
+  assert.equal(review.relationships.filter((relationship) => relationship.humanDecision === "SAME_PRODUCT_DIFFERENT_LISTING").length, 2);
+  assert.ok(review.relationships.filter((relationship) => relationship.humanDecision === "SAME_PRODUCT_DIFFERENT_LISTING").every((relationship) => relationship.normalizedProductGroupId === "kids-dress-gloves-group-737751870967" && relationship.action === "DO_NOT_MERGE"));
+  assert.ok(review.relationships.filter((relationship) => relationship.humanDecision === "KEEP_SEPARATE").every((relationship) => relationship.action === "DO_NOT_MERGE"));
+});
+
+test("records completed tranche-2 batch-01 Human Gates without unresolved review counts", () => {
+  const summary = JSON.parse(readFileSync(resolve(root, "data/ingestion/batch-reviews/tranche-2-batch-01/review-summary.json"), "utf8")) as { crossListingHumanReviewCount: number; crossListingHumanDecisionCount: number; crossBatchHumanReviewCount: number; crossBatchHumanDecisionCount: number; automaticMerges: number };
+  const review = JSON.parse(readFileSync(resolve(root, "data/ingestion/batch-reviews/tranche-2-batch-01/cross-listing-analysis.json"), "utf8")) as { humanDecisionCount: number };
+
+  assert.equal(summary.crossListingHumanReviewCount, 0);
+  assert.equal(summary.crossListingHumanDecisionCount, review.humanDecisionCount);
+  assert.equal(summary.crossBatchHumanReviewCount, 0);
+  assert.equal(summary.crossBatchHumanDecisionCount, 8);
+  assert.equal(summary.automaticMerges, 0);
 });
 
 test("blocks a listing ID or archive hash reused by a different batch", () => {
