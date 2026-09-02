@@ -1,0 +1,98 @@
+{
+  "schema": "product-batch-human-decisions/v1",
+  "batch": "tranche-2-batch-01",
+  "decisions": [
+    {
+      "listingId": "730371444820",
+      "acceptedFamily": "opera-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "730659973350",
+      "acceptedFamily": "opera-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "691557112631",
+      "acceptedFamily": "costume-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "732732478288",
+      "acceptedFamily": "costume-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "1002636896918",
+      "acceptedFamily": "kids-dress-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "761321664860",
+      "acceptedFamily": "bridal-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "950693682364",
+      "acceptedFamily": "bridal-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    },
+    {
+      "listingId": "729142545579",
+      "acceptedFamily": "opera-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING"
+    }
+  ],
+  "relationshipDecisions": [
+    {
+      "sourceListingIds": ["730371444820", "730659973350"],
+      "decision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": ["730371444820", "730186552239"],
+      "decision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": ["730371444820", "844530638864"],
+      "decision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": ["730371444820", "857043957533"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["950693682364", "856992679458"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["950693682364", "733063602867"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["950693682364", "844530638864"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["691557112631", "950693682364"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["729142545579", "857043957533"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["761321664860", "733010943271"],
+      "decision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    }
+  ]
+}

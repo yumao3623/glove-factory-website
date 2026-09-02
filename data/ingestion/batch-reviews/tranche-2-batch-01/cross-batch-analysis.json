@@ -1,0 +1,161 @@
+{
+  "schema": "product-batch-cross-batch-analysis/v1",
+  "batch": "tranche-2-batch-01",
+  "historicalFingerprintCount": 16,
+  "relationshipCount": 8,
+  "humanDecisionCount": 8,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "730186552239"
+      ],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: POSSIBLE_VARIATION.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "857043957533"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "730371444820",
+        "844530638864"
+      ],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a long construction",
+        "both titles identify satin construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: POSSIBLE_VARIATION.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": [
+        "950693682364",
+        "856992679458"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [
+        "748640ca03341f69de4572835221074b798335112802418760c283848fb07962"
+      ],
+      "sharedEvidence": [
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence"
+      ],
+      "rationale": "An exact shared source binary is meaningful duplicate evidence, but listing metadata and option evidence still require Human Gate comparison. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "sharedImageReferenceCount": 1,
+      "sharedSkuImageReferenceCount": 0,
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "950693682364",
+        "733063602867"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [
+        "both titles identify a short construction",
+        "both titles identify lace or mesh construction"
+      ],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "950693682364",
+        "844530638864"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [
+        "520f29a04f09afdaddf1f25a83a02b163fc6491340d5418d5a35de8928f16ac8"
+      ],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "long-versus-short construction evidence",
+        "satin versus lace/mesh construction evidence"
+      ],
+      "rationale": "An exact shared source binary is meaningful duplicate evidence, but listing metadata and option evidence still require Human Gate comparison. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "sharedImageReferenceCount": 1,
+      "sharedSkuImageReferenceCount": 0,
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "729142545579",
+        "857043957533"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "Continuous bows and cutout finger-loop construction differ from the plain finger-loop historical listing."
+      ],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Source titles: 镂空钩指弹力礼服婚纱手套中长绣珠外贸源头蝴蝶结婚庆晚礼服露指 / 夏季新品长款勾指色丁手套化妆舞会新娘婚手臂套礼防晒露指袖套. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": [
+        "761321664860",
+        "733010943271"
+      ],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": [],
+      "distinguishingEvidence": [
+        "Tulle ruffle fingerless/wrist-gauntlet construction differs from the historical listing's construction; retain as separate source products."
+      ],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Source titles: 时尚钉珠网纱袖套唯美新娘简约时尚袖套素纱袖套飞边花边袖套 / 夏季透气复古半截短款网纱女手套无手指薄款新娘花嫁花边手袖手套. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    }
+  ]
+}

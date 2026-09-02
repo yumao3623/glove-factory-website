@@ -1,0 +1,108 @@
+{
+  "schema": "product-batch-cross-batch-analysis/v1",
+  "batch": "tranche-2-batch-02",
+  "historicalFingerprintCount": 24,
+  "relationshipCount": 8,
+  "humanDecisionCount": 8,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": ["775921736857", "737751870967"],
+      "status": "POSSIBLE_DUPLICATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["Human visual review confirms the same children's long satin full-finger construction, folded cuff bow, and pearl decoration."],
+      "distinguishingEvidence": ["The current listing reports approximately 29 cm while historical evidence is approximately 28 cm; retain this as a source measurement discrepancy, not a variation split."],
+      "rationale": "Human Gate decision recorded: SAME_PRODUCT_DIFFERENT_LISTING. This is a re-photographed marketplace presentation with different colour combinations; retain separate source provenance.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "humanDecision": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION",
+      "normalizedProductGroupId": "kids-dress-gloves-group-737751870967"
+    },
+    {
+      "sourceListingIds": ["775921736857", "814984964565"],
+      "status": "POSSIBLE_DUPLICATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["Human visual review confirms the same children's long satin full-finger construction, folded cuff bow, and pearl decoration."],
+      "distinguishingEvidence": ["The current listing reports approximately 29 cm while historical evidence is approximately 28 cm; retain this as a source measurement discrepancy, not a variation split."],
+      "rationale": "Human Gate decision recorded: SAME_PRODUCT_DIFFERENT_LISTING. This is a re-photographed marketplace presentation with different colour combinations; retain separate source provenance.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "humanDecision": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION",
+      "normalizedProductGroupId": "kids-dress-gloves-group-737751870967"
+    },
+    {
+      "sourceListingIds": ["732561509757", "856992679458"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both titles identify a long construction", "both titles identify lace or mesh construction"],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["776820765686", "733063602867"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both titles identify a short construction", "both titles identify lace or mesh construction"],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["776820765686", "950693682364"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both titles identify a short construction", "both titles identify lace or mesh construction"],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["741321749838", "737751870967"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both titles identify a long construction", "both titles identify satin construction"],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["741321749838", "814984964565"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both titles identify a long construction", "both titles identify satin construction"],
+      "distinguishingEvidence": [],
+      "rationale": "Multiple broad title cues overlap, but there is no shared binary or reliable option metadata. Do not merge automatically. Human Gate decision recorded: KEEP_SEPARATE.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["732419024504", "761321664860"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["both are bridal tulle wrist-glove products"],
+      "distinguishingEvidence": ["732419024504 has hand-back tulle, a middle-finger loop, and pearl decoration.", "761321664860 has a wrist ruffle tulle construction."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. The construction differs; they are neither the same product nor a simple variation.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    }
+  ]
+}

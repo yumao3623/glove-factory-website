@@ -1,0 +1,29 @@
+{
+  "schema": "product-batch-human-decisions/v1",
+  "batch": "tranche-2-batch-02",
+  "decisions": [
+    { "listingId": "775921736857", "acceptedFamily": "kids-dress-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "728194389811", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "728592614367", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "732561509757", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "776820765686", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "728659873446", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "732419024504", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "741321749838", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" }
+  ],
+  "relationshipDecisions": [
+    { "sourceListingIds": ["775921736857", "737751870967"], "decision": "SAME_PRODUCT_DIFFERENT_LISTING", "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION", "normalizedProductGroupId": "kids-dress-gloves-group-737751870967" },
+    { "sourceListingIds": ["775921736857", "814984964565"], "decision": "SAME_PRODUCT_DIFFERENT_LISTING", "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION", "normalizedProductGroupId": "kids-dress-gloves-group-737751870967" },
+    { "sourceListingIds": ["732561509757", "856992679458"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["776820765686", "733063602867"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["776820765686", "950693682364"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["741321749838", "737751870967"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["741321749838", "814984964565"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["732419024504", "761321664860"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" }
+  ],
+  "reviewNotes": [
+    "775921736857: visual review found no recognizable character, brand, or third-party IP element; the title phrase alone is not an IP exception.",
+    "732419024504: visual review confirms a fingerless/wrist-gauntlet glove with hand-back tulle and a middle-finger loop, rather than an apparel sleeve.",
+    "775921736857: the approximately 29 cm current measurement and approximately 28 cm historical evidence are retained as a source measurement discrepancy, not a variation split."
+  ]
+}
