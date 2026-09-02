@@ -1,0 +1,143 @@
+{
+  "schema": "product-batch-cross-batch-analysis/v1",
+  "batch": "tranche-3-batch-01",
+  "historicalFingerprintCount": 32,
+  "relationshipCount": 11,
+  "humanDecisionCount": 11,
+  "automaticMerges": 0,
+  "relationships": [
+    {
+      "sourceListingIds": ["956904395389", "730659973350"],
+      "status": "POSSIBLE_DUPLICATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Human visual review confirms the same 23 cm short, plain satin, full-finger glove: product proportions, panels, finger shaping, and cuff agree."],
+      "distinguishingEvidence": ["956904395389 is a re-photographed marketplace presentation with a different colour range."],
+      "rationale": "Human Gate decision recorded: SAME_PRODUCT_DIFFERENT_LISTING. Preserve both independent source provenances in normalized group opera-gloves-group-730659973350; do not merge records.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "humanDecision": "SAME_PRODUCT_DIFFERENT_LISTING",
+      "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION",
+      "normalizedProductGroupId": "opera-gloves-group-730659973350"
+    },
+    {
+      "sourceListingIds": ["819969614484", "732732478288"],
+      "status": "POSSIBLE_VARIATION",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Human visual review confirms metallic/shiny stretch construction and overlapping colour evidence."],
+      "distinguishingEvidence": ["819969614484 is mid-length and fingerless; 732732478288 is shorter and full-finger."],
+      "rationale": "Human Gate decision recorded: POSSIBLE_VARIATION. Retain separate source drafts without a normalized group or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "SAME_PRODUCT_WITH_DIFFERENT_VARIATION_SET",
+      "humanDecision": "POSSIBLE_VARIATION",
+      "relationshipLabel": "RELATED_LISTING"
+    },
+    {
+      "sourceListingIds": ["788133828087", "737751870967"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both are children's satin formal glove listings."],
+      "distinguishingEvidence": ["788133828087 is short with a large bow and wide lace cuff; the established group style is long with a small bow and pearl decoration."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Do not add this listing to kids-dress-gloves-group-737751870967.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["788133828087", "814984964565"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both are children's satin formal glove listings."],
+      "distinguishingEvidence": ["788133828087 is short with a large bow and wide lace cuff; 814984964565 belongs to the long small-bow pearl construction."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. No group membership or merge is authorized.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["788133828087", "775921736857"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both are children's formal glove listings."],
+      "distinguishingEvidence": ["788133828087 is short with a large bow and wide lace cuff; 775921736857 is the long small-bow pearl construction."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. No group membership or merge is authorized.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["788133828087", "741321749838"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both titles use children's formal/satin or lace cues."],
+      "distinguishingEvidence": ["The new listing's short large-bow, wide-lace-cuff construction is not evidence of the same product."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. No group membership or merge is authorized.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["733406564887", "856992679458"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both indicate long lace or mesh glove construction."],
+      "distinguishingEvidence": ["No confirmed same-product construction, SKU, or re-photographed listing evidence."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Broad title cues do not authorize grouping or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["733406564887", "732561509757"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both indicate long lace or mesh glove construction."],
+      "distinguishingEvidence": ["No confirmed same-product construction, SKU, or re-photographed listing evidence."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Broad title cues do not authorize grouping or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["732867076935", "962080651234"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both title sets include lace/mesh and fingerless wording."],
+      "distinguishingEvidence": ["No confirmed same-product construction, SKU, or re-photographed listing evidence."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Broad title cues do not authorize grouping or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["728600712961", "856992679458"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both indicate long lace or mesh glove construction."],
+      "distinguishingEvidence": ["No confirmed same-product construction, SKU, or re-photographed listing evidence."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Broad title cues do not authorize grouping or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    },
+    {
+      "sourceListingIds": ["728600712961", "732561509757"],
+      "status": "KEEP_SEPARATE",
+      "exactSharedImageHashes": [],
+      "sharedEvidence": ["No exact shared image binary is recorded.", "Both indicate long lace or mesh glove construction."],
+      "distinguishingEvidence": ["No confirmed same-product construction, SKU, or re-photographed listing evidence."],
+      "rationale": "Human Gate decision recorded: KEEP_SEPARATE. Broad title cues do not authorize grouping or merge.",
+      "action": "DO_NOT_MERGE",
+      "recommendation": "KEEP_SEPARATE",
+      "humanDecision": "KEEP_SEPARATE",
+      "relationshipLabel": "KEEP_SEPARATE"
+    }
+  ]
+}

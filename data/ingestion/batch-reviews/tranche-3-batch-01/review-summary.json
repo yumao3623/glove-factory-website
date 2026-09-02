@@ -1,0 +1,24 @@
+{
+  "schema": "product-batch-review-summary/v1",
+  "batch": "tranche-3-batch-01",
+  "archiveCount": 8,
+  "draftCount": 8,
+  "quarantineCount": 0,
+  "cleanupCount": 0,
+  "permissionInheritedImageCount": 198,
+  "provenanceExceptionCount": 0,
+  "humanGateExceptionCount": 0,
+  "crossListingRelationshipCount": 28,
+  "crossListingHumanReviewCount": 0,
+  "crossBatchRelationshipCount": 11,
+  "crossBatchHumanReviewCount": 0,
+  "crossBatchHumanDecisionCount": 11,
+  "automaticMerges": 0,
+  "publicationState": "NO_DRAFT_OR_ASSET_IS_PUBLISHABLE",
+  "requiredHumanGate": [
+    "Resolve only provenance, IP/third-party, product-mapping, or image-cleanup exceptions.",
+    "Review cross-batch relationships before normalizing multiple listings into one website product.",
+    "Confirm claims only when the intended website record needs them.",
+    "Create approved ProductRecord data separately; inspection output never becomes application data."
+  ]
+}

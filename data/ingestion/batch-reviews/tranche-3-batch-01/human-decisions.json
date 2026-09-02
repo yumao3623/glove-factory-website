@@ -1,0 +1,59 @@
+{
+  "schema": "product-batch-human-decisions/v1",
+  "batch": "tranche-3-batch-01",
+  "decisions": [
+    {
+      "listingId": "956904395389",
+      "acceptedFamily": "opera-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING",
+      "imageReviewNotes": [
+        { "sha256": "e600f8316ac13cfb36e9a4c481c5591722b03f31dabce4875f2f03f07302111b", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Description marketing template visibly carries C.MAGIC branding of unclear provenance; exclude from production candidates." },
+        { "sha256": "17046cff88cf2c14be30080b4facdbe5548f4122b81734dd27309a2bcf326632", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Description marketing template visibly carries CM and HAND FOR SPIRIT branding of unclear provenance; exclude from production candidates." }
+      ]
+    },
+    { "listingId": "741154552428", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "788133828087", "acceptedFamily": "kids-dress-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "819969614484", "acceptedFamily": "costume-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "733406564887", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    {
+      "listingId": "977246337453",
+      "acceptedFamily": "bridal-gloves",
+      "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING",
+      "imageReviewNotes": [
+        { "sha256": "ea794d3b1aec7aa688eee84afa9ad3198b812b8a5075a4bf03dff2f34f092747", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "20b061cbc0c96895eef49d9b1ae92c9535539d4a76801c922317879d9ce86015", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "912acb9e8adefafe03ed10082855d1a187504d18f9457285d3206107223c40a4", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "36f3460d20c68655a80bfe848c16c7e33e4e393d2331406528609d601b8377bc", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "31248e223891252227093b00a95f5a47cbb3f887ed70d54fa954af2b8e0694c1", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "8de76af0188e1424a6648c198bb60e95efcb725e1c65c0506067cc6565b0d146", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "42a75c4fcb8087c184400d22bdbb9d9104621472f84adc2911df100d2fbed998", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "2cbbb47bb015eea68e01242725f0fb7677ce8c01b7e666f0c8258260536c5c7c", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "3e837ab4713c021601711992c545017eaf20f270d42dffea97328ca84862b246", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Third-party/publicity-risk or unclear-provenance model/composite marketing asset; exclude from production candidates." },
+        { "sha256": "7cc105888d24e33c9709518075d4ee61c4ca2f42e07f1ba57db32913c3cb3f14", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Unclear-provenance marketing asset with visible repeated FENG watermark; exclude from production candidates." },
+        { "sha256": "e5c3f615110fdc55822d14b311e2673d6a63a5b11639882fb4e83ece1da32ae5", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Unclear-provenance marketing asset with visible repeated FENG watermark; exclude from production candidates." },
+        { "sha256": "249c97f0c49ab0199614fe480395f62c590ef4ca525ca11182398caabfec1d37", "disposition": "NON_PREFERRED_PRODUCTION", "reason": "Unclear-provenance marketing asset with visible repeated FENG watermark; exclude from production candidates." }
+      ]
+    },
+    { "listingId": "732867076935", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "728600712961", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" }
+  ],
+  "relationshipDecisions": [
+    { "sourceListingIds": ["956904395389", "730659973350"], "decision": "SAME_PRODUCT_DIFFERENT_LISTING", "relationshipLabel": "DUPLICATE_MARKETPLACE_PRESENTATION", "normalizedProductGroupId": "opera-gloves-group-730659973350" },
+    { "sourceListingIds": ["733406564887", "728600712961"], "decision": "POSSIBLE_VARIATION", "relationshipLabel": "RELATED_LISTING" },
+    { "sourceListingIds": ["819969614484", "732732478288"], "decision": "POSSIBLE_VARIATION", "relationshipLabel": "RELATED_LISTING" },
+    { "sourceListingIds": ["788133828087", "737751870967"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["788133828087", "814984964565"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["788133828087", "775921736857"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["788133828087", "741321749838"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["733406564887", "856992679458"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["733406564887", "732561509757"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["732867076935", "962080651234"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["728600712961", "856992679458"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" },
+    { "sourceListingIds": ["728600712961", "732561509757"], "decision": "KEEP_SEPARATE", "relationshipLabel": "KEEP_SEPARATE" }
+  ],
+  "reviewNotes": [
+    "977246337453: primary family accepted as bridal-gloves. Current 1688 SKU evidence is children 28 cm with rhinestones, children 28 cm without rhinestones, adult 40 cm with rhinestones, adult 40 cm without rhinestones, adult 23 cm with rhinestones, and adult 23 cm without rhinestones. Four of six variants are adult formal/bridal evidence; the two children's 28 cm variants remain multi-audience/cross-family variation evidence only.",
+    "977246337453: retain as one independent source draft; do not add it to the kids normalized group, split it, or create an approved ProductRecord. The marketplace text stating more than 600 pairs sold is PLATFORM_EVIDENCE only, not a formal sales, bestseller, or factory claim.",
+    "956904395389 and 977246337453: the recorded non-preferred assets are asset-only production exclusions. Neither listing is quarantined, and both retain safe product imagery for subsequent review."
+  ]
+}
