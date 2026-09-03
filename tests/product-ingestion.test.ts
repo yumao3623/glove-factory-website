@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { analyzeCrossBatchRelationships, analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, buildListingRelationshipFingerprint, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedCatalogue, validateApprovedProduct } from "../lib/product-ingestion";
+import { getApprovedCatalogueByFamily, isApprovedProduct } from "../data/approved-catalogue";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -295,4 +296,32 @@ test("initial public tranche keeps exactly four approved records in a registry a
   assert.ok(!productionSources.includes("fc01e4e85a76f46680b54ade4b697dba7d7c866642f5692d01359f4810d09ea1"));
   assert.ok(!productionSources.includes("97d37bfcc74e37dcc19119f0149fbc5820eb4491c31cc71d9314c0046f0946e8"));
   assert.ok(!productionSources.includes("d482486585ca19e1e0077a33ef0c4bfc76e945e79331fde5f0343bc271c88caa"));
+});
+
+test("collection loader exposes only approved records with manifest-mapped primary production assets", () => {
+  assert.equal(isApprovedProduct({ status: "DRAFT" }), false);
+  assert.equal(isApprovedProduct({ status: "PENDING_REVIEW" }), false);
+  assert.equal(isApprovedProduct({ status: "ARCHIVED" }), false);
+  assert.equal(isApprovedProduct({ status: "APPROVED" }), true);
+  assert.deepEqual(getApprovedCatalogueByFamily("bridal-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["bridal-gloves-sheer-lace-long-001", "bridal-gloves-sheer-lace-long-001-front-web"]]);
+  assert.deepEqual(getApprovedCatalogueByFamily("opera-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["opera-gloves-satin-short-001", "opera-gloves-satin-short-001-front-web"]]);
+  assert.deepEqual(getApprovedCatalogueByFamily("kids-dress-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["kids-dress-gloves-satin-bow-001", "kids-dress-gloves-satin-bow-001-front-web"]]);
+  assert.deepEqual(getApprovedCatalogueByFamily("wedding-veils").map((record) => [record.id, record.primaryImage.assetId]), [["wedding-veils-black-lace-trim-001", "wedding-veils-black-lace-trim-001-front-web"]]);
+});
+
+test("static collection image imports stay closed over approved web derivatives", () => {
+  const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8")) as Array<{ images: Array<{ assetId: string; path: string | null; status: string; role: string }> }>;
+  const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8")) as { productionAssets: Array<{ derivatives: Array<{ assetId: string; path: string }> }> };
+  const mappingSource = readFileSync(resolve(root, "components/product/approved-product-image.ts"), "utf8");
+  const mappedAssetIds = [...mappingSource.matchAll(/^\s+"([^"]+-web)":/gm)].map((match) => match[1]).sort();
+  const recordImages = records.flatMap((record) => record.images).filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.includes("/web/"));
+  const approvedAssetIds = recordImages.map((image) => image.assetId).sort();
+  const manifestAssetIds = manifest.productionAssets.flatMap((asset) => asset.derivatives).filter((derivative) => approvedAssetIds.includes(derivative.assetId)).map((derivative) => derivative.assetId).sort();
+
+  assert.deepEqual(mappedAssetIds, approvedAssetIds);
+  assert.deepEqual(manifestAssetIds, approvedAssetIds);
+  for (const image of recordImages) {
+    assert.ok(existsSync(resolve(root, `assets${image.path}`)));
+    assert.match(mappingSource, new RegExp(`from "@/assets${image.path}";`));
+  }
 });

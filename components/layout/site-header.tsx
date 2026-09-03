@@ -25,7 +25,7 @@ export function SiteHeader() {
         <Button asChild size="lg" className="hidden min-h-11 rounded-none bg-black px-5 md:inline-flex"><a href="#rfq">Request a Quote</a></Button>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon-lg" className="min-h-11 min-w-11 md:hidden" aria-label="Open navigation"><MenuIcon /></Button>
+            <Button variant="ghost" size="icon-lg" className="inline-flex min-h-11 min-w-11 shrink-0 text-black md:hidden" aria-label="Open navigation"><MenuIcon aria-hidden="true" /></Button>
           </SheetTrigger>
           <SheetContent side="right">
             <SheetHeader>
