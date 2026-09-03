@@ -95,5 +95,115 @@
       "visual_status": "RESEARCH_ONLY",
       "reason": "Chinese marketing copy, dimensions, claims, packaging or marketplace-style layouts"
     }
+  ],
+  "productionAssets": [
+    {
+      "assetId": "kids-dress-gloves-satin-bow-001-front",
+      "productId": "kids-dress-gloves-satin-bow-001",
+      "sourceListingIds": ["737751870967", "814984964565"],
+      "sourceHash": "5db775e58e1e060cb6fccfba292f3d18b568f279e0ea32a09a20f74a5f761194",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/original/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.jpg", "width": 800, "height": 800 },
+      "derivatives": [{ "assetId": "kids-dress-gloves-satin-bow-001-front-web", "role": "primary", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/web/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "e7bdf457491898007006df7524b641b3ab7046abb42eeb1d65154ee7f4c76c7f" }, { "assetId": "kids-dress-gloves-satin-bow-001-front-thumb", "role": "thumbnail", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/thumb/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "01bbd1a9f6aeda0b23bc929ab2fd12d99ec185f2d78ab4ecc0eeb1e4db992f51" }]
+    },
+    {
+      "assetId": "kids-dress-gloves-satin-bow-001-detail",
+      "productId": "kids-dress-gloves-satin-bow-001",
+      "sourceListingIds": ["737751870967"],
+      "sourceHash": "8352aaaedaf0afc9139ae34370f120414530788996293e3e395341e8fddcd96c",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/original/kids-dress-gloves__kids-dress-gloves-satin-bow-001__detail__default__v1.jpg", "width": 800, "height": 800 },
+      "derivatives": [{ "assetId": "kids-dress-gloves-satin-bow-001-detail-web", "role": "detail", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/web/kids-dress-gloves__kids-dress-gloves-satin-bow-001__detail__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "f0eb375626365f12b496f43ba1df3c3c2dcaec5e24f615837a27d42d4b939ed2" }, { "assetId": "kids-dress-gloves-satin-bow-001-detail-thumb", "role": "thumbnail", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/thumb/kids-dress-gloves__kids-dress-gloves-satin-bow-001__detail__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "e898a889f3651c2bbc7d09d2f8217496eceb851e9452431e07488c6c04891ebb" }]
+    },
+    {
+      "assetId": "bridal-gloves-sheer-lace-long-001-front",
+      "productId": "bridal-gloves-sheer-lace-long-001",
+      "sourceListingIds": ["856992679458"],
+      "sourceHash": "5e05f6cb309029730123e14bace92d47294a77b318a9ea9a9fd31305a91b2266",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/original/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.jpg", "width": 1000, "height": 1000 },
+      "derivatives": [{ "assetId": "bridal-gloves-sheer-lace-long-001-front-web", "role": "primary", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "3bde4a216dd2f50e9df2c402a6e4a37072397c978c1d9efdfcf090206895f76e" }, { "assetId": "bridal-gloves-sheer-lace-long-001-front-thumb", "role": "thumbnail", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/thumb/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "a2b811bce697c830ae2cd7e410b71ce166ae521df3735322b35ca2d2b9406065" }]
+    },
+    {
+      "assetId": "bridal-gloves-sheer-lace-long-001-detail-01",
+      "productId": "bridal-gloves-sheer-lace-long-001",
+      "sourceListingIds": ["856992679458"],
+      "sourceHash": "36ffd5f87f6e067ae266651d6f6c4e833e8ad691ec35e9a4f74edb260c761221",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/original/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-01__default__v1.jpg", "width": 1000, "height": 1000 },
+      "derivatives": [{ "assetId": "bridal-gloves-sheer-lace-long-001-detail-01-web", "role": "detail", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-01__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "f89e1d9b6743418b6cc26ffe223dcfa99e2ec04910c216e6ead2df98013cedf3" }, { "assetId": "bridal-gloves-sheer-lace-long-001-detail-01-thumb", "role": "thumbnail", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/thumb/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-01__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "f9f059080d9f1621ababcddb12025215385f96fab6d9590398f0bd09b7951c19" }]
+    },
+    {
+      "assetId": "bridal-gloves-sheer-lace-long-001-detail-02",
+      "productId": "bridal-gloves-sheer-lace-long-001",
+      "sourceListingIds": ["856992679458"],
+      "sourceHash": "5a1e1a90a5bf5ee9ff96d6c2c8af94e2f50d50193db6b1535396f576399e4129",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/original/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-02__default__v1.jpg", "width": 1000, "height": 1000 },
+      "derivatives": [{ "assetId": "bridal-gloves-sheer-lace-long-001-detail-02-web", "role": "detail", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-02__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "155a0d927201d0fe129c86caceae2d0d36cd47efe6d8c6a9f97d1efc090d6f1f" }, { "assetId": "bridal-gloves-sheer-lace-long-001-detail-02-thumb", "role": "thumbnail", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/thumb/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-02__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "67689580bd78ae0f8cc841c7b5e09b7d8e8e716e998d45d2e8b3594d0debdcd4" }]
+    },
+    {
+      "assetId": "opera-gloves-satin-short-001-front",
+      "productId": "opera-gloves-satin-short-001",
+      "sourceListingIds": ["956904395389"],
+      "sourceHash": "d1e752a9bb687ff3bb4d9c2508703f2dbfc4f59be66fc31c2a1532076361ee57",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/opera-gloves/opera-gloves-satin-short-001/original/opera-gloves__opera-gloves-satin-short-001__front__default__v1.jpg", "width": 1200, "height": 1200 },
+      "derivatives": [{ "assetId": "opera-gloves-satin-short-001-front-web", "role": "primary", "path": "/products/opera-gloves/opera-gloves-satin-short-001/web/opera-gloves__opera-gloves-satin-short-001__front__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "5d640761a8de66d25814ca3a99bb592cd9863654398999674ca3a341b44df017" }, { "assetId": "opera-gloves-satin-short-001-front-thumb", "role": "thumbnail", "path": "/products/opera-gloves/opera-gloves-satin-short-001/thumb/opera-gloves__opera-gloves-satin-short-001__front__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "10ec7012abf4811bb90a76b023e7d281854b710bed9cccc53a27df5e5f0cd3fc" }]
+    },
+    {
+      "assetId": "wedding-veils-black-lace-trim-001-front",
+      "productId": "wedding-veils-black-lace-trim-001",
+      "sourceListingIds": ["800814497148"],
+      "sourceHash": "c8042675e03c7ecd8c1cef069c997a3f8cc4bd9673a5a6e672595c921d7c2baa",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/wedding-veils/wedding-veils-black-lace-trim-001/original/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.jpg", "width": 800, "height": 800 },
+      "derivatives": [{ "assetId": "wedding-veils-black-lace-trim-001-front-web", "role": "primary", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "b10d813a0b710aa33d8af4659b63e81a5c204029effd77cd468f25650e9324f4" }, { "assetId": "wedding-veils-black-lace-trim-001-front-thumb", "role": "thumbnail", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/thumb/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "682031e57dd96c8e2957de6a94a1cdbb53c4487a91ae028f12862ccebdb26c29" }]
+    },
+    {
+      "assetId": "wedding-veils-black-lace-trim-001-comb",
+      "productId": "wedding-veils-black-lace-trim-001",
+      "sourceListingIds": ["800814497148"],
+      "sourceHash": "8256dd02868a6e5ce8df433911fbeafc317789a5fe4654237962f8511efb8cfb",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/wedding-veils/wedding-veils-black-lace-trim-001/original/wedding-veils__wedding-veils-black-lace-trim-001__comb__default__v1.jpg", "width": 1200, "height": 1200 },
+      "derivatives": [{ "assetId": "wedding-veils-black-lace-trim-001-comb-web", "role": "detail", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__comb__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "e78bb83c44f794f6b71623e1d0b62af2dc6c58fff5d9b53c8dba533fba0dd94b" }, { "assetId": "wedding-veils-black-lace-trim-001-comb-thumb", "role": "thumbnail", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/thumb/wedding-veils__wedding-veils-black-lace-trim-001__comb__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "c299f213dd469f021d7935d06b26e60223ee8d4015c2e5c15891f9329d17df9a" }]
+    },
+    {
+      "assetId": "wedding-veils-black-lace-trim-001-dress-form",
+      "productId": "wedding-veils-black-lace-trim-001",
+      "sourceListingIds": ["800814497148"],
+      "sourceHash": "0cbc108c3d88502b71cbe4b454aa962869d1edfdeb1de2ac5fa2354e51ea4dfb",
+      "permissionStatus": "STORE_LEVEL_PERMISSION_INHERITED",
+      "permissionSource": "Factory-owned 1688 storefront grant for https://jsmeilai.1688.com/",
+      "visualApprovalStatus": "HUMAN_PRODUCTION_APPROVED",
+      "visualApprovalSource": "Human Review checkpoint 2026-09-03",
+      "original": { "path": "assets/products/wedding-veils/wedding-veils-black-lace-trim-001/original/wedding-veils__wedding-veils-black-lace-trim-001__dress-form__default__v1.jpg", "width": 800, "height": 800 },
+      "derivatives": [{ "assetId": "wedding-veils-black-lace-trim-001-dress-form-web", "role": "context", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__dress-form__default__v1.webp", "width": 800, "height": 800, "format": "webp", "sha256": "ca3de1b9d593ab1c4c8d07259733b7fda73b9832c840574b7432aaa9f0659287" }, { "assetId": "wedding-veils-black-lace-trim-001-dress-form-thumb", "role": "thumbnail", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/thumb/wedding-veils__wedding-veils-black-lace-trim-001__dress-form__default__v1.webp", "width": 400, "height": 400, "format": "webp", "sha256": "bfd495b1270322cdd94b2c5b649d6fb85e727e3eee255ecb42bc91cba44bf52b" }]
+    }
   ]
 }
