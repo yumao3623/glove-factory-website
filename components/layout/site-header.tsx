@@ -10,6 +10,9 @@ const navItems = [
   { href: "/", label: "Overview" },
   { href: "/products/", label: "Products" },
   { href: "/bridal-gloves/", label: "Bridal Gloves" },
+  { href: "/opera-gloves/", label: "Opera Gloves" },
+  { href: "/kids-dress-gloves/", label: "Kids Dress Gloves" },
+  { href: "/wedding-veils/", label: "Wedding Veils" },
 ];
 
 export function SiteHeader() {
