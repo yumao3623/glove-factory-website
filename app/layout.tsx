@@ -7,8 +7,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: getSiteOrigin(),
-  title: { default: "Occasion Gloves & Wedding Veils Manufacturer", template: "%s | Development prototype" },
-  description: "Development prototype for a B2B occasion gloves and wedding veils manufacturer site.",
+  title: { default: "Occasion Gloves & Wedding Veils Manufacturer", template: "%s | JS Meilai" },
+  description: "A focused B2B range of occasion gloves and wedding veils for sourcing conversations.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
