@@ -30,16 +30,16 @@ export function RfqForm() {
         setNotice(body.message ?? "Please review the highlighted fields.");
         return;
       }
-      setNotice("Validation passed. Delivery remains PENDING_PUBLIC_CONTACT for this development checkpoint.");
+      setNotice("Your enquiry details are ready to review. This preview does not transmit an enquiry.");
       setValues(initialState);
     } catch {
-      setNotice("The development endpoint could not be reached. No enquiry was sent.");
+      setNotice("The enquiry preview could not be reached. No enquiry was transmitted.");
     } finally { setSubmitting(false); }
   }
 
-  return <form onSubmit={submit} noValidate className="border border-border bg-background p-5 sm:p-8">
+  return <form onSubmit={submit} noValidate className="border border-border bg-background p-5 text-foreground sm:p-8">
     <FieldGroup>
-      <div><h3 className="font-serif text-3xl">Request a quote</h3><FieldDescription className="mt-2">This development form validates data only. Its public recipient is still PENDING_PUBLIC_CONTACT.</FieldDescription></div>
+      <div><h3 className="font-serif text-3xl">Prepare an enquiry</h3><FieldDescription className="mt-2">Use this form to organise the details for your sourcing brief. This preview does not transmit an enquiry.</FieldDescription></div>
       <div className="hidden" aria-hidden="true"><label htmlFor="website">Website</label><Input id="website" tabIndex={-1} autoComplete="off" value={String(values.website)} onChange={(event) => setValue("website", event.target.value)} /></div>
       <div className="grid gap-5 md:grid-cols-2">
         <Field data-invalid={Boolean(errors.name)}><FieldLabel htmlFor="name">Name</FieldLabel><Input id="name" aria-invalid={Boolean(errors.name)} value={String(values.name)} onChange={(event) => setValue("name", event.target.value)} />{errors.name ? <FieldError>{errors.name}</FieldError> : null}</Field>
@@ -52,7 +52,7 @@ export function RfqForm() {
       <Field data-invalid={Boolean(errors.productFamily)}><FieldLabel>Product family</FieldLabel><Select value={String(values.productFamily)} onValueChange={(value) => setValue("productFamily", value)}><SelectTrigger className="h-11 w-full" aria-invalid={Boolean(errors.productFamily)}><SelectValue placeholder="Select a family" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Product families</SelectLabel><SelectItem value="bridal-gloves">Bridal / Wedding Gloves</SelectItem><SelectItem value="opera-gloves">Opera / Evening / Formal Gloves</SelectItem><SelectItem value="costume-gloves">Costume / Stage Gloves</SelectItem><SelectItem value="kids-dress-gloves">Kids / Girls Dress Gloves</SelectItem><SelectItem value="wedding-veils">Wedding / Bridal Veils</SelectItem></SelectGroup></SelectContent></Select>{errors.productFamily ? <FieldError>{errors.productFamily}</FieldError> : null}</Field>
       <Field data-invalid={Boolean(errors.message)}><FieldLabel htmlFor="message">Message</FieldLabel><Textarea id="message" rows={5} aria-invalid={Boolean(errors.message)} value={String(values.message)} onChange={(event) => setValue("message", event.target.value)} />{errors.message ? <FieldError>{errors.message}</FieldError> : null}</Field>
       <Field orientation="horizontal" data-invalid={Boolean(errors.consent)}><Checkbox id="consent" checked={Boolean(values.consent)} onCheckedChange={(checked) => setValue("consent", checked === true)} aria-invalid={Boolean(errors.consent)} /><FieldLabel htmlFor="consent">I consent to the handling of this enquiry for quotation follow-up.</FieldLabel>{errors.consent ? <FieldError>{errors.consent}</FieldError> : null}</Field>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center"><Button type="submit" size="lg" className="min-h-11" disabled={submitting}>{submitting ? "Validating..." : "Submit enquiry"}</Button>{notice ? <p aria-live="polite" className="text-sm leading-6 text-muted-foreground">{notice}</p> : null}</div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center"><Button type="submit" size="lg" className="min-h-11" disabled={submitting}>{submitting ? "Checking..." : "Check enquiry details"}</Button>{notice ? <p aria-live="polite" className="text-sm leading-6 text-muted-foreground">{notice}</p> : null}</div>
     </FieldGroup>
   </form>;
 }

@@ -1,39 +1,19 @@
-import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
-import { EditorialImage } from "@/components/marketing/editorial-image";
-import { RfqForm } from "@/components/marketing/rfq-form";
-import { ProductCard } from "@/components/product/product-card";
-import { Button } from "@/components/ui/button";
-import { bridalDevelopmentFixtures } from "@/data/development-fixtures";
-import { visualGateMedia } from "@/data/visual-gate-media";
+import { CollectionPage, type CollectionConfig } from "@/components/product/collection-page";
+import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata("Bridal Gloves", "Development collection template for B2B bridal and wedding glove enquiries.", "/bridal-gloves/");
-type PageProps = { searchParams: Promise<{ gate?: string }> };
+export const metadata = pageMetadata("Bridal Gloves", "A focused B2B collection for buyers sourcing approved bridal glove products.", "/bridal-gloves/");
 
-export default async function BridalGlovesPage({ searchParams }: PageProps) {
-  const { gate } = await searchParams;
-  const variant = gate === "d" ? "d" : "e";
-  const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "/" }, { "@type": "ListItem", position: 2, name: "Products", item: "/products/" }, { "@type": "ListItem", position: 3, name: "Bridal Gloves", item: "/bridal-gloves/" }] };
-  return <main id="main-content" tabIndex={-1} className="overflow-hidden"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-    {variant === "d" ? <BalancedCollectionIntro /> : <RefinedCollectionIntro />}
-    <CollectionGrid variant={variant} /><CollectionDetail variant={variant} /><CollectionBridge variant={variant} /><CollectionRfq />
-  </main>;
-}
+const bridalCollection: CollectionConfig = {
+  family: "bridal-gloves",
+  title: "Bridal Gloves",
+  eyebrow: "Bridal glove sourcing",
+  intro: "A focused collection for buyers exploring bridal glove direction.",
+  layout: "bridal",
+  rangeHeading: "A lace-led bridal glove direction.",
+  rangeCopy: "Explore the visible silhouette and finishing details, then bring the requirements for your range to an enquiry.",
+  procurementHeading: "Detail the look before the specification.",
+  procurementCopy: "Use this selection to align on lace and sheer direction before discussing the specifications relevant to your brief.",
+};
 
-function Breadcrumb() { return <nav aria-label="Breadcrumb" className="text-sm text-stone-600"><Link href="/" className="hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black">Home</Link><span aria-hidden="true"> / </span><Link href="/products/" className="hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black">Products</Link><span aria-hidden="true"> / </span><span aria-current="page">Bridal Gloves</span></nav>; }
-
-function BalancedCollectionIntro() { return <section className="bg-[#fbfaf8]"><div className="mx-auto max-w-[1280px] px-5 py-8 sm:px-8 lg:px-10 lg:py-12"><Breadcrumb /><div className="mt-10 grid gap-8 lg:grid-cols-[.7fr_1.3fr]"><div className="flex flex-col justify-end"><p className="section-label">Collection edit</p><h1 className="mt-3 font-serif text-[clamp(3.2rem,6vw,5.8rem)] leading-[.9]">Bridal Gloves</h1><p className="mt-6 max-w-md leading-7 text-stone-600">A collection view for buyers exploring bridal and wedding glove direction before product-level details are confirmed.</p></div><div className="grid min-h-[390px] grid-cols-12 gap-3 sm:min-h-[520px]"><EditorialImage priority src={visualGateMedia.bridal04} alt="White lace bridal glove visual-gate candidate" className="col-span-7" imageClassName="object-cover" /><EditorialImage priority src={visualGateMedia.bridal01} alt="Embellished bridal glove visual-gate candidate" className="col-span-5 mt-12" imageClassName="object-cover" /></div></div></div></section>; }
-
-function RefinedCollectionIntro() { return <section className="bg-black text-white"><div className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 lg:px-10 lg:py-12"><div className="text-stone-400"><Breadcrumb /></div><div className="mt-8 grid gap-2 lg:grid-cols-12"><div className="flex flex-col justify-end py-8 lg:col-span-4 lg:py-16"><p className="section-label text-stone-400">Collection edit</p><h1 className="mt-3 max-w-[8ch] font-serif text-[clamp(3rem,6vw,6rem)] leading-[.89]">Bridal Gloves</h1><p className="mt-6 max-w-sm leading-7 text-stone-300">Lace, sheer and embellished glove directions for wedding and ceremony ranges.</p></div><div className="grid min-h-[390px] grid-cols-7 gap-1 lg:col-span-8 lg:min-h-[580px]"><EditorialImage priority src={visualGateMedia.bridal03} alt="Long black lace glove visual-gate candidate" className="col-span-4" imageClassName="object-cover" /><div className="col-span-3 grid gap-1"><EditorialImage priority src={visualGateMedia.bridal02} alt="White embellished glove visual-gate candidate" className="min-h-0" imageClassName="object-cover" /><EditorialImage priority src={visualGateMedia.bridal04} alt="White lace glove visual-gate candidate" className="min-h-0" imageClassName="object-cover" /></div></div></div></div></section>; }
-
-function CollectionGrid({ variant }: { variant: "d" | "e" }) {
-  const images = [visualGateMedia.bridal01, visualGateMedia.bridal02, visualGateMedia.bridal03, visualGateMedia.bridal04];
-  return <section id="collection" className={variant === "d" ? "bg-white" : "bg-[#f6f5f2]"}><div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:px-10 lg:py-24"><div className="flex flex-col justify-between gap-6 border-b border-stone-300 pb-6 lg:flex-row lg:items-end"><div><p className="section-label">Bridal glove range</p><h2 className="mt-3 font-serif text-4xl leading-tight">Styles to discuss</h2></div><p className="max-w-sm text-sm leading-6 text-stone-600">Development references for sourcing conversations; final names, specifications and permissions remain pending.</p></div><nav aria-label="Bridal glove style navigation" className="flex flex-wrap gap-x-5 gap-y-2 border-b border-stone-300 py-4 text-sm"><a className="underline underline-offset-4" href="#collection">Lace</a><a className="hover:underline hover:underline-offset-4" href="#collection">Sheer / tulle</a><a className="hover:underline hover:underline-offset-4" href="#collection">Fingerless</a><a className="hover:underline hover:underline-offset-4" href="#collection">Embellished</a></nav><div className={variant === "d" ? "mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" : "mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4"}>{bridalDevelopmentFixtures.map((product, index) => <ProductCard key={product.id} product={product} image={images[index]} />)}</div></div></section>;
-}
-
-function CollectionDetail({ variant }: { variant: "d" | "e" }) { return <section className={variant === "d" ? "bg-[#e9e8e5]" : "bg-white"}><div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:px-10 lg:py-20"><div className="flex flex-col justify-end lg:col-span-4"><p className="section-label">Material context</p><h2 className="mt-3 max-w-sm font-serif text-4xl leading-[1.04] sm:text-5xl">Detail the look before the specification.</h2><p className="mt-5 max-w-sm leading-7 text-stone-600">Use close-up imagery to align on lace, sheer and embellished directions before composition, dimensions and availability are confirmed.</p></div><div className="grid grid-cols-12 gap-3 lg:col-span-8"><EditorialImage src={visualGateMedia.bridal02} alt="Bridal glove detail visual-gate candidate" className="col-span-7 aspect-[4/5]" imageClassName="object-cover" /><EditorialImage src={visualGateMedia.bridal04} alt="Lace glove visual-gate candidate" className="col-span-5 mt-12 aspect-[3/4]" imageClassName="object-cover" /><EditorialImage src={visualGateMedia.veil01} alt="Wedding veil visual-gate candidate" className="col-span-5 aspect-[3/4]" imageClassName="object-cover" /></div></div></section>; }
-
-function CollectionBridge({ variant }: { variant: "d" | "e" }) { return <section className={variant === "d" ? "bg-white" : "bg-[#dfe3e2]"}><div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:px-10 lg:py-20"><div className="lg:col-span-7"><EditorialImage src={visualGateMedia.factory02} alt="Workshop visual-gate candidate" className="aspect-[16/8]" imageClassName="object-cover" /></div><div className="flex flex-col justify-center lg:col-span-5"><p className="section-label">Manufacturing evidence</p><h2 className="mt-3 font-serif text-4xl leading-[1.04]">Bring the requirements to the discussion.</h2><p className="mt-5 leading-7 text-stone-600">MOQ, samples, timing, exact materials and capacity remain pending confirmation. This workshop image is local visual-gate evidence only.</p><div className="mt-7 border-y border-stone-300 text-sm"><div className="flex justify-between py-3"><span>MOQ</span><span className="text-stone-500">Pending confirmation</span></div><div className="flex justify-between border-t border-stone-300 py-3"><span>Sample terms</span><span className="text-stone-500">Pending confirmation</span></div><div className="flex justify-between border-t border-stone-300 py-3"><span>Lead time</span><span className="text-stone-500">Pending confirmation</span></div></div><Button asChild variant="link" size="lg" className="mt-5 w-fit rounded-none px-0 text-black underline-offset-4"><a href="#rfq">Discuss Your Requirements <ArrowRightIcon data-icon="inline-end" /></a></Button></div></div></section>; }
-
-function CollectionRfq() { return <section id="rfq" className="bg-black text-white"><div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-10 lg:py-24"><div><p className="section-label text-stone-400">Enquiry</p><h2 className="mt-3 max-w-md font-serif text-4xl leading-[1.04] sm:text-5xl">Request a bridal range quotation.</h2><p className="mt-5 max-w-sm leading-7 text-stone-300">The form validates an enquiry without connecting to a public recipient.</p></div><div className="rfq-on-dark"><RfqForm /></div></div></section>; }
+export default function BridalGlovesPage() { return <CollectionPage config={bridalCollection} products={getApprovedCatalogueByFamily("bridal-gloves")} />; }
