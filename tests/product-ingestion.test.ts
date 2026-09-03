@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { analyzeCrossBatchRelationships, analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, buildListingRelationshipFingerprint, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedProduct } from "../lib/product-ingestion";
+import { analyzeCrossBatchRelationships, analyzeCrossListingRelationships, archivePathIsSafe, buildDraft, buildListingRelationshipFingerprint, hasCompleteStorefrontProvenance, listingIdFromFilename, listingRegistryConflicts, parseSourceMetadata, roleForArchivePath, sourceReviewFlags, triageImages, validateApprovedCatalogue, validateApprovedProduct } from "../lib/product-ingestion";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -262,6 +262,7 @@ test("approved records require reviewed product data and approved asset provenan
   assert.ok(invalid.some((error) => error.includes("Only status APPROVED")));
   const valid = validateApprovedProduct({
     id: "bg-001",
+    provenance: { normalizedProductGroupId: "bridal-gloves-group-001", sourceListingIds: ["814978872980"] },
     productName: "Long lace bridal glove",
     productFamily: "bridal-gloves",
     material: { value: null, status: "UNKNOWN", source: "Listing evidence reviewed 2026-09-01" },
@@ -276,4 +277,22 @@ test("approved records require reviewed product data and approved asset provenan
     altText: "Long lace bridal glove, front view",
   });
   assert.deepEqual(valid, []);
+});
+
+test("initial public tranche keeps exactly four approved records in a registry and asset-manifest closed loop", () => {
+  const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8"));
+  const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8"));
+  const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8"));
+  const fingerprints = readFileSync(resolve(root, "data/ingestion/listing-relationship-fingerprints.json"), "utf8");
+  assert.equal(records.length, 4);
+  assert.deepEqual(records.map((record: { id: string }) => record.id), ["kids-dress-gloves-satin-bow-001", "bridal-gloves-sheer-lace-long-001", "opera-gloves-satin-short-001", "wedding-veils-black-lace-trim-001"]);
+  assert.equal(new Set(records.map((record: { id: string }) => record.id)).size, 4);
+  assert.equal(records.find((record: { id: string }) => record.id === "bridal-gloves-sheer-lace-long-001")?.provenance.normalizedProductGroupId, undefined);
+  assert.equal(records.find((record: { id: string }) => record.id === "wedding-veils-black-lace-trim-001")?.provenance.normalizedProductGroupId, undefined);
+  assert.equal(records.find((record: { id: string }) => record.id === "wedding-veils-black-lace-trim-001")?.images.length, 4);
+  assert.deepEqual(validateApprovedCatalogue(records, { registryEntries: registry.entries, productionAssets: manifest.productionAssets, durableEvidenceText: fingerprints }), []);
+  const productionSources = manifest.productionAssets.map((asset: { sourceHash: string }) => asset.sourceHash);
+  assert.ok(!productionSources.includes("fc01e4e85a76f46680b54ade4b697dba7d7c866642f5692d01359f4810d09ea1"));
+  assert.ok(!productionSources.includes("97d37bfcc74e37dcc19119f0149fbc5820eb4491c31cc71d9314c0046f0946e8"));
+  assert.ok(!productionSources.includes("d482486585ca19e1e0077a33ef0c4bfc76e945e79331fde5f0343bc271c88caa"));
 });

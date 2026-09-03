@@ -36,9 +36,15 @@ export type CustomizableField = {
   source: string;
 };
 
+export type ProductProvenance = {
+  normalizedProductGroupId?: string;
+  sourceListingIds: string[];
+};
+
 export type ProductRecord = {
   id: string;
   slug?: string;
+  provenance: ProductProvenance;
   productName: string;
   productFamily: ProductFamily;
   subStyle?: string[];

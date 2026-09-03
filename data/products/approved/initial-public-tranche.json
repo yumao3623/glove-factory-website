@@ -1,0 +1,93 @@
+[
+  {
+    "id": "kids-dress-gloves-satin-bow-001",
+    "provenance": { "normalizedProductGroupId": "kids-dress-gloves-group-737751870967", "sourceListingIds": ["737751870967", "814984964565", "775921736857"] },
+    "productName": "Girls' Satin Bow Dress Gloves",
+    "productFamily": "kids-dress-gloves",
+    "subStyle": ["satin", "bow"],
+    "material": { "value": null, "status": "UNKNOWN", "source": "No fibre composition is approved for publication." },
+    "fingerStyle": { "value": "full-finger", "status": "CONFIRMED", "source": "Reviewed production image evidence." },
+    "decoration": { "value": ["bow"], "status": "CONFIRMED", "source": "Reviewed production image evidence." },
+    "ageGroup": { "value": "kids", "status": "CONFIRMED", "source": "Human-approved normalized family and product name." },
+    "customizableFields": [{ "field": "pattern", "status": "PENDING_CONFIRMATION", "source": "Not approved for public promise." }],
+    "images": [
+      { "assetId": "kids-dress-gloves-satin-bow-001-front-web", "role": "primary", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5db775e58e1e060cb6fccfba292f3d18b568f279e0ea32a09a20f74a5f761194.", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/web/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.webp", "width": 800, "height": 800, "altText": "Bright pink satin bow dress gloves shown on crossed arms" },
+      { "assetId": "kids-dress-gloves-satin-bow-001-detail-web", "role": "detail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 8352aaaedaf0afc9139ae34370f120414530788996293e3e395341e8fddcd96c.", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/web/kids-dress-gloves__kids-dress-gloves-satin-bow-001__detail__default__v1.webp", "width": 800, "height": 800, "altText": "Light lavender satin bow dress gloves on a white background" },
+      { "assetId": "kids-dress-gloves-satin-bow-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5db775e58e1e060cb6fccfba292f3d18b568f279e0ea32a09a20f74a5f761194.", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/thumb/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Bright pink satin bow dress gloves shown on crossed arms" }
+    ],
+    "thumbnail": { "assetId": "kids-dress-gloves-satin-bow-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5db775e58e1e060cb6fccfba292f3d18b568f279e0ea32a09a20f74a5f761194.", "path": "/products/kids-dress-gloves/kids-dress-gloves-satin-bow-001/thumb/kids-dress-gloves__kids-dress-gloves-satin-bow-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Girls' satin bow dress gloves, front view" },
+    "shortDescription": "Full-finger dress gloves with a satin-look finish and bow detail for girls' occasion wear.",
+    "specifications": { "colourAvailability": { "value": null, "status": "UNKNOWN", "source": "Photography does not confirm the full colour range." } },
+    "featured": false,
+    "sortOrder": 1,
+    "status": "APPROVED",
+    "altText": "Bright pink satin bow dress gloves shown on crossed arms"
+  },
+  {
+    "id": "bridal-gloves-sheer-lace-long-001",
+    "provenance": { "sourceListingIds": ["856992679458"] },
+    "productName": "Long Sheer Lace Bridal Gloves",
+    "productFamily": "bridal-gloves",
+    "subStyle": ["sheer", "lace"],
+    "material": { "value": null, "status": "UNKNOWN", "source": "No fibre composition is approved for publication." },
+    "fingerStyle": { "value": "full-finger", "status": "CONFIRMED", "source": "Reviewed production image evidence." },
+    "customizableFields": [{ "field": "pattern", "status": "PENDING_CONFIRMATION", "source": "Not approved for public promise." }],
+    "images": [
+      { "assetId": "bridal-gloves-sheer-lace-long-001-front-web", "role": "primary", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5e05f6cb309029730123e14bace92d47294a77b318a9ea9a9fd31305a91b2266.", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.webp", "width": 800, "height": 800, "altText": "White long sheer floral lace gloves worn on both hands" },
+      { "assetId": "bridal-gloves-sheer-lace-long-001-detail-01-web", "role": "detail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 36ffd5f87f6e067ae266651d6f6c4e833e8ad691ec35e9a4f74edb260c761221.", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-01__default__v1.webp", "width": 800, "height": 800, "altText": "Black and white long floral lace gloves displayed side by side" },
+      { "assetId": "bridal-gloves-sheer-lace-long-001-detail-02-web", "role": "detail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5a1e1a90a5bf5ee9ff96d6c2c8af94e2f50d50193db6b1535396f576399e4129.", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/web/bridal-gloves__bridal-gloves-sheer-lace-long-001__detail-02__default__v1.webp", "width": 800, "height": 800, "altText": "Black long floral lace gloves on a white background" },
+      { "assetId": "bridal-gloves-sheer-lace-long-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5e05f6cb309029730123e14bace92d47294a77b318a9ea9a9fd31305a91b2266.", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/thumb/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "White long sheer floral lace gloves worn on both hands" }
+    ],
+    "thumbnail": { "assetId": "bridal-gloves-sheer-lace-long-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 5e05f6cb309029730123e14bace92d47294a77b318a9ea9a9fd31305a91b2266.", "path": "/products/bridal-gloves/bridal-gloves-sheer-lace-long-001/thumb/bridal-gloves__bridal-gloves-sheer-lace-long-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Long sheer lace bridal gloves, front view" },
+    "shortDescription": "Long full-finger bridal gloves with a sheer lace-look surface.",
+    "specifications": { "colourAvailability": { "value": null, "status": "UNKNOWN", "source": "Photography does not confirm the full colour range." } },
+    "featured": false,
+    "sortOrder": 1,
+    "status": "APPROVED",
+    "altText": "White long sheer floral lace gloves worn on both hands"
+  },
+  {
+    "id": "opera-gloves-satin-short-001",
+    "provenance": { "normalizedProductGroupId": "opera-gloves-group-730659973350", "sourceListingIds": ["730659973350", "956904395389"] },
+    "productName": "Short Satin Dress Gloves",
+    "productFamily": "opera-gloves",
+    "subStyle": ["satin", "short"],
+    "material": { "value": null, "status": "UNKNOWN", "source": "No fibre composition is approved for publication." },
+    "fingerStyle": { "value": "full-finger", "status": "CONFIRMED", "source": "Reviewed production image evidence." },
+    "customizableFields": [{ "field": "pattern", "status": "PENDING_CONFIRMATION", "source": "Not approved for public promise." }],
+    "images": [
+      { "assetId": "opera-gloves-satin-short-001-front-web", "role": "primary", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash d1e752a9bb687ff3bb4d9c2508703f2dbfc4f59be66fc31c2a1532076361ee57.", "path": "/products/opera-gloves/opera-gloves-satin-short-001/web/opera-gloves__opera-gloves-satin-short-001__front__default__v1.webp", "width": 800, "height": 800, "altText": "White short satin dress gloves worn with a white gown" },
+      { "assetId": "opera-gloves-satin-short-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash d1e752a9bb687ff3bb4d9c2508703f2dbfc4f59be66fc31c2a1532076361ee57.", "path": "/products/opera-gloves/opera-gloves-satin-short-001/thumb/opera-gloves__opera-gloves-satin-short-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "White short satin dress gloves worn with a white gown" }
+    ],
+    "thumbnail": { "assetId": "opera-gloves-satin-short-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash d1e752a9bb687ff3bb4d9c2508703f2dbfc4f59be66fc31c2a1532076361ee57.", "path": "/products/opera-gloves/opera-gloves-satin-short-001/thumb/opera-gloves__opera-gloves-satin-short-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Short satin dress gloves, front view" },
+    "shortDescription": "Short full-finger dress gloves with a satin-look finish.",
+    "specifications": { "colourAvailability": { "value": null, "status": "UNKNOWN", "source": "Photography does not confirm the full colour range." } },
+    "featured": false,
+    "sortOrder": 1,
+    "status": "APPROVED",
+    "altText": "White short satin dress gloves worn with a white gown"
+  },
+  {
+    "id": "wedding-veils-black-lace-trim-001",
+    "provenance": { "sourceListingIds": ["800814497148"] },
+    "productName": "Black Lace-Trim Veil",
+    "productFamily": "wedding-veils",
+    "subStyle": ["lace-trim"],
+    "material": { "value": null, "status": "UNKNOWN", "source": "No fibre composition is approved for publication." },
+    "decoration": { "value": ["lace-trim"], "status": "CONFIRMED", "source": "Reviewed production image evidence." },
+    "customizableFields": [{ "field": "pattern", "status": "PENDING_CONFIRMATION", "source": "Not approved for public promise." }],
+    "images": [
+      { "assetId": "wedding-veils-black-lace-trim-001-front-web", "role": "primary", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash c8042675e03c7ecd8c1cef069c997a3f8cc4bd9673a5a6e672595c921d7c2baa.", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.webp", "width": 800, "height": 800, "altText": "Black lace-trim veil displayed on a white background" },
+      { "assetId": "wedding-veils-black-lace-trim-001-comb-web", "role": "detail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 8256dd02868a6e5ce8df433911fbeafc317789a5fe4654237962f8511efb8cfb.", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__comb__default__v1.webp", "width": 800, "height": 800, "altText": "Comb attachment on a black lace-trim veil" },
+      { "assetId": "wedding-veils-black-lace-trim-001-dress-form-web", "role": "context", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash 0cbc108c3d88502b71cbe4b454aa962869d1edfdeb1de2ac5fa2354e51ea4dfb.", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/web/wedding-veils__wedding-veils-black-lace-trim-001__dress-form__default__v1.webp", "width": 800, "height": 800, "altText": "Black lace-trim veil displayed on a dress form" },
+      { "assetId": "wedding-veils-black-lace-trim-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash c8042675e03c7ecd8c1cef069c997a3f8cc4bd9673a5a6e672595c921d7c2baa.", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/thumb/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Black lace-trim veil displayed on a white background" }
+    ],
+    "thumbnail": { "assetId": "wedding-veils-black-lace-trim-001-front-thumb", "role": "thumbnail", "status": "CONFIRMED", "source": "Approved production asset manifest entry; source hash c8042675e03c7ecd8c1cef069c997a3f8cc4bd9673a5a6e672595c921d7c2baa.", "path": "/products/wedding-veils/wedding-veils-black-lace-trim-001/thumb/wedding-veils__wedding-veils-black-lace-trim-001__front__default__v1.webp", "width": 400, "height": 400, "altText": "Black lace-trim veil displayed on a white background" },
+    "shortDescription": "Black veil with visible lace trim and comb attachment.",
+    "specifications": { "colour": { "value": ["black"], "status": "CONFIRMED", "source": "Reviewed production image evidence." } },
+    "featured": false,
+    "sortOrder": 1,
+    "status": "APPROVED",
+    "altText": "Black lace-trim veil displayed on a white background"
+  }
+]

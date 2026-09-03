@@ -132,6 +132,11 @@ export type ListingRelationshipFingerprint = {
 const factStatuses = new Set<FactStatus>(["CONFIRMED", "PENDING_CONFIRMATION", "UNKNOWN", "NOT_APPLICABLE"]);
 const productStatuses = new Set<ProductRecord["status"]>(["DRAFT", "PENDING_REVIEW", "APPROVED", "ARCHIVED"]);
 const assetRoles = new Set<AssetReference["role"]>(["primary", "detail", "context", "thumbnail"]);
+export const excludedProductionHashes = new Set([
+  "fc01e4e85a76f46680b54ade4b697dba7d7c866642f5692d01359f4810d09ea1",
+  "97d37bfcc74e37dcc19119f0149fbc5820eb4491c31cc71d9314c0046f0946e8",
+  "d482486585ca19e1e0077a33ef0c4bfc76e945e79331fde5f0343bc271c88caa",
+]);
 // A marketplace or store name in a filename is not itself an asset defect. Keep
 // this limited to explicit watermark/copyright or recognizable third-party/IP hints.
 const suspiciousName = /watermark|copyright|frozen|elsa|disney/i;
@@ -363,6 +368,7 @@ export function validateApprovedProduct(value: unknown): string[] {
   const errors: string[] = [];
   if (!isRecord(value)) return ["Product record must be an object."];
   if (typeof value.id !== "string" || !/^[a-z0-9][a-z0-9-]*$/.test(value.id)) errors.push("id must be a stable lowercase ASCII identifier.");
+  if (!isRecord(value.provenance) || (value.provenance.normalizedProductGroupId !== undefined && (typeof value.provenance.normalizedProductGroupId !== "string" || !value.provenance.normalizedProductGroupId.trim())) || !Array.isArray(value.provenance.sourceListingIds) || !value.provenance.sourceListingIds.length || value.provenance.sourceListingIds.some((listingId) => typeof listingId !== "string" || !/^\d+$/.test(listingId))) errors.push("provenance must include source listing IDs and may include a normalized product group only when durable relationship evidence exists.");
   if (typeof value.productName !== "string" || !value.productName.trim()) errors.push("productName is required.");
   if (!productFamilies.includes(value.productFamily as ProductFamily)) errors.push("productFamily is invalid.");
   if (value.status !== "APPROVED" || !productStatuses.has(value.status as ProductRecord["status"])) errors.push("Only status APPROVED may enter approved catalogue data.");
@@ -380,6 +386,89 @@ export function validateApprovedProduct(value: unknown): string[] {
   validateAsset(value.thumbnail, "thumbnail", errors);
   const thumbnailId = isRecord(value.thumbnail) ? value.thumbnail.assetId : null;
   if (typeof thumbnailId === "string" && Array.isArray(value.images) && !value.images.some((asset) => isRecord(asset) && asset.assetId === thumbnailId)) errors.push("thumbnail must also appear in images.");
+  return errors;
+}
+
+export function validateApprovedCatalogue(records: unknown[], context: { registryEntries: unknown[]; productionAssets: unknown[]; durableEvidenceText: string }): string[] {
+  const errors: string[] = [];
+  const ids = new Set<string>();
+  const registry = new Map<string, Record<string, unknown>>();
+  context.registryEntries.forEach((entry) => {
+    if (isRecord(entry) && typeof entry.listingId === "string") registry.set(entry.listingId, entry);
+  });
+  const derivatives = new Map<string, Record<string, unknown>>();
+  const fingerprints = (() => {
+    try {
+      const parsed = JSON.parse(context.durableEvidenceText) as { entries?: unknown[] };
+      return Array.isArray(parsed.entries) ? parsed.entries.filter(isRecord) : [];
+    } catch {
+      return [];
+    }
+  })();
+  const fingerprintByListing = new Map(fingerprints.filter((entry) => typeof entry.listingId === "string").map((entry) => [entry.listingId as string, entry]));
+  const recordById = new Map<string, Record<string, unknown>>();
+  context.productionAssets.forEach((asset) => {
+    if (!isRecord(asset) || !Array.isArray(asset.derivatives)) return;
+    asset.derivatives.forEach((derivative) => {
+      if (isRecord(derivative) && typeof derivative.assetId === "string") derivatives.set(derivative.assetId, { ...derivative, productId: asset.productId, sourceHash: asset.sourceHash, sourceListingIds: asset.sourceListingIds });
+    });
+  });
+
+  records.forEach((record, index) => {
+    errors.push(...validateApprovedProduct(record).map((error) => `records[${index}]: ${error}`));
+    if (!isRecord(record)) return;
+    if (typeof record.id === "string") {
+      if (ids.has(record.id)) errors.push(`records[${index}]: id must be unique.`);
+      ids.add(record.id);
+      recordById.set(record.id, record);
+    }
+    const provenance = record.provenance;
+    if (!isRecord(provenance) || !Array.isArray(provenance.sourceListingIds)) return;
+    if (typeof record.id === "string" && JSON.stringify(record).match(new RegExp([...excludedProductionHashes].join("|")))) errors.push(`records[${index}]: excluded source hash must not enter an approved ProductRecord.`);
+    provenance.sourceListingIds.forEach((listingId) => {
+      const entry = registry.get(listingId as string);
+      if (!entry) errors.push(`records[${index}]: provenance listing ${listingId} is absent from the durable registry.`);
+      else {
+        if (entry.normalizedProductFamily !== record.productFamily) errors.push(`records[${index}]: provenance listing ${listingId} has a different approved family.`);
+        if (typeof entry.normalizedProductGroupId === "string" && entry.normalizedProductGroupId !== provenance.normalizedProductGroupId) errors.push(`records[${index}]: provenance listing ${listingId} has a different normalized product group.`);
+      }
+    });
+    const references = Array.isArray(record.images) ? record.images : [];
+    references.forEach((reference, assetIndex) => {
+      if (!isRecord(reference) || typeof reference.assetId !== "string") return;
+      const derivative = derivatives.get(reference.assetId);
+      if (!derivative) errors.push(`records[${index}].images[${assetIndex}]: asset is absent from the production asset manifest.`);
+      else {
+        if (derivative.productId !== record.id) errors.push(`records[${index}].images[${assetIndex}]: asset belongs to a different product.`);
+        const provenanceListingIds = provenance.sourceListingIds as unknown[];
+        if (!Array.isArray(derivative.sourceListingIds) || derivative.sourceListingIds.some((listingId) => !provenanceListingIds.includes(listingId as string))) errors.push(`records[${index}].images[${assetIndex}]: manifest source listings exceed ProductRecord provenance.`);
+        if (derivative.path !== reference.path || derivative.width !== reference.width || derivative.height !== reference.height || derivative.role !== reference.role) errors.push(`records[${index}].images[${assetIndex}]: manifest derivative linkage does not match.`);
+      }
+    });
+  });
+  context.productionAssets.forEach((asset, index) => {
+    if (!isRecord(asset) || typeof asset.productId !== "string" || typeof asset.sourceHash !== "string") {
+      errors.push(`productionAssets[${index}] is malformed.`);
+      return;
+    }
+    if (!ids.has(asset.productId)) errors.push(`productionAssets[${index}]: asset belongs to no approved ProductRecord.`);
+    if (excludedProductionHashes.has(asset.sourceHash)) errors.push(`productionAssets[${index}]: excluded source hash cannot be production-approved.`);
+    if (asset.permissionStatus !== "STORE_LEVEL_PERMISSION_INHERITED") errors.push(`productionAssets[${index}]: permissionStatus must record the inherited storefront grant.`);
+    if (asset.visualApprovalStatus !== "HUMAN_PRODUCTION_APPROVED") errors.push(`productionAssets[${index}]: visualApprovalStatus must record Human production approval.`);
+    const sourceListings = Array.isArray(asset.sourceListingIds) ? asset.sourceListingIds : [];
+    if (!sourceListings.length) errors.push(`productionAssets[${index}]: sourceListingIds are required.`);
+    const record = recordById.get(asset.productId);
+    const provenance = record?.provenance;
+    const provenanceListingIds = isRecord(provenance) && Array.isArray(provenance.sourceListingIds) ? provenance.sourceListingIds : [];
+    sourceListings.forEach((listingId) => {
+      if (typeof listingId !== "string" || !registry.has(listingId)) errors.push(`productionAssets[${index}]: source listing ${String(listingId)} is absent from the durable registry.`);
+      if (!provenanceListingIds.includes(listingId)) errors.push(`productionAssets[${index}]: source listing ${String(listingId)} exceeds ProductRecord provenance.`);
+      const fingerprint = fingerprintByListing.get(listingId as string);
+      if (!fingerprint) errors.push(`productionAssets[${index}]: source listing ${listingId} is absent from durable fingerprint evidence.`);
+      else if (!Array.isArray(fingerprint.imageSha256s) || !fingerprint.imageSha256s.includes(asset.sourceHash)) errors.push(`productionAssets[${index}]: source hash is not recorded for source listing ${listingId}.`);
+    });
+    if (!fingerprints.length && !context.durableEvidenceText.includes(asset.sourceHash)) errors.push(`productionAssets[${index}]: source hash is absent from durable evidence.`);
+  });
   return errors;
 }
 
