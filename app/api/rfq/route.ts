@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateRfq } from "@/lib/rfq-validation";
+import { previewRobotsHeader, siteMode } from "@/lib/stakeholder-preview";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,9 @@ function isRateLimited(key: string) {
 }
 
 export async function POST(request: Request) {
+  if (siteMode === "STAKEHOLDER_PREVIEW") {
+    return NextResponse.json({ status: siteMode, message: "RFQ is disabled in stakeholder preview. No data was collected or stored." }, { status: 503, headers: { "Cache-Control": "no-store", "X-Robots-Tag": previewRobotsHeader } });
+  }
   if (isRateLimited(requestKey(request))) return NextResponse.json({ message: "Too many submissions. Please try again later." }, { status: 429 });
   let payload: unknown;
   try { payload = await request.json(); } catch { return NextResponse.json({ message: "Invalid request payload." }, { status: 400 }); }

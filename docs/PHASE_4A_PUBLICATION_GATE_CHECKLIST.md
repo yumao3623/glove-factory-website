@@ -29,7 +29,7 @@ This is a decision and launch-gate record only. It does not provision accounts, 
 
 - [ ] `/contact/` is the single RFQ/contact owner and contains the approved form, consent and failure fallback.
 - [ ] `/privacy/` is published as a noindex legal page before any live enquiry is collected.
-- [ ] Human copy approval records the exact homepage H1. Current status is `COPY_FREEZE_PENDING_VISUAL_REVIEW`; the positioning candidate is not an approved H1.
+- [x] Human formally approved the exact homepage H1: `Occasion Gloves & Wedding Veils Manufacturer` (2026-09-04).
 - [ ] Factory and customization claims are approved and evidence-bounded.
 
 ### Launch-blocking deferred routes
@@ -43,6 +43,10 @@ These are status records, not checkboxes. Keeping a page absent or explicitly bl
 | `/costume-gloves/` | `DEFERRED_LAUNCH_BLOCKER` | No approved assets or route integration; do not create or sitemap it. Resolve through a reviewed asset/route decision before formal launch. |
 
 Formal launch is blocked while any row remains in this state. No restricted launch exception exists.
+
+## Stakeholder preview exception
+
+`STAKEHOLDER_PREVIEW` is a bounded, public-review implementation and is not a formal publication-gate pass. It keeps `/factory/`, `/custom-manufacturing/` and `/costume-gloves/` deferred, leaves `/contact/` and `/privacy/` unresolved, disables RFQ collection and Resend, and applies noindex/nofollow behavior independently of the deployment hostname. These formal blockers remain unchanged and must be resolved in a separate checkpoint before SEO launch.
 
 ### Host, DNS and preview safety
 
