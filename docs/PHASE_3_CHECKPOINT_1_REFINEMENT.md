@@ -4,6 +4,8 @@ Status: `HUMAN_REVIEW_ACCEPTED_FOR_CHECKPOINT_1`
 
 This record evaluates the post-gate Human Review without changing the frozen Phase 2 architecture, route ownership, product families, SEO scope, catalogue model, or publishing boundaries.
 
+> **Historical record - superseded by Human Review on 2026-09-04.** The original `Header/Footer only` limitation for `JS Meilai` remains here as a record of the earlier decision, but is no longer current. Human approval now permits the public English brand and metadata title. The original checkpoint is not otherwise rewritten.
+
 ## Decisions
 
 | Review area | Decision | Rationale |

@@ -1,6 +1,6 @@
 # Route Registry
 
-Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and a trailing slash. No route may be renamed in Phase 3 without an ADR, redirect plan and human approval. `status` describes SEO treatment; `implementation` explicitly states whether Phase 3 creates a page, a redirect, or no route at all.
+Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and a trailing slash. The approved site host is `https://www.jsmeilai.com/`; matching apex URLs permanently redirect to `www`. No route may be renamed in Phase 3 without an ADR, redirect plan and human approval. `status` describes SEO treatment; `implementation` explicitly states whether Phase 3 creates a page, a redirect, or no route at all.
 
 | route | status | implementation | page_type | primary_intent | primary_keyword | supporting_keywords | canonical_owner | parent | index_status | reason |
 |---|---|---|---|---|---|---|---|---|---|
@@ -29,6 +29,7 @@ Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and
 ## Route ownership rules
 
 - One primary intent has one indexable canonical owner.
+- `/contact/` and `/privacy/` are required before the publication gate can authorize live RFQ or formal launch. `/factory/` and `/custom-manufacturing/` remain deferred by Human decision and do not become launch exceptions automatically.
 - `manufacturer`, `supplier`, `wholesale`, `OEM` and `private label` are conversion/context terms, not automatic URL dimensions.
 - Facets and query parameters are non-indexable by default; only approved child routes may enter the sitemap.
 - Conditional children require all threshold conditions and an approval record before status changes to `FROZEN`.

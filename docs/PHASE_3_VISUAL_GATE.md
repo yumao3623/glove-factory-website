@@ -4,6 +4,8 @@ Status: `E_SELECTED_WITH_REFINEMENT`
 
 Variant E, refined image-led editorial, is the approved baseline for this implementation checkpoint. The implementation keeps the frozen Editorial Utility architecture, five product families and category-only B2B catalogue model.
 
+> **Historical record - superseded by Human Review on 2026-09-04.** The remaining-review language below records the state of this visual gate. Human approval now permits `JS Meilai` as the public English brand and metadata identity and approves the RFQ routing/canonical host; visual, evidence and formal publication conditions remain in force.
+
 ## Direction
 
 - Image-led hero with coordinated bridal, opera and veil imagery.

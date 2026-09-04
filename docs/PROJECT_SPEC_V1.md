@@ -1,8 +1,8 @@
 # Project Specification V1
 
-Status: `PHASE_2_FREEZE_PENDING_HUMAN_APPROVAL`
+Status: `PHASE_4A_PUBLICATION_GATE_PENDING_IMPLEMENTATION`
 
-This is the single implementation contract for Phase 3. Phase 3 must not change the routes, data semantics, infrastructure boundaries or factual claims below without a reviewed ADR and human approval.
+This is the single implementation contract for the V1 site. The Phase 2 architecture and Phase 3 route/data boundaries remain frozen; publication decisions below are approved for documentation and the later publication gate only. Runtime or external changes still require the bounded implementation checkpoint.
 
 ## 1. Business positioning
 
@@ -20,7 +20,7 @@ This is the single implementation contract for Phase 3. Phase 3 must not change 
 
 `FALLBACK_POSITIONING`: **Bridal, Evening & Costume Gloves Manufacturer**, to be used only if the factory elects to defer veil/kids publication.
 
-The positioning concept is frozen, but exact homepage H1 copy is `COPY_FREEZE_PENDING_VISUAL_REVIEW`. Phase 3 may compare “Occasion” and “Special Occasion” wording, hierarchy and line length with real product photography, provided the same range intent and route ownership are retained. It is not a brand name. Use an approved English company name only after the factory supplies it; until then use a placeholder in metadata/spec tests, never an invented identity.
+The positioning concept is frozen, but exact homepage H1 copy remains `COPY_FREEZE_PENDING_VISUAL_REVIEW`. Phase 3 reviewed evidence did not approve the exact H1: `PHASE_3_CHECKPOINT_1_REPORT.md` records that Human copy approval is still required, and `PHASE_3_VISUAL_RESEARCH_GATE_2.md` lists the final public H1 as pending. Do not infer or freeze an H1 from the positioning candidate; formal publication requires an explicit Human copy approval record. `JS Meilai` is the Human-approved public English brand and metadata title identity; it must not be presented as a separate unapproved legal entity.
 
 ## 2. Final sitemap and page ownership
 
@@ -40,6 +40,16 @@ The positioning concept is frozen, but exact homepage H1 copy is `COPY_FREEZE_PE
 
 `/about/` is not a separate V1 route. Factory evidence and company context have one owner at `/factory/`, preventing a thin duplicate trust page. Generic material/modifier routes are omitted or redirected as defined in `ROUTE_REGISTRY.md`.
 
+### Publication blocker state
+
+The sitemap above is the route-ownership map, not a launch-pass list. The following route owners are currently `DEFERRED_LAUNCH_BLOCKER`:
+
+- `/factory/`: comprehensive factory evidence and approved facts remain deferred; its absence must not be checked as publication-gate completion.
+- `/custom-manufacturing/`: the capability/conversion route remains deferred; its absence must not be checked as publication-gate completion.
+- `/costume-gloves/`: no approved production asset set or route integration exists; do not create the page or add it to the sitemap. Its unresolved status is a launch blocker, not an ignorable omission.
+
+No restricted launch is permitted. Formal launch requires every `DEFERRED_LAUNCH_BLOCKER` to be resolved by a reviewed implementation/evidence decision, in addition to the required `/contact/` and `/privacy/` gates.
+
 ## 3. Page templates
 
 - **Homepage**: positioning/H1, five family entry points, approved evidence, custom-manufacturing bridge, RFQ CTA.
@@ -47,8 +57,8 @@ The positioning concept is frozen, but exact homepage H1 copy is `COPY_FREEZE_PE
 - **Collection**: family intent/H1, curated product grid, confirmed style/material/length context, B2B evidence, procurement questions with status labels, RFQ CTA.
 - **Custom Manufacturing**: supported customization workflow, boundaries and enquiry qualification; no invented OEM promises.
 - **Factory**: approved identity, process/evidence imagery and factual capability context; unknown metrics omitted.
-- **Contact/RFQ**: labeled form, consent, privacy link, success/error states and pending public fallback channel.
-- **Privacy**: provider, data use, retention, rights and contact placeholders completed before launch.
+- **Contact/RFQ**: labeled form, consent, privacy link, success/error states and the approved public fallback `yumao3623@gmail.com`.
+- **Privacy**: Resend and Gmail processing, data use, retention, rights and contact details completed before launch.
 
 ## 4. Child-page threshold
 
@@ -73,11 +83,11 @@ Use the status-aware fields and validation contract in `PRODUCT_DATA_MODEL.md`. 
 
 ## 7. RFQ and contact
 
-Use one `/contact/` flow per `RFQ_SPEC.md`. V1 has no upload, cart, checkout, payment or account. Required fields are name, company, country, email, product family, quantity, message and consent; WhatsApp is optional. Public recipient is `PENDING_PUBLIC_CONTACT`. Implement server validation, rate limiting, honeypot/provider risk checks, privacy-safe logging and authenticated email delivery.
+Use one `/contact/` flow per `RFQ_SPEC.md`. V1 has no upload, cart, checkout, payment or account. Required fields are name, company, country, email, product family, quantity, message and consent; WhatsApp is optional. Resend sends `JS Meilai RFQ <rfq@mail.jsmeilai.com>` to `yumao3623@gmail.com` with `Reply-To` set to the buyer email. The sender address is not an inbox. Implement server validation, durable rate limiting, honeypot/provider risk checks, privacy-safe logging and authenticated email delivery.
 
 ## 8. Infrastructure
 
-GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. `jsmeilai.com` is the confirmed official domain, but DNS, Vercel binding, production canonical configuration, business mailbox, form provider account/API key and analytics properties remain pending and must not be created in this phase. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
+GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. `https://www.jsmeilai.com/` is the approved canonical host and matching apex URLs permanently redirect to it. DNS, Vercel binding, Resend account/domain/API key and analytics properties remain pending publication integration and must not be created in this checkpoint. The approved RFQ recipient is `yumao3623@gmail.com`; no independent sender mailbox is provisioned. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
 
 ## 9. SEO and rendering
 
@@ -85,7 +95,7 @@ Follow `SEO_TECHNICAL_SPEC.md`: HTTPS and one host, trailing slash, one canonica
 
 ## 10. UI direction
 
-Implement `Editorial Utility` from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. Fonts, exact hex values and CTA treatment are provisional design tokens pending a human visual gate with real product imagery. shadcn is a reference/component source, not architecture.
+Implement the Human-approved Variant E `Image-led Editorial Utility` direction from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. Human Visual Gate 2 approved the visual direction; fonts, exact hex values and CTA treatment remain provisional design tokens pending final publication implementation. This visual approval does not approve the exact homepage H1 copy. shadcn is a reference/component source, not architecture.
 
 ## 11. Analytics taxonomy
 
@@ -93,7 +103,7 @@ Define events now; wire GA4 only after launch consent and property approval: `rf
 
 ## 12. Factual boundaries
 
-Only `FACTORY_CONFIRMED` scope, general customization availability and overseas enquiry ownership are publishable now. MOQ, sample terms, lead times, capacity, certifications, exact specs, legal identity and public contacts remain pending as defined in `PUBLISHING_BOUNDARIES.md`.
+Only `FACTORY_CONFIRMED` scope, general customization availability and overseas enquiry ownership are publishable now. The approved RFQ recipient and public failure fallback are `yumao3623@gmail.com`; legal identity and other public contacts (WhatsApp, phone and physical address) remain pending, along with MOQ, sample terms, lead times, capacity, certifications and exact specs, as defined in `PUBLISHING_BOUNDARIES.md`.
 
 ## 13. Phase 3 implementation-aid policy
 
@@ -103,6 +113,8 @@ This specification is the source of truth. Build Web Apps skills/plugins may be 
 
 - Every route matches `ROUTE_REGISTRY.md`; no duplicate keyword owner or unapproved child route.
 - Build is static/server-rendered for primary content and produces valid metadata, sitemap, robots, 404 and redirects.
+- Formal launch is blocked while any `DEFERRED_LAUNCH_BLOCKER` remains unresolved; omitting a blocked route is not a passing condition and no restricted launch is allowed.
+- The exact homepage H1 has an explicit Human copy approval record; `COPY_FREEZE_PENDING_VISUAL_REVIEW` cannot pass the publication gate.
 - Product records pass status/source validation; no fabricated values or marketplace screenshots appear as product imagery.
 - RFQ flow validates server-side, respects consent, handles failure and does not expose secrets.
 - Responsive/accessibility checks pass at 375/768/1024/1440px; images reserve space and meet CWV targets in representative tests.

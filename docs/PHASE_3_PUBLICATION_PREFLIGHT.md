@@ -3,6 +3,8 @@
 Date: 2026-09-01
 Baseline: `main` at `187b6b2ad81b830f13b459bac97a67bc080cffb2`; reviewed checkpoint `phase-3-collection-tranche-2-reviewed`.
 
+> **Historical record - superseded by Human Review on 2026-09-04.** This preflight preserves the facts and decisions known at its original checkpoint. The later Human decision approves `JS Meilai` as the public English brand and metadata identity, `https://www.jsmeilai.com/` as canonical, Resend RFQ delivery, the approved sender/recipient and retention boundaries. It does not create external resources or authorize launch; see `PHASE_4A_PUBLICATION_GATE_CHECKLIST.md`.
+
 ## Decision
 
 The site is not ready for public release. The next checkpoint should first implement a bounded, static, draft-first Product Batch Ingestion Workflow and process a limited real-product pilot. Collection integration follows only after the pilot's batch Human Gate; this checkpoint does not yet implement Factory, Custom Manufacturing, Contact or production infrastructure.

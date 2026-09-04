@@ -6,7 +6,7 @@ The following can be stated as `FACTORY_CONFIRMED`, with careful wording: active
 
 ## Do not publish until separately confirmed
 
-MOQ, sample fee/availability, sample and bulk lead times, monthly capacity, exact materials/composition, dimensions, testing standards, certifications, packaging, QC systems, export history, named customers, sustainability claims, legal English company identity, public email/WhatsApp/phone/address, and permission to reuse 1688 metrics or screenshots.
+MOQ, sample fee/availability, sample and bulk lead times, monthly capacity, exact materials/composition, dimensions, testing standards, certifications, packaging, QC systems, export history, named customers, sustainability claims, legal English company identity, and permission to reuse 1688 metrics or screenshots remain unconfirmed. `JS Meilai` is the approved public English brand and metadata identity, but is not an approved legal-entity statement. `yumao3623@gmail.com` is the approved RFQ recipient and failure fallback; `rfq@mail.jsmeilai.com` is a sending identity only, not a receiving mailbox. WhatsApp, phone and physical address remain unconfirmed.
 
 ## Enforcement
 

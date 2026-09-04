@@ -2,6 +2,8 @@
 
 ## 1. Foundation stability
 
+> **Historical record - superseded by Human Review on 2026-09-04.** The identity, contact and publication-approval references below preserve the state of this checkpoint. The later Human decision approves `JS Meilai` as the public English brand and metadata identity, the approved RFQ routing and the canonical host; the checkpoint is not otherwise rewritten.
+
 Stable for this checkpoint. Next.js App Router, TypeScript, Tailwind CSS and a small shadcn/ui subset are in place.
 
 ## 2. Verification
