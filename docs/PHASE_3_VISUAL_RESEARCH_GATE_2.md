@@ -3,6 +3,8 @@
 **Status: Human Visual Gate 2 passed with conditions; Variant E selected for Checkpoint 1 implementation and refinement.**
 **Scope: local rendered visual prototypes; no public publishing approval is implied.**
 
+> **Historical record - superseded by Human Review on 2026-09-04.** The publication-pending identity language below records the state of this visual gate. Human approval now permits `JS Meilai` as the public English brand and metadata identity; the remaining route, evidence and publication conditions remain in force.
+
 ## Why the earlier A/B/C concepts failed
 
 The initial concepts retained the right information architecture, but the Human Visual Research Gate rejected their visual outcome. The shared diagnosis was that they were too sparse and text-led: an oversized headline and one isolated marketplace-style product image carried the hero; five equal family cards read as a component set; and a single workshop image appeared as an abrupt evidence block rather than part of the page rhythm. Their differences were mostly typography and density, not meaningfully different compositions.
