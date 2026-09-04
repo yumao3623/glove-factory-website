@@ -20,7 +20,9 @@ This is the single implementation contract for the V1 site. The Phase 2 architec
 
 `FALLBACK_POSITIONING`: **Bridal, Evening & Costume Gloves Manufacturer**, to be used only if the factory elects to defer veil/kids publication.
 
-The positioning concept is frozen, but exact homepage H1 copy remains `COPY_FREEZE_PENDING_VISUAL_REVIEW`. Phase 3 reviewed evidence did not approve the exact H1: `PHASE_3_CHECKPOINT_1_REPORT.md` records that Human copy approval is still required, and `PHASE_3_VISUAL_RESEARCH_GATE_2.md` lists the final public H1 as pending. Do not infer or freeze an H1 from the positioning candidate; formal publication requires an explicit Human copy approval record. `JS Meilai` is the Human-approved public English brand and metadata title identity; it must not be presented as a separate unapproved legal entity.
+The exact homepage H1 `Occasion Gloves & Wedding Veils Manufacturer` was formally approved by Human on 2026-09-04 and is recorded as the current copy decision. This approval resolves only the H1 decision; it does not resolve any other formal publication gate. `JS Meilai` is the Human-approved public English brand and metadata title identity; it must not be presented as a separate unapproved legal entity.
+
+The current bounded runtime mode is `STAKEHOLDER_PREVIEW`: the four approved collection routes remain visible, while deferred routes stay absent, RFQ/contact data collection is disabled, and all output is noindex. This is not a restricted formal launch and does not change the deferred blocker state below.
 
 ## 2. Final sitemap and page ownership
 
@@ -114,7 +116,7 @@ This specification is the source of truth. Build Web Apps skills/plugins may be 
 - Every route matches `ROUTE_REGISTRY.md`; no duplicate keyword owner or unapproved child route.
 - Build is static/server-rendered for primary content and produces valid metadata, sitemap, robots, 404 and redirects.
 - Formal launch is blocked while any `DEFERRED_LAUNCH_BLOCKER` remains unresolved; omitting a blocked route is not a passing condition and no restricted launch is allowed.
-- The exact homepage H1 has an explicit Human copy approval record; `COPY_FREEZE_PENDING_VISUAL_REVIEW` cannot pass the publication gate.
+- The exact homepage H1 has an explicit Human copy approval record; formal publication still requires all other gates.
 - Product records pass status/source validation; no fabricated values or marketplace screenshots appear as product imagery.
 - RFQ flow validates server-side, respects consent, handles failure and does not expose secrets.
 - Responsive/accessibility checks pass at 375/768/1024/1440px; images reserve space and meet CWV targets in representative tests.

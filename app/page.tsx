@@ -27,9 +27,9 @@ function RefinedHero() {
         <div className="order-2 flex flex-col justify-center bg-black px-5 py-12 text-white sm:px-8 sm:py-14 lg:order-1 lg:px-12 lg:py-16">
           <p className="section-label text-stone-400">B2B occasionwear range</p>
           <h1 className="mt-4 max-w-[9ch] font-serif text-[clamp(2.8rem,4vw,4.25rem)] leading-[.95]">Occasion Gloves &amp; Wedding Veils Manufacturer</h1>
-          <p className="mt-6 max-w-sm leading-7 text-stone-300">Five product families for buyers sourcing a focused occasionwear range.</p>
+          <p className="mt-6 max-w-sm leading-7 text-stone-300">Four approved product families for buyers sourcing a focused occasionwear range.</p>
           <Button asChild size="lg" className="mt-8 min-h-11 w-fit rounded-none bg-white px-6 text-black hover:bg-stone-200">
-            <a href="#rfq">Discuss Your Requirements <ArrowRightIcon data-icon="inline-end" /></a>
+            <a href="#rfq">View Preview Status <ArrowRightIcon data-icon="inline-end" /></a>
           </Button>
         </div>
         <div className="order-1 min-w-0 bg-white lg:order-2">
@@ -51,7 +51,7 @@ function MaterialMoment() {
 }
 
 function CustomBridge() {
-  return <section className="border-y border-stone-200 bg-white"><div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:px-10 lg:py-24"><div className="order-2 flex flex-col justify-center lg:order-1"><p className="section-label">Custom manufacturing</p><h2 className="mt-3 max-w-lg font-serif text-4xl leading-[1.04] sm:text-5xl">Tell us what you need made.</h2><p className="mt-5 max-w-md leading-7 text-stone-600">Share a product direction and we can discuss materials, measurements, colours, packaging and timing during the sourcing conversation.</p><Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-black px-5"><a href="#rfq">Discuss Your Requirements <ArrowRightIcon data-icon="inline-end" /></a></Button></div><div className="order-1 grid grid-cols-2 gap-3 lg:order-2"><EditorialImage src={approvedProductImage(kids.primaryImage)} alt={kids.primaryImage.altText} className="aspect-[3/4]" imageClassName="object-contain bg-[#efefec]" /><EditorialImage src={approvedProductImage(veils.primaryImage)} alt={veils.primaryImage.altText} className="mt-10 aspect-[3/4]" imageClassName="object-contain bg-[#efefec]" /></div></div></section>;
+  return <section className="border-y border-stone-200 bg-white"><div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:px-10 lg:py-24"><div className="order-2 flex flex-col justify-center lg:order-1"><p className="section-label">Custom manufacturing</p><h2 className="mt-3 max-w-lg font-serif text-4xl leading-[1.04] sm:text-5xl">Tell us what you need made.</h2><p className="mt-5 max-w-md leading-7 text-stone-600">This preview shows the range only. Materials, measurements, colours, packaging and timing are not collected or discussed through the site yet.</p><Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-black px-5"><a href="#rfq">View Preview Status <ArrowRightIcon data-icon="inline-end" /></a></Button></div><div className="order-1 grid grid-cols-2 gap-3 lg:order-2"><EditorialImage src={approvedProductImage(kids.primaryImage)} alt={kids.primaryImage.altText} className="aspect-[3/4]" imageClassName="object-contain bg-[#efefec]" /><EditorialImage src={approvedProductImage(veils.primaryImage)} alt={veils.primaryImage.altText} className="mt-10 aspect-[3/4]" imageClassName="object-contain bg-[#efefec]" /></div></div></section>;
 }
 
 function RfqBand() {

@@ -2,6 +2,10 @@
 
 V1 is lead generation, not ecommerce. There is no cart, checkout, payment, account or consumer order flow.
 
+## Stakeholder preview boundary
+
+While runtime mode is `STAKEHOLDER_PREVIEW`, the RFQ UI is an informational notice with no form controls, browser state, client submission or personal-data fields. `POST /api/rfq/` returns service-disabled status before reading the request body; it does not validate, rate-limit, log, transmit or persist payloads. Resend, storage and visitor-data collection remain disabled until a separately approved formal publication checkpoint.
+
 ## Required fields
 
 | field | requirement |

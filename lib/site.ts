@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { previewRobots } from "@/lib/stakeholder-preview";
 
 const developmentOrigin = "http://localhost:3000";
 
@@ -16,6 +17,7 @@ export function pageMetadata(title: string, description: string, pathname: strin
   return {
     title,
     description,
+    robots: previewRobots,
     alternates: { canonical: canonicalUrl(pathname).pathname },
   };
 }

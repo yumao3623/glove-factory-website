@@ -5,14 +5,14 @@
 - HTTPS only; the approved canonical host is `https://www.jsmeilai.com/`. Permanently redirect every matching apex URL (`https://jsmeilai.com/*`) to the corresponding `www` URL. HTTP variants must also terminate at the HTTPS `www` URL.
 - Canonical URLs are absolute, lowercase, hyphenated and trailing-slash terminated: `/bridal-gloves/`.
 - Query strings, sort orders and filters are non-canonical and `noindex,follow` unless an ADR approves a child landing route.
-- Staging/preview deployments are access-protected and `noindex`; they must not be linked in production or submitted to Search Console.
+- The code-baked `STAKEHOLDER_PREVIEW` deployment is public-reviewable but emits `noindex, nofollow` metadata and `X-Robots-Tag` on every path, independent of the deployment hostname. It must not be submitted to Search Console. Formal production may use a different policy only after the publication gate passes.
 
 ## Metadata and headings
 
 - Title template: `{Page topic} | JS Meilai`. `JS Meilai` is the Human-approved public English brand and metadata identity.
 - Every indexable page has a unique 50-60 character target title where practical and a 140-160 character factual meta description; no keyword lists or unsupported promises.
 - Exactly one H1 states the page topic. H2s cover product range, evidence/capability, procurement details and next step in task order; H3s are subordinate, never styling hooks.
-- Homepage positioning direction: `Occasion Gloves & Wedding Veils Manufacturer`; exact H1 remains `COPY_FREEZE_PENDING_VISUAL_REVIEW`. Phase 3 reviewed evidence explicitly leaves the final H1 pending, so the positioning candidate must not be treated as an approved H1. A written Human copy approval is required before publication.
+- Homepage exact H1 `Occasion Gloves & Wedding Veils Manufacturer` is formally Human-approved on 2026-09-04; this does not by itself pass the formal publication gate.
 
 ## Crawl and index
 
@@ -50,5 +50,5 @@ Open Graph/Twitter metadata uses the same approved title/description and a permi
 ## Publication gate dependencies
 
 - Every indexable page must use the approved `JS Meilai` metadata identity and the HTTPS `www` canonical host.
-- The exact homepage H1 remains pending until a Human copy approval record exists; do not substitute the positioning candidate as an approved H1.
+- The exact homepage H1 approval is recorded, but formal publication remains blocked by unresolved route, legal, infrastructure and delivery gates.
 - `DEFERRED_LAUNCH_BLOCKER` routes are unresolved launch blockers even when their pages are absent. Formal publication cannot pass until each blocker is explicitly resolved.

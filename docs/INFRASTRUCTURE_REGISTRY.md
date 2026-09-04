@@ -13,4 +13,6 @@
 | Database / Supabase | NOT_REQUIRED | `V1_DATABASE = NONE`; no Supabase project or schema. |
 | Environment variables/secrets | PENDING_PUBLICATION_CONFIGURATION | `RESEND_API_KEY` will be required server-side at publication integration; no secret is created or committed in this checkpoint. |
 
+| Stakeholder preview runtime | IMPLEMENTED_PENDING_DEPLOYMENT | Code-baked `STAKEHOLDER_PREVIEW` mode is noindex on metadata and HTTP responses, keeps four approved collection routes, disables RFQ collection/API processing, and does not create or connect Vercel, DNS, Resend, GSC or secrets. |
+
 No production resource, paid service, database, DNS record, domain binding or credential was created in Phase 2. Domain ownership/selection is now confirmed separately from production configuration.
