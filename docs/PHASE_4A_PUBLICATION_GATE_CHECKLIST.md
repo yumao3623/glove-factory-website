@@ -50,9 +50,9 @@ Formal launch is blocked while any row remains in this state. No restricted laun
 
 ### Host, DNS and preview safety
 
-- [ ] Vercel project and production deployment are explicitly approved and configured.
-- [ ] `www.jsmeilai.com` is bound as the production canonical host.
-- [ ] Apex, HTTP and alternate host requests reach the HTTPS `www` URL with a one-hop permanent redirect.
+- [ ] Existing Vercel project and production deployment are explicitly approved for formal launch and re-verified.
+- [ ] Existing `www.jsmeilai.com` binding is re-verified as the production canonical host; do not duplicate-bind it.
+- [ ] Existing apex, HTTP and alternate host redirects are re-verified to reach the HTTPS `www` URL with a one-hop permanent redirect; do not recreate them without evidence.
 - [ ] Preview deployments are access-protected and emit noindex behavior; they are not linked or submitted to Search Console.
 - [ ] `NEXT_PUBLIC_SITE_URL` and all absolute URL outputs use `https://www.jsmeilai.com/`.
 
@@ -82,4 +82,4 @@ Formal launch is blocked while any row remains in this state. No restricted laun
 
 ## External state requiring verification
 
-The repository does not prove whether a Vercel project, DNS records, Resend account/domain, API key, Gmail mailbox policy, preview protection, GSC or GA4 already exists externally. These remain `UNKNOWN` until the separately authorized publication-integration checkpoint verifies them.
+The repository records stakeholder-preview verification (Vercel project/deployment, host, HTTPS, redirects, noindex and RFQ `503`) in `STAKEHOLDER_PREVIEW.md`. Formal launch must re-verify and approve that existing Vercel/DNS/host configuration; it must not duplicate-bind resources. Resend account/domain/API key, Gmail mailbox policy, preview protection, GSC and GA4 remain `UNKNOWN` or pending until their separately authorized publication-integration checkpoint verifies them.
