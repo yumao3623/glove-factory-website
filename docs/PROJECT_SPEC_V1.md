@@ -2,6 +2,8 @@
 
 Status: `PHASE_4A_PUBLICATION_GATE_PENDING_IMPLEMENTATION`
 
+Post-preview sequencing is governed by the canonical `V1_POST_PREVIEW_EXECUTION_ROADMAP.md`; this specification remains the implementation contract and is not duplicated there.
+
 This is the single implementation contract for the V1 site. The Phase 2 architecture and Phase 3 route/data boundaries remain frozen; publication decisions below are approved for documentation and the later publication gate only. Runtime or external changes still require the bounded implementation checkpoint.
 
 ## 1. Business positioning
@@ -89,7 +91,7 @@ Use one `/contact/` flow per `RFQ_SPEC.md`. V1 has no upload, cart, checkout, pa
 
 ## 8. Infrastructure
 
-GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. `https://www.jsmeilai.com/` is the approved canonical host and matching apex URLs permanently redirect to it. DNS, Vercel binding, Resend account/domain/API key and analytics properties remain pending publication integration and must not be created in this checkpoint. The approved RFQ recipient is `yumao3623@gmail.com`; no independent sender mailbox is provisioned. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
+GitHub remains the source repository. `V1_HOSTING = Vercel`; Cloudflare Pages is fallback. `V1_DATABASE = NONE`. `https://www.jsmeilai.com/` is the approved canonical host and matching apex URLs permanently redirect to it. The stakeholder-preview Vercel deployment, domain binding, HTTPS and redirect behavior are externally verified and recorded in `STAKEHOLDER_PREVIEW.md`; formal launch must re-verify and approve the existing DNS/Vercel configuration rather than recreate it. Resend account/domain/API key and analytics properties remain pending publication integration and must not be created in this checkpoint. The approved RFQ recipient is `yumao3623@gmail.com`; no independent sender mailbox is provisioned. See `HOSTING_DECISION.md` and `INFRASTRUCTURE_REGISTRY.md`.
 
 ## 9. SEO and rendering
 
@@ -97,7 +99,7 @@ Follow `SEO_TECHNICAL_SPEC.md`: HTTPS and one host, trailing slash, one canonica
 
 ## 10. UI direction
 
-Implement the Human-approved Variant E `Image-led Editorial Utility` direction from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. Human Visual Gate 2 approved the visual direction; fonts, exact hex values and CTA treatment remain provisional design tokens pending final publication implementation. This visual approval does not approve the exact homepage H1 copy. shadcn is a reference/component source, not architecture.
+Implement the Human-approved Variant E `Image-led Editorial Utility` direction from `UI_DESIGN_SPEC.md`: real photography, restrained ink/neutral palette, 1200-1280px content width, 8px spacing unit, dense but scannable catalogue grids, mobile-safe navigation and WCAG-oriented focus/contrast/touch behavior. Human Visual Gate 2 approved the visual direction; fonts, exact hex values and CTA treatment remain provisional design tokens pending final publication implementation. This visual-direction approval did not itself approve the exact homepage H1; the H1 was separately approved on 2026-09-04 and is recorded in §1 and the Phase 4A gate. shadcn is a reference/component source, not architecture.
 
 ## 11. Analytics taxonomy
 
