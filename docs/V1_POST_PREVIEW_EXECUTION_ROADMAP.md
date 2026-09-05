@@ -41,7 +41,7 @@ The IDs below preserve the user's original twelve items. The execution order is 
 
 | ID | Original scope | Current status | Dependencies | Inputs | Outputs | Human Gate | Allowed scope and non-goals | Bounded checkpoint |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| W01 | Complete Factory, Custom, Contact, Privacy, Costume and other missing materials | `NEXT` | Baseline; existing route/spec/boundary docs | Factory answers, legal/contact facts, approved asset evidence, route registry | Evidence pack, claim matrix, route/content readiness decisions | Accept facts, permissions, legal identity/contact boundaries and page scope | Collect, classify and document facts. No runtime route creation, legal invention, or RFQ activation | **Evidence Pack Gate**: every requested fact has source/status/owner, and unresolved claims are explicitly omitted or deferred |
+| W01 | Complete Factory, Custom, Contact, Privacy, Costume and other missing materials | `COMPLETE; HUMAN_REVIEW_ACCEPTED` | Baseline; existing route/spec/boundary docs | Factory answers, legal/contact facts, approved asset evidence, route registry | Accepted evidence pack, claim matrix, route/content readiness decisions | Accepted 2026-09-05: facts, permissions, legal identity/contact boundaries, page scope and omissions | Documentation/classification only; it created no runtime route, legal invention or RFQ activation | **Evidence Pack Gate complete**: `docs/W01_EVIDENCE_PACK_GATE.md` records source/status/owner for requested facts and explicit omissions/deferred claims. |
 | W02 | Review the existing 40 imported products and publish only the approved subset | `PENDING_HUMAN_GATE` | W01 product/asset evidence only; ingestion workflow; frozen taxonomy | Listing registry, approved records, image manifest, provenance and risk review | A decision ledger for every listing (`approve`, `defer`, `reject`, `quarantine` or equivalent), approved ProductRecords/assets, optional publication tranche and validation report | Approve family mapping, product facts, images, IP/provenance exceptions and each final disposition | Every listing must receive an auditable disposition; approval does not require public publication, and no listing is published without evidence. No automatic approval or new import batch | **40-Listing Decision Gate**: all 40 listings have recorded dispositions; only the approved subset may proceed to a separate route/publication integration check |
 | W03 | Continue importing remaining products from the authorized 1688 store | `NOT_STARTED; REMAINDER_UNKNOWN` | W02 workflow and Human Gate; source/provenance permission | Authorized-store listing exports, raw archives, checksums, review ledger | Draft registry entries, quarantine/exception ledger, later approved tranche | Approve exceptions, family decisions, images and any promotion | Ingest and preserve provenance. No claim that the historical “about 118” remainder is current; no public publishing before approval | **Next Ingestion Tranche Gate**: auditable intake, exception decisions and approved export |
 | W04 | Enable Resend RFQ | `PENDING_FORMAL_INTEGRATION` | W01 Contact/Privacy; Phase 4A decisions; external provider verification | Approved recipient/from/reply-to, consent copy, provider DNS/API evidence, abuse controls | Tested RFQ delivery, failure fallback, retention/monitoring record | Approve live collection, privacy text, operational owner and provider evidence | No credentials, DNS, provider calls or runtime changes in this roadmap checkpoint | **RFQ Integration Gate**: end-to-end test, abuse controls, privacy/retention and owner sign-off |
@@ -81,17 +81,16 @@ The order below is operational sequencing only; it does not renumber the stable 
 
 ## Pending execution queue
 
-1. **W01 - Evidence Pack Gate** (next actual checkpoint).
-2. **W02 - 40-Listing Decision Gate**, after product and asset evidence is accepted.
-3. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
-4. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
-5. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
-6. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
-7. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
-8. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
-9. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
-10. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
-W01 is the only immediate checkpoint. **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W01-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W01/W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
+1. **W02 - 40-Listing Decision Gate**, after the accepted W01 product/asset evidence pack.
+2. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
+3. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
+4. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
+5. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
+6. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
+7. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
+8. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
+9. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
+W01 is complete. **W02 is the next serial checkpoint but is not activated by this closure.** **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W02-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
 
 ## Anti-drift rules
 
@@ -104,4 +103,4 @@ W01 is the only immediate checkpoint. **W09 is a parallel support lane, not a se
 
 ## Current next checkpoint
 
-**W01 Evidence Pack Gate.** Close the evidence/status matrix for missing route materials, legal/contact boundaries, approved product/image inputs and explicit omissions. No runtime or external integration is included.
+**W02 40-Listing Decision Gate** is the next serial checkpoint after W01 completion. It remains `PENDING_HUMAN_GATE` and is not activated by this documentation update. W01 closure evidence is in `docs/W01_EVIDENCE_PACK_GATE.md`.

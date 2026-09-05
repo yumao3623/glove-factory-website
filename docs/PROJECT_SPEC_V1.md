@@ -107,7 +107,7 @@ Define events now; wire GA4 only after launch consent and property approval: `rf
 
 ## 12. Factual boundaries
 
-Only `FACTORY_CONFIRMED` scope, general customization availability and overseas enquiry ownership are publishable now. The approved RFQ recipient and public failure fallback are `yumao3623@gmail.com`; legal identity and other public contacts (WhatsApp, phone and physical address) remain pending, along with MOQ, sample terms, lead times, capacity, certifications and exact specs, as defined in `PUBLISHING_BOUNDARIES.md`.
+Only the `FACTORY_CONFIRMED` scope and the Human-confirmed boundaries in `PUBLISHING_BOUNDARIES.md` are publishable now. `JS Meilai` is the public English brand, while `江山市美来服饰厂` is the registered Chinese operator name where legal identity is required. The approved public address is `浙江省衢州市江山市石门镇泉塘村泉塘路37号`, and the only approved public phone/WhatsApp number is `+60 1114166916`. The approved RFQ recipient, public failure fallback and Privacy rights/deletion contact are `yumao3623@gmail.com`. MOQ, sample terms, lead times, capacity, certifications and exact product specs remain omitted unless separately evidenced and approved.
 
 ## 13. Phase 3 implementation-aid policy
 

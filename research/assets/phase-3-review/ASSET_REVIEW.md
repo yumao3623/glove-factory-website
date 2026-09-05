@@ -13,7 +13,7 @@ Reviewed 2026-08-31 against `docs/ASSET_PIPELINE.md` and `docs/PUBLISHING_BOUNDA
 | Wedding veils | VISUAL_GATE_APPROVED_CANDIDATE | REQUIRES_PERMISSION_CONFIRMATION | Clean veil and comb/detail views selected; measurement/marketing panels are research only. |
 | Fringe satin gloves | REJECT_FOR_PRODUCTION | UNKNOWN | Supplied views visibly carry 1688 watermark/attribution. |
 | Princess/Frozen/Elsa satin gloves | REJECT_FOR_PRODUCTION | UNKNOWN | Explicit IP context; no licensed claim or authorization. |
-| Factory workshop photos (2) | VISUAL_GATE_APPROVED_CANDIDATE | REQUIRES_PERMISSION_CONFIRMATION | Allowed for this round's Factory/Trust visual prototype only. |
+| Factory workshop photos (2) | VISUAL_GATE_APPROVED_CANDIDATE | HUMAN_PUBLIC_USE_APPROVED | Human Review W01 (2026-09-05) approves public website use for the user-provided factory photos. Production selection still requires technical, privacy and fact-to-image review; this does not approve a specific factory-page claim. |
 | Factory introduction posters | RESEARCH_ONLY | UNKNOWN | Do not publish establishment year, quality system, equipment, customer recognition or similar claims. |
 
 ## Handling rules
