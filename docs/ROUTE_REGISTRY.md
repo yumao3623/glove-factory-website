@@ -28,6 +28,8 @@ Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and
 
 ## Route ownership rules
 
+The 2026-09-05 ADR 0005 bounded amendment permits a future static stakeholder-preview product-detail route only as `NOINDEX`, out of sitemap, and without a canonical SEO owner. It is not a new frozen route and is not authorized by W02; W08 must decide any indexability or canonical ownership.
+
 - One primary intent has one indexable canonical owner.
 - `/contact/` and `/privacy/` are required before the publication gate can authorize live RFQ or formal launch. `/factory/` and `/custom-manufacturing/` remain deferred by Human decision and do not become launch exceptions automatically.
 - `manufacturer`, `supplier`, `wholesale`, `OEM` and `private label` are conversion/context terms, not automatic URL dimensions.

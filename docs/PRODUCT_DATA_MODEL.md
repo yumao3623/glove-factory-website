@@ -7,7 +7,7 @@ This is a catalogue schema for a static, B2B lead-generation site. It is not an 
 | field | type | required | allowed/notes |
 |---|---|---:|---|
 | `id` | string | yes | Stable internal identifier; never derived from display text. |
-| `slug` | string | no | Reserved for a future PDP; absent while V1 is category-only. |
+| `slug` | string | no | Optional stable path key for a static, `noindex` stakeholder-preview detail route under the ADR 0005 amendment; it is not an SEO owner and is absent until a separate route/publication checkpoint approves it. |
 | `product_name` | string | yes | Factual, buyer-readable name; no unverified superlatives. |
 | `product_family` | enum | yes | `bridal-gloves`, `opera-gloves`, `costume-gloves`, `kids-dress-gloves`, `wedding-veils`. |
 | `sub_style` | enum/list | no | Satin, lace, sheer/tulle, fingerless, bow, embellished, etc., only when evidenced. |
@@ -43,3 +43,4 @@ Every operational field uses one of `CONFIRMED`, `PENDING_CONFIRMATION`, `UNKNOW
 - A record with unresolved safety, licensing or identity concerns cannot be `APPROVED`.
 - Product claims must link to a source/evidence note where the fact is not self-evident in the image.
 - Product data is presentation/catalogue data only; no price, stock, checkout, account or order fields are in V1.
+- A detail-preview record, when separately approved, remains static repository content, uses the same status-aware claims and provenance rules, is `noindex`/out of sitemap, and does not change the category-only indexable catalogue boundary.

@@ -79,7 +79,7 @@ If any condition fails, render the style as a section/filter on the parent and k
 
 ## 5. Product page model
 
-V1 is **category-only B2B catalogue**. Do not build individual indexable PDPs. Collection cards expose approved name, image, style/material, dimensions and “Request a Quote” context from `PRODUCT_DATA_MODEL.md`; unresolved values are omitted or marked pending. Reconsider PDPs only when the ADR 0005 evidence triggers are met: product-level information gain, unique approved specs/images for a meaningful share, demonstrated shareable-URL demand, acceptable thin-content risk and a catalogue owner. Roughly 30 active products is supporting scale evidence only.
+V1 remains a **category-only indexable B2B catalogue**. Do not build individual indexable PDPs. Under the 2026-09-05 ADR 0005 bounded amendment, a stakeholder-preview or approved product card may link to a static, internal product-detail preview that is `noindex`, omitted from the sitemap, and has no SEO canonical owner. It may show only the candidate's confirmed title/attributes, mapped approved or preview-safe images and product-scoped RFQ context; it adds no commerce or persistence capability. Collection cards continue to expose approved name, image, style/material, dimensions and “Request a Quote” context from `PRODUCT_DATA_MODEL.md`; unresolved values are omitted or marked pending. Reconsider indexable PDPs only when the ADR 0005 evidence triggers are met and W08 approves the indexability change. Roughly 30 active products is supporting scale evidence only.
 
 ## 6. Data and assets
 

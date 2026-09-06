@@ -1,6 +1,6 @@
 # Product Batch Ingestion Workflow
 
-Status: `READY_FOR_PILOT_UPLOAD` before raw intake; `PILOT_HUMAN_GATE` after inspection. This is a bounded, local, static and draft-first workflow. It is not a CMS, upload endpoint, database, import-to-page feature, PDP system, taxonomy change, or publication approval.
+Status: `READY_FOR_PILOT_UPLOAD` before raw intake; `PILOT_HUMAN_GATE` after inspection. This is a bounded, local, static and draft-first workflow. It is not a CMS, upload endpoint, database, import-to-page feature, indexable PDP system, taxonomy change, or publication approval. A later checkpoint may consume approved evidence for a static `noindex` stakeholder-preview detail route under ADR 0005; that route is outside this ingestion gate.
 
 ## Hard boundary
 
@@ -45,7 +45,7 @@ Before any record or derivative enters `data/products/approved/` or the asset ma
 - the family, English buyer-readable name, visible style terms and safe primary image are reviewed;
 - every selected image is clean and provenance-validated; production visual suitability remains a separate decision from reuse permission;
 - material/composition, dimensions, colours, sizes, commercial terms and performance claims stay `UNKNOWN`/`PENDING_CONFIRMATION` unless separately evidenced; and
-- the record adds no public route, child route, PDP, SEO owner, factory/custom/contact/privacy content, ecommerce, account, database, DNS, Vercel, email or analytics scope.
+- the record adds no indexable/public canonical route, child route, SEO owner, factory/custom/contact/privacy content, ecommerce, account, database, DNS, Vercel, email or analytics scope. A non-indexable detail preview is permitted only under the bounded ADR 0005 amendment and a later route/publication checkpoint.
 
 `npm run validate:products` accepts only `APPROVED` records with status-aware claims, an approved image and thumbnail under `/products/`, provenance, intrinsic dimensions and reviewed alt text. Draft output cannot satisfy that validator.
 
