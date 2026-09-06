@@ -82,14 +82,14 @@ The order below is operational sequencing only; it does not renumber the stable 
 ## Pending execution queue
 
 1. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
-3. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
-4. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
-5. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
-6. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
-7. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
-8. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
-9. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
-W01 is complete. **W02 is the next serial checkpoint but is not activated by this closure.** **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W02-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
+2. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
+3. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
+4. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
+5. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
+6. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
+7. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
+8. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
+W01 and W02 are complete. **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W03-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
 
 ## Anti-drift rules
 
