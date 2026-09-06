@@ -51,7 +51,7 @@ The IDs below preserve the user's original twelve items. The execution order is 
 | W08 | Complete SEO | `PENDING_CONTENT_AND_ROUTE_FREEZE` | W01/W02 route/content evidence; W05 UI; formal host rules | Route registry, metadata/schema/canonical requirements, approved copy/assets | Page-level SEO map, technical checks and launch report | Approve claims, titles, canonicals, schema and indexability | No keyword stuffing, duplicate owners, invented claims or indexing of deferred routes | **SEO Publication Gate**: canonical/indexability/metadata/schema/sitemap checks pass |
 | W09 | Research verifiable B2B projects on GitHub | `PARTIAL; NOT_COMPLETE` | Can run as a read-only support stream; no implementation dependency | GitHub source, maintenance signals, competitor-site observations | Separate GitHub project register and competitor reference register | Accept relevance, production/template classification and reusable patterns | GitHub open-source projects and live competitor websites must remain separate; incomplete research cannot be marked complete | **Research Evidence Gate**: each entry has URL, category, maintenance status, evidence and bounded takeaway |
 | W10 | Diagnose and organize repository structure | `PENDING_SCOPE_REVIEW` | Roadmap authority; current docs and ownership map | File hierarchy, duplicate/obsolete records, authority graph | Scoped hygiene proposal and, later, low-risk documentation cleanup | Approve deletions/renames, authority changes and compatibility impact | No broad refactor, history rewrite, runtime move or historical Phase rewrite | **Repository Hygiene Gate**: proposed boundary and affected-file list accepted before edits |
-| W11 | Filter `awesome-design-md` visual guidance and obtain Human choice | `UPSTREAM_AND_FORK_CHECKED; HUMAN_SELECTION_PENDING` | W01/W02 real content helps evaluate density; W05 consumes decision | Upstream and `yumao3623` fork snapshot, candidate DESIGN.md sources, human visual feedback | 3–5 candidate briefs with borrow/avoid/composition notes and selected direction | Human selects or rejects candidates; selection is not implied by research | Do not copy code or treat upstream/fork as an implementation mandate | **Visual Language Selection Gate**: one chosen direction and explicit rejected options recorded |
+| W11 | Filter `awesome-design-md` visual guidance and obtain Human choice | `COMPLETE; HUMAN_REVIEW_ACCEPTED` | W01/W02 real content helps evaluate density; W05 consumes decision | Upstream and `yumao3623` fork snapshot, candidate DESIGN.md sources, human visual feedback | Accepted candidate briefs, borrow/avoid/composition notes, selected direction and asset-use classification in `docs/W11_VISUAL_LANGUAGE_SELECTION_GATE.md` | Accepted 2026-09-06: A — Editorial Utility / Refined E selected; B/C rejected alternatives; D rejected as default; homepage candidate ZIP authorized for editorial/decorative use; factory ZIP approved for public website use | Do not copy code or treat upstream/fork as an implementation mandate. Homepage candidate assets still require normal hash/technical asset processing; no product/factory identity may be inferred from editorial imagery | **Visual Language Selection Gate complete**: A is the sole selected direction for W05; explicit rejected options and asset boundaries are recorded |
 | W12 | Audit omitted V1 essentials | `COMPLETE_AS_AUDIT` | Completed in repository-first post-preview audit | Project spec, gates, registries, code/history and prior external evidence | Gap ledger, dependency order and omission decisions | Human accepts audit record; individual gaps close in their own workstreams | Do not repeat the audit as a workstream or treat its completion as implementation approval | **Roadmap Freeze Gate**: this record is reviewed; remaining gaps flow to their owning IDs |
 
 ## Material requiredness
@@ -81,15 +81,14 @@ The order below is operational sequencing only; it does not renumber the stable 
 
 ## Pending execution queue
 
-1. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
-2. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
-3. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
-4. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
-5. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
-6. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
-7. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
-8. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
-W01 and W02 are complete. **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W03-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
+1. **W05 - UI/UX Visual Gate**, consuming the accepted W11 direction and approved imagery.
+2. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
+3. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
+4. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
+5. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
+6. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
+7. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
+W01, W02 and W11 are complete. **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W03-W10 and never substitutes for implementation evidence. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
 
 ## Anti-drift rules
 
@@ -102,4 +101,4 @@ W01 and W02 are complete. **W09 is a parallel support lane, not a serial step:**
 
 ## Current next checkpoint
 
-**W11 Visual Language Selection Gate** is the next serial checkpoint after the accepted W02 closure. It remains `HUMAN_SELECTION_PENDING` and is not activated by this documentation update. W02 closure evidence is in `docs/W02_40_LISTING_DECISION_GATE.md`.
+**W05 UI/UX Visual Gate** is the next serial checkpoint after the accepted W11 closure. It must consume the selected A direction and the approved imagery boundaries recorded in `docs/W11_VISUAL_LANGUAGE_SELECTION_GATE.md`. W11 closure evidence is in that record; W02 closure evidence remains in `docs/W02_40_LISTING_DECISION_GATE.md`.
