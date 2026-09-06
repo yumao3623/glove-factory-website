@@ -42,7 +42,7 @@ The IDs below preserve the user's original twelve items. The execution order is 
 | ID | Original scope | Current status | Dependencies | Inputs | Outputs | Human Gate | Allowed scope and non-goals | Bounded checkpoint |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | W01 | Complete Factory, Custom, Contact, Privacy, Costume and other missing materials | `COMPLETE; HUMAN_REVIEW_ACCEPTED` | Baseline; existing route/spec/boundary docs | Factory answers, legal/contact facts, approved asset evidence, route registry | Accepted evidence pack, claim matrix, route/content readiness decisions | Accepted 2026-09-05: facts, permissions, legal identity/contact boundaries, page scope and omissions | Documentation/classification only; it created no runtime route, legal invention or RFQ activation | **Evidence Pack Gate complete**: `docs/W01_EVIDENCE_PACK_GATE.md` records source/status/owner for requested facts and explicit omissions/deferred claims. |
-| W02 | Review the existing 40 imported products and publish only the approved subset | `PENDING_HUMAN_GATE` | W01 product/asset evidence only; ingestion workflow; frozen taxonomy | Listing registry, approved records, image manifest, provenance and risk review | A decision ledger for every listing (`approve`, `defer`, `reject`, `quarantine` or equivalent), approved ProductRecords/assets, optional publication tranche and validation report | Approve family mapping, product facts, images, IP/provenance exceptions and each final disposition | Every listing must receive an auditable disposition; approval does not require public publication, and no listing is published without evidence. No automatic approval or new import batch | **40-Listing Decision Gate**: all 40 listings have recorded dispositions; only the approved subset may proceed to a separate route/publication integration check |
+| W02 | Review the existing 40 imported products and publish only the approved subset | `COMPLETE; HUMAN_REVIEW_ACCEPTED` | W01 product/asset evidence only; ingestion workflow; frozen taxonomy | Listing registry, approved records, image manifest, provenance and risk review | Accepted decision ledger: 39 approvable source candidates resolving to 36 displayable normalized products; 1 IP-risk quarantine; no ProductRecord, asset export or route integration | Accepted 2026-09-06: six family mappings, image exclusions, IP quarantine and no-merge treatment of five possible-variation relationships | Every listing received an auditable disposition; this closure creates no ProductRecord, public publication or new import batch. A separate approved-data/route checkpoint remains required | **40-Listing Decision Gate complete**: `docs/W02_40_LISTING_DECISION_GATE.md` is the accepted closure record; only its 36 displayable normalized candidates may be considered by later approved-data and route/publication work |
 | W03 | Continue importing remaining products from the authorized 1688 store | `NOT_STARTED; REMAINDER_UNKNOWN` | W02 workflow and Human Gate; source/provenance permission | Authorized-store listing exports, raw archives, checksums, review ledger | Draft registry entries, quarantine/exception ledger, later approved tranche | Approve exceptions, family decisions, images and any promotion | Ingest and preserve provenance. No claim that the historical “about 118” remainder is current; no public publishing before approval | **Next Ingestion Tranche Gate**: auditable intake, exception decisions and approved export |
 | W04 | Enable Resend RFQ | `PENDING_FORMAL_INTEGRATION` | W01 Contact/Privacy; Phase 4A decisions; external provider verification | Approved recipient/from/reply-to, consent copy, provider DNS/API evidence, abuse controls | Tested RFQ delivery, failure fallback, retention/monitoring record | Approve live collection, privacy text, operational owner and provider evidence | No credentials, DNS, provider calls or runtime changes in this roadmap checkpoint | **RFQ Integration Gate**: end-to-end test, abuse controls, privacy/retention and owner sign-off |
 | W05 | UI/UX optimization | `PENDING_W11_AND_APPROVED_ASSETS` | W11 visual choice; sufficient approved imagery/content density from W01/W02; UI spec | Human visual direction, approved images, responsive/accessibility/performance checks | Bounded UI change set and visual QA record | Choose visual language and accept desktop/mobile/accessibility result | Evaluate effects; sufficient approved content is enough for the selected surface; all 40 W02 decisions are not required unless that surface depends on them. Do not mechanically add every radius, blur, glow, animation, Bento, noise or overlap idea | **UI/UX Visual Gate**: selected direction implemented in a bounded surface and accepted at required viewports |
@@ -81,16 +81,15 @@ The order below is operational sequencing only; it does not renumber the stable 
 
 ## Pending execution queue
 
-1. **W02 - 40-Listing Decision Gate**, after the accepted W01 product/asset evidence pack.
-2. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
-3. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
-4. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
-5. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
-6. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
-7. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
-8. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
-9. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
-W01 is complete. **W02 is the next serial checkpoint but is not activated by this closure.** **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W02-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
+1. **W11 - Visual Language Selection Gate**, using real approved content and preserving the separate GitHub/competitor classifications.
+2. **W05 - UI/UX Visual Gate**, consuming W11 and approved imagery.
+3. **W03 - Next Ingestion Tranche Gate**, reusing the accepted W02 ingestion workflow.
+4. **W10 - Repository Hygiene Gate**, after the content/data boundaries are known.
+5. **W08 - SEO Publication Gate**, after route/content and UI decisions stabilize.
+6. **W04 - RFQ Integration Gate**, after Contact/Privacy evidence and provider authorization are available.
+7. **W07 - Search Console Integration Gate**, only after indexable formal launch readiness.
+8. **W06 - Locale Readiness Gate**, after English V1 and SEO ownership are stable.
+W01 and W02 are complete. **W09 is a parallel support lane, not a serial step:** it may run read-only throughout W03-W10 and never substitutes for implementation evidence. W11 preparation may run in parallel with W02, but its Human selection must precede W05. W03 preparation may run in parallel with W05 after W02's workflow is accepted; promotion remains gated. W04, W07 and W06 remain blocked by their explicit launch/dependency conditions.
 
 ## Anti-drift rules
 
@@ -103,4 +102,4 @@ W01 is complete. **W02 is the next serial checkpoint but is not activated by thi
 
 ## Current next checkpoint
 
-**W02 40-Listing Decision Gate** is the next serial checkpoint after W01 completion. It remains `PENDING_HUMAN_GATE` and is not activated by this documentation update. W01 closure evidence is in `docs/W01_EVIDENCE_PACK_GATE.md`.
+**W11 Visual Language Selection Gate** is the next serial checkpoint after the accepted W02 closure. It remains `HUMAN_SELECTION_PENDING` and is not activated by this documentation update. W02 closure evidence is in `docs/W02_40_LISTING_DECISION_GATE.md`.
