@@ -1,23 +1,115 @@
+import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
 import { approvedProductImage } from "@/components/product/approved-product-image";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
-import { families } from "@/data/families";
+import { families, type FamilyEntry } from "@/data/families";
+import { w05HomepageFamilyVisuals } from "@/data/w05-homepage-visuals";
+import { w11EditorialMedia } from "@/data/w11-media";
 
-const familyProducts = {
-  "bridal-gloves": getApprovedCatalogueByFamily("bridal-gloves")[0],
-  "opera-gloves": getApprovedCatalogueByFamily("opera-gloves")[0],
-  "kids-dress-gloves": getApprovedCatalogueByFamily("kids-dress-gloves")[0],
-  "wedding-veils": getApprovedCatalogueByFamily("wedding-veils")[0],
-} as const;
+type FamilyVisual = {
+  family: FamilyEntry;
+  image: StaticImageData;
+  alt: string;
+  productId: string;
+};
+
+const familyVisuals: readonly FamilyVisual[] = families.map((family) => {
+  const selected = w05HomepageFamilyVisuals[family.slug];
+
+  if (family.slug === "costume-gloves") {
+    const costumeVisual = w05HomepageFamilyVisuals["costume-gloves"];
+    return {
+      family,
+      image: costumeVisual.image,
+      alt: costumeVisual.alt,
+      productId: costumeVisual.productId,
+    };
+  }
+
+  const product = getApprovedCatalogueByFamily(family.slug)[0];
+  if (!product) throw new Error(`Missing approved homepage visual for ${family.slug}.`);
+
+  return {
+    family,
+    image: approvedProductImage(product.primaryImage),
+    alt: product.primaryImage.altText,
+    productId: selected.productId,
+  };
+});
+
+const cardOffsets = ["lg:pt-0", "lg:pt-10", "lg:pt-4", "lg:pt-14", "lg:pt-7"] as const;
 
 export function EditorialFamilyDiscovery() {
-  return <section id="families" className="bg-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><div className="mb-10 flex flex-col justify-between gap-4 lg:mb-14 lg:flex-row lg:items-end"><div><p className="section-label">Explore the range</p><h2 className="mt-3 max-w-2xl font-serif text-4xl leading-[1.04] sm:text-5xl">Explore four approved occasionwear families.</h2></div><p className="max-w-md text-sm leading-6 text-stone-600">Choose a product direction first, then bring the specifications into the offline enquiry discussion.</p></div><div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4"><div className="sm:col-span-2 lg:col-span-2"><FamilyLink family={families[0]} /></div><div className="lg:col-span-1 lg:pt-20"><FamilyLink family={families[1]} vertical /></div><div className="lg:col-span-1 lg:pt-8"><FamilyLink family={families[4]} vertical /></div><div className="lg:col-span-2 lg:pr-[15%]"><FamilyLink family={families[3]} /></div></div></div></section>;
+  return (
+    <section id="families" className="relative isolate overflow-hidden bg-[#f8f6f2]">
+      <EditorialImage
+        src={w11EditorialMedia.laceShadow.src}
+        alt=""
+        className="pointer-events-none absolute -right-[12%] top-0 hidden h-full w-[44%] opacity-35 lg:block"
+        imageClassName="object-cover object-left"
+        sizes="44vw"
+      />
+      <EditorialImage
+        src={w11EditorialMedia.sheerSparkle.src}
+        alt=""
+        className="pointer-events-none absolute -left-[14%] bottom-0 h-[42%] w-[48%] opacity-20"
+        imageClassName="object-cover object-top"
+        sizes="48vw"
+      />
+      <div className="relative mx-auto max-w-[1380px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div>
+            <p className="section-label text-stone-600">Explore the range</p>
+            <h2 className="mt-3 max-w-[13ch] font-serif text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
+              Five directions for an occasionwear range.
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm leading-6 text-stone-700">
+            Start with a family, then bring materials, measurements and timing into the sourcing conversation.
+          </p>
+        </div>
+        <div className="relative mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-12 lg:mt-16 lg:grid-cols-5 lg:items-start lg:gap-x-5 lg:pb-8">
+          {familyVisuals.map((visual, index) => (
+            <FamilyLink key={visual.family.slug} visual={visual} offset={cardOffsets[index]} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
-function FamilyLink({ family, vertical = false, pending = false }: { family: (typeof families)[number]; vertical?: boolean; pending?: boolean }) {
-  const product = familyProducts[family.slug as keyof typeof familyProducts];
-  const content = <><div className={vertical ? "aspect-[3/4]" : "aspect-[1.08] sm:aspect-[1.2]"}>{pending ? <div className="flex h-full items-end bg-[#f6f5f2] p-5"><span className="section-label text-stone-500">Collection information coming soon</span></div> : product ? <EditorialImage src={approvedProductImage(product.primaryImage)} alt={product.primaryImage.altText} className="h-full" imageClassName="object-contain bg-[#efefec] transition-transform duration-300 group-hover:scale-[1.025]" /> : null}</div><div className="flex items-start justify-between gap-4 border-t border-stone-300 pt-3"><div><h3 className="font-serif text-xl leading-tight sm:text-2xl">{family.title}</h3><p className="mt-1 text-xs leading-5 text-stone-600">{family.buyerUse}</p></div>{family.route ? <ArrowUpRightIcon className="mt-1 size-4 shrink-0" aria-hidden="true" /> : null}</div></>;
-  return family.route ? <Link href={family.route} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">{content}</Link> : <article className="group block" aria-label={`${family.title}: collection information coming soon`}>{content}</article>;
+function FamilyLink({ visual, offset }: { visual: FamilyVisual; offset: string }) {
+  const content = (
+    <>
+      <EditorialImage
+        src={visual.image}
+        alt={visual.alt}
+        className="aspect-[4/5]"
+        imageClassName="object-cover transition-transform duration-500 motion-reduce:transition-none group-hover:scale-[1.035]"
+        sizes="(min-width: 1024px) 19vw, (min-width: 640px) 44vw, 46vw"
+      />
+      <div className="mt-3 border-t border-black/30 pt-3">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-serif text-[1.35rem] leading-[1.02] sm:text-2xl">{visual.family.title}</h3>
+          {visual.family.route ? <ArrowUpRightIcon className="mt-0.5 size-4 shrink-0" aria-hidden="true" /> : null}
+        </div>
+        <p className="mt-2 text-xs leading-5 text-stone-700">{visual.family.buyerUse}</p>
+        {!visual.family.route ? <p className="mt-2 text-[0.65rem] font-semibold uppercase text-stone-600">Route pending</p> : null}
+      </div>
+    </>
+  );
+
+  const className = `group block min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4 ${offset}`;
+
+  return visual.family.route ? (
+    <Link href={visual.family.route} className={className} data-product-id={visual.productId}>
+      {content}
+    </Link>
+  ) : (
+    <article className={className} aria-label={`${visual.family.title}: route pending`} data-product-id={visual.productId}>
+      {content}
+    </article>
+  );
 }

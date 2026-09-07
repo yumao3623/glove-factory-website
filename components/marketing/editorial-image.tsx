@@ -7,17 +7,18 @@ type EditorialImageProps = {
   className?: string;
   imageClassName?: string;
   priority?: boolean;
+  sizes?: string;
 };
 
-export function EditorialImage({ src, alt, className, imageClassName, priority = false }: EditorialImageProps) {
+export function EditorialImage({ src, alt, className, imageClassName, priority = false, sizes = "(min-width: 1024px) 50vw, 100vw" }: EditorialImageProps) {
   return (
-    <div className={cn("overflow-hidden bg-[#f0f0ef]", className)}>
+    <div className={cn("overflow-hidden", className)}>
       <Image
         src={src}
         alt={alt}
-        sizes="(min-width: 1024px) 50vw, 100vw"
+        sizes={sizes}
         preload={priority}
-        loading="eager"
+        loading={priority ? "eager" : "lazy"}
         className={cn("h-full w-full object-cover", imageClassName)}
       />
     </div>
