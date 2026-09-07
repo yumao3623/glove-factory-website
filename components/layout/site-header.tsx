@@ -15,6 +15,10 @@ const navItems = [
   { href: "/wedding-veils/", label: "Wedding Veils" },
 ];
 
+function handleMobileRfqClick() {
+  window.setTimeout(() => document.getElementById("rfq")?.scrollIntoView({ behavior: "smooth", block: "start" }), 220);
+}
+
 export function SiteHeader() {
   return (
     <header className="border-b border-stone-200 bg-[#fbfaf8]">
@@ -22,13 +26,13 @@ export function SiteHeader() {
         <Link href="/" className="font-serif text-2xl leading-none text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           {provisionalBrandDisplay}
         </Link>
-        <nav aria-label="Primary navigation" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => <Link key={item.href} href={item.href} className="min-h-11 px-3 py-3 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{item.label}</Link>)}
         </nav>
-        <Button asChild size="lg" className="hidden min-h-11 rounded-none bg-black px-5 md:inline-flex"><a href="#rfq">Preview Enquiry Status</a></Button>
+        <Button asChild size="lg" className="hidden min-h-11 rounded-none bg-black px-5 xl:inline-flex"><a href="#rfq">Preview Enquiry Status</a></Button>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon-lg" className="inline-flex min-h-11 min-w-11 shrink-0 text-black md:hidden" aria-label="Open navigation"><MenuIcon aria-hidden="true" /></Button>
+            <Button variant="ghost" size="icon-lg" className="inline-flex min-h-11 min-w-11 shrink-0 text-black xl:hidden" aria-label="Open navigation"><MenuIcon aria-hidden="true" /></Button>
           </SheetTrigger>
           <SheetContent side="right">
             <SheetHeader>
@@ -37,7 +41,7 @@ export function SiteHeader() {
             </SheetHeader>
             <nav aria-label="Mobile navigation" className="flex flex-col gap-1 px-4">
               {navItems.map((item) => <SheetClose key={item.href} asChild><Link href={item.href} className="min-h-11 px-3 py-3 text-base hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{item.label}</Link></SheetClose>)}
-              <SheetClose asChild><a href="#rfq" className="mt-3 min-h-11 bg-primary px-3 py-3 text-center text-sm font-medium text-primary-foreground">Preview enquiry status</a></SheetClose>
+              <SheetClose asChild><a href="#rfq" onClick={handleMobileRfqClick} className="mt-3 min-h-11 bg-primary px-3 py-3 text-center text-sm font-medium text-primary-foreground">Preview enquiry status</a></SheetClose>
             </nav>
           </SheetContent>
         </Sheet>
