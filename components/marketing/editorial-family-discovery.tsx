@@ -10,7 +10,7 @@ import { w11EditorialMedia } from "@/data/w11-media";
 
 type FamilyVisual = {
   family: FamilyEntry;
-  image: StaticImageData;
+  image: StaticImageData | string;
   alt: string;
   productId: string;
 };

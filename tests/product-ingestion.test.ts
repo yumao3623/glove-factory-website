@@ -280,17 +280,15 @@ test("approved records require reviewed product data and approved asset provenan
   assert.deepEqual(valid, []);
 });
 
-test("initial public tranche keeps exactly four approved records in a registry and asset-manifest closed loop", () => {
+test("initial public tranche keeps all 36 W02-approved records in a registry and asset-manifest closed loop", () => {
   const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8"));
   const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8"));
   const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8"));
   const fingerprints = readFileSync(resolve(root, "data/ingestion/listing-relationship-fingerprints.json"), "utf8");
-  assert.equal(records.length, 4);
-  assert.deepEqual(records.map((record: { id: string }) => record.id), ["kids-dress-gloves-satin-bow-001", "bridal-gloves-sheer-lace-long-001", "opera-gloves-satin-short-001", "wedding-veils-black-lace-trim-001"]);
-  assert.equal(new Set(records.map((record: { id: string }) => record.id)).size, 4);
-  assert.equal(records.find((record: { id: string }) => record.id === "bridal-gloves-sheer-lace-long-001")?.provenance.normalizedProductGroupId, undefined);
-  assert.equal(records.find((record: { id: string }) => record.id === "wedding-veils-black-lace-trim-001")?.provenance.normalizedProductGroupId, undefined);
-  assert.equal(records.find((record: { id: string }) => record.id === "wedding-veils-black-lace-trim-001")?.images.length, 4);
+  assert.equal(records.length, 36);
+  assert.equal(new Set(records.map((record: { id: string }) => record.id)).size, 36);
+  assert.deepEqual(new Set(records.map((record: { productFamily: string }) => record.productFamily)), new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"]));
+  assert.ok(records.every((record: { images: unknown[] }) => record.images.length >= 2));
   assert.deepEqual(validateApprovedCatalogue(records, { registryEntries: registry.entries, productionAssets: manifest.productionAssets, durableEvidenceText: fingerprints }), []);
   const productionSources = manifest.productionAssets.map((asset: { sourceHash: string }) => asset.sourceHash);
   assert.ok(!productionSources.includes("fc01e4e85a76f46680b54ade4b697dba7d7c866642f5692d01359f4810d09ea1"));
@@ -303,25 +301,22 @@ test("collection loader exposes only approved records with manifest-mapped prima
   assert.equal(isApprovedProduct({ status: "PENDING_REVIEW" }), false);
   assert.equal(isApprovedProduct({ status: "ARCHIVED" }), false);
   assert.equal(isApprovedProduct({ status: "APPROVED" }), true);
-  assert.deepEqual(getApprovedCatalogueByFamily("bridal-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["bridal-gloves-sheer-lace-long-001", "bridal-gloves-sheer-lace-long-001-front-web"]]);
-  assert.deepEqual(getApprovedCatalogueByFamily("opera-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["opera-gloves-satin-short-001", "opera-gloves-satin-short-001-front-web"]]);
-  assert.deepEqual(getApprovedCatalogueByFamily("kids-dress-gloves").map((record) => [record.id, record.primaryImage.assetId]), [["kids-dress-gloves-satin-bow-001", "kids-dress-gloves-satin-bow-001-front-web"]]);
-  assert.deepEqual(getApprovedCatalogueByFamily("wedding-veils").map((record) => [record.id, record.primaryImage.assetId]), [["wedding-veils-black-lace-trim-001", "wedding-veils-black-lace-trim-001-front-web"]]);
+  for (const family of ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"] as const) {
+    const products = getApprovedCatalogueByFamily(family);
+    assert.ok(products.length > 0, family);
+    assert.ok(products.every((product) => product.primaryImage.role === "primary"), family);
+  }
 });
 
 test("static collection image imports stay closed over approved web derivatives", () => {
   const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8")) as Array<{ images: Array<{ assetId: string; path: string | null; status: string; role: string }> }>;
   const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8")) as { productionAssets: Array<{ derivatives: Array<{ assetId: string; path: string }> }> };
-  const mappingSource = readFileSync(resolve(root, "components/product/approved-product-image.ts"), "utf8");
-  const mappedAssetIds = [...mappingSource.matchAll(/^\s+"([^"]+-web)":/gm)].map((match) => match[1]).sort();
-  const recordImages = records.flatMap((record) => record.images).filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.includes("/web/"));
+  const recordImages = records.flatMap((record) => record.images).filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.startsWith("/products/"));
   const approvedAssetIds = recordImages.map((image) => image.assetId).sort();
   const manifestAssetIds = manifest.productionAssets.flatMap((asset) => asset.derivatives).filter((derivative) => approvedAssetIds.includes(derivative.assetId)).map((derivative) => derivative.assetId).sort();
 
-  assert.deepEqual(mappedAssetIds, approvedAssetIds);
   assert.deepEqual(manifestAssetIds, approvedAssetIds);
   for (const image of recordImages) {
-    assert.ok(existsSync(resolve(root, `assets${image.path}`)));
-    assert.match(mappingSource, new RegExp(`from "@/assets${image.path}";`));
+    assert.ok(existsSync(resolve(root, `public${image.path}`)), image.path ?? "missing path");
   }
 });

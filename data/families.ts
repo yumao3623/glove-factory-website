@@ -29,10 +29,10 @@ export const families: FamilyEntry[] = [
   {
     slug: "costume-gloves",
     title: "Costume / Stage Gloves",
-    route: null,
+    route: "/costume-gloves/",
     buyerUse: "Stage, performance and supported costume ranges.",
     detail: "Scope-controlled stage and supported costume directions.",
-    availableNow: false,
+    availableNow: true,
   },
   {
     slug: "kids-dress-gloves",

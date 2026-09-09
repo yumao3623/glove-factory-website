@@ -12,6 +12,12 @@ Authored-from branch (provenance): `codex/phase-4c-v1-post-preview-roadmap-freez
 
 This is the single canonical execution roadmap after the bounded stakeholder preview. `PROJECT_SPEC_V1.md` remains the V1 implementation contract; `ROUTE_REGISTRY.md`, `PUBLISHING_BOUNDARIES.md`, `PHASE_4A_PUBLICATION_GATE_CHECKLIST.md`, and the product/asset registries remain authoritative within their own domains. This file owns only the post-preview workstream order, dependencies, gates, and anti-drift rules.
 
+## Human architecture continuation correction (2026-09-08)
+
+Human Review confirms that implementation resumes in this repository's existing Next.js/Vercel project. The separate WordPress experiment is closed as an optional reference package and does not replace, reorder or constrain this roadmap. WordPress patterns may inform later SEO, page structure and content-management decisions, but no WordPress project, migration, plugin plan or staging environment is a dependency of this repository. Continue from the pending post-W02 approved-data and product-preview integration handoff below; the current Next.js stakeholder preview, Vercel project, domain and DNS remain the historical preview and fallback until their own publication checks are completed.
+
+This correction changes the architecture direction only. It does not authorize DNS, Vercel, Resend, GSC or other external changes, and it does not mark the post-W02 handoff complete. The handoff remains incomplete until all 36 W02-approved normalized products, their approved image mappings, collection/detail inventory and RFQ context evidence are validated.
+
 This checkpoint changes documentation only. It does not authorize runtime, product data, asset, UI, deployment, DNS, Vercel, Resend, GSC, or other external changes.
 
 ## Operating entry

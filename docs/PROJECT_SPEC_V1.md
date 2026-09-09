@@ -24,7 +24,11 @@ This is the single implementation contract for the V1 site. The Phase 2 architec
 
 The exact homepage H1 `Occasion Gloves & Wedding Veils Manufacturer` was formally approved by Human on 2026-09-04 and is recorded as the current copy decision. This approval resolves only the H1 decision; it does not resolve any other formal publication gate. `JS Meilai` is the Human-approved public English brand and metadata title identity; it must not be presented as a separate unapproved legal entity.
 
-The current bounded runtime mode is `STAKEHOLDER_PREVIEW`: the four approved collection routes remain visible, while deferred routes stay absent, RFQ/contact data collection is disabled, and all output is noindex. This is not a restricted formal launch and does not change the deferred blocker state below.
+The current bounded runtime mode is `STAKEHOLDER_PREVIEW`: approved collection routes remain visible, RFQ/contact data collection is disabled, and all output is noindex. This is not a restricted formal launch.
+
+### Human architecture continuation correction (2026-09-08)
+
+W02 Human Review accepted 39 non-IP source listings as 36 normalized products across all five frozen families, including four supported non-licensed `costume-gloves` products. The approved-data handoff may therefore integrate `/costume-gloves/` and its product previews. The prior blocker wording below described the pre-W02 four-product preview and is superseded for this bounded integration checkpoint; formal launch still requires the separate publication gates.
 
 ## 2. Final sitemap and page ownership
 
@@ -50,7 +54,7 @@ The sitemap above is the route-ownership map, not a launch-pass list. The follow
 
 - `/factory/`: comprehensive factory evidence and approved facts remain deferred; its absence must not be checked as publication-gate completion.
 - `/custom-manufacturing/`: the capability/conversion route remains deferred; its absence must not be checked as publication-gate completion.
-- `/costume-gloves/`: no approved production asset set or route integration exists; do not create the page or add it to the sitemap. Its unresolved status is a launch blocker, not an ignorable omission.
+- `/costume-gloves/`: route and approved W02 product assets are now available for bounded integration; formal launch/indexability remains governed by the publication gate.
 
 No restricted launch is permitted. Formal launch requires every `DEFERRED_LAUNCH_BLOCKER` to be resolved by a reviewed implementation/evidence decision, in addition to the required `/contact/` and `/privacy/` gates.
 

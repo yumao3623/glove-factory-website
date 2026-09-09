@@ -2,7 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
 
 type EditorialImageProps = {
-  src: StaticImageData;
+  src: StaticImageData | string;
   alt: string;
   className?: string;
   imageClassName?: string;

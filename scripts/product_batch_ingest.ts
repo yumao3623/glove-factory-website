@@ -339,7 +339,9 @@ async function validateApproved() {
     if (!isRegularFile(originalPath)) errors.push(`${asset.assetId}: original file is missing.`);
     else if (sha256File(originalPath) !== asset.sourceHash) errors.push(`${asset.assetId}: original hash does not match sourceHash.`);
     for (const derivative of asset.derivatives ?? []) {
-      const derivativePath = join(root, "assets", derivative.path.slice(1));
+      const derivativePath = derivative.path.startsWith("/products/media/")
+        ? join(root, "public", derivative.path.slice(1))
+        : join(root, "assets", derivative.path.slice(1));
       if (!isRegularFile(derivativePath)) errors.push(`${derivative.assetId}: derivative file is missing.`);
       else if (sha256File(derivativePath) !== derivative.sha256) errors.push(`${derivative.assetId}: derivative hash does not match manifest.`);
       else {

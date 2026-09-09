@@ -8,6 +8,7 @@ type ProductionAsset = { productId: string; permissionStatus: string; visualAppr
 export type ApprovedCatalogueImage = AssetReference & { path: string; width: number; height: number; altText: string };
 
 export type ApprovedCatalogueProduct = ProductRecord & {
+  slug: string;
   primaryImage: ApprovedCatalogueImage;
   collectionImages: readonly ApprovedCatalogueImage[];
 };
@@ -32,16 +33,18 @@ function productionImageFor(record: ProductRecord, image: AssetReference): Appro
 
 function collectionImagesFor(record: ProductRecord): readonly ApprovedCatalogueImage[] {
   return record.images
-    .filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.includes("/web/"))
+    .filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.startsWith("/products/"))
     .map((image) => productionImageFor(record, image))
     .filter((image): image is ApprovedCatalogueImage => image !== null);
 }
 
 function toApprovedCatalogueProduct(record: ProductRecord): ApprovedCatalogueProduct | null {
   if (!isApprovedProduct(record)) return null;
+  const slug = record.slug;
+  if (!slug) return null;
   const collectionImages = collectionImagesFor(record);
   const primaryImage = collectionImages.find((image) => image.role === "primary");
-  return primaryImage ? { ...record, primaryImage, collectionImages } : null;
+  return primaryImage ? { ...record, slug, primaryImage, collectionImages } : null;
 }
 
 const approvedCatalogue = records
@@ -51,4 +54,12 @@ const approvedCatalogue = records
 
 export function getApprovedCatalogueByFamily(family: ProductFamily): readonly ApprovedCatalogueProduct[] {
   return approvedCatalogue.filter((record) => record.productFamily === family);
+}
+
+export function getApprovedCatalogueProductBySlug(slug: string): ApprovedCatalogueProduct | undefined {
+  return approvedCatalogue.find((record) => record.slug === slug);
+}
+
+export function getApprovedCatalogueSlugs(): readonly string[] {
+  return approvedCatalogue.map((record) => record.slug);
 }
