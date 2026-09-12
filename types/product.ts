@@ -11,7 +11,8 @@ export type ProductFamily =
   | "opera-gloves"
   | "costume-gloves"
   | "kids-dress-gloves"
-  | "wedding-veils";
+  | "wedding-veils"
+  | "arm-sleeves";
 
 export type SourcedValue<T> = {
   value: T | null;

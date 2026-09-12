@@ -6,11 +6,13 @@
 
 ## Reproduction
 
-From the repository root, run:
+From the repository root on macOS or Linux, run:
 
-```powershell
-& 'C:\Users\毛彧\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts/normalize_keyword_stats.py research/keywords/raw/keyword-stats-2026-08-26.xlsx research/keywords/processed/keyword-stats-normalized.csv
+```bash
+python3 scripts/normalize_keyword_stats.py research/keywords/raw/keyword-stats-2026-08-26.xlsx research/keywords/processed/keyword-stats-normalized.csv
 ```
+
+On Windows, use `py -3` instead of `python3` when the Python launcher is available.
 
 ## Source structure and handling
 

@@ -96,7 +96,6 @@ for (const line of w02Text.split(/\r?\n/)) {
 }
 const sourcePathFor = (listing, image) => path.join(repo, ".product-ingestion", listing.batch, "inspection", listing.rawArchiveSha256.slice(0, 16), ...image.archivePath.replaceAll("\\", "/").split("/"));
 const sha256 = (file) => crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
-const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const tagsFor = (name) => name.toLowerCase().split(/[^a-z0-9]+/).filter((tag) => ["satin", "lace", "sheer", "tulle", "fingerless", "full", "short", "long", "bow", "beaded", "rhinestone", "glossy", "mesh", "fishnet", "feather", "floral", "opera", "formal", "costume"].includes(tag));
 const roleFor = (image, index, primaryHash) => image.sha256 === primaryHash ? "primary" : image.role === "description" ? "context" : index === 0 ? "detail" : "detail";
 const sourceRoleLabel = (roles) => roles.length ? roles.join(", ") : "other";

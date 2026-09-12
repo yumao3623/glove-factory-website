@@ -350,6 +350,33 @@ async function validateApproved() {
       }
     }
   }
+  const publicMediaRoot = join(root, "public", "products", "media");
+  const collectPublicWebp = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const target = join(directory, entry.name);
+    return entry.isDirectory() ? collectPublicWebp(target) : entry.isFile() && entry.name.endsWith(".webp") ? [target] : [];
+  });
+  const manifestPublicPaths = new Set<string>((manifest.productionAssets ?? []).flatMap((asset: { derivatives?: Array<{ path?: string }> }) =>
+    (asset.derivatives ?? []).flatMap((derivative) => derivative.path?.startsWith("/products/media/") ? [join(root, "public", derivative.path.slice(1))] : []),
+  ));
+  const publicFiles = new Set(collectPublicWebp(publicMediaRoot));
+  for (const file of publicFiles) if (!manifestPublicPaths.has(file)) errors.push(`${relativeToRoot(root, file)}: public product asset is not present in the production manifest.`);
+  for (const file of manifestPublicPaths) if (!publicFiles.has(file)) errors.push(`${relativeToRoot(root, file)}: production manifest path is absent from the public product directory.`);
+
+  const curationPath = join(root, "data", "ingestion", "w02-public-asset-curation.json");
+  if (!isRegularFile(curationPath)) errors.push("Missing the durable Post-W02 public asset curation ledger.");
+  else {
+    const curation = JSON.parse(readFileSync(curationPath, "utf8")) as { schema?: string; status?: string; selectedSourceHashesByProduct?: Record<string, string[]> };
+    if (curation.schema !== "w02-public-asset-curation/v1" || curation.status !== "HUMAN_REVIEW_ACCEPTED") errors.push("Post-W02 public asset curation ledger has an unexpected schema or review status.");
+    const selected = curation.selectedSourceHashesByProduct ?? {};
+    const sourceHashByDerivativeId = new Map<string, string>((manifest.productionAssets ?? []).flatMap((asset: { sourceHash?: string; derivatives?: Array<{ assetId?: string }> }) =>
+      (asset.derivatives ?? []).flatMap((derivative) => derivative.assetId && asset.sourceHash ? [[derivative.assetId, asset.sourceHash] as [string, string]] : []),
+    ));
+    for (const record of approvedRecords as Array<{ id?: string; images?: Array<{ assetId?: string; role?: string }> }>) {
+      if (!record.id) continue;
+      const recordHashes = (record.images ?? []).flatMap((image) => image.role !== "thumbnail" && image.assetId && sourceHashByDerivativeId.has(image.assetId) ? [sourceHashByDerivativeId.get(image.assetId)] : []);
+      if (JSON.stringify(recordHashes) !== JSON.stringify(selected[record.id] ?? [])) errors.push(`${record.id}: approved image order does not match the Post-W02 curation ledger.`);
+    }
+  }
   if (errors.length) throw new Error(`Approved product validation failed:\n${errors.map((error) => `- ${error}`).join("\n")}`);
   console.log(`Approved product validation passed for ${files.length} JSON file(s).`);
 }

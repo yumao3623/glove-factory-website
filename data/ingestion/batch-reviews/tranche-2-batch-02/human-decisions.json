@@ -8,7 +8,7 @@
     { "listingId": "732561509757", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
     { "listingId": "776820765686", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
     { "listingId": "728659873446", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
-    { "listingId": "732419024504", "acceptedFamily": "bridal-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
+    { "listingId": "732419024504", "acceptedFamily": "arm-sleeves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" },
     { "listingId": "741321749838", "acceptedFamily": "opera-gloves", "variationDecision": "ONE_NORMALIZED_DRAFT_VARIATION_DETAILS_PENDING" }
   ],
   "relationshipDecisions": [
@@ -23,7 +23,7 @@
   ],
   "reviewNotes": [
     "775921736857: visual review found no recognizable character, brand, or third-party IP element; the title phrase alone is not an IP exception.",
-    "732419024504: visual review confirms a fingerless/wrist-gauntlet glove with hand-back tulle and a middle-finger loop, rather than an apparel sleeve.",
+    "732419024504: taxonomy follow-up reclassifies the fingerless/wrist-gauntlet tulle style into the Arm Sleeves｜Occasion Accessories family for storefront discovery.",
     "775921736857: the approximately 29 cm current measurement and approximately 28 cm historical evidence are retained as a source measurement discrepancy, not a variation split."
   ]
 }

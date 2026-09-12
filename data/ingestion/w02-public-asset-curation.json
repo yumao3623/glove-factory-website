@@ -1,0 +1,256 @@
+{
+  "schema": "w02-public-asset-curation/v1",
+  "status": "HUMAN_REVIEW_ACCEPTED",
+  "checkpoint": "Post-W02 approved-data and product-preview integration handoff — visual asset remediation",
+  "reviewedOn": "2026-09-10",
+  "sourceBoundary": "The 36 W02-approved ProductRecords derived from 39 approved source listings; no W03 products are included.",
+  "selectionPolicy": "Product-forward images only; reject promotional posters, marketplace/store UI, price/specification panels, unsupported claims, third-party branding and unrelated packaging. Prefer clean studio or model views and limit each product to a concise gallery.",
+  "selectedSourceHashesByProduct": {
+    "opera-gloves-730186552239": [
+      "8e5473f4c02dd22ae9ff634772c89936e0b5e49c3f60b7b56b5f520568585c32",
+      "f614c1ef7becad8433c7234dbc7eba9a1daea1c0d6d9978e25d90d16730a7642",
+      "83118171d10ffa41770ae5424005b272c201c8ad361957284e30f27af5f855f1",
+      "8bd5c0be1d8edd8ca2379473476e18ea30ebe66c901a4714eef40682ab512aab"
+    ],
+    "kids-dress-gloves-satin-bow-001": [
+      "5f58e6e044d4d6d92583ce2ac4109a884f550a8abe1d1dfc39ef7fe8dc9e2f70",
+      "8352aaaedaf0afc9139ae34370f120414530788996293e3e395341e8fddcd96c",
+      "cf95540a9e47127560ee59d3f008bfe602733f5789f07d8271f26b26ed8fe0a1",
+      "4bc2e163cdb1e89e6af2a9c053550cb40aee9ac0d6f6bd31902aed98c3fdcf7c"
+    ],
+    "wedding-veils-black-lace-trim-001": [
+      "0cbc108c3d88502b71cbe4b454aa962869d1edfdeb1de2ac5fa2354e51ea4dfb",
+      "8256dd02868a6e5ce8df433911fbeafc317789a5fe4654237962f8511efb8cfb",
+      "53ffe69ae5cea83ea5116048c7b1b215673a50d6cd523b450660bf4ed892c386",
+      "c8042675e03c7ecd8c1cef069c997a3f8cc4bd9673a5a6e672595c921d7c2baa"
+    ],
+    "bridal-gloves-sheer-lace-long-001": [
+      "5e05f6cb309029730123e14bace92d47294a77b318a9ea9a9fd31305a91b2266",
+      "5a1e1a90a5bf5ee9ff96d6c2c8af94e2f50d50193db6b1535396f576399e4129",
+      "fa20cd3b77203e8dea5f39cde30581ba2e1f669c85e24804d5c7eff91e53f2d0",
+      "4abaae73fda2dd5a1f018d5530f41a248a1d88591c5f91f10f620e228a513cce"
+    ],
+    "kids-dress-gloves-728772172182": [
+      "a59be1f64ff0e5dcec90e1e56d82bb2267f4e4412396da96e4664cea8145a214",
+      "cb40045ddf02946c1517a8bda791f654ab10bd445b7171b1ba0cc3c8edee42c9",
+      "5b993176d8ee0da95ffc4f6a43e7e385b1d1198a802e242c3d979544b738c156",
+      "8f1c58879f780253e24191571807b5bc9de1f9aae1a58496947ff0282f8af3de"
+    ],
+    "bridal-gloves-728908046635": [
+      "59a8db8cf24aff7ce94539f806343bf62c0998b9486942d5348d158562f2de76",
+      "616462d52c82df86c71f36f8c4db9215962ed42e4e293e535b75726c385f135f",
+      "011466d4680f073f410c7b4bcef48a7ce99b84e057eeac3a2a59c9dd831450c1",
+      "d29ea500a6941f13e65cbec9e9d1e7da43513e9e74bade2507dd655830a93c57"
+    ],
+    "bridal-gloves-733063602867": [
+      "64d167450b03cf4d5e5ffde95c67abbe054405a7d1eed3b369692f0358419c2e",
+      "3d6cce56d56a8a7be5638ed8c4a6713c018f280d8982752bda368ea633b7ac54",
+      "5ebcc03efb42ad1e45c6cab8f25d010c113545e4f31a6ccc99938cb716b3379e",
+      "82462ad59e5f2283d19787a27541ff4968491551d72f00ad65e360c74f197a8b"
+    ],
+    "bridal-gloves-735814134529": [
+      "28bb5f99feb4b0b50d599d13e4bda919605e3b2756d8e10221b09d2fed3967b4",
+      "33042fdcf586b3ece6f81bda5fb91267fbb057f9c65d44f418105279b5d87531",
+      "bcb661e88f3c0d0863c696429e25f3f46561f853bf8bbc3c99ee699fdb6f10f7",
+      "94ce7e160c851c79d96b1040ca0fc711807f5e2ad7ffd32ebc431da71db01c46"
+    ],
+    "bridal-gloves-857043957533": [
+      "6771f72d7847ec3b42a1945e71155b82b94a1a1e6e6b1a7282a2f98058f676a6",
+      "125ad3e4cae8875009664d37be68a99359241db3e3d32aa1e27ddff77e6414f2",
+      "210b6d250e6b2c074113d61da03210218be4c79fc092abf43b82cacf78a12b9c",
+      "81fe18770d8fa1217f10528959e075ef8e7843624c3128795a6bf057ce01a9ef"
+    ],
+    "bridal-gloves-733010943271": [
+      "6273550406d3667d21233bb622645bb039c5a9b184ed8d7063dc489803fa7b5a",
+      "07955cace4dcc4f171d2d2fc7b9f3fe1aa4d6e7c1b182712f311d1adec2d81e4",
+      "7eebf0e98f9c7af6c81d7cb202f26875b4e93ea72c246e54d9c96b49a3e7c9e7",
+      "2f88bd12fcfcfbb0febd88bfa852b9bd93d556d1356b5b2a58b93c0369c36417"
+    ],
+    "bridal-gloves-819967426657": [
+      "2fe9020aedacdf1e23ac2ebf1638b0ebcc10c7fbefe54d3fa890780224f1acd9",
+      "01e528923daf18d8c78efc85175761e022a327d0a8ea8096233ccd573c63ecb0",
+      "ec7962191cd04d96c9c0425794d8e3b485d9ab567556edc755b61fe74357636a",
+      "4cd736e58a2501c5f5224e7e47620eca1e59bb0ce36dff78dc8a47a2f9580c2b"
+    ],
+    "opera-gloves-844530638864": [
+      "f614c1ef7becad8433c7234dbc7eba9a1daea1c0d6d9978e25d90d16730a7642",
+      "2840acc4ce83349870298242dfb58575ab6774acc42c9fef05959fd20eda476e",
+      "443ad0bbe9f0eadc3d37a75efa648d9a3e21bace8db0f2394db060233e9c9e0f",
+      "87fc26517d8db28a10d77037948676c0aa8d62b6abd41e547fa1178666526e4d"
+    ],
+    "opera-gloves-956309661690": [
+      "cc5277157f3e3fdc732212d1bfab7913f22469035ac4db7962f67717338cad24",
+      "edf04c9da581def83e0cbad10609d2f8b3f51d07334fe381e653db85561ed85d",
+      "2592187551ffdb30245b76a80cb1046cd65f49177a7f21289398154d2c7673d2",
+      "e775bd8d051cc5471be256adf810048402b0f2109b36b08d381bb7a3b9916c04"
+    ],
+    "costume-gloves-962080651234": [
+      "34e55a7197c580be1575d3f9667a94226ae3567919ce525690521ba45f804159",
+      "e8c8af5ff5efecea829dd14d3045ba3dfa389ed579fb1d63584f8bc4615448ca"
+    ],
+    "kids-dress-gloves-1002636896918": [
+      "b2a45ab02160f05195c15d249c6f39bcd45a7410901128f6bca75510ab0bdb95",
+      "1b1028c1b89da6cbaf0d2443540c52a73395a6714b7a2f528b65995d44b13195",
+      "be54e6567a2b2283c4a0a870b3dfd9bbb8e7f2ce7613c4986901922c7b67f07f",
+      "65d700dc35e92a9e0d82ba8e3489fed3027aaf9126433ee7a032cf117e6e083e"
+    ],
+    "costume-gloves-691557112631": [
+      "f69f0de4884a5544fa587e4f56a4d1155b8c57a18e68636c569268ababfd2846",
+      "2232f0dd24ff98bef093732b27fefe570a321ae980ad2632e4df9eb8ff193316"
+    ],
+    "opera-gloves-729142545579": [
+      "0e59fb287ad9f2956be71ffc95b9843ef26549af3545feb87665d18bc9cff31d",
+      "e8c8906212e73b4a6b8dc6d23785cddfcab0264e62a2593b05551b77f4b76689",
+      "25c9efb6036f9d831b9eed9379d3e4938dbb38f509a2457ef2814b5a41294e34",
+      "5bceb4f5b98dbac92b58b27218a9831b53e466105425ff8ea57ed6fda8925714"
+    ],
+    "opera-gloves-730371444820": [
+      "9d1684abb07e1a55efeb1b629e8f1095f7ca41f5ee763e1823a6cbeb272db738",
+      "a2d6d18be1f844df870f29ebd357911dc263d70cf9e1343ee6933becc4bd8d48",
+      "50eef4e3e2dcd6059693a72f8025c9545c7de4e56076abc5fd7cacdc2bbcb3cf",
+      "bcba1568d3c1104c246432158078b000ef1bb01af98e1037c706ba3fdfe1bae9"
+    ],
+    "opera-gloves-satin-short-001": [
+      "812ae161055513dcfb76213e57cdd29e6db7a47a6792119fce333fdbc880ad0c",
+      "1d207e4a46f46efbd5b3d84ba025a13f2b97d7b0de0499d1758b38e8c8640afb",
+      "da87ba0813edbe0879802110771c818176a93b2f0bf188bf817e99f7a38d24b3",
+      "43929d3a6ec0e0bda990fb4c1799d7def576bbf92c92c062b21110a4f5eacb82"
+    ],
+    "costume-gloves-732732478288": [
+      "a46cb466d74d8d3461e77fe1b794f6b9f44efe3f4341c067a16a7ccee04b4243",
+      "d365a401ac7c131ad3e3215ae7aa5b6a104f0969dff74222339ccef3fdd996da",
+      "0496ff8992bd4b9a71c8d8ca4a8a9b50fd4902efa923e389908bd4389c636eb0",
+      "1b035d23d5c2081c42785418418bcf7d8807ace2f78d3fb943112a146fc3cf18"
+    ],
+    "bridal-gloves-761321664860": [
+      "920fbe2019820ac33e04e9c83ddc1dac5431271fd158385a1bcfd05f3fd07b1a",
+      "b212b8939ac33fc657b87ef38d7fc973a2bd28449fbf9281c9dbf8be951343ca",
+      "900b2bc8330d24cebddcac078f8203d0f2074bb30684c76a0a3c4d787bf6dfac",
+      "59bfcda15425e4aba12d5f83fc612d9a97655aab52a5807606f66aa40d3992e5"
+    ],
+    "bridal-gloves-950693682364": [
+      "394bd6e2b2630f88a4e3bdd5ecc784caaed256d63be0d40f92af0ac290f16810",
+      "31089a77fecc29541ff1029273204b7dfadc2ae24ce2ccd2ab21c419889ee791",
+      "ddc72bf3b49885c89c32f90442f63afb8fce0149897f4f9b7af2a4fcbcf00fde",
+      "0bb46ca96918cf3ba2c563c32e0fdb24a645207e6e4ba7b721ddbd9a57b5cbfe"
+    ],
+    "opera-gloves-728194389811": [
+      "631b0e455a4365deb872d16c3c29aae337a01e49d88292f9571f0a79e42abb2c",
+      "6fdb78d0162aa786537e28955751cfa43469e89a41d41c14c7cdd37e09ff0f42",
+      "24c50bc4e0a64c01666e6205e50cafca61138cd8fc132ef06335a4f50c6aef1d",
+      "fedacf16c845ce8c960235e2f6df0f1361811bb1936ed264d179db071a9cde56"
+    ],
+    "opera-gloves-728592614367": [
+      "a08e3ec734a5d3683a8b5fc27f08e1d79119a44bfdf2f3d857cd182c91e50534",
+      "f7908efbfe46232c0a0b50430e1fd0a32dbd2e638292ea2881d892deb8a891af",
+      "171bba348c18a54ffb06a8a8909f511783327a0e705ace4dada74ee5009584f6",
+      "66fedae6968dc053d530d7f77ca4121ce032376ff7f3293ba74bc8af93bbd2ef"
+    ],
+    "opera-gloves-728659873446": [
+      "785e4e9c533df783f7c53c2d511d98137a5b8ce99c9f21aa947f8a43f6d79cc4",
+      "90bda5a1f7842efeaf7fcd9ceef51ca76f7b10a0ce43a60015dff288a98230da",
+      "27dc7839a4afd00855f83492c3cb4c2eb6f065676cb61bccc174d79db67f4f9d",
+      "0574e7b633bc216e3dac404799c7a97a1726df695291c6af2c274d07f80351fb"
+    ],
+    "bridal-gloves-732419024504": [
+      "7c4a1f8e199245c6a18b0160a41e6ef3b41363486e80dbea7cf2595000e9a47d",
+      "17b4da257a5257b9e9867dbeb6ff156f249eb19a9302a37a4018433ef18c1ad5",
+      "ca49e2f7e401cb6649eba3a270681728d16aa1e08e9af40a48dfc04bf9554dce",
+      "87ae56173fb289060f569382841c4537da69ad3d3542a58e0699991ad43298c9"
+    ],
+    "bridal-gloves-732561509757": [
+      "c832d4d0aa976c49cb45ab633119613b7b7c49ac25a41579165239f13f938932",
+      "647541ccf55f76cb05eaa2460cfbcc808ef8f9cdfa5b97114c606147eb28a3a2",
+      "040e5ba59edcb5995dc4929cfdc4cf51454804e783d9dd9ee33db0e9d6ae9b55",
+      "9965e6c1ebfa3b3be9bfdb177ba8724b9b6dab1ced2ced405594f84b3b636a42"
+    ],
+    "opera-gloves-741321749838": [
+      "222cd56273214633b97d07809f02e3d80f61a20b3175d6cae984185a19131665",
+      "177d7b487a1fb42cd54a07f73bd84b92f9a1b1799000ae3b68bbbc271e757d05",
+      "6a6b2b8cbc91281a4fb6071ebec11284135711b8c9c1f357646c522e00aa9022"
+    ],
+    "bridal-gloves-776820765686": [
+      "fe75cba79a88022361d266b2bf7b122ce502059991795234116d60b6e9ea6eb2",
+      "fe2f6992fdba4718ae240b7dd5443592fbfdba0299b4af99601ef5013c1671ab",
+      "74d32022cdc7dec4ca56fcda6861b75bf7d413a308683e7deba9811ba2472df3",
+      "caff064e5d6d2912e8bcc12dc98d78ac6e89205629c2cd7786664007c11838f9"
+    ],
+    "bridal-gloves-728600712961": [
+      "7053997bff7c47bfac006e52c035d85de1d2e0233a807ef0974ebfe4c69c6004",
+      "592060bee85f8637a52273b2bf30ca100c3e970edabd99fb52d82de4a32b0417",
+      "190fa625b5fe887ed36cc0285a746c2d427ec7cc602dfd39c9436d3521633c0e",
+      "03dee9907f47c10533d16ae38dbc73ffc54c7e0ace2eb14fc53ca1dfcc90ec2e"
+    ],
+    "opera-gloves-732867076935": [
+      "bffbef509f2993969dea18b290b670d96ad09b805fe65637b1ae83c425001adb",
+      "fc89fec9b7fee724d279fb1263c107e53d771998f976da1a16db44b9cf135b03",
+      "7b071be78d7c75cab82cfd86b9a582cac8b0c1e8e5179c4a823a5038224b5206",
+      "a7013597034a705b40e84ea8d818491a0808710d4ed3dfe74afb35427b52e6b0"
+    ],
+    "bridal-gloves-733406564887": [
+      "375bb40c303bb95f500ddf48643d79e27bc55badb4c9f75e67b555a97f3836f1",
+      "8751ce9e310462ab1a60d0a462cc2ca92efbafdab381ef701af9f045ec0b13e1",
+      "41e46ddb204809ddf632d0ad0c38b1f66a7832ba47e9490bb4d89e9d93075428",
+      "986d9b79ac0bdb8fd31827be3a967374b25c007cc58db947ed1186398c967347"
+    ],
+    "opera-gloves-741154552428": [
+      "e48e773c5b92a2f4999e148abb83a8757316bb27a61ac799dc9ce24457813a0e",
+      "e89ed2a29e1604c6c8692cdacc823641aefae92e7ac6c2d4b547e3c11026c75a",
+      "47ccbc857483db23f43a58b35a0f80f0683c9cf9c9d9b3d6c9d0b97eb2714f0c",
+      "f8998b9bee0a9719e2fe0495574cc1de1ec71828a158b5727a38ade536889ad0"
+    ],
+    "kids-dress-gloves-788133828087": [
+      "ab4754e0f620238f3d0ce9ba1e84ef4958bf7bb068ec9a509f115f0eca994b0f",
+      "ffb387a2cf3b2c349aa79b21051158047076b0d2344742738aa1d88271757c3d",
+      "961793dfd74c2461d6f7a14370583f4a4ec2716b5419022ea254519d5bc39a71",
+      "40fe95c83d033f4a9036aac9ebff1307673af2da11cd84998664bf56f2f85a4e"
+    ],
+    "costume-gloves-819969614484": [
+      "f574058f6724755ae60fb6a2c49fe15421ec853788ef16866f516c53849774d2",
+      "e531cc2be890e6232311575831262a5eb6c9bc2c6510f29ba95ba11838f5a574",
+      "c95dd646ae5a89bb92590adf1de4654f6b9413b80e4799c361be67fd3afac13f",
+      "8043c40759953f678f091809046e105f50fc06aed7ba6ab8be6687b3a92b6e12"
+    ],
+    "bridal-gloves-977246337453": [
+      "7fa03027f6e8cf934b069b35d1a7427d33e279546962dce0391bc3d309ef3d8d",
+      "8245be7555ac084da6e6be935d4bbabb38e244e896a45d67d8f1162ac7ea3780"
+    ]
+  },
+  "safeEdgeCrops": [
+    {
+      "productId": "costume-gloves-962080651234",
+      "sourceHash": "34e55a7197c580be1575d3f9667a94226ae3567919ce525690521ba45f804159",
+      "derivativePath": "/products/media/costume-gloves-962080651234/34e55a7197c580be1575d3f9667a94226ae3567919ce525690521ba45f804159-crop-v1.webp"
+    },
+    {
+      "productId": "costume-gloves-962080651234",
+      "sourceHash": "e8c8af5ff5efecea829dd14d3045ba3dfa389ed579fb1d63584f8bc4615448ca",
+      "derivativePath": "/products/media/costume-gloves-962080651234/e8c8af5ff5efecea829dd14d3045ba3dfa389ed579fb1d63584f8bc4615448ca-crop-v1.webp"
+    },
+    {
+      "productId": "bridal-gloves-950693682364",
+      "sourceHash": "394bd6e2b2630f88a4e3bdd5ecc784caaed256d63be0d40f92af0ac290f16810",
+      "derivativePath": "/products/media/bridal-gloves-950693682364/394bd6e2b2630f88a4e3bdd5ecc784caaed256d63be0d40f92af0ac290f16810-crop-v1.webp"
+    },
+    {
+      "productId": "bridal-gloves-950693682364",
+      "sourceHash": "ddc72bf3b49885c89c32f90442f63afb8fce0149897f4f9b7af2a4fcbcf00fde",
+      "derivativePath": "/products/media/bridal-gloves-950693682364/ddc72bf3b49885c89c32f90442f63afb8fce0149897f4f9b7af2a4fcbcf00fde-crop-v1.webp"
+    },
+    {
+      "productId": "bridal-gloves-950693682364",
+      "sourceHash": "0bb46ca96918cf3ba2c563c32e0fdb24a645207e6e4ba7b721ddbd9a57b5cbfe",
+      "derivativePath": "/products/media/bridal-gloves-950693682364/0bb46ca96918cf3ba2c563c32e0fdb24a645207e6e4ba7b721ddbd9a57b5cbfe-crop-v1.webp"
+    }
+  ],
+  "sourceInventoryBaseline": {
+    "manifestCommit": "a2a92128cb3e201de2d9ce6e188569ee456d1a05",
+    "productionAssetCount": 601,
+    "galleryDerivativeCount": 565,
+    "thumbnailDerivativeCount": 36,
+    "uniqueSourceHashCount": 561,
+    "originalFilesPresent": 601,
+    "originalHashMismatchCount": 0,
+    "preservationBoundary": "All baseline originals remain in the Git-ignored .product-ingestion workspace; only the curated production derivatives remain public."
+  }
+}

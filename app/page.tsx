@@ -1,11 +1,9 @@
 import { ArrowRightIcon } from "lucide-react";
-import { approvedProductImage } from "@/components/product/approved-product-image";
 import { EditorialFamilyDiscovery } from "@/components/marketing/editorial-family-discovery";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { RfqForm } from "@/components/marketing/rfq-form";
 import { Button } from "@/components/ui/button";
-import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
-import { w11EditorialMedia } from "@/data/w11-media";
+import { generatedEditorialMedia } from "@/data/generated-editorial-media";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata(
@@ -13,11 +11,6 @@ export const metadata = pageMetadata(
   "A focused B2B range of occasion gloves and wedding veils for sourcing conversations.",
   "/",
 );
-
-const bridal = getApprovedCatalogueByFamily("bridal-gloves")[0];
-const veils = getApprovedCatalogueByFamily("wedding-veils")[0];
-const bridalBlackLace = bridal.collectionImages.find((image) => image.role === "detail") ?? bridal.primaryImage;
-const veilDetail = veils.collectionImages.find((image) => image.role === "detail") ?? veils.primaryImage;
 
 export default function HomePage() {
   return (
@@ -34,55 +27,38 @@ export default function HomePage() {
 
 function RefinedHero() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#151512] text-white">
-      <EditorialImage
-        src={w11EditorialMedia.satinFolds.src}
-        alt=""
-        className="pointer-events-none absolute -right-[22%] -top-[25%] h-[135%] w-[75%] opacity-20"
-        imageClassName="object-cover blur-[2px]"
-        priority
-        sizes="75vw"
-      />
-      <div className="relative mx-auto grid max-w-[1440px] gap-3 px-5 py-4 sm:gap-5 sm:px-8 sm:py-6 lg:grid-cols-[minmax(0,0.94fr)_minmax(19rem,0.7fr)_minmax(11rem,0.32fr)] lg:items-end lg:gap-5 lg:px-10 lg:py-10">
-        <div className="order-1 flex flex-col justify-end pb-3 pt-0 sm:pb-4 sm:pt-3 lg:min-h-[40rem] lg:pb-12 lg:pt-0">
-          <h1 className="max-w-[9ch] font-serif text-[clamp(3.2rem,6.2vw,6.25rem)] leading-[0.84] text-balance">
-            Occasion Gloves &amp; Wedding Veils Manufacturer
-          </h1>
-          <p className="mt-7 max-w-md text-[1.05rem] leading-7 text-stone-300">
-            A focused range for buyers building bridal, formal and occasionwear programmes.
-          </p>
-          <Button asChild size="lg" className="mt-8 min-h-11 w-fit rounded-none bg-white px-6 text-black hover:bg-stone-200">
-            <a href="#families">Explore the range <ArrowRightIcon data-icon="inline-end" /></a>
-          </Button>
+    <section className="relative isolate overflow-hidden bg-[#e7e9e8] text-[#111416]">
+      <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.84fr_1.16fr]">
+        <div className="order-2 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:min-h-[39rem] lg:px-12 lg:py-14">
+          <div>
+            <p className="section-label text-[#274c68]">JS Meilai｜Sourcing studio</p>
+            <h1 className="mt-8 max-w-[10ch] font-serif text-[clamp(3.4rem,6vw,6.6rem)] leading-[0.88] tracking-[-0.045em] text-balance">
+              Made for the moment.
+            </h1>
+            <p className="mt-8 max-w-md text-[1.05rem] leading-7 text-[#3e464b]">
+              A considered glove and veil range for bridal, formalwear and occasionwear buyers.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <Button asChild size="lg" className="min-h-12 rounded-none bg-[#111416] px-6 text-white hover:bg-[#274c68]">
+              <a href="#families">Explore the range <ArrowRightIcon data-icon="inline-end" /></a>
+            </Button>
+            <span className="max-w-[14rem] text-xs leading-5 text-[#5c676d]">Small-batch development, clear material decisions, export-ready conversations.</span>
+          </div>
         </div>
-        <div className="relative order-2 grid grid-cols-[1fr_0.48fr] items-end gap-3 lg:grid-cols-1">
+        <div className="relative order-1 min-h-[22rem] lg:order-2 lg:min-h-[39rem]">
           <EditorialImage
             priority
-            src={w11EditorialMedia.veilPortrait.src}
-            alt={w11EditorialMedia.veilPortrait.alt}
-            className="aspect-[4/5] md:aspect-[5/4] lg:aspect-[4/5]"
+            src={generatedEditorialMedia.hero.src}
+            alt={generatedEditorialMedia.hero.alt}
+            className="absolute inset-0 h-full w-full"
             imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 31vw, (min-width: 640px) 62vw, 62vw"
+            sizes="(min-width: 1024px) 58vw, 100vw"
           />
-          <EditorialImage
-            src={w11EditorialMedia.laceShadow.src}
-            alt=""
-            className="aspect-[3/4] self-end lg:absolute lg:-bottom-10 lg:-right-16 lg:w-[56%] lg:shadow-[0_18px_34px_rgba(0,0,0,0.3)]"
-            imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 18vw, 30vw"
-          />
-        </div>
-        <div className="order-3 hidden lg:z-10 lg:block lg:self-start lg:pt-14">
-          <EditorialImage
-            src={w11EditorialMedia.blackGloveSatin.src}
-            alt={w11EditorialMedia.blackGloveSatin.alt}
-            className="ml-auto aspect-[3/4] w-full max-w-[14rem]"
-            imageClassName="object-cover object-center"
-            sizes="14rem"
-          />
-          <p className="mt-4 max-w-[14rem] border-t border-white/35 pt-3 text-xs leading-5 text-stone-300">
-            Product images and editorial material are kept distinct throughout this preview.
-          </p>
+          <div className="absolute bottom-5 left-5 border-l border-white/70 pl-3 text-[0.65rem] uppercase tracking-[0.14em] text-white sm:bottom-8 sm:left-8">
+            <span className="block">Hand-finished</span>
+            <span className="mt-1 block text-white/70">For global buyers</span>
+          </div>
         </div>
       </div>
     </section>
@@ -91,50 +67,36 @@ function RefinedHero() {
 
 function MaterialMoment() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#eeece6]">
-      <EditorialImage
-        src={w11EditorialMedia.veilSculpture.src}
-        alt=""
-        className="pointer-events-none absolute -left-[18%] -top-[30%] h-[160%] w-[44%] opacity-45"
-        imageClassName="object-cover object-center"
-        sizes="44vw"
-      />
-      <div className="relative mx-auto grid max-w-[1380px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.68fr_1.32fr] lg:items-center lg:px-10 lg:py-16">
+    <section className="relative isolate overflow-hidden border-y border-[#c9ced0] bg-[#f4f5f4]">
+      <div className="relative mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[0.68fr_1.32fr] lg:items-center lg:px-10 lg:py-20">
         <div className="max-w-md">
-          <p className="section-label">Product detail</p>
-          <h2 className="mt-3 font-serif text-4xl leading-[0.98] sm:text-5xl">Details buyers compare.</h2>
-          <p className="mt-5 leading-7 text-stone-700">
-            Use the range to identify a direction before material, dimensions and availability are confirmed.
+          <p className="section-label text-[#274c68]">Material｜Finish｜Hand</p>
+          <h2 className="mt-4 font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">The decision is in the detail.</h2>
+          <p className="mt-6 leading-7 text-[#4c5559]">
+            Compare surface, structure and finish before a sampling conversation. Every enquiry starts with a real product direction.
           </p>
         </div>
-        <div className="grid min-h-[19rem] grid-cols-12 grid-rows-[0.9fr_1.1fr] gap-3 sm:min-h-[23rem] lg:min-h-[20rem]">
+        <div className="grid min-h-[20rem] grid-cols-12 grid-rows-[1.1fr_0.9fr] gap-3 sm:min-h-[26rem]">
           <EditorialImage
-            src={approvedProductImage(bridalBlackLace)}
-            alt={bridalBlackLace.altText}
-            className="col-span-4 row-span-2"
+            src={generatedEditorialMedia.materialReview.src}
+            alt={generatedEditorialMedia.materialReview.alt}
+            className="col-span-7 row-span-2"
             imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 19vw, 36vw"
+            sizes="(min-width: 1024px) 42vw, 58vw"
           />
           <EditorialImage
-            src={w11EditorialMedia.pearlGloveDetail.src}
-            alt={w11EditorialMedia.pearlGloveDetail.alt}
-            className="col-span-3"
+            src={generatedEditorialMedia.materialDetail.src}
+            alt={generatedEditorialMedia.materialDetail.alt}
+            className="col-span-5"
             imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 14vw, 28vw"
+            sizes="(min-width: 1024px) 30vw, 42vw"
           />
           <EditorialImage
-            src={w11EditorialMedia.satinDetail.src}
-            alt=""
-            className="col-span-5 row-span-2"
+            src={generatedEditorialMedia.gloveDetail.src}
+            alt={generatedEditorialMedia.gloveDetail.alt}
+            className="col-span-5"
             imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 24vw, 42vw"
-          />
-          <EditorialImage
-            src={approvedProductImage(veilDetail)}
-            alt={veilDetail.altText}
-            className="col-span-3"
-            imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 14vw, 28vw"
+            sizes="(min-width: 1024px) 30vw, 42vw"
           />
         </div>
       </div>
@@ -144,24 +106,24 @@ function MaterialMoment() {
 
 function FactoryBridge() {
   return (
-    <section className="relative overflow-hidden border-y border-stone-300 bg-[#171714] text-white">
+    <section className="relative overflow-hidden border-y border-[#243746] bg-[#1c2b35] text-white">
       <EditorialImage
-        src={w11EditorialMedia.satinBows.src}
-        alt=""
-        className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-20 sm:w-[58%]"
-        imageClassName="object-cover object-center"
-        sizes="58vw"
+        src={generatedEditorialMedia.craft.src}
+        alt={generatedEditorialMedia.craft.alt}
+        className="absolute inset-y-0 right-0 hidden w-[54%] sm:block"
+        imageClassName="object-cover object-center opacity-75"
+        sizes="54vw"
       />
-      <div className="relative mx-auto flex max-w-[1380px] flex-col justify-between gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-end lg:px-10 lg:py-16">
+      <div className="relative mx-auto flex max-w-[1380px] flex-col justify-between gap-8 px-5 py-14 sm:px-8 md:min-h-[28rem] md:flex-row md:items-end lg:px-10 lg:py-20">
         <div>
-          <p className="section-label text-stone-400">Factory</p>
-          <h2 className="mt-3 max-w-[12ch] font-serif text-4xl leading-[0.98] sm:text-5xl">Bring the factory conversation into the brief.</h2>
+          <p className="section-label text-[#a8c2d3]">Atelier｜Production</p>
+          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Craft you can specify.</h2>
         </div>
         <div className="max-w-sm md:pb-1">
-          <p className="leading-7 text-stone-300">
-            Start with the range, then bring process questions and product requirements into the sourcing conversation.
+          <p className="leading-7 text-[#d2dde4]">
+            Bring construction, trim and volume questions into one clear sourcing brief.
           </p>
-          <Button asChild variant="outline" size="lg" className="mt-7 min-h-11 rounded-none border-white bg-transparent px-5 text-white hover:bg-white hover:text-black">
+          <Button asChild variant="outline" size="lg" className="mt-7 min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]">
             <a href="#rfq">Discuss factory capability <ArrowRightIcon data-icon="inline-end" /></a>
           </Button>
         </div>
@@ -172,41 +134,26 @@ function FactoryBridge() {
 
 function CustomBridge() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#f8f6f2]">
+    <section className="relative isolate overflow-hidden bg-[#1f2d35] text-white">
       <EditorialImage
-        src={w11EditorialMedia.veilBow.src}
-        alt=""
-        className="pointer-events-none absolute -right-[8%] -top-[12%] h-[125%] w-[42%] opacity-45"
-        imageClassName="object-cover object-center"
-        sizes="42vw"
+        src={generatedEditorialMedia.customManufacturing.src}
+        alt={generatedEditorialMedia.customManufacturing.alt}
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        imageClassName="object-cover object-center opacity-45"
+        sizes="100vw"
       />
-      <div className="relative mx-auto grid max-w-[1380px] gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_0.82fr] lg:items-center lg:px-10 lg:py-20">
+      <div className="relative mx-auto grid max-w-[1380px] gap-8 px-5 py-16 sm:px-8 lg:min-h-[34rem] lg:grid-cols-[1fr_0.82fr] lg:items-center lg:px-10 lg:py-20">
         <div>
-          <p className="section-label">Custom manufacturing</p>
-          <h2 className="mt-3 max-w-[11ch] font-serif text-4xl leading-[0.98] sm:text-5xl">Bring a direction into the discussion.</h2>
-          <p className="mt-5 max-w-md leading-7 text-stone-700">
+          <p className="section-label text-[#c6d8e1]">Custom manufacturing</p>
+          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Bring a direction into the discussion.</h2>
+          <p className="mt-5 max-w-md leading-7 text-[#e0e8ec]">
             This preview introduces the range. Requirements can be discussed separately for a product and project.
           </p>
-          <Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-black bg-transparent px-5">
+          <Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]">
             <a href="#rfq">View preview status <ArrowRightIcon data-icon="inline-end" /></a>
           </Button>
         </div>
-        <div className="grid grid-cols-[0.72fr_1fr] items-end gap-3 sm:max-w-[42rem] lg:justify-self-end">
-          <EditorialImage
-            src={w11EditorialMedia.whiteGloveRibbons.src}
-            alt={w11EditorialMedia.whiteGloveRibbons.alt}
-            className="aspect-[3/4]"
-            imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 18vw, 34vw"
-          />
-          <EditorialImage
-            src={w11EditorialMedia.longGloveModel.src}
-            alt={w11EditorialMedia.longGloveModel.alt}
-            className="mb-7 aspect-[4/5]"
-            imageClassName="object-cover object-center"
-            sizes="(min-width: 1024px) 25vw, 48vw"
-          />
-        </div>
+        <div aria-hidden="true" />
       </div>
     </section>
   );

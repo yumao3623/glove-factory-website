@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
 import type { AssetReference, FactStatus, ProductFamily, ProductRecord } from "@/types/product";
 
-export const productFamilies = ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"] as const satisfies readonly ProductFamily[];
+export const productFamilies = ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils", "arm-sleeves"] as const satisfies readonly ProductFamily[];
 export const supportedImageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 export const supportedMetadataExtensions = new Set([".json", ".txt", ".html", ".htm", ".csv", ".pdf"]);
 

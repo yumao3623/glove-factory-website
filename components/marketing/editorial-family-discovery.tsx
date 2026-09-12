@@ -1,12 +1,10 @@
 import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
-import { approvedProductImage } from "@/components/product/approved-product-image";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
+import { generatedFamilyMedia } from "@/data/generated-family-media";
 import { families, type FamilyEntry } from "@/data/families";
-import { w05HomepageFamilyVisuals } from "@/data/w05-homepage-visuals";
-import { w11EditorialMedia } from "@/data/w11-media";
 
 type FamilyVisual = {
   family: FamilyEntry;
@@ -15,62 +13,31 @@ type FamilyVisual = {
   productId: string;
 };
 
-const familyVisuals: readonly FamilyVisual[] = families.map((family) => {
-  const selected = w05HomepageFamilyVisuals[family.slug];
+const familyVisuals: readonly FamilyVisual[] = families.map((family) => ({
+  family,
+  image: generatedFamilyMedia[family.slug].src,
+  alt: generatedFamilyMedia[family.slug].alt,
+  productId: getApprovedCatalogueByFamily(family.slug)[0]?.id ?? `family-${family.slug}`,
+}));
 
-  if (family.slug === "costume-gloves") {
-    const costumeVisual = w05HomepageFamilyVisuals["costume-gloves"];
-    return {
-      family,
-      image: costumeVisual.image,
-      alt: costumeVisual.alt,
-      productId: costumeVisual.productId,
-    };
-  }
-
-  const product = getApprovedCatalogueByFamily(family.slug)[0];
-  if (!product) throw new Error(`Missing approved homepage visual for ${family.slug}.`);
-
-  return {
-    family,
-    image: approvedProductImage(product.primaryImage),
-    alt: product.primaryImage.altText,
-    productId: selected.productId,
-  };
-});
-
-const cardOffsets = ["lg:pt-0", "lg:pt-10", "lg:pt-4", "lg:pt-14", "lg:pt-7"] as const;
+const cardOffsets = ["lg:pt-0", "lg:pt-10", "lg:pt-4", "lg:pt-14", "lg:pt-7", "lg:pt-2"] as const;
 
 export function EditorialFamilyDiscovery() {
   return (
-    <section id="families" className="relative isolate overflow-hidden bg-[#f8f6f2]">
-      <EditorialImage
-        src={w11EditorialMedia.laceShadow.src}
-        alt=""
-        className="pointer-events-none absolute -right-[12%] top-0 hidden h-full w-[44%] opacity-35 lg:block"
-        imageClassName="object-cover object-left"
-        sizes="44vw"
-      />
-      <EditorialImage
-        src={w11EditorialMedia.sheerSparkle.src}
-        alt=""
-        className="pointer-events-none absolute -left-[14%] bottom-0 h-[42%] w-[48%] opacity-20"
-        imageClassName="object-cover object-top"
-        sizes="48vw"
-      />
+    <section id="families" className="relative isolate overflow-hidden border-b border-[#c9ced0] bg-[#f5f6f5]">
       <div className="relative mx-auto max-w-[1380px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="section-label text-stone-600">Explore the range</p>
             <h2 className="mt-3 max-w-[13ch] font-serif text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
-              Five directions for an occasionwear range.
+              Six directions for an occasionwear range.
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-stone-700">
             Start with a family, then bring materials, measurements and timing into the sourcing conversation.
           </p>
         </div>
-        <div className="relative mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-12 lg:mt-16 lg:grid-cols-5 lg:items-start lg:gap-x-5 lg:pb-8">
+        <div className="relative mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-12 lg:mt-16 lg:grid-cols-6 lg:items-start lg:gap-x-5 lg:pb-8">
           {familyVisuals.map((visual, index) => (
             <FamilyLink key={visual.family.slug} visual={visual} offset={cardOffsets[index]} />
           ))}

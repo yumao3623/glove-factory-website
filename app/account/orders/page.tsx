@@ -1,0 +1,3 @@
+import Link from "next/link";
+export const metadata = { title: "我的订单 | JS Meilai", description: "订单与询价状态。" };
+export default function OrdersPage() { return <main id="main-content" className="mx-auto min-h-[60vh] max-w-[900px] px-5 py-16 sm:px-8 lg:py-24"><p className="section-label text-stone-500">账户｜订单</p><h1 className="mt-3 font-serif text-5xl text-[#0d2b3f]">订单与询价</h1><p className="mt-5 max-w-xl leading-7 text-stone-700">认证服务接入后，这里会显示订单、样品和询价状态。当前预览不会伪造订单数据。</p><Link href="/products/" className="mt-8 inline-flex min-h-11 items-center bg-[#0d2b3f] px-5 text-sm font-medium text-white">浏览产品</Link></main>; }

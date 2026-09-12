@@ -1,8 +1,10 @@
-import { EditorialFamilyDiscovery } from "@/components/marketing/editorial-family-discovery";
+import { CatalogBrowser } from "@/components/product/catalog-browser";
+import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata("Products", "A B2B navigation hub for five approved occasion glove and bridal veil families.", "/products/");
+export const metadata = pageMetadata("全部产品", "按产品类别、材料、长度、指型和颜色筛选 JS Meilai 的 B2B 手套与婚礼配饰目录。", "/products/");
 
 export default function ProductsPage() {
-  return <main id="main-content" tabIndex={-1} className="overflow-hidden"><section className="bg-black text-white"><div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><p className="section-label text-stone-400">Product families</p><h1 className="mt-3 max-w-3xl font-serif text-[clamp(3rem,5.6vw,5.6rem)] leading-[.94]">Find the right family before discussing a product direction.</h1><p className="mt-6 max-w-xl leading-7 text-stone-300">Explore five approved bridal, formal, costume, girls&apos; dress and veil ranges.</p></div></section><EditorialFamilyDiscovery /></main>;
+  const products = ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils", "arm-sleeves"].flatMap((family) => getApprovedCatalogueByFamily(family as never));
+  return <main id="main-content" tabIndex={-1}><CatalogBrowser products={products} /></main>;
 }

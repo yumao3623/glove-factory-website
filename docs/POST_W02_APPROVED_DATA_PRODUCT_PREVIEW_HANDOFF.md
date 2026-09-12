@@ -1,6 +1,6 @@
 # Post-W02 Approved-Data and Product-Preview Integration Handoff
 
-Status: `IN_PROGRESS; ARCHITECTURE_CONTINUED_IN_NEXTJS`
+Status: `COMPLETE; HUMAN_REVIEW_ACCEPTED`
 
 Bounded checkpoint: `Post-W02 approved-data and product-preview integration handoff`
 
@@ -8,7 +8,7 @@ This record implements the concrete successor defined in `docs/V1_POST_PREVIEW_E
 
 ## Current boundary
 
-On 2026-09-08 Human Review resumed this repository's existing Next.js/Vercel implementation after evaluating a separate WordPress experiment. WordPress remains an optional reference for later page structure and SEO patterns; it is not an implementation dependency or a replacement project. This handoff continues in the current repository and still requires the complete 36-product evidence set before its Human Gate.
+On 2026-09-08 Human Review resumed this repository's existing Next.js/Vercel implementation after evaluating a separate WordPress experiment. WordPress remains an optional reference for later page structure and SEO patterns; it is not an implementation dependency or a replacement project. On 2026-09-10 Human Review accepted the complete 36-product evidence set and closed this bounded handoff.
 
 ## Evidence
 
@@ -36,4 +36,4 @@ The remaining authorized-store 1688 intake is the separate W03 `Next Ingestion T
 
 ## Human gate
 
-Human Review is required for this handoff before W08 freezes route/content and before W04 consumes the contract for live RFQ integration. Until acceptance, the detail previews remain internal stakeholder-preview surfaces and RFQ delivery remains disabled.
+Human Review accepted this handoff on 2026-09-10. The detail previews remain internal stakeholder-preview surfaces and RFQ delivery remains disabled; W08 still owns route/indexability freeze and W04 still owns live RFQ integration.

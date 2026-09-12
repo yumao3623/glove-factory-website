@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -64,7 +64,7 @@ test("records the completed tranche-2 batch-02 Human Gate without publishing cat
     "732561509757": "bridal-gloves",
     "776820765686": "bridal-gloves",
     "728659873446": "opera-gloves",
-    "732419024504": "bridal-gloves",
+    "732419024504": "arm-sleeves",
     "741321749838": "opera-gloves",
   });
   assert.deepEqual(registry.entries.filter((entry) => entry.normalizedProductGroupId === "kids-dress-gloves-group-737751870967").map((entry) => entry.listingId).sort(), ["737751870967", "775921736857", "814984964565"]);
@@ -284,11 +284,15 @@ test("initial public tranche keeps all 36 W02-approved records in a registry and
   const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8"));
   const registry = JSON.parse(readFileSync(resolve(root, "data/ingestion/listing-registry.json"), "utf8"));
   const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8"));
+  const curation = JSON.parse(readFileSync(resolve(root, "data/ingestion/w02-public-asset-curation.json"), "utf8"));
   const fingerprints = readFileSync(resolve(root, "data/ingestion/listing-relationship-fingerprints.json"), "utf8");
   assert.equal(records.length, 36);
   assert.equal(new Set(records.map((record: { id: string }) => record.id)).size, 36);
-  assert.deepEqual(new Set(records.map((record: { productFamily: string }) => record.productFamily)), new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"]));
+  assert.deepEqual(new Set(records.map((record: { productFamily: string }) => record.productFamily)), new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils", "arm-sleeves"]));
   assert.ok(records.every((record: { images: unknown[] }) => record.images.length >= 2));
+  assert.equal(curation.schema, "w02-public-asset-curation/v1");
+  assert.equal(curation.status, "HUMAN_REVIEW_ACCEPTED");
+  assert.equal(Object.keys(curation.selectedSourceHashesByProduct).length, 36);
   assert.deepEqual(validateApprovedCatalogue(records, { registryEntries: registry.entries, productionAssets: manifest.productionAssets, durableEvidenceText: fingerprints }), []);
   const productionSources = manifest.productionAssets.map((asset: { sourceHash: string }) => asset.sourceHash);
   assert.ok(!productionSources.includes("fc01e4e85a76f46680b54ade4b697dba7d7c866642f5692d01359f4810d09ea1"));
@@ -301,7 +305,7 @@ test("collection loader exposes only approved records with manifest-mapped prima
   assert.equal(isApprovedProduct({ status: "PENDING_REVIEW" }), false);
   assert.equal(isApprovedProduct({ status: "ARCHIVED" }), false);
   assert.equal(isApprovedProduct({ status: "APPROVED" }), true);
-  for (const family of ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"] as const) {
+  for (const family of ["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils", "arm-sleeves"] as const) {
     const products = getApprovedCatalogueByFamily(family);
     assert.ok(products.length > 0, family);
     assert.ok(products.every((product) => product.primaryImage.role === "primary"), family);
@@ -319,4 +323,14 @@ test("static collection image imports stay closed over approved web derivatives"
   for (const image of recordImages) {
     assert.ok(existsSync(resolve(root, `public${image.path}`)), image.path ?? "missing path");
   }
+
+  const collectWebp = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const target = resolve(directory, entry.name);
+    return entry.isDirectory() ? collectWebp(target) : entry.isFile() && entry.name.endsWith(".webp") ? [target] : [];
+  });
+  const publicPaths = collectWebp(resolve(root, "public/products/media")).sort();
+  const manifestPaths = manifest.productionAssets.flatMap((asset) => asset.derivatives)
+    .map((derivative) => resolve(root, `public${derivative.path}`))
+    .sort();
+  assert.deepEqual(publicPaths, manifestPaths);
 });
