@@ -9,9 +9,13 @@ export type RfqPayload = {
   message?: unknown;
   consent?: unknown;
   website?: unknown;
+  idempotencyKey?: unknown;
+  productContext?: unknown;
 };
 
-export type RfqValidation = { valid: true; data: Required<Omit<RfqPayload, "whatsapp" | "website">> & { whatsapp?: string } } | { valid: false; errors: Record<string, string> };
+export type ValidatedRfq = { name: string; company: string; country: string; email: string; productFamily: string; quantity: string; quantityInteger: number | null; quantityDescription: string; message: string; consent: true; whatsapp?: string; idempotencyKey?: string; productContext: Array<Record<string, unknown>> };
+
+export type RfqValidation = { valid: true; data: ValidatedRfq } | { valid: false; errors: Record<string, string> };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const families = new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"]);
@@ -30,6 +34,7 @@ export function validateRfq(payload: RfqPayload): RfqValidation {
   const quantity = text(payload.quantity);
   const message = text(payload.message);
   const whatsapp = text(payload.whatsapp);
+  const idempotencyKey = text(payload.idempotencyKey);
 
   if (!name) errors.name = "Name is required.";
   if (!company) errors.company = "Company is required.";
@@ -40,7 +45,11 @@ export function validateRfq(payload: RfqPayload): RfqValidation {
   if (!message) errors.message = "Message is required.";
   if (payload.consent !== true) errors.consent = "Consent is required.";
   if (text(payload.website)) errors.website = "Submission cannot be processed.";
+  if (idempotencyKey && !/^[0-9a-f-]{36}$/i.test(idempotencyKey)) errors.idempotencyKey = "Invalid request key.";
 
   if (Object.keys(errors).length) return { valid: false, errors };
-  return { valid: true, data: { name, company, country, email, productFamily, quantity, message, consent: true, ...(whatsapp ? { whatsapp } : {}) } };
+  const numeric = Number(quantity.replace(/[,\s]/g, ""));
+  const quantityInteger = /^\d+$/.test(quantity.replace(/[,\s]/g, "")) && Number.isSafeInteger(numeric) ? numeric : null;
+  const productContext = Array.isArray(payload.productContext) ? payload.productContext.slice(0, 50).filter(item => item && typeof item === "object").map(item => Object.fromEntries(Object.entries(item as Record<string, unknown>).filter(([key, value]) => ["productId", "productName", "productSlug", "family", "quantity", "color", "size", "addons"].includes(key) && ["string", "number", "object"].includes(typeof value)))) : [];
+  return { valid: true, data: { name, company, country, email, productFamily, quantity, quantityInteger, quantityDescription: quantity, message, consent: true, productContext, ...(idempotencyKey ? { idempotencyKey } : {}), ...(whatsapp ? { whatsapp } : {}) } };
 }

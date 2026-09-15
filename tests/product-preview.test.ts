@@ -21,11 +21,11 @@ test("approved products have stable preview slugs and closed detail inventory", 
   }
 });
 
-test("detail preview route is static, noindex and excluded from sitemap", () => {
+test("detail preview route stays dynamic-capable, noindex and excluded from sitemap", () => {
   const routePath = resolve(root, "app/products/[slug]/page.tsx");
   assert.equal(existsSync(routePath), true);
   const route = read("app/products/[slug]/page.tsx");
-  assert.match(route, /dynamicParams\s*=\s*false/);
+  assert.match(route, /dynamicParams\s*=\s*true/);
   assert.match(route, /generateStaticParams/);
   assert.match(route, /params: Promise<\{ slug: string \}>/);
   assert.match(route, /previewRobots/);

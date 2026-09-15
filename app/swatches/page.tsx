@@ -1,3 +1,3 @@
 import { InfoPage } from "@/components/marketing/info-page";
-export const metadata = { title: "材质色卡 | JS Meilai", description: "查看颜色和材料方向并提交样品需求。" };
-export default function Page() { return <InfoPage eyebrow="JS Meilai｜ 材质色卡" title="材质色卡" intro="查看颜色和材料方向并提交样品需求。" sections={[{ title: "颜色需要实物确认", body: "屏幕颜色仅用于方向选择；色卡和样品可作为后续项目输入，最终颜色以确认样为准。" }]} />; }
+export const metadata = { title: "Material swatches | JS Meilai", description: "Compare colour and material directions, then request samples." };
+export default function Page() { return <InfoPage eyebrow="JS Meilai | Material swatches" title="Material swatches" intro="Compare colour and material directions, then request samples." sections={[{ title: "Colour needs a physical reference", body: "On-screen colour is directional only; swatches and samples inform the project, with final colour set by an approved sample." }]} />; }

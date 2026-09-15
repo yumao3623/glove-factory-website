@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata(
   "Occasion Gloves & Wedding Veils Manufacturer",
-  "A focused B2B range of occasion gloves and wedding veils for sourcing conversations.",
+  "Occasion gloves and wedding veils from Jiangshan Meilai Garment Factory. Browse styles and discuss wholesale orders.",
   "/",
 );
 
@@ -31,19 +31,19 @@ function RefinedHero() {
       <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.84fr_1.16fr]">
         <div className="order-2 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:min-h-[39rem] lg:px-12 lg:py-14">
           <div>
-            <p className="section-label text-[#274c68]">JS Meilai｜Sourcing studio</p>
+            <p className="section-label text-[#274c68]">JS Meilai · Glove manufacturer</p>
             <h1 className="mt-8 max-w-[10ch] font-serif text-[clamp(3.4rem,6vw,6.6rem)] leading-[0.88] tracking-[-0.045em] text-balance">
-              Made for the moment.
+              Gloves for your collection.
             </h1>
             <p className="mt-8 max-w-md text-[1.05rem] leading-7 text-[#3e464b]">
-              A considered glove and veil range for bridal, formalwear and occasionwear buyers.
+              Occasion gloves and wedding veils for bridal shops, costume suppliers and clothing brands.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <Button asChild size="lg" className="min-h-12 rounded-none bg-[#111416] px-6 text-white hover:bg-[#274c68]">
               <a href="#families">Explore the range <ArrowRightIcon data-icon="inline-end" /></a>
             </Button>
-            <span className="max-w-[14rem] text-xs leading-5 text-[#5c676d]">Small-batch development, clear material decisions, export-ready conversations.</span>
+            <span className="max-w-[14rem] text-xs leading-5 text-[#5c676d]">Explore styles, then tell us the quantities and finishes you need.</span>
           </div>
         </div>
         <div className="relative order-1 min-h-[22rem] lg:order-2 lg:min-h-[39rem]">
@@ -56,8 +56,8 @@ function RefinedHero() {
             sizes="(min-width: 1024px) 58vw, 100vw"
           />
           <div className="absolute bottom-5 left-5 border-l border-white/70 pl-3 text-[0.65rem] uppercase tracking-[0.14em] text-white sm:bottom-8 sm:left-8">
-            <span className="block">Hand-finished</span>
-            <span className="mt-1 block text-white/70">For global buyers</span>
+            <span className="block">Occasion gloves</span>
+            <span className="mt-1 block text-white/70">Wholesale collection</span>
           </div>
         </div>
       </div>
@@ -70,10 +70,10 @@ function MaterialMoment() {
     <section className="relative isolate overflow-hidden border-y border-[#c9ced0] bg-[#f4f5f4]">
       <div className="relative mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[0.68fr_1.32fr] lg:items-center lg:px-10 lg:py-20">
         <div className="max-w-md">
-          <p className="section-label text-[#274c68]">Material｜Finish｜Hand</p>
-          <h2 className="mt-4 font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">The decision is in the detail.</h2>
+          <p className="section-label text-[#274c68]">Materials</p>
+          <h2 className="mt-4 font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Choose the right fabric.</h2>
           <p className="mt-6 leading-7 text-[#4c5559]">
-            Compare surface, structure and finish before a sampling conversation. Every enquiry starts with a real product direction.
+            Compare satin, lace and tulle styles. Ask about samples to check colour, stretch and feel before confirming a bulk order.
           </p>
         </div>
         <div className="grid min-h-[20rem] grid-cols-12 grid-rows-[1.1fr_0.9fr] gap-3 sm:min-h-[26rem]">
@@ -116,15 +116,15 @@ function FactoryBridge() {
       />
       <div className="relative mx-auto flex max-w-[1380px] flex-col justify-between gap-8 px-5 py-14 sm:px-8 md:min-h-[28rem] md:flex-row md:items-end lg:px-10 lg:py-20">
         <div>
-          <p className="section-label text-[#a8c2d3]">Atelier｜Production</p>
-          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Craft you can specify.</h2>
+          <p className="section-label text-[#a8c2d3]">Jiangshan, Zhejiang</p>
+          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Talk to the factory.</h2>
         </div>
         <div className="max-w-sm md:pb-1">
           <p className="leading-7 text-[#d2dde4]">
-            Bring construction, trim and volume questions into one clear sourcing brief.
+            We are Jiangshan Meilai Garment Factory in Zhejiang, China. Send the style and quantities you have in mind so we can review the production details.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-7 min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]">
-            <a href="#rfq">Discuss factory capability <ArrowRightIcon data-icon="inline-end" /></a>
+            <a href="#rfq">Discuss your order <ArrowRightIcon data-icon="inline-end" /></a>
           </Button>
         </div>
       </div>
@@ -145,12 +145,12 @@ function CustomBridge() {
       <div className="relative mx-auto grid max-w-[1380px] gap-8 px-5 py-16 sm:px-8 lg:min-h-[34rem] lg:grid-cols-[1fr_0.82fr] lg:items-center lg:px-10 lg:py-20">
         <div>
           <p className="section-label text-[#c6d8e1]">Custom manufacturing</p>
-          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Bring a direction into the discussion.</h2>
+          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl">Start with your design.</h2>
           <p className="mt-5 max-w-md leading-7 text-[#e0e8ec]">
-            This preview introduces the range. Requirements can be discussed separately for a product and project.
+            Share your reference images, measurements and preferred materials. We’ll review what can be made and confirm the details in a quotation.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]">
-            <a href="#rfq">View preview status <ArrowRightIcon data-icon="inline-end" /></a>
+            <a href="#rfq">Ask about custom orders <ArrowRightIcon data-icon="inline-end" /></a>
           </Button>
         </div>
         <div aria-hidden="true" />
@@ -165,9 +165,9 @@ function RfqBand() {
       <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-10 lg:py-24">
         <div>
           <p className="section-label text-stone-400">Enquiry</p>
-          <h2 className="mt-3 max-w-md font-serif text-4xl leading-[0.98] sm:text-5xl">Bring the range into an RFQ.</h2>
+          <h2 className="mt-3 max-w-md font-serif text-4xl leading-[0.98] sm:text-5xl">Tell us what you need.</h2>
           <p className="mt-5 max-w-sm leading-7 text-stone-300">
-            Organise the details for a sourcing conversation. Enquiry delivery remains offline in this checkpoint.
+            Tell us which styles you are considering, your estimated quantities and where the order needs to go.
           </p>
         </div>
         <div className="rfq-on-dark"><RfqForm /></div>

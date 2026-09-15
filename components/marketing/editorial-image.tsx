@@ -12,10 +12,12 @@ type EditorialImageProps = {
 
 export function EditorialImage({ src, alt, className, imageClassName, priority = false, sizes = "(min-width: 1024px) 50vw, 100vw" }: EditorialImageProps) {
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <div className={cn("relative overflow-hidden", className)}>
       <Image
         src={src}
         alt={alt}
+        fill={typeof src === "string"}
+        unoptimized={typeof src === "string" && src.startsWith("/api/media/")}
         sizes={sizes}
         preload={priority}
         loading={priority ? "eager" : "lazy"}

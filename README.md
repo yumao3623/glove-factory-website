@@ -75,7 +75,7 @@ research/               关键词、竞品、SEO 和视觉研究材料
 
 ## 成熟独立站需求基线
 
-成熟 B2B 电商方向、页面结构、筛选、商品详情、购物车、账户、Supabase/Stripe 接口和分阶段验收标准见 [docs/REQUIREMENTS_MATURITY_COMMERCE.md](docs/REQUIREMENTS_MATURITY_COMMERCE.md)。本文件与 [docs/DECISION_MATURITY_COMMERCE_SCOPE.md](docs/DECISION_MATURITY_COMMERCE_SCOPE.md) 记录了从预览站向成熟独立站演进的边界；真实第三方账号和支付仍需单独授权。
+成熟 B2B 电商方向、页面结构、筛选、商品详情、购物车、账户、Supabase、RFQ 邮件接口和分阶段验收标准见 [docs/REQUIREMENTS_MATURITY_COMMERCE.md](docs/REQUIREMENTS_MATURITY_COMMERCE.md)。Paddle 不适用于实物手套；替代支付商和真实商业政策在沙盒验收前保持关闭。
 
 ## 产品数据来源
 

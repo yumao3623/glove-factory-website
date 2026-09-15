@@ -5,7 +5,7 @@ import type { AssetReference, ProductFamily, ProductRecord } from "@/types/produ
 type ProductionDerivative = { assetId: string; role: AssetReference["role"]; path: string; width: number; height: number };
 type ProductionAsset = { productId: string; permissionStatus: string; visualApprovalStatus: string; derivatives: ProductionDerivative[] };
 
-export type ApprovedCatalogueImage = AssetReference & { path: string; width: number; height: number; altText: string };
+export type ApprovedCatalogueImage = AssetReference & { path: string; width: number | null; height: number | null; altText: string };
 
 export type ApprovedCatalogueProduct = ProductRecord & {
   slug: string;

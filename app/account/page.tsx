@@ -1,3 +1,3 @@
-import { InfoPage } from "@/components/marketing/info-page";
-export const metadata = { title: "账户 | JS Meilai", description: "登录后管理订单、询价、地址和收藏。" };
-export default function Page() { return <InfoPage eyebrow="JS Meilai｜ 账户" title="账户" intro="登录后管理订单、询价、地址和收藏。" sections={[{ title: "账户功能预览", body: "账户登录和 Google 登录将在认证服务配置后启用。本地版本保留页面入口，不伪造登录状态或订单数据。" }]} />; }
+import { AuthPanel } from "@/components/account/auth-panel";
+export const metadata = { title: "Account", description: "Sign in to view your orders." };
+export default async function Page({ searchParams }: { searchParams: Promise<{ auth_error?: string }> }) { return <main id="main-content" className="mx-auto min-h-[60vh] max-w-[1100px] px-5 py-16 sm:px-8 lg:py-24"><p className="section-label text-stone-500">JS Meilai | Account</p><h1 className="mt-3 font-serif text-5xl text-[#0d2b3f]">Sign in or create an account</h1><p className="mt-5 max-w-xl leading-7 text-stone-700">Sign in to view your orders and continue your enquiry.</p><AuthPanel authError={(await searchParams).auth_error} googleEnabled={process.env.GOOGLE_AUTH_ENABLED === "true"} /></main>; }
