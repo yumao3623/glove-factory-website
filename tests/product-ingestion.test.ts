@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -312,25 +312,19 @@ test("collection loader exposes only approved records with manifest-mapped prima
   }
 });
 
-test("static collection image imports stay closed over approved web derivatives", () => {
-  const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8")) as Array<{ images: Array<{ assetId: string; path: string | null; status: string; role: string }> }>;
-  const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8")) as { productionAssets: Array<{ derivatives: Array<{ assetId: string; path: string }> }> };
-  const recordImages = records.flatMap((record) => record.images).filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.startsWith("/products/"));
-  const approvedAssetIds = recordImages.map((image) => image.assetId).sort();
-  const manifestAssetIds = manifest.productionAssets.flatMap((asset) => asset.derivatives).filter((derivative) => approvedAssetIds.includes(derivative.assetId)).map((derivative) => derivative.assetId).sort();
-
-  assert.deepEqual(manifestAssetIds, approvedAssetIds);
-  for (const image of recordImages) {
-    assert.ok(existsSync(resolve(root, `public${image.path}`)), image.path ?? "missing path");
+test("approved product images have a complete cloud manifest and no public binary copies", () => {
+  const records = JSON.parse(readFileSync(resolve(root, "data/products/approved/initial-public-tranche.json"), "utf8")) as Array<{ images: Array<{ assetId: string; status: string }> }>;
+  const manifest = JSON.parse(readFileSync(resolve(root, "assets/asset-manifest.json"), "utf8")) as { productionAssets: Array<{ derivatives: Array<{ assetId: string; path: string; sha256: string; width: number; height: number }> }> };
+  const cloud = JSON.parse(readFileSync(resolve(root, "data/products/media-storage.json"), "utf8")) as { objects: Array<{ assetId: string; legacyPath: string; path: string; sha256: string; width: number; height: number }> };
+  const derivatives = manifest.productionAssets.flatMap(asset => asset.derivatives);
+  assert.equal(cloud.objects.length, derivatives.length);
+  assert.equal(new Set(cloud.objects.map(object => object.path)).size, cloud.objects.length);
+  for (const image of records.flatMap(record => record.images).filter(image => image.status === "CONFIRMED")) assert.ok(cloud.objects.some(object => object.assetId === image.assetId));
+  for (const derivative of derivatives) {
+    const object = cloud.objects.find(item => item.assetId === derivative.assetId);
+    assert.ok(object);
+    assert.deepEqual([object.legacyPath, object.sha256, object.width, object.height], [derivative.path, derivative.sha256, derivative.width, derivative.height]);
+    assert.match(object.path, /^products\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/);
   }
-
-  const collectWebp = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const target = resolve(directory, entry.name);
-    return entry.isDirectory() ? collectWebp(target) : entry.isFile() && entry.name.endsWith(".webp") ? [target] : [];
-  });
-  const publicPaths = collectWebp(resolve(root, "public/products/media")).sort();
-  const manifestPaths = manifest.productionAssets.flatMap((asset) => asset.derivatives)
-    .map((derivative) => resolve(root, `public${derivative.path}`))
-    .sort();
-  assert.deepEqual(publicPaths, manifestPaths);
+  assert.equal(existsSync(resolve(root, "public/products/media")), false);
 });

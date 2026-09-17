@@ -1,6 +1,6 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。2.0 版本的产品运行时已接入受保护的 Supabase 产品表与 `product-media` 对象存储；本地已批准数据仅作为迁移和测试证据保留。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前版本为 **2.1.0**，账号、后台、询价与报价验收见 [2.1 发布记录](docs/V2_1_RELEASE.md)。运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
 
 2.0 版本的结构、设计系统、需求与支付边界见 [仓库结构说明](docs/REPOSITORY_MAP.md)、[设计系统](DESIGN.md)、[2.0 实施说明](docs/V2_REQUIREMENTS.md) 和 [2.0 支付决策](docs/V2_PAYMENT_DECISION.md)。
 
@@ -50,7 +50,7 @@ npm start
 | `npm run validate:products` | 校验已批准产品、图片、哈希和溯源闭环 |
 | `npm run ingest:batch -- <command>` | 执行本地、分批、审阅优先的产品导入流程 |
 
-2.0 数据迁移使用 `node --env-file=.env.local scripts/migrate-approved-catalogue-to-supabase.mjs --dry-run` 预检，确认数量后再使用 `--apply`。脚本只上传已批准的网页派生图片，并在媒体验证完成后将 36 条产品记录切换为已上架状态（`active`）。
+历史数据重建工具使用 `node --env-file=.env.local scripts/migrate-approved-catalogue-to-supabase.mjs --dry-run` 预检。重新上传需要通过 `PRODUCT_MEDIA_ARCHIVE_ROOT` 指向仓库外的图片备份。日常上新、编辑、图片上传和归档使用 `/admin/`，不要重跑迁移覆盖经营中的产品。
 
 ## 目录结构
 
@@ -60,7 +60,7 @@ components/             页面、产品和界面组件
 lib/                    产品导入、询盘校验和站点工具
 data/                   已批准产品、分类和导入审阅记录
 assets/                 资产清单、原始素材和站内派生素材
-public/products/media/  迁移前已批准的网页派生图片及溯源校验输入；电商目录开关开启时，运行时读取 Supabase 对象存储
+supabase/               数据库迁移、访问策略和订单原子操作
 scripts/                产品导入、资产处理和研究辅助脚本
 tests/                  自动化测试
 docs/                   项目规范、决策、路线图和操作边界
@@ -70,12 +70,16 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 
 ## 环境变量
 
-当前本地预览不要求 `.env` 文件。
+复制 `.env.example` 为 `.env.local` 并按实际环境配置；环境文件不进入 Git。
 
-- `NEXT_PUBLIC_SITE_URL`：可选。未设置时使用 `http://localhost:3000`。
-- `RESEND_API_KEY`：仅在未来正式启用 Resend 询价邮件集成时需要；当前预览不读取或要求该变量。
+- `NEXT_PUBLIC_APP_URL`、`NEXT_PUBLIC_SITE_URL`：本地开发地址；生产均为 `https://www.jsmeilai.com`。
+- Supabase URL、anon key、服务端 service-role key：账户、后台、目录和受保护媒体所需。
+- `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
+- `COMMERCE_RFQ_ENABLED=true`、`RESEND_API_KEY`、`EMAIL_FROM`、`RFQ_RECIPIENT`：询价存储及通知邮件。
+- `ADMIN_EMAILS`：已授权管理员邮箱；必须先完成邮箱验证才有后台权限。
+- `PAYPAL_CHECKOUT_ENABLED=false`：2.1 保持关闭，完成商户及真实支付验收后再开启。
 
-环境变量文件已被 `.gitignore` 排除。若后续需要提供示例，只提交不含密钥的 `.env.example`。
+忘记密码从 `/account/` 进入。管理员邀请工具为 `node --env-file=.env.local --import tsx scripts/send-admin-access.ts <管理员邮箱>`；正式邀请前确认应用 URL 为生产域名。密码由收件人自己设置。
 
 ## 成熟独立站需求基线
 
@@ -83,7 +87,7 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 
 ## 产品数据来源
 
-产品原始资料来自已授权的 JS Meilai 1688 店铺导出。已批准记录位于 `data/products/approved/`，图片与来源哈希映射位于 `assets/asset-manifest.json`，迁移输入位于 `public/products/media/`；运行时产品与图片由 Supabase 提供。
+产品原始资料来自已授权的 JS Meilai 1688 店铺导出。已批准记录位于 `data/products/approved/`，图片与来源哈希映射位于 `assets/asset-manifest.json`，云端路径与校验值位于 `data/products/media-storage.json`；产品图片不再存入仓库。
 
 不要直接从原始 ZIP 或未审阅草稿生成公开产品。产品状态、来源商品条目、图片许可、哈希和人工审核结论必须保持可追溯。
 
@@ -96,11 +100,11 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 - 批次配置、草稿、审阅、隔离和清理队列；
 - 产品图片与来源商品条目的本地溯源证据。
 
-这些文件用于产品导入和 `validate:products` 的原图哈希校验，但不会被 Next.js 网站直接发布。
+这些文件用于产品导入和 `validate:products` 的原图哈希校验，但不会被 Next.js 网站直接发布。派生图校验从 Supabase 获取；离线时可通过 `PRODUCT_MEDIA_ARCHIVE_ROOT` 指定仓库外备份。
 
 ## `.product-ingestion` 不进入 Git
 
-`.product-ingestion/` 可能很大，并包含仅用于本地审阅的源文件，因此已被 `.gitignore` 明确排除。不要强制添加、提交或上传这个目录。仓库只保留经过批准的产品记录、轻量审阅证据、资产清单和公开派生图片。
+`.product-ingestion/` 可能很大，并包含仅用于本地审阅的源文件，因此已被 `.gitignore` 明确排除。不要强制添加、提交或上传这个目录。仓库只保留经过批准的产品记录、轻量审阅证据和资产清单。
 
 可以这样确认忽略规则：
 

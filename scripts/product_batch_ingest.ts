@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -334,33 +335,34 @@ async function validateApproved() {
   const manifest = JSON.parse(readFileSync(join(root, "assets", "asset-manifest.json"), "utf8"));
   const fingerprints = readFileSync(join(root, "data", "ingestion", "listing-relationship-fingerprints.json"), "utf8");
   errors.push(...validateApprovedCatalogue(approvedRecords, { registryEntries: registry.entries ?? [], productionAssets: manifest.productionAssets ?? [], durableEvidenceText: fingerprints }));
+  const cloud = JSON.parse(readFileSync(join(root, "data/products/media-storage.json"), "utf8")) as { objects: Array<{ assetId: string; path: string; sha256: string }> };
+  const cloudByAsset = new Map(cloud.objects.map(object => [object.assetId, object]));
+  if (existsSync(join(root, ".env.local")) && typeof process.loadEnvFile === "function") process.loadEnvFile(join(root, ".env.local"));
+  const remoteBase = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const remoteKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const archiveRoot = process.env.PRODUCT_MEDIA_ARCHIVE_ROOT;
+  if (!archiveRoot && (!remoteBase || !remoteKey)) throw new Error("Product media validation needs Supabase server credentials or PRODUCT_MEDIA_ARCHIVE_ROOT pointing to the external archive.");
+  const checks: Array<() => Promise<void>> = [];
   for (const asset of manifest.productionAssets ?? []) {
     const originalPath = join(root, asset.original.path);
     if (!isRegularFile(originalPath)) errors.push(`${asset.assetId}: original file is missing.`);
     else if (sha256File(originalPath) !== asset.sourceHash) errors.push(`${asset.assetId}: original hash does not match sourceHash.`);
-    for (const derivative of asset.derivatives ?? []) {
-      const derivativePath = derivative.path.startsWith("/products/media/")
-        ? join(root, "public", derivative.path.slice(1))
-        : join(root, "assets", derivative.path.slice(1));
-      if (!isRegularFile(derivativePath)) errors.push(`${derivative.assetId}: derivative file is missing.`);
-      else if (sha256File(derivativePath) !== derivative.sha256) errors.push(`${derivative.assetId}: derivative hash does not match manifest.`);
+    for (const derivative of asset.derivatives ?? []) checks.push(async () => {
+      const object = cloudByAsset.get(derivative.assetId);
+      if (!object || object.sha256 !== derivative.sha256) { errors.push(`${derivative.assetId}: cloud manifest does not match reviewed derivative.`); return; }
+      let bytes: Buffer;
+      if (archiveRoot) bytes = readFileSync(join(archiveRoot, derivative.path.replace(/^\/products\/media\//, "")));
       else {
-        const metadata = await sharp(derivativePath).metadata();
-        if (metadata.width !== derivative.width || metadata.height !== derivative.height || metadata.format !== derivative.format) errors.push(`${derivative.assetId}: derivative dimensions or format do not match manifest.`);
+        const response = await fetch(`${remoteBase}/storage/v1/object/authenticated/product-media/${object.path}`, { headers: { apikey: remoteKey!, Authorization: `Bearer ${remoteKey}` } });
+        if (!response.ok) { errors.push(`${derivative.assetId}: cloud object HTTP ${response.status}.`); return; }
+        bytes = Buffer.from(await response.arrayBuffer());
       }
-    }
+      if (createHash("sha256").update(bytes).digest("hex") !== derivative.sha256) errors.push(`${derivative.assetId}: derivative hash does not match manifest.`);
+      const metadata = await sharp(bytes).metadata();
+      if (metadata.width !== derivative.width || metadata.height !== derivative.height || metadata.format !== derivative.format) errors.push(`${derivative.assetId}: derivative dimensions or format do not match manifest.`);
+    });
   }
-  const publicMediaRoot = join(root, "public", "products", "media");
-  const collectPublicWebp = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const target = join(directory, entry.name);
-    return entry.isDirectory() ? collectPublicWebp(target) : entry.isFile() && entry.name.endsWith(".webp") ? [target] : [];
-  });
-  const manifestPublicPaths = new Set<string>((manifest.productionAssets ?? []).flatMap((asset: { derivatives?: Array<{ path?: string }> }) =>
-    (asset.derivatives ?? []).flatMap((derivative) => derivative.path?.startsWith("/products/media/") ? [join(root, "public", derivative.path.slice(1))] : []),
-  ));
-  const publicFiles = new Set(collectPublicWebp(publicMediaRoot));
-  for (const file of publicFiles) if (!manifestPublicPaths.has(file)) errors.push(`${relativeToRoot(root, file)}: public product asset is not present in the production manifest.`);
-  for (const file of manifestPublicPaths) if (!publicFiles.has(file)) errors.push(`${relativeToRoot(root, file)}: production manifest path is absent from the public product directory.`);
+  for (let offset = 0; offset < checks.length; offset += 6) await Promise.all(checks.slice(offset, offset + 6).map(check => check()));
 
   const curationPath = join(root, "data", "ingestion", "w02-public-asset-curation.json");
   if (!isRegularFile(curationPath)) errors.push("Missing the durable Post-W02 public asset curation ledger.");

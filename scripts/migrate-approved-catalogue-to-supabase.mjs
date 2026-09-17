@@ -91,7 +91,7 @@ for (const record of records) {
   const imageUrls = images.map((image) => storagePath(record, image));
   if (!imageUrls.length) throw new Error(`${record.slug} has no approved web images.`);
   for (const image of images) {
-    const localPath = join(root, "public", image.path.replace(/^\//, ""));
+    const localPath = join(process.env.PRODUCT_MEDIA_ARCHIVE_ROOT ?? join(root, "..", "product-media-archive-v1"), image.path.replace(/^\/products\/media\//, ""));
     prepared.push({ record, image, imageUrls, localPath, storagePath: storagePath(record, image), payload: payloadFor(record, imageUrls) });
   }
 }

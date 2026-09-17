@@ -31,10 +31,10 @@ test("unpublished or untrusted rows never enter the public model", () => {
   assert.equal(mapPublishedProduct({ id: "db-4", slug: "no-image", name: "No image", family: "opera-gloves", status: "active", image_urls: [] }), null);
 });
 
-test("catalog keeps the frozen fallback when DB loading is not explicitly enabled", async () => {
+test("catalog never republishes stale local records when DB loading is disabled", async () => {
   const previous = process.env.COMMERCE_CATALOG_ENABLED;
   delete process.env.COMMERCE_CATALOG_ENABLED;
   const products = await getCommerceCatalogue("opera-gloves");
-  assert.ok(products.length > 0);
+  assert.equal(products.length, 0);
   if (previous === undefined) delete process.env.COMMERCE_CATALOG_ENABLED; else process.env.COMMERCE_CATALOG_ENABLED = previous;
 });

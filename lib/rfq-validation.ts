@@ -47,6 +47,8 @@ export function validateRfq(payload: RfqPayload): RfqValidation {
   if (text(payload.website)) errors.website = "Submission cannot be processed.";
   if (idempotencyKey && !/^[0-9a-f-]{36}$/i.test(idempotencyKey)) errors.idempotencyKey = "Invalid request key.";
 
+  for (const [key, value, max] of [["name", name, 200], ["company", company, 200], ["country", country, 200], ["email", email, 254], ["quantity", quantity, 100], ["message", message, 6000], ["whatsapp", whatsapp, 80]] as const) if (value.length > max) errors[key] = `Use no more than ${max} characters.`;
+  if (/^0+$/.test(quantity.replace(/[,\s]/g, ""))) errors.quantity = "Enter a quantity greater than zero.";
   if (Object.keys(errors).length) return { valid: false, errors };
   const numeric = Number(quantity.replace(/[,\s]/g, ""));
   const quantityInteger = /^\d+$/.test(quantity.replace(/[,\s]/g, "")) && Number.isSafeInteger(numeric) ? numeric : null;

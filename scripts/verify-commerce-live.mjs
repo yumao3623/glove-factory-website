@@ -1,7 +1,6 @@
 /** Opt-in integration test. Creates and removes only its own marked fixtures. */
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
 
 const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -44,9 +43,9 @@ try {
     const r = await fetch(`${app}/api/auth/session/`, { headers: { Cookie: `sm_refresh_token=${session.refresh_token}` } });
     assert.equal(r.status, 200); const data = await r.json(); assert.equal(data.user.id, user.id); assert.equal(data.refreshed, true); assert.equal(data.isAdmin, false); assert.ok(r.headers.get('set-cookie')?.includes('sm_access_token='));
   });
-  const imagePath = `products/${marker}.webp`;
-  const bytes = await readFile(new URL('../public/products/media/kids-dress-gloves-satin-bow-001/5f58e6e044d4d6d92583ce2ac4109a884f550a8abe1d1dfc39ef7fe8dc9e2f70-thumb.webp', import.meta.url));
-  const uploaded = await fetch(`${base}/storage/v1/object/product-media/${imagePath}`, { method: 'POST', headers: { apikey: service, Authorization: `Bearer ${service}`, 'Content-Type': 'image/webp', 'x-upsert': 'false' }, body: bytes });
+  const imagePath = `products/${marker}.png`;
+  const bytes = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a+XkAAAAASUVORK5CYII=', 'base64');
+  const uploaded = await fetch(`${base}/storage/v1/object/product-media/${imagePath}`, { method: 'POST', headers: { apikey: service, Authorization: `Bearer ${service}`, 'Content-Type': 'image/png', 'x-upsert': 'false' }, body: bytes });
   assert.ok(uploaded.ok, `Upload: HTTP ${uploaded.status}`); ids.image = imagePath;
   const product = await insert('products', { slug: marker, name: 'Temporary integration fixture glove', family: 'kids-dress-gloves', material: 'Satin', colors: ['Ivory'], finger_style: 'full-finger', length_cm: 22, description: 'Automated integration fixture. Removed when the verification completes.', image_urls: [imagePath], status: 'draft' });
   ids.product = product.id;

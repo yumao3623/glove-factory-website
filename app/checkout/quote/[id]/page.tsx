@@ -1,0 +1,3 @@
+import { QuoteCheckout } from "@/components/commerce/quote-checkout";
+export const metadata = { title: "Your confirmed quote", robots: { index: false, follow: false }, referrer: "no-referrer" as const };
+export default async function Page({ params }: { params: Promise<{ id: string }> }) { const { id } = await params; return <main id="main-content" className="mx-auto min-h-[70vh] max-w-[1100px] px-5 py-16 sm:px-8"><p className="section-label text-stone-500">JS Meilai | Quotation</p><h1 className="mt-4 font-serif text-4xl text-[#0d2b3f] sm:text-5xl">Your confirmed quote</h1><QuoteCheckout orderId={id} /></main>; }

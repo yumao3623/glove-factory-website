@@ -2,7 +2,8 @@ import { getCommerceConfig } from "@/lib/commerce/config";
 
 type PayPalEnvironment = "sandbox" | "live";
 type PayPalAmount = { currency_code: string; value: string };
-type PayPalOrderResponse = { id?: string; status?: string; links?: Array<{ href: string; rel: string; method?: string }>; message?: string };
+type PayPalCapture = { id?: string; status?: string; amount?: PayPalAmount };
+type PayPalOrderResponse = { purchase_units?: Array<{ payments?: { captures?: PayPalCapture[] } }>; id?: string; status?: string; links?: Array<{ href: string; rel: string; method?: string }>; message?: string };
 type PayPalVerificationResponse = { verification_status?: string; message?: string };
 
 function environment(): PayPalEnvironment {
@@ -16,6 +17,10 @@ function baseUrl() {
 function configured() {
   const config = getCommerceConfig();
   return Boolean(config.paypalClientId && config.paypalClientSecret);
+}
+
+export function paypalCheckoutEnabled() {
+  return process.env.PAYPAL_CHECKOUT_ENABLED === "true" && configured() && Boolean(getCommerceConfig().paypalWebhookId);
 }
 
 async function accessToken() {
@@ -76,9 +81,9 @@ export async function capturePayPalOrder(orderId: string) {
   if (!/^[A-Z0-9-]{5,80}$/i.test(orderId)) return { configured: true as const, error: "Invalid PayPal order id." };
   const tokenResult = await accessToken();
   if (!tokenResult.token) return { configured: true as const, error: tokenResult.error };
-  const response = await fetch(`${baseUrl()}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, { method: "POST", headers: { Authorization: `Bearer ${tokenResult.token}`, "Content-Type": "application/json" }, cache: "no-store" });
+  const response = await fetch(`${baseUrl()}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, { method: "POST", headers: { Authorization: `Bearer ${tokenResult.token}`, "Content-Type": "application/json", "PayPal-Request-Id": `capture-${orderId}` }, cache: "no-store" });
   const data = await response.json().catch(() => ({})) as PayPalOrderResponse;
-  return response.ok ? { configured: true as const, id: data.id ?? orderId, status: data.status ?? "COMPLETED" } : { configured: true as const, error: data.message ?? "PayPal capture failed." };
+  return response.ok ? { configured: true as const, id: data.id ?? orderId, status: data.status, capture: data.purchase_units?.[0]?.payments?.captures?.[0] } : { configured: true as const, error: data.message ?? "PayPal capture failed." };
 }
 
 export type PayPalWebhookHeaders = {
@@ -117,7 +122,7 @@ export async function verifyPayPalWebhook(rawBody: string, headers: PayPalWebhoo
   if (required.some((value) => !value)) return { configured: true as const, verified: false as const, error: "PayPal webhook signature headers are incomplete." };
   try {
     const cert = new URL(headers.certUrl!);
-    if (cert.protocol !== "https:") return { configured: true as const, verified: false as const, error: "PayPal certificate URL must use HTTPS." };
+    if (cert.protocol !== "https:" || !["api.paypal.com", "api.sandbox.paypal.com", "api-m.paypal.com", "api-m.sandbox.paypal.com"].includes(cert.hostname)) return { configured: true as const, verified: false as const, error: "PayPal certificate URL must use HTTPS." };
   } catch {
     return { configured: true as const, verified: false as const, error: "PayPal certificate URL is invalid." };
   }
@@ -141,4 +146,17 @@ export async function verifyPayPalWebhook(rawBody: string, headers: PayPalWebhoo
   return response.ok && data.verification_status === "SUCCESS"
     ? { configured: true as const, verified: true as const, event }
     : { configured: true as const, verified: false as const, error: data.message ?? "PayPal webhook signature verification failed." };
+}
+
+export async function getPayPalCapture(captureId: string) {
+  if (!/^[A-Z0-9-]{5,80}$/i.test(captureId)) return null;
+  const token = await accessToken(); if (!token.token) return null;
+  const response = await fetch(`${baseUrl()}/v2/payments/captures/${captureId}`, { headers: { Authorization: `Bearer ${token.token}` }, cache: "no-store" });
+  return response.ok ? await response.json() as PayPalCapture : null;
+}
+
+export function paypalAmountMinor(amount?: {value?: string; currency_code?: string}) {
+  if (!amount?.value || !/^[0-9]+\.[0-9]{2}$/.test(amount.value)) return null;
+  const [units, cents] = amount.value.split("."); const minor = Number(units) * 100 + Number(cents);
+  return Number.isSafeInteger(minor) && minor > 0 ? minor : null;
 }

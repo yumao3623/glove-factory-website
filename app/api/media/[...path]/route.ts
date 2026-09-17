@@ -18,8 +18,8 @@ export async function GET(request: Request, context: { params: Promise<{ path: s
   const config = getCommerceConfig();
   const path = safePath((await context.params).path);
   if (!path) return NextResponse.json({ error: "Invalid media path." }, { status: 400, headers: { "Cache-Control": "no-store" } });
-  const result = await supabaseRest<Array<{ status: string; image_urls: string[] }>>("products?select=status,image_urls", {}, true);
-  const active = result.data?.some((product) => product.status === "active" && product.image_urls?.includes(path));
+  const result = await supabaseRest<Array<{ id: string }>>(`products?select=id&status=eq.active&image_urls=cs.${encodeURIComponent(`{${path}}`)}&limit=1`, {}, true);
+  const active = Boolean(result.data?.length);
   if (!active) return NextResponse.json({ error: "Media is unavailable." }, { status: 404, headers: { "Cache-Control": "no-store" } });
   const url = await signed(path);
   if (!url) return NextResponse.json({ error: "Media is not configured." }, { status: 503, headers: { "Cache-Control": "no-store" } });

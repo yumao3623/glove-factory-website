@@ -1,4 +1,4 @@
-import { getApprovedCatalogueByFamily, getApprovedCatalogueProductBySlug, getApprovedCatalogueSlugs, type ApprovedCatalogueProduct, type ApprovedCatalogueImage } from "@/data/approved-catalogue";
+import type { ApprovedCatalogueProduct, ApprovedCatalogueImage } from "@/data/approved-catalogue";
 import type { CustomizableField, ProductFamily, ProductRecord, SourcedValue } from "@/types/product";
 import { supabaseRest } from "@/lib/commerce/supabase-rest";
 import { siteMode } from "@/lib/stakeholder-preview";
@@ -57,12 +57,10 @@ async function fetchPublished(): Promise<ApprovedCatalogueProduct[]> {
 
 export async function getCommerceCatalogue(family?: ProductFamily): Promise<readonly ApprovedCatalogueProduct[]> {
   const remote = await fetchPublished();
-  const fallback = process.env.COMMERCE_CATALOG_ENABLED === "true" ? [] : family ? getApprovedCatalogueByFamily(family) : getApprovedCatalogueSlugs().map((slug) => getApprovedCatalogueProductBySlug(slug)!).filter(Boolean);
-  const merged = [...remote, ...fallback.filter((item) => !remote.some((published) => published.slug === item.slug))];
-  return family ? merged.filter((item) => item.productFamily === family) : merged;
+  return family ? remote.filter((item) => item.productFamily === family) : remote;
 }
 
 export async function getCommerceProductBySlug(slug: string): Promise<ApprovedCatalogueProduct | undefined> {
   const remote = await fetchPublished();
-  return remote.find((item) => item.slug === slug) ?? (process.env.COMMERCE_CATALOG_ENABLED === "true" ? undefined : getApprovedCatalogueProductBySlug(slug));
+  return remote.find((item) => item.slug === slug);
 }
