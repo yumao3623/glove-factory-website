@@ -28,7 +28,7 @@ npm run seo:audit -- --origin http://localhost:3000 --mode preview --json .tmp/s
 
 Chrome GSC 证据（2026-09-18）：以 `yumao3623@gmail.com` 完成 HTML 文件验证，文件名为 `google14a276efa04bb12e.html`；随后提交 `https://www.jsmeilai.com/sitemap.xml`，状态为“成功”，最近读取日期为 2026-09-18，发现网页数为 9。Performance、Indexing、Enhancements 和 Links 报告均显示“正在处理数据，请过 1 天左右再来查看”，当前无可用查询/页面数据。
 
-Chrome URL Inspection 证据（2026-09-18）：首页最近一次 Googlebot smartphone 抓取成功，发现来源为 sitemap，但旧抓取结果仍显示“已抓取 - 尚未编入索引”。已点击一次“请求编入索引”，Google 返回临时错误“提交您的索引编制请求时出现了问题，请稍后重试”；因此不能把首页已收录作为已完成事实，需等待报告处理并稍后重试一次。
+Chrome URL Inspection 证据（2026-09-18）：首页旧抓取结果显示“已抓取 - 尚未编入索引”。在 Chrome 中先完成“测试实际网址”，结果为“网址可编入 Google 索引”，随后重新提交请求，GSC 显示“已请求编入索引”，并确认网址已加入优先抓取队列。该状态代表请求已受理，不代表已经完成收录。
 
 最终自动化验证（2026-09-18）：`npm run typecheck`、`npm run lint`、`npm test`（63/63）、`npm run build`、preview audit 和 production audit 均通过；production audit 检查 9 个 sitemap URL，`failures=0`、`warnings=0`。
 
