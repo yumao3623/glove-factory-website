@@ -2,6 +2,6 @@ import { CollectionPage, veilsCollection } from "@/components/product/collection
 import { getCommerceCatalogue } from "@/lib/commerce/catalog";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata("Wedding Veils", "A focused edit for buyers sourcing wedding and bridal veil directions.", "/wedding-veils/");
+export const metadata = pageMetadata("Wedding Veils for Bridal Collections", "Review wedding and bridal veil directions for accessory ranges, then discuss colour, trim, attachment and quantities with JS Meilai.", "/wedding-veils/");
 
 export default async function WeddingVeilsPage() { return <CollectionPage config={veilsCollection} products={await getCommerceCatalogue("wedding-veils")} />; }

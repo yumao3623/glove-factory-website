@@ -2,7 +2,7 @@ import { CollectionPage, armSleevesCollection } from "@/components/product/colle
 import { getCommerceCatalogue } from "@/lib/commerce/catalog";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata("Arm Sleeves | Occasion Accessories", "A focused collection for fingerless arm sleeves and coordinated occasion accessories.", "/arm-sleeves/");
+export const metadata = pageMetadata("Arm Sleeves & Occasion Accessories", "Explore fingerless sleeve and coordinated occasion accessory directions for bridal, formalwear and costume sourcing conversations.", "/arm-sleeves/");
 
 export default async function ArmSleevesPage() {
   return <CollectionPage config={armSleevesCollection} products={await getCommerceCatalogue("arm-sleeves")} />;

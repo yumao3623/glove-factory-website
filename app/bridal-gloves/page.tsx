@@ -2,7 +2,7 @@ import { CollectionPage, type CollectionConfig } from "@/components/product/coll
 import { getCommerceCatalogue } from "@/lib/commerce/catalog";
 import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata("Bridal Gloves", "A focused B2B collection for buyers sourcing approved bridal glove products.", "/bridal-gloves/");
+export const metadata = pageMetadata("Bridal & Wedding Gloves for Sourcing", "Review bridal, lace and sheer glove directions from JS Meilai for wedding collections, wholesale enquiries and project discussion.", "/bridal-gloves/");
 
 const bridalCollection: CollectionConfig = {
   family: "bridal-gloves",

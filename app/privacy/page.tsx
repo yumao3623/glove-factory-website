@@ -1,3 +1,4 @@
 import { InfoPage } from "@/components/marketing/info-page";
-export const metadata = { title: "Privacy policy | JS Meilai", description: "How enquiry, account and marketing subscription data is handled." };
+import { noindexRobots } from "@/lib/stakeholder-preview";
+export const metadata = { title: "Privacy policy | JS Meilai", description: "How enquiry, account and marketing subscription data is handled.", robots: noindexRobots };
 export default function Page() { return <InfoPage eyebrow="JS Meilai | Privacy policy" title="Privacy policy" intro="How enquiry, account and marketing subscription data is handled." sections={[{ title: "Current preview boundary", body: "This preview only shows local enquiry-list and form behaviour; live marketing and payments are disabled. Legal entity, processors, retention and rights will be documented before production." }, { title: "Your choices", body: "Marketing subscription and enquiry consent are recorded separately; you can request access, correction or deletion of site-held information." }]} />; }

@@ -1,3 +1,4 @@
 import { InfoPage } from "@/components/marketing/info-page";
-export const metadata = { title: "Terms of service | JS Meilai", description: "Rules for using the catalogue, enquiries and future orders." };
+import { noindexRobots } from "@/lib/stakeholder-preview";
+export const metadata = { title: "Terms of service | JS Meilai", description: "Rules for using the catalogue, enquiries and future orders.", robots: noindexRobots };
 export default function Page() { return <InfoPage eyebrow="JS Meilai | Terms of service" title="Terms of service" intro="Rules for using the catalogue, enquiries and future orders." sections={[{ title: "Catalogue status", body: "Products, prices, stock, MOQ, lead times and certifications become public commercial facts only after confirmation. Preview fields are not quotes." }, { title: "Orders and enquiries", body: "Formal orders follow a human-confirmed quote, payment, tax and shipping terms. No paid order exists before payment confirmation." }]} />; }

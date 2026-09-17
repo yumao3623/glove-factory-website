@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 import { EditorialFamilyDiscovery } from "@/components/marketing/editorial-family-discovery";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { RfqForm } from "@/components/marketing/rfq-form";
@@ -35,7 +36,7 @@ function RefinedHero() {
           <div>
             <p className="section-label text-[#274c68]">JS Meilai · Glove manufacturer</p>
             <h1 className="mt-8 max-w-[10ch] font-serif text-[clamp(3.4rem,6vw,6.6rem)] leading-[0.88] tracking-[-0.045em] text-balance">
-              Gloves for your collection.
+              Occasion Gloves &amp; Wedding Veils Manufacturer
             </h1>
             <p className="mt-8 max-w-md text-[1.05rem] leading-7 text-[#3e464b]">
               Occasion gloves and wedding veils for bridal shops, costume suppliers and clothing brands.
@@ -126,7 +127,7 @@ function FactoryBridge() {
             We are Jiangshan Meilai Garment Factory in Zhejiang, China. Send the style and quantities you have in mind so we can review the production details.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-7 min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]">
-            <a href="#rfq">Discuss your order <ArrowRightIcon data-icon="inline-end" /></a>
+            <div className="flex flex-wrap gap-4"><a href="#rfq">Discuss your order <ArrowRightIcon data-icon="inline-end" /></a><Link href="/factory/" className="underline underline-offset-4">See factory information</Link></div>
           </Button>
         </div>
       </div>
@@ -152,7 +153,7 @@ function CustomBridge() {
             Share your reference images, measurements and preferred materials. We’ll review what can be made and confirm the details in a quotation.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]">
-            <a href="#rfq">Ask about custom orders <ArrowRightIcon data-icon="inline-end" /></a>
+            <div className="flex flex-wrap gap-4"><a href="#rfq">Ask about custom orders <ArrowRightIcon data-icon="inline-end" /></a><Link href="/custom-manufacturing/" className="underline underline-offset-4">Explore custom manufacturing</Link></div>
           </Button>
         </div>
         <div aria-hidden="true" />

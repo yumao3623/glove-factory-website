@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { previewRobots, previewRobotsHeader, siteMode } from "../lib/stakeholder-preview";
 import { POST } from "../app/api/rfq/route";
+import robots from "../app/robots";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path: string) => readFileSync(resolve(root, path), "utf8");
@@ -15,7 +16,7 @@ test("preview mode is explicit and fail-closed for indexing", () => {
   assert.equal(previewRobots.follow, false);
   assert.equal(previewRobotsHeader, "noindex, nofollow, noarchive, noimageindex");
   assert.match(read("next.config.ts"), /X-Robots-Tag/);
-  assert.doesNotMatch(read("app/robots.ts"), /sitemap/);
+  assert.equal("sitemap" in robots(), false);
 });
 
 test("preview RFQ rejects before reading the request body", async () => {

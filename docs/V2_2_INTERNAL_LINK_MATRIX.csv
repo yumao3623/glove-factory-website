@@ -1,0 +1,15 @@
+source_route,destination_route,anchor_text,intent,required_state,evidence
+/,/products/,Browse all products,range discovery,REPO_CHECKED,homepage to catalogue hub
+/,/bridal-gloves/,Explore bridal gloves,bridal sourcing,REPO_CHECKED,homepage family discovery
+/,/opera-gloves/,Explore opera gloves,formal sourcing,REPO_CHECKED,homepage family discovery
+/,/wedding-veils/,Explore wedding veils,bridal accessory sourcing,REPO_CHECKED,homepage family discovery
+/,/factory/,See factory information,trust evidence,PENDING_HUMAN_GATE,linked from homepage; destination remains noindex
+/,/custom-manufacturing/,Explore custom manufacturing,custom enquiry,PENDING_HUMAN_GATE,linked from homepage; destination remains noindex
+/products/,/bridal-gloves/,Bridal and wedding gloves,family discovery,REPO_CHECKED,hub to family
+/products/,/opera-gloves/,Opera evening and formal gloves,family discovery,REPO_CHECKED,hub to family
+/products/,/kids-dress-gloves/,Girls dress gloves,family discovery,REPO_CHECKED,hub to family
+/products/,/wedding-veils/,Wedding veils,family discovery,REPO_CHECKED,hub to family
+/bridal-gloves/,/guides/materials/,Compare materials,material evaluation,REPO_CHECKED,expanded guide with Article schema
+/bridal-gloves/,/guides/size-guide/,Prepare measurements,procurement preparation,REPO_CHECKED,expanded guide with HowTo schema
+/opera-gloves/,/custom-manufacturing/,Discuss custom work,custom enquiry,PENDING_HUMAN_GATE,destination remains noindex
+/wedding-veils/,/contact/#rfq,Start an enquiry,conversion,PENDING_HUMAN_GATE,contact route remains noindex until launch gate

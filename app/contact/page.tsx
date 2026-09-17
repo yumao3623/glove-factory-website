@@ -1,5 +1,6 @@
 import { InfoPage } from "@/components/marketing/info-page";
 import { LiveRfqForm } from "@/components/rfq/live-form";
 import { commerceRfqEnabled } from "@/lib/commerce/config";
-export const metadata = { title: "Contact us | JS Meilai", description: "Send a B2B enquiry with products, quantities and custom direction." };
+import { noindexRobots } from "@/lib/stakeholder-preview";
+export const metadata = { title: "Contact us | JS Meilai", description: "Send a B2B enquiry with products, quantities and custom direction.", robots: noindexRobots };
 export default function Page() { return <><InfoPage eyebrow="JS Meilai | Contact us" title="Contact us" intro="Send a B2B enquiry with products, quantities and custom direction." sections={[{ title: "Make your brief actionable", body: "Use the enquiry form to share company, country, product links, expected quantity, target lead time, colour, material, sizing and packaging requirements." }, { title: "Privacy and reply", body: "Contact details are used only to process your enquiry. Production email delivery and storage start after approved provider configuration." }, { title: "Useful guides", body: "See the measuring guide for sizing and the material guide for fabrics; browse all products if you are unsure of the family." }]} />{commerceRfqEnabled() && <section id="rfq" className="mx-auto max-w-[1180px] px-5 pb-20 sm:px-8 lg:px-10"><LiveRfqForm /></section>}</>; }

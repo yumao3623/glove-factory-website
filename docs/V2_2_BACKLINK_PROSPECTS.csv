@@ -1,0 +1,7 @@
+prospect_id,prospect_type,qualification_target,preferred_destination,content_offer,status,owner,evidence
+P-001,bridal trade publication,Relevant bridal accessory or wedding retail editorial with real audience,/wedding-veils/,Original material and sourcing guidance,DRAFT_REQUIRED,,RESEARCH_REQUIRED
+P-002,occasionwear trade publication,Relevant formalwear or costume buying audience,/opera-gloves/,Material and silhouette reference with factual sourcing CTA,DRAFT_REQUIRED,,RESEARCH_REQUIRED
+P-003,manufacturer or sourcing directory,Allows verified company profile and editorial description,/products/,Approved family overview and contact path,QUALIFY_FIRST,,RESEARCH_REQUIRED
+P-004,industry association,Relevant textile/accessory or manufacturing membership directory,/factory/,Operator identity and evidence-bounded factory profile,QUALIFY_FIRST,,RESEARCH_REQUIRED
+P-005,retailer or buying partner,Existing relationship and permission to reference a live collaboration,/bridal-gloves/,Co-created buyer guide or product feature,DO_NOT_CONTACT_WITHOUT_PERMISSION,,HUMAN_APPROVAL_REQUIRED
+P-006,creator or stylist,Audience matches bridal/formal/costume buyers and disclosure is possible,/guides/materials/,Useful material comparison with disclosed referral,QUALIFY_FIRST,,RESEARCH_REQUIRED

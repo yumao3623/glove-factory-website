@@ -1,5 +1,6 @@
 import Link from "next/link";
-export const metadata = { title: "Request a quotation", description: "Confirm materials, quantities and delivery for your glove order." };
+import { noindexRobots } from "@/lib/stakeholder-preview";
+export const metadata = { title: "Request a quotation", description: "Confirm materials, quantities and delivery for your glove order.", robots: noindexRobots };
 export default function CheckoutPage() {
   return <main id="main-content" className="mx-auto min-h-[60vh] max-w-[900px] px-5 py-16 sm:px-8 lg:py-24">
     <p className="section-label text-stone-500">Your next step</p>

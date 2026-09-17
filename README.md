@@ -1,6 +1,6 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前版本为 **2.1.0**，账号、后台、询价与报价验收见 [2.1 发布记录](docs/V2_1_RELEASE.md)。运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前版本为 **2.1.0**，账号、后台、询价与报价验收见 [2.1 发布记录](docs/V2_1_RELEASE.md)；2.2 SEO/GSC 工程记录见 [2.2 SEO/GSC 执行手册](docs/V2_2_SEO_GSC_RUNBOOK.md)。运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
 
 2.0 版本的结构、设计系统、需求与支付边界见 [仓库结构说明](docs/REPOSITORY_MAP.md)、[设计系统](DESIGN.md)、[2.0 实施说明](docs/V2_REQUIREMENTS.md) 和 [2.0 支付决策](docs/V2_PAYMENT_DECISION.md)。
 
@@ -47,6 +47,7 @@ npm start
 | `npm run lint` | 运行 ESLint |
 | `npm run typecheck` | 运行 TypeScript 类型检查 |
 | `npm test` | 运行 Node 测试套件 |
+| `npm run seo:audit -- --origin <URL> --mode <preview\|production>` | 按 sitemap 逐页检查状态码、robots、title、description、canonical、H1 和正式索引边界 |
 | `npm run validate:products` | 校验已批准产品、图片、哈希和溯源闭环 |
 | `npm run ingest:batch -- <command>` | 执行本地、分批、审阅优先的产品导入流程 |
 
@@ -73,6 +74,8 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 复制 `.env.example` 为 `.env.local` 并按实际环境配置；环境文件不进入 Git。
 
 - `NEXT_PUBLIC_APP_URL`、`NEXT_PUBLIC_SITE_URL`：本地开发地址；生产均为 `https://www.jsmeilai.com`。
+- `SEO_INDEXING_ENABLED=true`：2.2 正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
+- `SEO_COSTUME_INDEXING_ENABLED=true`：仅在正式索引开关和 `/costume-gloves/` 的 Human gate 同时通过后启用该 family；默认不进入 sitemap。
 - Supabase URL、anon key、服务端 service-role key：账户、后台、目录和受保护媒体所需。
 - `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
 - `COMMERCE_RFQ_ENABLED=true`、`RESEND_API_KEY`、`EMAIL_FROM`、`RFQ_RECIPIENT`：询价存储及通知邮件。

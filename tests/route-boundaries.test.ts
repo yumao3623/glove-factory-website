@@ -24,6 +24,10 @@ test("sitemap includes only implemented indexable owners", () => {
   for (const excluded of ["wedding-gloves", "lace-gloves", "wholesale-gloves"]) assert.equal(sitemap.includes(excluded), false, excluded);
 });
 
+test("retains the Search Console HTML ownership file", () => {
+  assert.equal(read("public/google14a276efa04bb12e.html").trim(), "google-site-verification: google14a276efa04bb12e.html");
+});
+
 test("available families expose their canonical collection route", () => {
   for (const family of families.filter((entry) => entry.availableNow)) assert.ok(family.route, family.slug);
   assert.equal(families.find((entry) => entry.slug === "costume-gloves")?.route, "/costume-gloves/");
