@@ -1,12 +1,12 @@
 route,page_type,index_state,canonical,sitemap,robots_reason,owner
-/,homepage,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/,yes,public range owner,SEO-2.2
-/products/,catalogue hub,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/products/,yes,public catalogue owner,SEO-2.2
-/bridal-gloves/,family collection,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/bridal-gloves/,yes,bridal canonical owner,SEO-2.2
-/opera-gloves/,family collection,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/opera-gloves/,yes,formal glove canonical owner,SEO-2.2
-/costume-gloves/,family collection,PREVIEW_NOINDEX_FORMAL_PENDING_GATE,https://www.jsmeilai.com/costume-gloves/,conditional,legacy launch blocker; requires SEO_COSTUME_INDEXING_ENABLED and Human gate,SEO-2.2
-/kids-dress-gloves/,family collection,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/kids-dress-gloves/,yes,girls occasion canonical owner,SEO-2.2
-/wedding-veils/,family collection,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/wedding-veils/,yes,wedding veil canonical owner,SEO-2.2
-/arm-sleeves/,family collection,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/arm-sleeves/,yes,current V2 accessory family owner,SEO-2.2
+/,homepage,FORMAL_INDEX,https://www.jsmeilai.com/,yes,public range owner,SEO-2.2
+/products/,catalogue hub,FORMAL_INDEX,https://www.jsmeilai.com/products/,yes,public catalogue owner,SEO-2.2
+/bridal-gloves/,family collection,FORMAL_INDEX,https://www.jsmeilai.com/bridal-gloves/,yes,bridal canonical owner,SEO-2.2
+/opera-gloves/,family collection,FORMAL_INDEX,https://www.jsmeilai.com/opera-gloves/,yes,formal glove canonical owner,SEO-2.2
+/costume-gloves/,family collection,FORMAL_PENDING_GATE,https://www.jsmeilai.com/costume-gloves/,conditional,legacy launch blocker; requires SEO_COSTUME_INDEXING_ENABLED and Human gate,SEO-2.2
+/kids-dress-gloves/,family collection,FORMAL_INDEX,https://www.jsmeilai.com/kids-dress-gloves/,yes,girls occasion canonical owner,SEO-2.2
+/wedding-veils/,family collection,FORMAL_INDEX,https://www.jsmeilai.com/wedding-veils/,yes,wedding veil canonical owner,SEO-2.2
+/arm-sleeves/,family collection,FORMAL_INDEX,https://www.jsmeilai.com/arm-sleeves/,yes,current V2 accessory family owner,SEO-2.2
 /products/{slug}/,product preview,NOINDEX,no canonical,no,ADR 0005 preview boundary,SEO-2.2
 /contact/,conversion endpoint,NOINDEX_UNTIL_LAUNCH,no canonical,no,formal RFQ/privacy gate pending,SEO-2.2
 /factory/,evidence page,NOINDEX_UNTIL_EVIDENCE,no canonical,no,factory evidence gate pending,SEO-2.2
@@ -15,5 +15,5 @@ route,page_type,index_state,canonical,sitemap,robots_reason,owner
 /account/,private account,NOINDEX,no canonical,no,private user area,SEO-2.2
 /cart/,private enquiry list,NOINDEX,no canonical,no,session state,SEO-2.2
 /checkout/,private quote flow,NOINDEX,no canonical,no,transactional state,SEO-2.2
-/guides/materials/,guide,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/guides/materials/,yes,expanded educational guide with Article schema,SEO-2.2
-/guides/size-guide/,guide,PREVIEW_NOINDEX_FORMAL_INDEX,https://www.jsmeilai.com/guides/size-guide/,yes,expanded measurement guide with HowTo schema,SEO-2.2
+/guides/materials/,guide,FORMAL_INDEX,https://www.jsmeilai.com/guides/materials/,yes,expanded educational guide with Article schema,SEO-2.2
+/guides/size-guide/,guide,FORMAL_INDEX,https://www.jsmeilai.com/guides/size-guide/,yes,expanded measurement guide with HowTo schema,SEO-2.2
