@@ -2,8 +2,10 @@ import { ArrowRightIcon } from "lucide-react";
 import { EditorialFamilyDiscovery } from "@/components/marketing/editorial-family-discovery";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { RfqForm } from "@/components/marketing/rfq-form";
+import { LiveRfqForm } from "@/components/rfq/live-form";
 import { Button } from "@/components/ui/button";
 import { generatedEditorialMedia } from "@/data/generated-editorial-media";
+import { commerceRfqEnabled } from "@/lib/commerce/config";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata(
@@ -160,6 +162,7 @@ function CustomBridge() {
 }
 
 function RfqBand() {
+  const enabled = commerceRfqEnabled();
   return (
     <section id="rfq" className="bg-black text-white">
       <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-10 lg:py-24">
@@ -170,7 +173,7 @@ function RfqBand() {
             Tell us which styles you are considering, your estimated quantities and where the order needs to go.
           </p>
         </div>
-        <div className="rfq-on-dark"><RfqForm /></div>
+        <div className="rfq-on-dark">{enabled ? <LiveRfqForm /> : <RfqForm />}</div>
       </div>
     </section>
   );

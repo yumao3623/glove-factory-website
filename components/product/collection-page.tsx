@@ -3,10 +3,12 @@ import { ArrowRightIcon } from "lucide-react";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { approvedProductImage } from "@/components/product/approved-product-image";
 import { RfqForm } from "@/components/marketing/rfq-form";
+import { LiveRfqForm } from "@/components/rfq/live-form";
 import { ProductCard } from "@/components/product/product-card";
 import { Button } from "@/components/ui/button";
 import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 import type { ProductFamily } from "@/types/product";
+import { commerceRfqEnabled } from "@/lib/commerce/config";
 
 export type CollectionConfig = {
   family: ProductFamily;
@@ -26,12 +28,13 @@ function Breadcrumb({ title, dark = false }: { title: string; dark?: boolean }) 
 }
 
 export function CollectionPage({ config, products }: { config: CollectionConfig; products: readonly ApprovedCatalogueProduct[] }) {
+  const rfqEnabled = commerceRfqEnabled();
   const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "/" }, { "@type": "ListItem", position: 2, name: "Products", item: "/products/" }, { "@type": "ListItem", position: 3, name: config.title, item: `/${config.family}/` }] };
   return <main id="main-content" tabIndex={-1} className="overflow-hidden"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
     <CollectionHero config={config} product={products[0]} />
     <CollectionRange config={config} products={products} />
     <CollectionProcurement config={config} />
-    <section id="rfq" className="bg-black text-white"><div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-10 lg:py-24"><div><p className="section-label text-stone-400">Enquiry</p><h2 className="mt-3 max-w-md font-serif text-4xl leading-[1.04] sm:text-5xl">Review the range without submitting a brief.</h2><p className="mt-5 max-w-sm leading-7 text-stone-300">This stakeholder preview keeps enquiry delivery and visitor-data collection offline.</p></div><div className="rfq-on-dark"><RfqForm /></div></div></section>
+    <section id="rfq" className="bg-black text-white"><div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-10 lg:py-24"><div><p className="section-label text-stone-400">Enquiry</p><h2 className="mt-3 max-w-md font-serif text-4xl leading-[1.04] sm:text-5xl">{rfqEnabled ? "Start a wholesale conversation." : "Review the range without submitting a brief."}</h2><p className="mt-5 max-w-sm leading-7 text-stone-300">{rfqEnabled ? "Share the styles, quantities and custom details you need us to review." : "This stakeholder preview keeps enquiry delivery and visitor-data collection offline."}</p></div><div className="rfq-on-dark">{rfqEnabled ? <LiveRfqForm /> : <RfqForm />}</div></div></section>
   </main>;
 }
 

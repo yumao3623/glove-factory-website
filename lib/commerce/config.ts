@@ -37,3 +37,8 @@ export function getCommerceConfig(): CommerceConfig {
 export function missingConfig(...keys: Array<string | undefined>) {
   return keys.map((key, index) => key ? null : `required value #${index + 1}`).filter((key): key is string => Boolean(key));
 }
+
+export function commerceRfqEnabled() {
+  const config = getCommerceConfig();
+  return process.env.COMMERCE_RFQ_ENABLED === "true" && missingConfig(config.supabaseUrl, config.supabaseServiceRoleKey).length === 0;
+}
