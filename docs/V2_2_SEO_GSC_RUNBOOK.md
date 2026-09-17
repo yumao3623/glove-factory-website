@@ -1,9 +1,9 @@
 # JS Meilai 2.2 SEO / GSC 执行手册
 
-状态：`LOCAL_FOUNDATION_COMPLETE; EXTERNAL_GSC_PENDING`  
+状态：`FORMAL_INDEXING_DEPLOYED; GSC_VERIFIED; SITEMAP_SUBMITTED; REPORTS_PROCESSING`
 日期：2026-09-18
 
-2.2 的仓库基础已经加入，但正式索引保持显式关闭。`SEO_INDEXING_ENABLED=true` 只有在 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com`、正式发布依赖、内容/法律边界和 GSC property 均复核后才可设置。错误 host 即使误设开关也会继续走 preview fail-closed 分支。历史上被标为 launch blocker 的 `/costume-gloves/` 另受 `SEO_COSTUME_INDEXING_ENABLED` 和 Human gate 控制，不能因为打开总开关而自动进入 sitemap。
+2.2 正式索引已按用户授权开启。Vercel Production 环境已设置 `SEO_INDEXING_ENABLED=true`，错误 host 即使误设开关也会继续走 preview fail-closed 分支。历史上被标为 launch blocker 的 `/costume-gloves/` 仍受 `SEO_COSTUME_INDEXING_ENABLED` 和 Human gate 控制，不能因为打开总开关而自动进入 sitemap；当前保持 noindex。
 
 ## 本地和发布前检查
 
@@ -24,15 +24,19 @@ npm run seo:audit -- --origin http://localhost:3000 --mode preview --json .tmp/s
 - `robots.txt` 明确声明 `https://www.jsmeilai.com/sitemap.xml`；
 - `/api/`、`/admin/`、`/account/`、`/cart/` 和 `/checkout/` 不进入 sitemap，并保持 noindex/受保护状态。
 
-当前线上观察（2026-09-18）仍是 stakeholder preview：首页、robots 和 sitemap 均返回 `X-Robots-Tag: noindex, nofollow, noarchive, noimageindex`。这不是 GSC 提交成功证据；正式开关需要单独复核。
+正式部署观察（2026-09-18）：commit `fa36a45` 已由 Vercel Production 部署。Chrome 和线上响应共同确认 `robots.txt` 为 200 且声明 `https://www.jsmeilai.com/sitemap.xml`，`sitemap.xml` 为 200 且不含 `X-Robots-Tag`，当前发现 9 个正式 URL；首页和两篇 guide 均返回绝对 canonical、无 `noindex`。`/costume-gloves/` 仍按独立 gate 保持 noindex，未进入 sitemap。
 
-Chrome 核验（2026-09-18）：以 `yumao3623@gmail.com` 访问 `https://www.jsmeilai.com/` property 时，Search Console 显示“您无权访问此资源”，并提供 HTML 文件验证方式，文件名为 `google14a276efa04bb12e.html`。文件已加入 `public/`，但必须先部署到正式 host，再回到 Chrome 点击“验证”；在此之前 property ownership、sitemap submission 和 indexing data 仍属于外部待办。
+Chrome GSC 证据（2026-09-18）：以 `yumao3623@gmail.com` 完成 HTML 文件验证，文件名为 `google14a276efa04bb12e.html`；随后提交 `https://www.jsmeilai.com/sitemap.xml`，状态为“成功”，最近读取日期为 2026-09-18，发现网页数为 9。Performance、Indexing、Enhancements 和 Links 报告均显示“正在处理数据，请过 1 天左右再来查看”，当前无可用查询/页面数据。
+
+Chrome URL Inspection 证据（2026-09-18）：首页最近一次 Googlebot smartphone 抓取成功，发现来源为 sitemap，但旧抓取结果仍显示“已抓取 - 尚未编入索引”。已点击一次“请求编入索引”，Google 返回临时错误“提交您的索引编制请求时出现了问题，请稍后重试”；因此不能把首页已收录作为已完成事实，需等待报告处理并稍后重试一次。
+
+最终自动化验证（2026-09-18）：`npm run typecheck`、`npm run lint`、`npm test`（63/63）、`npm run build`、preview audit 和 production audit 均通过；production audit 检查 9 个 sitemap URL，`failures=0`、`warnings=0`。
 
 ## GSC checkpoint
 
-1. 在 Google Search Console 确认 `https://www.jsmeilai.com/` URL-prefix 或 `sc-domain:jsmeilai.com` property 的所有权。保存 property 类型、验证方式和验证日期，不把 token 写入 Git。
+1. 在 Google Search Console 确认 `https://www.jsmeilai.com/` URL-prefix 或 `sc-domain:jsmeilai.com` property 的所有权。当前已完成 URL-prefix property 的 HTML 文件验证；token 未写入 Git。
 2. 先检查 Manual actions、Security issues、Page indexing 和现有 sitemap 状态。
-3. 正式索引开关打开并部署后，提交 `https://www.jsmeilai.com/sitemap.xml`。
+3. 正式索引开关已打开并部署，`https://www.jsmeilai.com/sitemap.xml` 已提交且 GSC 显示成功、发现 9 个网页。
 4. 读取最近 28 天的 query/page/date/device/country 数据，优先找：有 impression 无 click、平均位置 11–20、商业 family 页低 CTR、孤立或 underlinked 页面。
 5. 对首页、产品 hub 和六个 family canonical URL 做 URL Inspection；记录 Google 实际的 canonical、crawl、index 状态和检查时间。
 6. 一周后复查 sitemap discovered/indexed、excluded reason 和 query/page 变化。GSC 结果只作为 `GSC_OBSERVED` 证据，不替代浏览器和源代码检查。
