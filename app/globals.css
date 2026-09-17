@@ -24,6 +24,15 @@
 :root {
   --background: #f5f6f5;
   --foreground: #111416;
+  --ink: #111416;
+  --ink-muted: #5c676d;
+  --navy: #0d2b3f;
+  --canvas: #f5f6f5;
+  --canvas-warm: #f7f5f1;
+  --pearl: #ffffff;
+  --hairline: #c9ced0;
+  --action: #0d2b3f;
+  --on-action: #ffffff;
   --primary: #111416;
   --primary-foreground: #ffffff;
   --secondary: #e7ebed;
@@ -44,6 +53,15 @@ a { text-underline-offset: 4px; }
 .font-serif { font-family: "Iowan Old Style", Baskerville, Georgia, "Times New Roman", serif; }
 .section-label { font-size: .6875rem; font-weight: 600; letter-spacing: 0; line-height: 1.4; text-transform: uppercase; }
 .rfq-on-dark form { border-color: #4a4742; }
+.announcement-bar { position: relative; overflow: hidden; background: var(--navy); color: #fff; }
+.announcement-track { display: flex; width: max-content; min-height: 2.25rem; align-items: center; animation: announcement-scroll 34s linear infinite; }
+.announcement-bar:hover .announcement-track, .announcement-bar:focus-within .announcement-track { animation-play-state: paused; }
+.announcement-item { display: inline-flex; align-items: center; gap: 1.5rem; padding: .45rem 1.5rem; font-size: .625rem; font-weight: 600; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; white-space: nowrap; }
+.announcement-dot { color: #a8c2d3; font-size: .85rem; }
+@keyframes announcement-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.admin-stat { border: 1px solid var(--hairline); background: var(--pearl); padding: 1rem; }
+.admin-stat-value { color: var(--navy); font-family: "Iowan Old Style", Baskerville, Georgia, serif; font-size: 1.7rem; line-height: 1; }
+.admin-stat-label { color: var(--ink-muted); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; }
 .skip-link { position: fixed; top: 0.5rem; left: 0.5rem; z-index: 100; transform: translateY(-200%); background: var(--foreground); color: var(--background); padding: 0.75rem 1rem; }
 .skip-link:focus { transform: translateY(0); outline: 2px solid var(--primary); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }

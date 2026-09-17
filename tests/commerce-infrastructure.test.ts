@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { getMarketQuote, applyWholesalePrice } from "@/lib/commerce/markets";
 import { createPaddleTransaction, verifyPaddleSignature } from "@/lib/commerce/paddle-rest";
+import { createPayPalOrder, verifyPayPalWebhook } from "@/lib/commerce/paypal-rest";
 
 test("market quote applies configured wholesale threshold and currency", () => {
   const quote = getMarketQuote("GB");
@@ -24,4 +25,21 @@ test("paddle webhook signature verifies a fresh signed payload", () => {
   const signature = crypto.createHmac("sha256", secret).update(`${timestamp}:${payload}`).digest("hex");
   assert.equal(verifyPaddleSignature(payload, `ts=${timestamp};h1=${signature}`, secret), true);
   assert.equal(verifyPaddleSignature(payload, `ts=${timestamp};h1=bad`, secret), false);
+});
+
+test("paypal checkout fails closed until merchant verification", async () => {
+  delete process.env.PAYPAL_CLIENT_ID;
+  delete process.env.PAYPAL_CLIENT_SECRET;
+  const result = await createPayPalOrder({ orderId: "quote_test_001", lines: [{ name: "Approved glove direction", quantity: 1, unitAmountMinor: 1000, currency: "USD" }] });
+  assert.equal(result.configured, false);
+  assert.match(result.error, /pending merchant verification/i);
+});
+
+test("paypal webhook verification fails closed without merchant configuration", async () => {
+  delete process.env.PAYPAL_CLIENT_ID;
+  delete process.env.PAYPAL_CLIENT_SECRET;
+  delete process.env.PAYPAL_WEBHOOK_ID;
+  const result = await verifyPayPalWebhook("{}", { authAlgo: null, certUrl: null, transmissionId: null, transmissionSig: null, transmissionTime: null });
+  assert.equal(result.configured, false);
+  assert.equal(result.verified, false);
 });

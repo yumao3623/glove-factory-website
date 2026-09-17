@@ -6,6 +6,9 @@ export type CommerceConfig = {
   paddleWebhookSecret?: string;
   stripeSecretKey?: string;
   stripeWebhookSecret?: string;
+  paypalClientId?: string;
+  paypalClientSecret?: string;
+  paypalWebhookId?: string;
   resendApiKey?: string;
   appUrl: string;
   rfqRecipient: string;
@@ -21,6 +24,9 @@ export function getCommerceConfig(): CommerceConfig {
     paddleWebhookSecret: process.env.PADDLE_WEBHOOK_SECRET,
     stripeSecretKey: process.env.STRIPE_SECRET_KEY,
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+    paypalClientId: process.env.PAYPAL_CLIENT_ID,
+    paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET,
+    paypalWebhookId: process.env.PAYPAL_WEBHOOK_ID,
     resendApiKey: process.env.RESEND_API_KEY,
     appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3005",
     rfqRecipient: process.env.RFQ_RECIPIENT ?? "yumao3623@gmail.com",

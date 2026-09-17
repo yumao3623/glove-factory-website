@@ -27,7 +27,7 @@ export function sameOrigin(request: Request) {
   try { return new URL(origin).origin === new URL(request.url).origin; } catch { return false; }
 }
 
-const allowedFields = ["slug", "name", "family", "material", "length_cm", "finger_style", "colors", "description", "image_urls", "status"] as const;
+const allowedFields = ["slug", "name", "family", "material", "length_cm", "finger_style", "colors", "description", "image_urls", "sub_style", "occasion", "decoration", "age_group", "customizable_fields", "featured", "sort_order", "status"] as const;
 type ProductField = typeof allowedFields[number];
 
 export type ProductInput = Partial<Record<ProductField, unknown>>;
@@ -52,11 +52,18 @@ export function validateProductInput(input: ProductInput, partial = false) {
   for (const field of ["material", "finger_style", "description"] as const) if (field in input && input[field] !== null && (typeof input[field] !== "string" || input[field].length > (field === "description" ? 10000 : 120))) errors.push(`${field} is invalid`);
   if (input.finger_style && !["full-finger", "fingerless", "half-finger", "not-applicable"].includes(String(input.finger_style))) errors.push("finger_style must be a supported value");
   if ("length_cm" in input && input.length_cm !== null && (!Number.isFinite(Number(input.length_cm)) || Number(input.length_cm) < 0 || Number(input.length_cm) > 300)) errors.push("length_cm is invalid");
-  if ("colors" in input && (!Array.isArray(input.colors) || input.colors.some((value) => typeof value !== "string" || value.length > 60))) errors.push("colors must be an array of short strings");
+  for (const field of ["colors", "sub_style", "occasion", "decoration", "customizable_fields"] as const) if (field in input && (!Array.isArray(input[field]) || input[field].some((value) => typeof value !== "string" || value.length > 120))) errors.push(`${field} must be an array of short strings`);
+  if ("age_group" in input && input.age_group !== null && !["adult", "kids", "mixed"].includes(String(input.age_group))) errors.push("age_group is invalid");
+  if ("featured" in input && typeof input.featured !== "boolean") errors.push("featured is invalid");
+  if ("sort_order" in input && (!Number.isInteger(Number(input.sort_order)) || Number(input.sort_order) < 0)) errors.push("sort_order is invalid");
   if ("image_urls" in input && (!Array.isArray(input.image_urls) || input.image_urls.some((value) => typeof value !== "string" || !/^products\/[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(value) || String(value).includes("..")))) errors.push("image_urls must contain product-media paths");
   if ("status" in input && !["draft", "active", "archived"].includes(String(input.status))) errors.push("status is invalid");
   if ("length_cm" in input) payload.length_cm = input.length_cm === null || input.length_cm === "" ? null : Number(input.length_cm);
   if ("colors" in input) payload.colors = input.colors;
+  for (const field of ["sub_style", "occasion", "decoration", "customizable_fields"] as const) if (field in input) payload[field] = input[field];
+  if ("age_group" in input) payload.age_group = input.age_group === "" ? null : input.age_group;
+  if ("featured" in input) payload.featured = input.featured;
+  if ("sort_order" in input) payload.sort_order = Number(input.sort_order);
   if ("image_urls" in input) payload.image_urls = input.image_urls;
   if ("status" in input) payload.status = input.status;
   for (const field of ["material", "finger_style", "description"] as const) if (field in input) payload[field] = input[field] === "" ? null : input[field];

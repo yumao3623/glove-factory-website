@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 import type { ApprovedCatalogueImage } from "@/data/approved-catalogue";
 
-/** Approved catalogue derivatives are copied into public/ by the W02 build step. */
+/** Resolve either a protected Supabase media route or a local provenance derivative. */
 export function approvedProductImage(imageReference: ApprovedCatalogueImage): StaticImageData | string {
   if (/^https?:\/\//i.test(imageReference.path ?? "") || imageReference.path?.startsWith("/api/media/")) return imageReference.path!;
   if (!imageReference.path?.startsWith("/products/") || !imageReference.width || !imageReference.height) {

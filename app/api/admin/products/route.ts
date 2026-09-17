@@ -4,7 +4,7 @@ import { getAdminUser, sameOrigin, validateProductInput } from "@/lib/commerce/a
 
 export async function GET() {
   if (!(await getAdminUser())) return NextResponse.json({ error: "Admin authentication required." }, { status: 401 });
-  const result = await supabaseRest("products?select=*&order=updated_at.desc", {}, true);
+  const result = await supabaseRest("products?select=*&order=featured.desc,sort_order.asc,updated_at.desc", {}, true);
   return NextResponse.json(result, { status: result.error ? 502 : 200 });
 }
 

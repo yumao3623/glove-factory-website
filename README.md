@@ -1,6 +1,8 @@
-# JS Meilai Glove Factory Website
+# JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套和婚礼头纱等采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前询盘功能处于预览关闭状态；产品数据和图片必须通过仓库内的溯源校验后才能使用。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。2.0 版本的产品运行时已接入受保护的 Supabase 产品表与 `product-media` 对象存储；本地已批准数据仅作为迁移和测试证据保留。
+
+2.0 版本的结构、设计系统、需求与支付边界见 [仓库结构说明](docs/REPOSITORY_MAP.md)、[设计系统](DESIGN.md)、[2.0 实施说明](docs/V2_REQUIREMENTS.md) 和 [2.0 支付决策](docs/V2_PAYMENT_DECISION.md)。
 
 ## 环境要求
 
@@ -35,7 +37,7 @@ npm run build
 npm start
 ```
 
-## 主要 npm scripts
+## 主要 npm 脚本
 
 | 命令 | 用途 |
 | --- | --- |
@@ -48,19 +50,21 @@ npm start
 | `npm run validate:products` | 校验已批准产品、图片、哈希和溯源闭环 |
 | `npm run ingest:batch -- <command>` | 执行本地、分批、审阅优先的产品导入流程 |
 
+2.0 数据迁移使用 `node --env-file=.env.local scripts/migrate-approved-catalogue-to-supabase.mjs --dry-run` 预检，确认数量后再使用 `--apply`。脚本只上传已批准的网页派生图片，并在媒体验证完成后将 36 条产品记录切换为已上架状态（`active`）。
+
 ## 目录结构
 
 ```text
 app/                    Next.js 路由、页面和 API
-components/             页面、产品和 UI 组件
+components/             页面、产品和界面组件
 lib/                    产品导入、询盘校验和站点工具
 data/                   已批准产品、分类和导入审阅记录
 assets/                 资产清单、原始素材和站内派生素材
-public/products/media/  网站使用的产品图片
+public/products/media/  迁移前已批准的网页派生图片及溯源校验输入；电商目录开关开启时，运行时读取 Supabase 对象存储
 scripts/                产品导入、资产处理和研究辅助脚本
 tests/                  自动化测试
 docs/                   项目规范、决策、路线图和操作边界
-research/               关键词、竞品、SEO 和视觉研究材料
+research/               关键词、竞品、搜索引擎优化和视觉研究材料
 .product-ingestion/     仅本地保存的原始导入与溯源工作目录
 ```
 
@@ -69,19 +73,19 @@ research/               关键词、竞品、SEO 和视觉研究材料
 当前本地预览不要求 `.env` 文件。
 
 - `NEXT_PUBLIC_SITE_URL`：可选。未设置时使用 `http://localhost:3000`。
-- `RESEND_API_KEY`：仅在未来正式启用 Resend RFQ 集成时需要；当前预览不读取或要求该变量。
+- `RESEND_API_KEY`：仅在未来正式启用 Resend 询价邮件集成时需要；当前预览不读取或要求该变量。
 
 环境变量文件已被 `.gitignore` 排除。若后续需要提供示例，只提交不含密钥的 `.env.example`。
 
 ## 成熟独立站需求基线
 
-成熟 B2B 电商方向、页面结构、筛选、商品详情、购物车、账户、Supabase、RFQ 邮件接口和分阶段验收标准见 [docs/REQUIREMENTS_MATURITY_COMMERCE.md](docs/REQUIREMENTS_MATURITY_COMMERCE.md)。Paddle 不适用于实物手套；替代支付商和真实商业政策在沙盒验收前保持关闭。
+成熟 B2B 电商方向、页面结构、筛选、商品详情、购物车、账户、Supabase、询价邮件接口和分阶段验收标准见 [成熟独立站需求基线](docs/REQUIREMENTS_MATURITY_COMMERCE.md)。Paddle 不适用于实物手套；替代支付商和真实商业政策在沙盒验收前保持关闭。
 
 ## 产品数据来源
 
-产品原始资料来自已授权的 JS Meilai 1688 店铺导出。公开使用的数据位于 `data/products/approved/`，图片与来源哈希映射位于 `assets/asset-manifest.json`，网站派生图片位于 `public/products/media/`。
+产品原始资料来自已授权的 JS Meilai 1688 店铺导出。已批准记录位于 `data/products/approved/`，图片与来源哈希映射位于 `assets/asset-manifest.json`，迁移输入位于 `public/products/media/`；运行时产品与图片由 Supabase 提供。
 
-不要直接从原始 ZIP 或未审阅草稿生成公开产品。产品状态、来源 listing、图片许可、哈希和人工审核结论必须保持可追溯。
+不要直接从原始 ZIP 或未审阅草稿生成公开产品。产品状态、来源商品条目、图片许可、哈希和人工审核结论必须保持可追溯。
 
 ## `.product-ingestion` 的作用
 
@@ -90,7 +94,7 @@ research/               关键词、竞品、SEO 和视觉研究材料
 - 未改动的原始产品 ZIP；
 - 解压和检查得到的原始图片；
 - 批次配置、草稿、审阅、隔离和清理队列；
-- 产品图片与来源 listing 的本地溯源证据。
+- 产品图片与来源商品条目的本地溯源证据。
 
 这些文件用于产品导入和 `validate:products` 的原图哈希校验，但不会被 Next.js 网站直接发布。
 
@@ -128,7 +132,7 @@ git status --short
     cleanup/
 ```
 
-## Validate products
+## 产品校验
 
 运行：
 
@@ -136,6 +140,6 @@ git status --short
 npm run validate:products
 ```
 
-校验会检查已批准产品记录、registry/manifest 映射、原图和派生图是否存在，以及文件哈希、图片格式和尺寸是否匹配。校验失败时不要通过跳过检查、重新生成产品数据或修改资产清单来掩盖问题；应先恢复缺失的原始资料或确认迁移过程是否改变了路径、大小写、编码或文件内容。
+校验会检查已批准产品记录、登记表与资产清单的映射、原图和派生图是否存在，以及文件哈希、图片格式和尺寸是否匹配。校验失败时不要通过跳过检查、重新生成产品数据或修改资产清单来掩盖问题；应先恢复缺失的原始资料或确认迁移过程是否改变了路径、大小写、编码或文件内容。
 
 更完整的产品导入边界和流程见 `docs/PRODUCT_BATCH_INGESTION.md`。

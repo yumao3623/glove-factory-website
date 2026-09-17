@@ -18,7 +18,7 @@ export type ValidatedRfq = { name: string; company: string; country: string; ema
 export type RfqValidation = { valid: true; data: ValidatedRfq } | { valid: false; errors: Record<string, string> };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const families = new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils"]);
+const families = new Set(["bridal-gloves", "opera-gloves", "costume-gloves", "kids-dress-gloves", "wedding-veils", "arm-sleeves"]);
 
 function text(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
