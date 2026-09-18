@@ -1,6 +1,6 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。商务与应用基线为 **2.1.0**，账号、后台、询价与报价验收见 [2.1 发布记录](docs/V2_1_RELEASE.md)；2.2 SEO/GSC 工程已部署，执行记录见 [2.2 SEO/GSC 执行手册](docs/V2_2_SEO_GSC_RUNBOOK.md)。运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。商务与应用基线为 **2.1.0**，账号、后台、询价与报价验收见 [2.1 发布记录](docs/V2_1_RELEASE.md)；**2.1.5 多语言界面基础**见 [2.1.5 多语言界面记录](docs/V2_1_5_LOCALE_UI.md)；2.2 SEO/GSC 工程已部署，执行记录见 [2.2 SEO/GSC 执行手册](docs/V2_2_SEO_GSC_RUNBOOK.md)。运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
 
 2.0 版本的结构、设计系统、需求与支付边界见 [仓库结构说明](docs/REPOSITORY_MAP.md)、[设计系统](DESIGN.md)、[2.0 实施说明](docs/V2_REQUIREMENTS.md) 和 [2.0 支付决策](docs/V2_PAYMENT_DECISION.md)。
 
