@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { isLocale, localeList, translate, type Locale } from "@/lib/i18n";
 
 const STORAGE_KEY = "jsmeilai-locale";
@@ -16,6 +16,7 @@ function initialLocale(): Locale {
 
 export function LocaleProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [locale, setLocaleState] = useState<Locale>("en");
+  const hydrated = useRef(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLocaleState(initialLocale()), 0);
@@ -23,6 +24,10 @@ export function LocaleProvider({ children }: Readonly<{ children: React.ReactNod
   }, []);
 
   useEffect(() => {
+    if (!hydrated.current) {
+      hydrated.current = true;
+      return;
+    }
     window.localStorage.setItem(STORAGE_KEY, locale);
     document.cookie = `${STORAGE_KEY}=${encodeURIComponent(locale)}; Path=/; Max-Age=31536000; SameSite=Lax`;
     document.documentElement.lang = locale;
