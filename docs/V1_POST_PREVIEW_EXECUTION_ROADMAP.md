@@ -1,5 +1,7 @@
 # V1 Post-Preview Execution Roadmap
 
+> 2026-09-22 治理注记：本文保留当时的范围与验收，不作为当前任务队列或实时平台状态。当前事实见 [PROJECT_STATUS.md](PROJECT_STATUS.md)，未来顺序见 [ROADMAP.md](ROADMAP.md)。文内旧“待上线/未配置/2.3 必做多语言”等表述按历史理解；不抹除已完成的 2.1.5 或 2.2。
+
 Status: `HUMAN_REVIEW_ACCEPTED_FOR_V1_POST_PREVIEW_ROADMAP_FREEZE`
 
 Human approval: `2026-09-05`
