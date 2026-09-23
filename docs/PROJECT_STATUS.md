@@ -1,6 +1,6 @@
 # JS Meilai 当前项目状态
 
-核对日期：2026-09-22（Asia/Shanghai）。这是当前状态唯一入口；先读本页，再读 ROADMAP.md 和 HANDOFF.md。历史版本事实见 RELEASE_HISTORY.md；执行规则见 PROJECT_WORKFLOW.md。
+核对日期：2026-09-24（Asia/Shanghai）；平台事实沿用 2026-09-22 最近一次实查，除非另有证据。这是当前状态唯一入口；由根目录 AGENTS.md 规定读取顺序。先读本页，再读 HANDOFF.md、ROADMAP.md 和 PROJECT_WORKFLOW.md。历史版本事实见 RELEASE_HISTORY.md；执行规则见 PROJECT_WORKFLOW.md。
 
 ## 版本与阶段
 
