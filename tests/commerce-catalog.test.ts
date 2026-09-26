@@ -25,6 +25,15 @@ test("source colour evidence is rendered as English public copy", () => {
   assert.deepEqual(displayColors(product!), ["Red", "Black", "White", "Pink"]);
 });
 
+test("unconfirmed source measurements are removed from the public product name", () => {
+  const product = mapPublishedProduct({ id: "db-length-title", slug: "length-title", name: "55 cm Long Satin Opera Gloves", family: "opera-gloves", status: "active", image_urls: ["products/length-title/image.webp"] });
+  assert.equal(product?.productName, "Long Satin Opera Gloves");
+  assert.equal(product?.length, undefined);
+  assert.equal(product?.primaryImage.altText, "Long Satin Opera Gloves product image");
+  const confirmed = mapPublishedProduct({ id: "db-confirmed-length", slug: "confirmed-length", name: "55 cm Long Satin Opera Gloves", family: "opera-gloves", status: "active", length_cm: 55, image_urls: ["products/confirmed-length/image.webp"] });
+  assert.equal(confirmed?.productName, "55 cm Long Satin Opera Gloves");
+});
+
 test("unpublished or untrusted rows never enter the public model", () => {
   assert.equal(mapPublishedProduct({ id: "db-2", slug: "draft", name: "Draft", family: "opera-gloves", status: "draft", image_urls: ["/api/media/products/a.jpg"] }), null);
   assert.equal(mapPublishedProduct({ id: "db-3", slug: "bad", name: "Bad", family: "unknown", image_urls: ["/api/media/products/a.jpg"] }), null);

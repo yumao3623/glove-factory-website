@@ -9,10 +9,17 @@ export type PublishedRow = { id: string; slug: string; name: string; family: str
 const confirmed = <T,>(value: T, source: string): SourcedValue<T> => ({ value, status: "CONFIRMED", source });
 const customFieldValues = new Set<CustomizableField["field"]>(["pattern", "color", "size", "logo", "packaging", "supplied-material"]);
 const strings = (value: unknown): string[] => Array.isArray(value) ? value.filter((item): item is string => typeof item === "string" && item.trim().length > 0).map((item) => item.trim()) : [];
+const publicProductName = (name: string, hasConfirmedLength: boolean): string => {
+  if (hasConfirmedLength) return name;
+  const sanitized = name.replace(/\b\d+(?:\.\d+)?\s*cm\b/gi, "").replace(/\s{2,}/g, " ").trim();
+  return sanitized || name;
+};
 
 export function mapPublishedProduct(row: PublishedRow): ApprovedCatalogueProduct | null {
   if (!row.id || !row.slug || !row.name || row.status !== "active" || !families.has(row.family as ProductFamily)) return null;
   const family = row.family as ProductFamily;
+  const hasConfirmedLength = typeof row.length_cm === "number";
+  const productName = publicProductName(row.name, hasConfirmedLength);
   const source = "supabase:products";
   const supabaseOrigin = (() => { try { return new URL(getCommerceConfig().supabaseUrl ?? "").origin; } catch { return ""; } })();
   const urls = (row.image_urls ?? []).map((url) => {
@@ -27,13 +34,13 @@ export function mapPublishedProduct(row: PublishedRow): ApprovedCatalogueProduct
     } catch { return null; }
   }).filter((url): url is string => Boolean(url));
   if (!urls.length) return null;
-  const images: ApprovedCatalogueImage[] = urls.map((path, index) => ({ assetId: `supabase-${row.id}-${index}`, role: index === 0 ? "primary" : "detail", status: "CONFIRMED", source: "supabase:products", path, width: null, height: null, altText: `${row.name} product image` }));
+  const images: ApprovedCatalogueImage[] = urls.map((path, index) => ({ assetId: `supabase-${row.id}-${index}`, role: index === 0 ? "primary" : "detail", status: "CONFIRMED", source: "supabase:products", path, width: null, height: null, altText: `${productName} product image` }));
   const occasion = strings(row.occasion);
   const decoration = strings(row.decoration);
   const ageGroup = row.age_group === "adult" || row.age_group === "kids" || row.age_group === "mixed" ? row.age_group : null;
   const customizableFields = strings(row.customizable_fields).filter((field): field is CustomizableField["field"] => customFieldValues.has(field as CustomizableField["field"])).map((field) => ({ field, status: "CONFIRMED", source } satisfies CustomizableField));
   const record: ProductRecord = {
-    id: row.id, slug: row.slug, productName: row.name, productFamily: family,
+    id: row.id, slug: row.slug, productName, productFamily: family,
     provenance: { sourceListingIds: [], normalizedProductGroupId: `admin:${row.id}` },
     material: row.material ? confirmed(row.material, source) : { value: null, status: "UNKNOWN", source },
     length: typeof row.length_cm === "number" ? confirmed({ value: row.length_cm, unit: "cm", label: `${row.length_cm} cm` }, source) : undefined,
