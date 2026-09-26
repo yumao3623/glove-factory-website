@@ -11,7 +11,7 @@
 
 - 2026-09-27：完成并部署 B2B indexable surface：28 URL sitemap、13 个核心/指南页面、15 个首批高质量 PDP、factory/custom/contact/costume 正式索引边界、canonical/robots/OG/Twitter、Organization/Breadcrumb/Product schema、SSR/内链/移动语义检查；Product schema 不伪造 Offer、价格、库存、评价或评分。
 - 2026-09-27：修复旧 `/api/` robots 规则对 `/api/media/` 的覆盖，加入隐私安全的 claimed-crawler 观察标记、IndexNow key 和一次 28 URL HTTP 202 提交；新增 RFQ/contact/WhatsApp/product-family 事件骨架但保持 GA4/consent 未启用。
-- 2026-09-27：依据生产 Supabase 事实撤掉 PDP editorial copy 中未确认的长度断言，改善目录收藏按钮语义并明确生成视觉为 editorial；`a6290e5` 推送到 `origin/main`，随后以 `349201d` 修复首页 CTA 的嵌套交互语义并校正 sitemap `lastmod`。Vercel success，线上 28/28 probe 通过。Google live test/Request Indexing 结果与历史 0 indexed 状态见状态文档；不把请求当成已收录。
+- 2026-09-27：依据生产 Supabase 事实撤掉 PDP editorial copy 中未确认的长度断言，改善目录收藏按钮语义并明确生成视觉为 editorial；`a6290e5` 推送到 `origin/main`，随后以 `349201d` 修复首页 CTA 的嵌套交互语义，以 `ac404cf`/`6a08d52` 移除未确认的产品名尺寸词，并以 `b43ce31` 校正最终 sitemap `lastmod`。Vercel success，线上 28/28 probe 通过，测试 67/67。Google live test/Request Indexing 结果与历史 0 indexed 状态见状态文档；不把请求当成已收录。
 
 ## 2.2.0
 

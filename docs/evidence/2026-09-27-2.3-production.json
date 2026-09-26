@@ -1,17 +1,17 @@
 {
-  "observedAt": "2026-09-27T02:43:50+08:00",
+  "observedAt": "2026-09-27T03:13:43.586+08:00",
   "release": {
     "version": "2.3.0",
-    "commit": "349201d",
-    "previousCodeCommits": ["9e68f5e", "3a29adc", "314e955", "a6290e5"],
+    "commit": "b43ce31",
+    "previousCodeCommits": ["9e68f5e", "3a29adc", "314e955", "a6290e5", "349201d", "ac404cf", "6a08d52"],
     "vercelCommitStatus": "success",
-    "vercelStatusUrl": "https://vercel.com/creen-ai/glove-factory-website/2AGLhN1pHh24FtWoxR36KT5fPYpe",
+    "vercelStatusUrl": "https://vercel.com/creen-ai/glove-factory-website/Cv5h64HHJtQZa5BK2bAfDxg7ygug",
     "productionHost": "https://www.jsmeilai.com"
   },
   "productionProbe": {
     "sitemapStatus": 200,
     "sitemapUrlCount": 28,
-    "sitemapLastModified": "2026-09-26T18:42:00.000Z",
+    "sitemapLastModified": "2026-09-26T19:08:58.000Z",
     "sitemapUrlAudit": {
       "status200": 28,
       "indexFollow": 28,
@@ -53,6 +53,7 @@
   },
   "crawlGuard": {
     "command": "node scripts/seo-audit.mjs --origin https://www.jsmeilai.com --mode production",
+    "checkedAt": "2026-09-26T19:13:43.586Z",
     "checkedPages": 28,
     "failures": 0,
     "warnings": 0,
@@ -66,7 +67,7 @@
     "status": 200,
     "responseFinishedMs": 332,
     "functionExecutionMs": 236,
-    "releaseRelation": "Historical 2.3 deployment-window request; before the 349201d polish commit.",
+    "releaseRelation": "Historical 2.3 deployment-window request; before the b43ce31 final production code sequence.",
     "qualification": "Observed request presented a Googlebot UA; UA is spoofable and no reverse-DNS verification is claimed."
   },
   "gsc": {
@@ -112,6 +113,7 @@
     "gatedPdpCount": 21,
     "approvedMediaObjects": 173,
     "unconfirmedFieldsKeptOutOfClaims": ["material", "length", "MOQ", "sample", "lead time", "stock", "certifications", "price", "reviews", "ratings"],
+    "unconfirmedMeasurementNameHandling": "When runtime length_cm is null, cm tokens are removed from the public product name, title and image alt; confirmed lengths are preserved.",
     "seoLanguage": "English URLs only; client locale UI exists but no hreflang/locale sitemap.",
     "analytics": "Privacy-gated event scaffold only; no GA4 measurement ID, consent UI, GTM, Vercel Analytics or Speed Insights data.",
     "payment": "BLOCKED / awaiting real payment information"
