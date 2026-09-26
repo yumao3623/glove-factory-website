@@ -4,6 +4,7 @@ import { FormEvent, useRef, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/locale-provider";
 import { useEnquiryList } from "@/components/product/use-enquiry-list";
+import { trackEvent } from "@/lib/analytics";
 
 const familyOptions = [
   ["bridal-gloves", "facet.bridal-gloves", "Bridal gloves"],
@@ -32,10 +33,13 @@ export function LiveRfqForm() {
     if (submission.current?.fingerprint !== fingerprint) submission.current = { fingerprint, id: crypto.randomUUID() };
     try {
       const response = await fetch("/api/rfq/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...payload, idempotencyKey: submission.current.id }) });
-      await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({})) as { status?: string };
+      const outcome = result.status === "RECEIVED" && response.status === 201 ? "received" : result.status === "RECEIVED" ? "duplicate" : result.status === "STORED_EMAIL_PENDING" ? "stored_email_pending" : response.ok ? "accepted" : "error";
+      trackEvent("rfq_submit", { family: String(payload.productFamily), source_route: window.location.pathname, outcome });
       setStatus(response.ok ? t("form.received") : t("form.submitError"));
       if (response.ok) { form.reset(); submission.current = null; }
     } catch {
+      trackEvent("rfq_submit", { family: String(payload.productFamily), source_route: window.location.pathname, outcome: "network_error" });
       setStatus(t("form.serviceError"));
     } finally {
       setBusy(false);

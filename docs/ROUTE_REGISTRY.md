@@ -2,6 +2,10 @@
 
 Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and a trailing slash. The approved site host is `https://www.jsmeilai.com/`; matching apex URLs permanently redirect to `www`. No route may be renamed in Phase 3 without an ADR, redirect plan and human approval. `status` describes SEO treatment; `implementation` explicitly states whether Phase 3 creates a page, a redirect, or no route at all.
 
+## Current 2.3 amendment (2026-09-27)
+
+The table below preserves the Phase 2 research record. The user-authorized 2.3 release supersedes the old deferred gates for the current production surface: `/custom-manufacturing/`, `/factory/`, `/contact/` and the reviewed non-licensed `/costume-gloves/` collection are indexable in formal production; 15 evidence-reviewed product slugs in `data/seo-index.ts` are the first indexable PDP tranche. Other dynamic product previews remain `noindex` and are omitted from the production sitemap until their copy is reviewed. English remains the only SEO URL language in this release; no `hreflang` is emitted for languages without equivalent server-rendered pages.
+
 | route | status | implementation | page_type | primary_intent | primary_keyword | supporting_keywords | canonical_owner | parent | index_status | reason |
 |---|---|---|---|---|---|---|---|---|---|
 | `/` | FROZEN | CREATE_PAGE | Homepage | Range and supplier discovery | N/A | bridal gloves manufacturer; wedding veils manufacturer | Homepage | none | INDEX | Covers the confirmed range without competing with a family page. |
@@ -12,7 +16,7 @@ Status: `FROZEN` for Phase 2. Canonical URLs use lowercase, hyphenated slugs and
 | `/kids-dress-gloves/` | FROZEN | CREATE_PAGE | Collection | Girls' formal/special-occasion sourcing | girls dress gloves | flower girl gloves; girls formal gloves; princess gloves; girls wedding gloves | Kids Dress Gloves | `/products/` | INDEX | Independent owner because the SERP spans formal, bridal and costume use. |
 | `/wedding-veils/` | FROZEN | CREATE_PAGE | Collection | Wedding veil sourcing | wedding veils | bridal veils; wedding veils wholesale; bridal veil wholesale | Wedding Veils | `/products/` | INDEX | Wedding wording is cleaner than place-name-polluted bridal veil results. |
 | `/custom-manufacturing/` | FROZEN | CREATE_PAGE | Capability/conversion | B2B custom/OEM enquiry | N/A | private label gloves; OEM gloves; custom bridal gloves | Custom Manufacturing | `/` | INDEX | Service/conversion owner; no independent Phase 1 keyword owner. |
-| `/factory/` | FROZEN | CREATE_PAGE | Factory/About evidence | Validate supplier evidence | N/A | glove factory; glove manufacturer; production process | Factory | `/` | INDEX WHEN FACTS APPROVED | Trust/evidence page; no reliable independent Phase 1 keyword owner. |
+| `/factory/` | FROZEN | CREATE_PAGE | Factory/About evidence | Validate supplier evidence | N/A | glove factory; glove manufacturer; production process | Factory | `/` | INDEX | 2.3 publishes the approved factory, capability and quality boundary without unverified certifications, capacity or lead times. |
 | `/contact/` | FROZEN | CREATE_PAGE | RFQ/contact | Submit a qualified enquiry | N/A | request a quote; request samples | Contact | `/` | INDEX | Conversion endpoint, not a search landing page. |
 | `/privacy/` | FROZEN | CREATE_PAGE | Legal | Understand enquiry data handling | N/A | RFQ privacy; contact data | Privacy | `/` | NOINDEX | Required before collecting enquiries; not a search landing page. |
 | `/404/` | FROZEN | CREATE_SYSTEM_STATE | System | Handle missing URL | N/A | none | System | none | NOINDEX | Helpful error state; never a sitemap entry. |
@@ -37,3 +41,5 @@ The 2026-09-05 ADR 0005 bounded amendment permits a future static stakeholder-pr
 - Conditional children require all threshold conditions and an approval record before status changes to `FROZEN`.
 - `NOINDEX + DO_NOT_CREATE` is a research/SEO exclusion record, not an HTML page requirement.
 - `NOINDEX + REDIRECT_301_ONLY` means emit a one-hop 301 and no destination page at that alias.
+
+The historical Phase 2 rule that all product-detail routes remain noindex is superseded for the bounded 2.3 tranche described above; the historical ADR/W08 documents remain unchanged as evidence of the earlier gate.

@@ -4,7 +4,9 @@ import { isIndexableProduction } from "@/lib/stakeholder-preview";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/404/", "/admin/", "/account/", "/cart/", "/checkout/"] },
+    // Product imagery is delivered through the read-only media gateway. Keep
+    // private APIs blocked while explicitly allowing that crawlable asset path.
+    rules: { userAgent: "*", allow: ["/", "/api/media/"], disallow: ["/api/", "/404/", "/admin/", "/account/", "/cart/", "/checkout/"] },
     ...(isIndexableProduction ? { sitemap: new URL("/sitemap.xml", getSiteOrigin()).toString() } : {}),
   };
 }

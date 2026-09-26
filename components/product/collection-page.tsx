@@ -11,6 +11,9 @@ import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 import type { ProductFamily } from "@/types/product";
 import { commerceRfqEnabled } from "@/lib/commerce/config";
 import { canonicalUrl } from "@/lib/site";
+import { ProductFamilyView } from "@/components/analytics/product-family-view";
+import { isIndexableProductSlug } from "@/data/seo-index";
+import { isIndexableProduction } from "@/lib/stakeholder-preview";
 
 export type CollectionConfig = {
   family: ProductFamily;
@@ -31,11 +34,12 @@ function Breadcrumb({ title, dark = false }: { title: string; dark?: boolean }) 
 
 export function CollectionPage({ config, products }: { config: CollectionConfig; products: readonly ApprovedCatalogueProduct[] }) {
   const rfqEnabled = commerceRfqEnabled();
+  const visibleProducts = isIndexableProduction ? products.filter((product) => isIndexableProductSlug(product.slug)) : products;
   const breadcrumbSchema = { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: canonicalUrl("/").toString() }, { "@type": "ListItem", position: 2, name: "Products", item: canonicalUrl("/products/").toString() }, { "@type": "ListItem", position: 3, name: config.title, item: canonicalUrl(`/${config.family}/`).toString() }] };
   const collectionSchema = { "@context": "https://schema.org", "@graph": [{ "@type": "CollectionPage", name: config.title, description: config.intro, url: canonicalUrl(`/${config.family}/`).toString(), isPartOf: { "@type": "WebSite", url: canonicalUrl("/").toString() } }, breadcrumbSchema] };
-  return <main id="main-content" tabIndex={-1} className="overflow-hidden"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-    <CollectionHero config={config} product={products[0]} />
-    <CollectionRange config={config} products={products} />
+  return <main id="main-content" tabIndex={-1} className="overflow-hidden"><ProductFamilyView family={config.family} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+    <CollectionHero config={config} product={visibleProducts[0]} />
+    <CollectionRange config={config} products={visibleProducts} />
     <CollectionProcurement config={config} rfqEnabled={rfqEnabled} />
     <section id="rfq" className="bg-black text-white"><div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-10 lg:py-24"><div><p className="section-label text-stone-400"><LocalizedText k="common.enquiry" fallback="Enquiry" /></p><h2 className="mt-3 max-w-md font-serif text-4xl leading-[1.04] sm:text-5xl">{rfqEnabled ? <LocalizedText k="common.startWholesale" fallback="Start a wholesale conversation." /> : <LocalizedText k="common.reviewRange" fallback="Review the range without submitting a brief." />}</h2><p className="mt-5 max-w-sm leading-7 text-stone-300">{rfqEnabled ? <LocalizedText k="common.shareStyles" fallback="Share the styles, quantities and custom details you need us to review." /> : <LocalizedText k="common.previewOffline" fallback="This stakeholder preview keeps enquiry delivery and visitor-data collection offline." />}</p></div><div className="rfq-on-dark">{rfqEnabled ? <LiveRfqForm /> : <RfqForm />}</div></div></section>
   </main>;

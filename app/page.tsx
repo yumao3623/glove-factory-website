@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata(
   "Occasion Gloves & Wedding Veils Manufacturer",
-  "Occasion gloves and wedding veils from Jiangshan Meilai Garment Factory. Browse styles and discuss wholesale orders.",
+  "Occasion gloves and wedding veils from JS Meilai in Jiangshan, Zhejiang, China. Browse styles and discuss wholesale orders.",
   "/",
 );
 

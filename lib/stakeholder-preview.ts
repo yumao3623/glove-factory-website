@@ -4,7 +4,10 @@ import type { Metadata } from "next";
 const configuredSiteOrigin = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/+$/, "");
 export const siteMode: "FORMAL_PRODUCTION" | "STAKEHOLDER_PREVIEW" = process.env.SEO_INDEXING_ENABLED === "true" && configuredSiteOrigin === "https://www.jsmeilai.com" ? "FORMAL_PRODUCTION" : "STAKEHOLDER_PREVIEW";
 export const isIndexableProduction = siteMode === "FORMAL_PRODUCTION";
-export const isCostumeIndexable = isIndexableProduction && process.env.SEO_COSTUME_INDEXING_ENABLED === "true";
+// Costume and stage pages now meet the same evidence boundary as the other
+// public families. Keep the legacy env var readable for deployment compatibility,
+// but do not let an old deferred gate keep a complete production route noindex.
+export const isCostumeIndexable = isIndexableProduction;
 
 export const previewRobots = {
   index: false,

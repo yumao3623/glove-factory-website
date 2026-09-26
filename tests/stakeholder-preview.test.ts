@@ -16,6 +16,7 @@ test("preview mode is explicit and fail-closed for indexing", () => {
   assert.equal(previewRobots.follow, false);
   assert.equal(previewRobotsHeader, "noindex, nofollow, noarchive, noimageindex");
   assert.match(read("next.config.ts"), /X-Robots-Tag/);
+  assert.match(read("app/robots.ts"), /\/api\/media\//);
   assert.equal("sitemap" in robots(), false);
 });
 

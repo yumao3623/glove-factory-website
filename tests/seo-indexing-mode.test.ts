@@ -14,7 +14,11 @@ test("formal indexing requires the exact canonical host", () => {
   assert.equal(formal.siteMode, "FORMAL_PRODUCTION");
   assert.equal(formal.siteRobots.index, true);
   assert.equal(formal.robots.sitemap, "https://www.jsmeilai.com/sitemap.xml");
-  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/costume-gloves/")), false);
+  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/costume-gloves/")), true);
+  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/custom-manufacturing/")), true);
+  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/factory/")), true);
+  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/contact/")), true);
+  assert.equal(formal.sitemap.some((item) => item.url.endsWith("/products/bridal-gloves-sheer-lace-long-001/")), true);
   assert.equal(formal.sitemap.some((item) => item.url.endsWith("/guides/materials/")), true);
   assert.equal(formal.sitemap.some((item) => item.url.endsWith("/guides/size-guide/")), true);
 
@@ -24,7 +28,7 @@ test("formal indexing requires the exact canonical host", () => {
   assert.equal("sitemap" in wrongHost.robots, false);
 });
 
-test("the deferred costume collection requires its separate gate", () => {
+test("formal production includes the reviewed costume collection without a second stale gate", () => {
   const gated = run({ SEO_INDEXING_ENABLED: "true", NEXT_PUBLIC_SITE_URL: "https://www.jsmeilai.com", SEO_COSTUME_INDEXING_ENABLED: "true" });
   assert.equal(gated.sitemap.some((item) => item.url.endsWith("/costume-gloves/")), true);
 });
