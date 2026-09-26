@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-09-27：为既有 RFQ/contact/WhatsApp/product-family 事件骨架增加 consent + `gtag` 双门控的 UTM、落地页和 session 级首触/末触归因准备；未配置 GA4 时保持惰性，不改变当前生产数据收集边界。
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。
 - 2026-09-24：确认并保留 `docs/PROJECT_STATUS.md`、`docs/ROADMAP.md`、`docs/HANDOFF.md`、`docs/PROJECT_WORKFLOW.md`、`docs/RELEASE_HISTORY.md` 作为持续交接体系；补充本变更记录文件。
 

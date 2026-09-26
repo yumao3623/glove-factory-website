@@ -5,7 +5,7 @@
 ## 版本与阶段
 
 - **Production: 2.3.0**。当前生产代码提交为 `b43ce31`；`main`/`origin/main` 在其后包含治理文档提交，Vercel 对代码部署检查为 success，线上最终复核已通过。
-- **Development / Current work: 无（2.3.0 已完成，进入持续运营）**。后续是 SEO、外部获客、事实补充和账号配置的运营工作，不把“等待 Google 报告更新”当成开发阶段。
+- **Development / Current work: 归因基础待评审（不改变 Production 2.3.0）**。本轮增加了只在 consent + 已配置 `gtag` 时生效的 UTM/落地页事件归因基础；尚未接入 GA4、尚未部署，不把“等待 Google 报告更新”当成开发阶段。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
 
@@ -39,7 +39,7 @@
 | Metadata / schema | 所有 28 indexable URL 有唯一 title、description、canonical、OG/Twitter；OG image 为 1200×630 PNG。15 PDP 输出 Product + Breadcrumb，Guide 输出 Article/HowTo + Breadcrumb；没有 Offer/price/stock/review/rating。线上 SSR JSON-LD 已解析检查，未把该检查表述为 Google Rich Results Test 通过。无 verified social profile，因此不伪造 `sameAs`。 |
 | Multilingual | 当前有 2.1.5 的 en、简中、de、fr、it 客户端 UI 和持久化选择；SEO 仍只有英文独立 URL。没有 server-rendered locale URL、localized canonical、双向 hreflang、`x-default` 或语言 sitemap，故不宣称完整多语言 SEO，也没有制造机械薄页。 |
 | RFQ / contact | 生产 RFQ 开关为 true；页面提供表单、邮箱、电话和已批准号码的 WhatsApp CTA，未在本轮提交真实询盘或发送邮件。数据库当前没有新增 RFQ；不把没有测试写入的状态称为 lead。 |
-| Analytics / attribution | 代码有隐私门控的 `rfq_submit`、`contact_click`、`whatsapp_click`、`product_family_view`、`sample_request` 事件骨架，但没有 GA4 measurement ID、consent UI、GTM、Vercel Web Analytics 或 Speed Insights 数据；UTM 只做链接约定，尚未捕获/持久化。 |
+| Analytics / attribution | 本轮代码新增隐私门控的 UTM/落地页归因读取与 session 级首触/末触事件参数；只有 `__jsmeilaiAnalyticsConsent=true` 且存在 `gtag` 才会读取/写入并发送，当前未配置 GA4 measurement ID、consent UI、GTM、Vercel Web Analytics 或 Speed Insights，生产仍无正式数据。代码尚未部署。 |
 | Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted（不代表已被 Bing/Google 索引）。Bing Webmaster 当前账号没有 jsmeilai.com，sitemap/站点验证尚未完成。IndexNow 不等同于 Google Indexing API。 |
 | 外部获客 | LinkedIn、Facebook、Instagram、TikTok、Pinterest、YouTube 和目录目前没有已核验 profile/link 证据；仓库外链台账仍是 qualify-first 草稿，没有发送、群发或已发布 backlink。稳定落地页为产品族、指南、custom、contact，待账号和合规核验后使用。 |
 | Payment | `PAYPAL_CHECKOUT_ENABLED=false`；没有假 checkout、价格、账户或支付渠道。待经营者约 5 天后提供真实支付资料、KYC/收单/结算条件并完成受控验收。 |
