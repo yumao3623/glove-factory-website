@@ -4,7 +4,7 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前生产代码对应 `main`/`origin/main` 的 `349201d`，Vercel commit check 为 success；线上最终复核已通过。
+- **Production: 2.3.0**。当前生产代码提交为 `349201d`；`main`/`origin/main` 在其后包含治理文档提交，Vercel 对代码部署检查为 success，线上最终复核已通过。
 - **Development / Current work: 无（2.3.0 已完成，进入持续运营）**。后续是 SEO、外部获客、事实补充和账号配置的运营工作，不把“等待 Google 报告更新”当成开发阶段。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
@@ -51,6 +51,7 @@
 - 产品媒体由 `/api/media/` 映射到云对象，当前有 alt 和稳定 aspect box，但源对象名不是 SEO 描述性文件名、图片走 `unoptimized`；公共 derivative/CDN 和更细的 gallery alt 是后续资产优化，不是当前 Web indexing blocker。
 - 15 个 PDP 有可展开的 sizing/customisation 说明，但尚未发布事实完整的 FAQ/FAQPage；待真实规格批准后再扩充，不用模板问题凑内容。
 - 产品目录依赖 request-scoped Supabase 读取；本次线上数据完整，但未来数据库短暂故障可能让 200 页面变薄，后续应在目录扩大前评估受控缓存或经审核的降级策略。
+- 个别来源名称保留了来源标题中的尺寸词（例如 `55 cm`），但 runtime `length_cm` 为空；该尺寸未作为已确认属性、正文规格或 Product JSON-LD 字段发布，后续补事实时再决定是否改名。
 
 ## 已知问题与待办分类
 

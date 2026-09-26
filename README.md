@@ -79,7 +79,7 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 
 - `NEXT_PUBLIC_APP_URL`、`NEXT_PUBLIC_SITE_URL`：本地开发地址；生产均为 `https://www.jsmeilai.com`。
 - `SEO_INDEXING_ENABLED=true`：2.3 正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
-- `SEO_COSTUME_INDEXING_ENABLED=true`：仅在正式索引开关和 `/costume-gloves/` 的 Human gate 同时通过后启用该 family；默认不进入 sitemap。
+- `SEO_COSTUME_INDEXING_ENABLED`：历史兼容变量；2.3 正式生产沿用统一的 `SEO_INDEXING_ENABLED`，`/costume-gloves/` 与其他已审页面共享索引边界，不再由旧 gate 单独控制。
 - Supabase URL、anon key、服务端 service-role key：账户、后台、目录和受保护媒体所需。
 - `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
 - `COMMERCE_RFQ_ENABLED=true`、`RESEND_API_KEY`、`EMAIL_FROM`、`RFQ_RECIPIENT`：询价存储及通知邮件。
