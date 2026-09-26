@@ -7,7 +7,7 @@ import { isIndexableProduction } from "@/lib/stakeholder-preview";
 // would send a false freshness signal to crawlers.
 // UTC timestamp of the final 2.3 content/UX correction. Keep this fixed so a
 // crawl does not see a false per-request freshness signal.
-const releaseLastModified = new Date("2026-09-26T18:42:00.000Z");
+const releaseLastModified = new Date("2026-09-26T19:08:58.000Z");
 
 const corePaths = [
   "/",
