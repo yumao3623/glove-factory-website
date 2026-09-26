@@ -12,7 +12,7 @@ const strings = (value: unknown): string[] => Array.isArray(value) ? value.filte
 const publicProductName = (name: string, hasConfirmedLength: boolean): string => {
   if (hasConfirmedLength) return name;
   const sanitized = name.replace(/\b\d+(?:\.\d+)?\s*cm\b/gi, "").replace(/\s{2,}/g, " ").trim();
-  return sanitized || name;
+  return sanitized || "Product reference";
 };
 
 export function mapPublishedProduct(row: PublishedRow): ApprovedCatalogueProduct | null {

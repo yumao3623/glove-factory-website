@@ -32,6 +32,8 @@ test("unconfirmed source measurements are removed from the public product name",
   assert.equal(product?.primaryImage.altText, "Long Satin Opera Gloves product image");
   const confirmed = mapPublishedProduct({ id: "db-confirmed-length", slug: "confirmed-length", name: "55 cm Long Satin Opera Gloves", family: "opera-gloves", status: "active", length_cm: 55, image_urls: ["products/confirmed-length/image.webp"] });
   assert.equal(confirmed?.productName, "55 cm Long Satin Opera Gloves");
+  const unnamed = mapPublishedProduct({ id: "db-only-length", slug: "only-length", name: "55 cm", family: "opera-gloves", status: "active", image_urls: ["products/only-length/image.webp"] });
+  assert.equal(unnamed?.productName, "Product reference");
 });
 
 test("unpublished or untrusted rows never enter the public model", () => {
