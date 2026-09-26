@@ -23,8 +23,8 @@
 
 | 领域 | 当前状态与证据边界 |
 | --- | --- |
-| Git / main | `main` 与 `origin/main` 同步到 `349201d`；工作树在文档提交前应保持干净。2.3 代码沿 `9e68f5e`、`3a29adc`、`314e955`、`a6290e5`、`349201d` 连续推送，未重写旧历史。 |
-| Vercel / production | `349201d` 的 Vercel commit status 为 success（本次实查）；`https://www.jsmeilai.com/` 及正式页面已返回新 2.3 HTML。当前可见 API 未提供可稳定引用的 deployment ID，因此以 commit status + live probe 作为部署证据。 |
+| Git / main | 生产代码提交为 `349201d`；`main` 与 `origin/main` 还包含后续治理文档提交，未重写旧历史，最终工作树应保持干净。2.3 代码沿 `9e68f5e`、`3a29adc`、`314e955`、`a6290e5`、`349201d` 连续推送。 |
+| Vercel / production | `349201d` 的 Vercel commit status 为 success（本次实查）；部署 URL/status 记录在本轮 evidence JSON，`https://www.jsmeilai.com/` 及正式页面已返回新 2.3 HTML，commit status + live probe 仍是主要部署证据。 |
 | 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为对应本轮内容/UX 修正的固定时间 `2026-09-26T18:42:00.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |

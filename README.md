@@ -1,8 +1,8 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.2.0**（历史 2.2，包含 2.1.5 五语言 UI），处于上线运营与 SEO observation；没有在开发的新版本。package.json 的 2.1.0 是历史包元数据，不能用作部署判定。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.3.0**（包含 2.1.5 五语言 UI），已进入持续 SEO、获客和询盘运营；没有在开发的新版本。package.json 的版本字段不能单独作为部署判定，当前生产代码和线上证据以 [PROJECT_STATUS](docs/PROJECT_STATUS.md) 为准。
 
-新任务先读 [当前状态](docs/PROJECT_STATUS.md)、[当前交接](docs/HANDOFF.md)、[近期路线](docs/ROADMAP.md)、[固定工作规则](docs/PROJECT_WORKFLOW.md)。历史只需读 [版本简史](docs/RELEASE_HISTORY.md)，详细验收按其中链接追溯。
+新任务先读根目录 [AGENTS.md](AGENTS.md)，再按其中顺序读 [当前状态](docs/PROJECT_STATUS.md)、[当前交接](docs/HANDOFF.md)、[近期路线](docs/ROADMAP.md)、[固定工作规则](docs/PROJECT_WORKFLOW.md)。历史只需读 [版本简史](docs/RELEASE_HISTORY.md)，详细验收按其中链接追溯。
 
 运行时读取 Supabase 产品表和受保护的 `product-media` 对象存储；Git 仅保留产品数据与图片清单。
 
@@ -78,7 +78,7 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 复制 `.env.example` 为 `.env.local` 并按实际环境配置；环境文件不进入 Git。
 
 - `NEXT_PUBLIC_APP_URL`、`NEXT_PUBLIC_SITE_URL`：本地开发地址；生产均为 `https://www.jsmeilai.com`。
-- `SEO_INDEXING_ENABLED=true`：2.2 正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
+- `SEO_INDEXING_ENABLED=true`：2.3 正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
 - `SEO_COSTUME_INDEXING_ENABLED=true`：仅在正式索引开关和 `/costume-gloves/` 的 Human gate 同时通过后启用该 family；默认不进入 sitemap。
 - Supabase URL、anon key、服务端 service-role key：账户、后台、目录和受保护媒体所需。
 - `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
