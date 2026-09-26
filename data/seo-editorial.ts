@@ -4,7 +4,7 @@ import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 // already marked CONFIRMED in the approved registry; unknown commercial facts
 // stay explicitly in the enquiry flow.
 const descriptions: Record<string, string> = {
-  "bridal-gloves-sheer-lace-long-001": "A long, sheer lace fingerless direction in black for bridal and formalwear collections. Use the reference images to discuss trim, colour matching and sizing; fibre composition and commercial terms are confirmed with the factory.",
+  "bridal-gloves-sheer-lace-long-001": "A long, sheer lace fingerless direction in black for bridal and formalwear collections. Use the reference images to discuss trim, colour matching and sizing; fibre composition and commercial terms remain to be confirmed with the factory.",
   "bridal-gloves-728908046635": "Beaded, fingerless lace gloves with a black-and-white colour direction for bridal and formalwear briefs. The beaded surface is a visual reference; construction, materials and sampling are reviewed per project.",
   "bridal-gloves-735814134529": "Long ruched satin gloves with a full-finger silhouette for bridal and formalwear ranges. Share the desired colour, measurements and finish so the sample brief can be checked.",
   "bridal-gloves-776820765686": "Short full-finger lace gloves with a red, black, white or pink colour direction for bridal and formalwear collections. Confirm the final colour and construction against a sample.",

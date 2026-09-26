@@ -9,26 +9,26 @@ import materialDetail from "../assets/editorial/generated/material-detail.png";
 export const generatedEditorialMedia = {
   hero: {
     src: atelierHero,
-    alt: "Ink satin opera glove being fitted in a quiet atelier",
+    alt: "Editorial still life of an ink satin opera glove in a quiet atelier",
   },
   materialReview: {
     src: materialReview,
-    alt: "Ivory satin glove and lace materials arranged for buyer review",
+    alt: "Editorial still life of ivory satin and lace materials for buyer review",
   },
   craft: {
     src: atelierCraft,
-    alt: "Glove maker top-stitching an ivory satin cuff at an atelier worktable",
+    alt: "Editorial close-up of satin glove construction at a worktable",
   },
   customManufacturing: {
     src: customManufacturingBg,
-    alt: "A continuous atelier worktable with satin, lace and pattern tools",
+    alt: "Editorial atelier worktable with satin, lace and pattern tools",
   },
   materialDetail: {
     src: materialDetail,
-    alt: "Ivory satin, black lace and a tailor's ruler arranged on a stone worktable",
+    alt: "Editorial still life of ivory satin, black lace and a tailor's ruler",
   },
   gloveDetail: {
     src: gloveDetail,
-    alt: "Ivory satin glove with a charcoal lace cuff and mother-of-pearl button",
+    alt: "Editorial close-up of an ivory satin glove with a charcoal lace cuff",
   },
 } as const;
