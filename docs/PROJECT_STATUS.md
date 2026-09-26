@@ -1,6 +1,6 @@
 # JS Meilai 当前项目状态
 
-核对日期：2026-09-24（Asia/Shanghai）；平台事实沿用 2026-09-22 最近一次实查，除非另有证据。这是当前状态唯一入口；由根目录 AGENTS.md 规定读取顺序。先读本页，再读 HANDOFF.md、ROADMAP.md 和 PROJECT_WORKFLOW.md。历史版本事实见 RELEASE_HISTORY.md；执行规则见 PROJECT_WORKFLOW.md。
+核对日期：2026-09-27（Asia/Shanghai）；本次补充 GSC 只读 SEO observation，平台事实沿用最近一次有证据的实查，除非另有注明。这是当前状态唯一入口；由根目录 AGENTS.md 规定读取顺序。先读本页，再读 HANDOFF.md、ROADMAP.md 和 PROJECT_WORKFLOW.md。历史版本事实见 RELEASE_HISTORY.md；执行规则见 PROJECT_WORKFLOW.md。
 
 ## 版本与阶段
 
@@ -14,13 +14,13 @@
 
 | 领域 | 状态和证据边界 |
 | --- | --- |
-| Git / main | 核查前工作树干净，fetch 后 main = origin/main = `55ab4840186ce214c685d49d8bbe331419d7e2f9`。本次文档整理在本地 main 提交，未推送；远端及生产代码仍为此 SHA。未来任务重新检查 ahead/behind，不照抄本行。 |
+| Git / main | 本次核查前工作树干净；已将治理提交 `7c19945`、`2b540b3` 推送到 `origin/main`，当前 main 与远端同步于 `2b540b3`。该推送只包含治理文档，不等于新的生产版本发布；未来任务重新检查 ahead/behind，不照抄本行。 |
 | Vercel | GitHub 最新 Production deployment `6520058115` 为 success（2026-09-18 07:55:29Z），SHA 为 `55ab484`；Vercel commit status 同为 success。域名今天返回 Vercel 200。用户打开授权浏览器后，直接确认 Production Ready、同一 SHA 和 www.jsmeilai.com 绑定；6h 概览错误率 0%（89 edge requests / 11 function invocations，仅此窗口）。生产设置实查 SEO_INDEXING_ENABLED=true、COMMERCE_RFQ_ENABLED=true、PAYPAL_CHECKOUT_ENABLED=false。连接器/CLI 曾 403，但浏览器已解除本次核查阻塞。 |
 | 域名 | `https://www.jsmeilai.com/` HTTPS 200；HTTP apex 与 HTTPS apex 最终跳转到该 canonical host 200。未改 DNS；未重新验证注册商续费和所有邮件 DNS。 |
 | Supabase | `JSMeilai` / `lkpufupiddbmqzdgpbxo` / 东京，API 实查 ACTIVE_HEALTHY。13 张 public 表均启用 RLS；不等于本次完整权限渗透验收。list_projects 只返回别的项目，但按仓库项目 ID 直接读取成功，不能误用其他项目。 |
 | Product | SQL 实查 36 active 产品、173 个 product-media 对象；六类分布：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。所有产品有 description，但扩展 specifications 均为空；基础材质/颜色等不因此被视为空。变体与库存记录均为 0。后台 CRUD/库存机制有 2.1 验收，不能称已有确认库存。 |
 | SEO | 今天 9 个 sitemap URL 全部 200、一个 title/description/H1、正确自引用 canonical、index/follow。robots 指向正式 sitemap。factory、custom-manufacturing、contact、抽样 PDP 仍 noindex 且无 canonical；costume 仍独立 noindex gate。保持既有边界，不批量解除。 |
-| Search Console | 2026-09-18 仓库验收记录：URL-prefix property 验证成功、sitemap 成功且发现 9 URL、首页 live test 可索引、收录请求已受理；当时旧结果是“已抓取—尚未编入索引”。今天用户切换到已授权账号后实查：sitemap 成功、9 URL、最近读取 9 月 21 日；索引报告更新日 9 月 18 日，0 已索引、8 已发现尚未索引、首页 1 个旧 noindex 排除。首页 Inspection 仍为 9 月 18 日 07:41:23 抓取的 noindex；今天 21:44 实时测试“网址可编入 Google 索引”。效果报告默认 3 个月为 0 点击/0 曝光、无查询；人工处置和安全问题均未检测到问题。没有重复提交索引请求。 |
+| Search Console | **2026-09-27 本次实查**：sitemap `/sitemap.xml` 状态成功，2026-09-26 最近读取，已发现 9 个网页、0 个视频；索引报告上次更新 2026-09-21，0 已索引、11 未索引（3 个“被 noindex 标记排除”、8 个“已发现—尚未编入索引”）。首页 Inspection 仍为 2026-09-18 07:41:23 抓取的旧 noindex 记录；`/products/`、`/bridal-gloves/`、`/opera-gloves/` 均为“已发现—尚未编入索引”，抓取日期不适用。效果报告最新更新约 4.5 小时前，3 个月窗口 0 点击、0 曝光、0% CTR、平均排名 0、无查询。未重复提交 sitemap 或索引请求；本次未看到新技术异常。 |
 | 搜索可见性 | 用户报告普通 Google 搜索尚无官网结果；今天搜索工具 `site:jsmeilai.com` 无结果，仅为弱信号，不证明未收录，也不是 Google URL Inspection。GSC 今日报告及首页 Inspection 尚未收录；报告有数据截止延迟，不声称实时覆盖所有 URL。 |
 | Multilingual | 2.1.5 的 English、简体中文、Deutsch、Français、Italiano UI 与持久化已实现并随最新代码部署。大量正文和产品英文；没有独立语言 URL / hreflang / localized canonical / 多语言 sitemap。今天所查页面无 hreflang。不是完整本地化。 |
 | RFQ / Email | 2.1 记录已验证持久化、幂等、后台状态和 Resend delivered。今天 SQL：RFQ 0、订单 0、失败通知 0；零失败不等于链路已重新验收。生产 RFQ 开关今天实查为 true。本次未提交询价、未发邮件、未登录后台写数据；最新投递和跟进履约未验证。 |

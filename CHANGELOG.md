@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-09-27：完成 2.2.0 只读 SEO observation；GSC sitemap 成功并发现 9 个 URL，索引报告为 0 已索引、3 个 noindex 排除、8 个已发现未索引，3 个月搜索点击与曝光均为 0；同步推送治理提交 `7c19945`、`2b540b3`。未发现需要改代码或重复请求收录的新异常。
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。
 - 2026-09-24：确认并保留 `docs/PROJECT_STATUS.md`、`docs/ROADMAP.md`、`docs/HANDOFF.md`、`docs/PROJECT_WORKFLOW.md`、`docs/RELEASE_HISTORY.md` 作为持续交接体系；补充本变更记录文件。
 
