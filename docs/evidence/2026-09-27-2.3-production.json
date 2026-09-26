@@ -30,6 +30,8 @@
       "httpApexToHttpsWww": true,
       "httpWwwToHttpsWww": true,
       "httpsApexToHttpsWww": true,
+      "httpApexHopCountObserved": 2,
+      "httpsApexHopCountObserved": 1,
       "noSlashToTrailingSlash": true
     },
     "intentionalNoindex": [
@@ -64,6 +66,7 @@
     "status": 200,
     "responseFinishedMs": 332,
     "functionExecutionMs": 236,
+    "releaseRelation": "Historical 2.3 deployment-window request; before the 349201d polish commit.",
     "qualification": "Observed request presented a Googlebot UA; UA is spoofable and no reverse-DNS verification is claimed."
   },
   "gsc": {

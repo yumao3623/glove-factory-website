@@ -25,14 +25,14 @@
 | --- | --- |
 | Git / main | 生产代码提交为 `349201d`；`main` 与 `origin/main` 还包含后续治理文档提交，未重写旧历史，最终工作树应保持干净。2.3 代码沿 `9e68f5e`、`3a29adc`、`314e955`、`a6290e5`、`349201d` 连续推送。 |
 | Vercel / production | `349201d` 的 Vercel commit status 为 success（本次实查）；部署 URL/status 记录在本轮 evidence JSON，`https://www.jsmeilai.com/` 及正式页面已返回新 2.3 HTML，commit status + live probe 仍是主要部署证据。 |
-| 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；无斜杠核心路径 308 到 trailing slash。 |
+| 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；当前 HTTP apex 观测为两跳（HTTP apex → HTTPS apex → HTTPS www），HTTPS apex 为一跳，属于 Vercel 域名设置优化而非索引阻塞；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为对应本轮内容/UX 修正的固定时间 `2026-09-26T18:42:00.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
 | 生产索引健康 | 以 Googlebot UA 与普通 UA **模拟请求**审计 sitemap 全部 28 URL：均 200、`index, follow`、自指向 canonical、一个 H1、SSR 正文、标准 `<a href>` 内链；无 `X-Robots-Tag`。`/privacy/`、`/terms/`、`/shipping/`、`/returns/` 和非 curated PDP 有意 `noindex`；`/wedding-gloves/` 一跳 308 到 `/bridal-gloves/`。 |
 | Robots / media | `robots.txt` 200，允许 `/` 和 `/api/media/`，sitemap 指向正式 URL；私有 API/后台/账户/购物车/checkout 继续 disallow。旧版本曾用 `Disallow: /api/` 覆盖媒体路径，这是本轮修复的真实技术问题。 |
 | Rendering / UA / mobile | 对首页、产品 hub、核心分类、custom、factory、contact、curated PDP 做普通、移动、Googlebot、Google-InspectionTool UA **模拟请求**，HTML hash 一致；SSR 直接含主要正文和 H1，没有 locale/cookie/geo/User-Agent 分流。移动导航保留完整产品、工厂、指南和 RFQ 入口。 |
 | 性能与 capacity | 本次 28 URL probe 无 403、429、5xx、timeout；网络计时 p50 约 1.47s、最大约 3.43s，动态页面样本约 0.4–1.2s TTFB。产品/PDP 使用 `no-store` Supabase 请求，当前不是阻塞，但规模扩大前应评估受控 revalidate/缓存。 |
-| Googlebot 证据 | Vercel 可见短保留日志中，2026-09-26T17:55:11.656Z UTC（上海 2026-09-27 01:55:11.656）有一个呈现 Googlebot UA 的 `/kids-dress-gloves/` 请求：200、完成约 332ms、函数约 236ms；相邻首页、hub、分类和 PDP 也为 200。UA 可伪造，故表述为“观察到呈现 Googlebot UA 的请求”，不是反向 DNS 认证。更久历史在 Hobby 日志中不可见。 |
+| Googlebot 证据 | Vercel 可见短保留日志中，2026-09-26T17:55:11.656Z UTC（上海 2026-09-27 01:55:11.656）有一个呈现 Googlebot UA 的 `/kids-dress-gloves/` 请求：200、完成约 332ms、函数约 236ms；相邻首页、hub、分类和 PDP 也为 200。该请求发生在 `349201d` 最终 polish 之前的 2.3 部署窗口，不能写成 Google 已抓取最新提交。UA 可伪造，故表述为“观察到呈现 Googlebot UA 的请求”，不是反向 DNS 认证。更久历史在 Hobby 日志中不可见。 |
 | GSC 历史索引状态 | 本次进入 GSC 前台仍看到旧报告：sitemap 2026-09-26 最近读取、旧索引报告 0 indexed / 11 not indexed（3 noindex、8 discovered-not-indexed）；效果近 3 个月 0 clicks、0 impressions。首页旧记录明确为 2026-09-18 07:41:23 Googlebot 智能手机版抓到 `noindex`；这不是当前 live HTML。 |
 | GSC live test / 请求 | 2026-09-27：`/` 和 `/opera-gloves/` live test 显示“网址可编入 Google”；首页与 Opera 各请求一次并成功进入优先抓取队列。`/products/`、`/bridal-gloves/`、`/kids-dress-gloves/`、`/wedding-veils/`、`/custom-manufacturing/`、`/factory/` 各请求一次并成功；Contact 与一个首批 PDP 尝试时 GSC 返回“提交请求时出现问题，请稍后重试”，未继续重试。live test/请求不等于已收录；Google-selected canonical 和新 crawl date 仍未验证。 |
 | 0 indexed 的根因判断 | **A 确定**：GSC 保存的是旧 noindex crawl record，且旧代码把 PDP、factory/custom/contact/costume gate 留在 noindex；**B 高概率**：新域名、旧 sitemap 仅 9 URL、无外部权威/零 impressions，crawl demand 较低；**C 有贡献**：旧 PDP 文案模板化、信息增量和内链图较弱，本轮已做 15 页高质量 tranche；**D 未发现证据**：当前无错误状态或 timeout；**E 当前未发现**：canonical、robots、SSR、UA 版本一致。剩余 0 indexed 是历史报告刷新 + Google scheduling/priority 的组合，不可简化为“纯技术无异常所以等”。 |
@@ -52,6 +52,7 @@
 - 15 个 PDP 有可展开的 sizing/customisation 说明，但尚未发布事实完整的 FAQ/FAQPage；待真实规格批准后再扩充，不用模板问题凑内容。
 - 产品目录依赖 request-scoped Supabase 读取；本次线上数据完整，但未来数据库短暂故障可能让 200 页面变薄，后续应在目录扩大前评估受控缓存或经审核的降级策略。
 - 个别来源名称保留了来源标题中的尺寸词（例如 `55 cm`），但 runtime `length_cm` 为空；该尺寸未作为已确认属性、正文规格或 Product JSON-LD 字段发布，后续补事实时再决定是否改名。
+- HTTP apex 的两跳归一可在 Vercel 域名设置中进一步合并；当前最终 canonical、HTTPS、状态码和 sitemap host 均正确，不阻塞抓取或索引。
 
 ## 已知问题与待办分类
 
