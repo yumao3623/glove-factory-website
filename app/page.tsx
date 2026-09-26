@@ -127,9 +127,10 @@ function FactoryBridge() {
           <p className="leading-7 text-[#d2dde4]">
             <LocalizedText k="home.factoryCopy" />
           </p>
-          <Button asChild variant="outline" size="lg" className="mt-7 min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]">
-            <div className="flex flex-wrap gap-4"><a href="#rfq"><LocalizedText k="home.factoryCta" /> <ArrowRightIcon data-icon="inline-end" /></a><Link href="/factory/" className="underline underline-offset-4"><LocalizedText k="home.factoryLink" /></Link></div>
-          </Button>
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]"><a href="#rfq"><LocalizedText k="home.factoryCta" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
+            <Link href="/factory/" className="inline-flex min-h-11 items-center underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"><LocalizedText k="home.factoryLink" /></Link>
+          </div>
         </div>
       </div>
     </section>
@@ -153,9 +154,10 @@ function CustomBridge() {
           <p className="mt-5 max-w-md leading-7 text-[#e0e8ec]">
             <LocalizedText k="home.customCopy" />
           </p>
-          <Button asChild variant="outline" size="lg" className="mt-8 min-h-11 w-fit rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]">
-            <div className="flex flex-wrap gap-4"><a href="#rfq"><LocalizedText k="home.customCta" /> <ArrowRightIcon data-icon="inline-end" /></a><Link href="/custom-manufacturing/" className="underline underline-offset-4"><LocalizedText k="home.customLink" /></Link></div>
-          </Button>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]"><a href="#rfq"><LocalizedText k="home.customCta" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
+            <Link href="/custom-manufacturing/" className="inline-flex min-h-11 items-center underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"><LocalizedText k="home.customLink" /></Link>
+          </div>
         </div>
         <div aria-hidden="true" />
       </div>

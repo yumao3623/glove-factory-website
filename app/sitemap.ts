@@ -5,9 +5,9 @@ import { isIndexableProduction } from "@/lib/stakeholder-preview";
 
 // Keep this release timestamp stable. Generating `new Date()` on every request
 // would send a false freshness signal to crawlers.
-// UTC timestamp of the verified 2.3 production content change. Keeping this
-// before the server response time avoids advertising a future modification.
-const releaseLastModified = new Date("2026-09-26T17:53:25.000Z");
+// UTC timestamp of the final 2.3 content/UX correction. Keep this fixed so a
+// crawl does not see a false per-request freshness signal.
+const releaseLastModified = new Date("2026-09-26T18:42:00.000Z");
 
 const corePaths = [
   "/",
