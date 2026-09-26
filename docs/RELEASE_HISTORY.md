@@ -1,6 +1,6 @@
 # JS Meilai 简明版本历史
 
-历史叙事保留 **1.x → 2.0 → 2.1 → 2.1.5 → 2.2**。这是产品阶段顺序，不伪造 Git 时间顺序。核对日期：2026-09-22。
+历史叙事保留 **1.x → 2.0 → 2.1 → 2.1.5 → 2.2 → 2.3**。这是产品阶段顺序，不伪造 Git 时间顺序。核对日期：2026-09-27。
 
 | 历史版本 | 真正完成内容 | 可追溯来源 |
 | --- | --- | --- |
@@ -9,11 +9,12 @@
 | 2.1 | 邮箱账号/后台、36 产品与云媒体、询价持久化/通知/幂等、报价/订单/库存能力、生产域名部署与真实验收。站点当时 noindex；PayPal 关闭，163 管理员激活延后。 | `4857e34`、`4afee82`、`38b461d`；`9c4d5b9` 发布记录（2026-09-18）；[2.1 release](V2_1_RELEASE.md)。 |
 | 2.1.5 | 五语言 UI、核心界面文案、语言选择与刷新持久化。保留此已发生版本名，不能改名/删除。没有完整内容本地化及语言 SEO。 | `d878f14` → `99317f2` → `24645ad` → `55ab484`（2026-09-18）；[范围记录](V2_1_5_LOCALE_UI.md)。 |
 | 2.2（当前统一表达 2.2.0） | 限定正式索引开关、9 URL sitemap、canonical/robots/指南内容与技术审计；GSC 验证/sitemap 提交/首页索引请求历史已完成。外链仅台账和模板，非发布；Google 收录不是 release DoD。 | `db853bf`、`fa36a45` 与截至 `2f92a54` 的验收文档（2026-09-18）；[SEO/GSC 手册](V2_2_SEO_GSC_RUNBOOK.md)。 |
+| 2.3.0 | B2B 成熟度升级：28 URL 正式 sitemap、15 个 curated PDP、factory/custom/contact/costume 索引边界、SSR/内链/移动语义、canonical/robots/OG/schema、`/api/media/` 抓取修复、claimed-crawler 观察、RFQ/获客事件骨架和 IndexNow 提交。Payment 仍 blocked；多语言 SEO、GA4、Bing property 和外部发送仍需账号/事实。 | `9e68f5e` → `3a29adc` → `314e955` → `a6290e5` → `349201d`；Vercel commit status success；生产 28/28 probe 与 GSC live/request 证据见 `docs/PROJECT_STATUS.md` 和 `docs/evidence/2026-09-27-2.3-production.json`。 |
 
 ## 必须保留的差异
 
-Git 实际顺序是：2.0 → 2.1 → **2.2 SEO 提交与验收** → **2.1.5 UI 提交**，都已合并在当前 main `55ab484`。所以“准备 2.2 时插入 2.1.5”可作为用户阶段叙述保留，不能作为提交时间事实。当前产品基线用 2.2.0 表达两者的合并成果；没有新制造一个发布。
+Git 实际顺序是：2.0 → 2.1 → **2.2 SEO 提交与验收** → **2.1.5 UI 提交** → **2.3 indexable B2B surface**，都已合并在当前 main `349201d`。所以“准备 2.2 时插入 2.1.5”可作为用户阶段叙述保留，不能作为提交时间事实；2.3 是后续真实代码能力，不重写历史。
 
-package.json 仍是 2.1.0；没有 2.0/2.1/2.1.5/2.2 Git tag。不要假装从包字段或不存在的 tag 确认了生产版本。本次依据 release 范围、GitHub Production 记录及线上行为整理。
+package.json/lock 根包当前为 2.3.0；没有 2.0/2.1/2.1.5/2.2/2.3 Git tag。不要假装从不存在的 tag 确认了生产版本；本次依据 release 范围、GitHub/Vercel commit status 及线上行为整理。
 
 旧文档出现“未接 Supabase”“RFQ 尚未上线”“GSC 未配置”“2.2 暂停”“2.3 必须多语言”等字句时，按其当时日期理解。当前决策以 PROJECT_STATUS.md / ROADMAP.md 为准。旧证据留在原处，不再复制长篇任务流水账。

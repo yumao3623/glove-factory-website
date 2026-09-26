@@ -4,14 +4,14 @@
 
 ## 每次开始
 
-1. 读 PROJECT_STATUS.md → HANDOFF.md → ROADMAP.md；需要历史才读 RELEASE_HISTORY.md 和相关原始验收。不要默认重读几十份历史报告。
+1. 先按根目录 `AGENTS.md` 的顺序读取 `PROJECT_STATUS.md` → `HANDOFF.md` → `ROADMAP.md` → `PROJECT_WORKFLOW.md`；需要历史才读 RELEASE_HISTORY.md 和相关原始验收。不要默认重读几十份历史报告。
 2. 检查 cwd、git status、当前分支、远端 main 与既有未提交工作；确认本次 Product / Growth / Operations / 外部等待类别与有范围目标。
 3. 当前事实优先于旧计划；记录证据日期及“本次实查 / 历史验收 / 用户报告 / 未验证”。平台权限不足不等于服务故障，不删除已有资源重建。
 4. 未选择并满足进入条件前 Development=无；新聊天、核查、等待和文档整理不产生 release。
 
 ## 版本及发布
 
-- 历史 1.x、2.0、2.1、2.1.5、2.2 不更名。当前产品状态统一表达 Production 2.2.0。
+- 历史 1.x、2.0、2.1、2.1.5、2.2 不更名。当前产品状态按已验证部署表达；本次 2.3.0 已完成，因此当前稳定生产版本为 Production 2.3.0。后续仅在新的代码能力达到 DoD 时创建下一版本。
 - PATCH：有范围的小 bug/文案/样式/接口/SEO 代码修复；MINOR：完整新能力；MAJOR：产品定位/核心架构/商业模式/整体体验显著变化。
 - 单纯内容录入、GSC/外链、服务检查、账号操作一般不变版本；是否需要开发按实际变化判断。
 - 新代码分支默认 codex/，尽量一次任务一个清晰范围。不要重写旧提交/删除历史分支或 tag 美化记录。

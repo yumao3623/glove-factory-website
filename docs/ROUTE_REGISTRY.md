@@ -24,7 +24,7 @@ The table below preserves the Phase 2 research record. The user-authorized 2.3 r
 | `/bridal-gloves/lace/` | CONDITIONAL | CREATE_PAGE_IF_THRESHOLD | Child collection | Bridal lace glove sourcing | bridal lace gloves | lace wedding gloves | Bridal Lace | `/bridal-gloves/` | INDEX ONLY IF THRESHOLD PASSES | Qualified bridal intent; no generic lace owner. |
 | `/bridal-gloves/sheer-tulle/` | CONDITIONAL | CREATE_PAGE_IF_THRESHOLD | Child collection | Sheer/tulle bridal glove sourcing | sheer wedding gloves | tulle gloves; sheer bridal gloves | Sheer/Tulle Bridal | `/bridal-gloves/` | INDEX ONLY IF THRESHOLD PASSES | Qualified material intent; no generic mesh owner. |
 | `/bridal-gloves/fingerless/` | CONDITIONAL | CREATE_PAGE_IF_THRESHOLD | Child collection | Fingerless bridal glove sourcing | fingerless bridal gloves | half-finger bridal gloves | Fingerless Bridal | `/bridal-gloves/` | INDEX ONLY IF THRESHOLD PASSES | Generic fingerless intent is non-target; qualified child only. |
-| `/wedding-gloves/` | NOINDEX | REDIRECT_301_ONLY | Redirect alias | Legacy synonym | N/A | bridal gloves | Bridal Gloves | `/bridal-gloves/` | NO HTML | Permanent redirect to `/bridal-gloves/`; never render a noindex page. |
+| `/wedding-gloves/` | NOINDEX | REDIRECT_308_ONLY | Redirect alias | Legacy synonym | N/A | bridal gloves | Bridal Gloves | `/bridal-gloves/` | NO HTML | One-hop permanent 308 redirect to `/bridal-gloves/`; never render a noindex page. |
 | `/lace-gloves/` | NOINDEX | DO_NOT_CREATE | SEO exclusion record | Mixed generic intent | N/A | mesh gloves; fingerless gloves | none | none | NO HTML | SERP is polluted by DIY, costume and non-target uses. |
 | `/mesh-gloves/` | NOINDEX | DO_NOT_CREATE | SEO exclusion record | Industrial/sport mixed intent | N/A | sheer gloves | none | none | NO HTML | No clean product-family intent. |
 | `/fingerless-gloves/` | NOINDEX | DO_NOT_CREATE | SEO exclusion record | Winter/work/sport mixed intent | N/A | half-finger gloves | none | none | NO HTML | Qualified bridal styles belong under Bridal only. |
@@ -35,11 +35,11 @@ The table below preserves the Phase 2 research record. The user-authorized 2.3 r
 The 2026-09-05 ADR 0005 bounded amendment permits a future static stakeholder-preview product-detail route only as `NOINDEX`, out of sitemap, and without a canonical SEO owner. It is not a new frozen route and is not authorized by W02; W08 must decide any indexability or canonical ownership.
 
 - One primary intent has one indexable canonical owner.
-- `/contact/` and `/privacy/` are required before the publication gate can authorize live RFQ or formal launch. `/factory/` and `/custom-manufacturing/` remain deferred by Human decision and do not become launch exceptions automatically.
+- `/contact/` and `/privacy/` remain required supporting routes for the live RFQ/privacy boundary. The historical Human-deferred gate for `/factory/` and `/custom-manufacturing/` is superseded for the current user-authorized 2.3 release; both are now indexable formal-production routes, while the historical ADR/W01 wording remains evidence only.
 - `manufacturer`, `supplier`, `wholesale`, `OEM` and `private label` are conversion/context terms, not automatic URL dimensions.
 - Facets and query parameters are non-indexable by default; only approved child routes may enter the sitemap.
 - Conditional children require all threshold conditions and an approval record before status changes to `FROZEN`.
 - `NOINDEX + DO_NOT_CREATE` is a research/SEO exclusion record, not an HTML page requirement.
-- `NOINDEX + REDIRECT_301_ONLY` means emit a one-hop 301 and no destination page at that alias.
+- `NOINDEX + REDIRECT_308_ONLY` means emit a one-hop 308 and no destination page at that alias.
 
 The historical Phase 2 rule that all product-detail routes remain noindex is superseded for the bounded 2.3 tranche described above; the historical ADR/W08 documents remain unchanged as evidence of the earlier gate.

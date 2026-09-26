@@ -1,0 +1,116 @@
+{
+  "observedAt": "2026-09-27T02:43:50+08:00",
+  "release": {
+    "version": "2.3.0",
+    "commit": "349201d",
+    "previousCodeCommits": ["9e68f5e", "3a29adc", "314e955", "a6290e5"],
+    "vercelCommitStatus": "success",
+    "vercelStatusUrl": "https://vercel.com/creen-ai/glove-factory-website/2AGLhN1pHh24FtWoxR36KT5fPYpe",
+    "productionHost": "https://www.jsmeilai.com"
+  },
+  "productionProbe": {
+    "sitemapStatus": 200,
+    "sitemapUrlCount": 28,
+    "sitemapLastModified": "2026-09-26T18:42:00.000Z",
+    "sitemapUrlAudit": {
+      "status200": 28,
+      "indexFollow": 28,
+      "selfCanonical": 28,
+      "singleH1": 28,
+      "serverRenderedBody": 28,
+      "xRobotsTagPresent": 0,
+      "homepageCtaInteractiveNesting": "fixed; RFQ and destination links are separate interactive elements"
+    },
+    "robots": {
+      "status": 200,
+      "allowMediaPath": true,
+      "sitemap": "https://www.jsmeilai.com/sitemap.xml"
+    },
+    "urlNormalization": {
+      "httpApexToHttpsWww": true,
+      "httpWwwToHttpsWww": true,
+      "httpsApexToHttpsWww": true,
+      "noSlashToTrailingSlash": true
+    },
+    "intentionalNoindex": [
+      "/privacy/",
+      "/terms/",
+      "/shipping/",
+      "/returns/",
+      "non-curated /products/{slug}/ previews"
+    ],
+    "alias": "/wedding-gloves/ -> 308 -> /bridal-gloves/",
+    "uaProbe": "Normal, mobile, Googlebot and Google-InspectionTool UA simulations returned matching key-route HTML hashes; this is not proof of Google's actual fetch.",
+    "observedErrorClasses": {
+      "403": 0,
+      "429": 0,
+      "5xx": 0,
+      "timeouts": 0
+    },
+    "latencyNote": "Network-inclusive 28-URL probe p50 approximately 1.47s and maximum approximately 3.43s; dynamic TTFB samples approximately 0.4-1.2s."
+  },
+  "crawlGuard": {
+    "command": "node scripts/seo-audit.mjs --origin https://www.jsmeilai.com --mode production",
+    "checkedPages": 28,
+    "failures": 0,
+    "warnings": 0,
+    "linkCheckScope": "Up to the first 20 unique non-API internal links per sitemap page"
+  },
+  "crawlerEvidence": {
+    "source": "Vercel short-retention request detail",
+    "lastConfirmedPresentedGooglebotUa": "2026-09-26T17:55:11.656Z",
+    "localTime": "2026-09-27T01:55:11.656+08:00",
+    "path": "/kids-dress-gloves/",
+    "status": 200,
+    "responseFinishedMs": 332,
+    "functionExecutionMs": 236,
+    "qualification": "Observed request presented a Googlebot UA; UA is spoofable and no reverse-DNS verification is claimed."
+  },
+  "gsc": {
+    "historicalStateObserved": {
+      "indexed": 0,
+      "notIndexed": 11,
+      "noindexExcluded": 3,
+      "discoveredNotIndexed": 8,
+      "homepageOldNoindexCrawl": "2026-09-18T07:41:23+08:00",
+      "clicks90d": 0,
+      "impressions90d": 0
+    },
+    "liveTests": {
+      "/": "indexable",
+      "/opera-gloves/": "indexable"
+    },
+    "requestIndexingAccepted": [
+      "/",
+      "/opera-gloves/",
+      "/products/",
+      "/bridal-gloves/",
+      "/kids-dress-gloves/",
+      "/wedding-veils/",
+      "/custom-manufacturing/",
+      "/factory/"
+    ],
+    "requestIndexingRetryNotRepeated": [
+      {"path": "/contact/", "result": "GSC temporary submission error"},
+      {"path": "/products/bridal-gloves-sheer-lace-long-001/", "result": "GSC temporary submission error"}
+    ],
+    "interpretation": "Live-test eligibility and queue acceptance do not mean indexed; Google-selected canonical and new crawl date remain unverified."
+  },
+  "indexNow": {
+    "keyFileStatus": 200,
+    "submittedUrlCount": 28,
+    "endpoint": "https://api.indexnow.org/indexnow",
+    "httpStatus": 202,
+    "meaning": "Accepted by IndexNow endpoint; not an indexing guarantee and not Google's Indexing API."
+  },
+  "contentAndTrust": {
+    "activeProductRows": 36,
+    "curatedIndexablePdpCount": 15,
+    "gatedPdpCount": 21,
+    "approvedMediaObjects": 173,
+    "unconfirmedFieldsKeptOutOfClaims": ["material", "length", "MOQ", "sample", "lead time", "stock", "certifications", "price", "reviews", "ratings"],
+    "seoLanguage": "English URLs only; client locale UI exists but no hreflang/locale sitemap.",
+    "analytics": "Privacy-gated event scaffold only; no GA4 measurement ID, consent UI, GTM, Vercel Analytics or Speed Insights data.",
+    "payment": "BLOCKED / awaiting real payment information"
+  }
+}

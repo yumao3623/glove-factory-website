@@ -1,10 +1,16 @@
 # 当前交接
 
-更新：2026-09-27。
+更新：2026-09-27（Asia/Shanghai）。
 
-- Production **2.2.0**；Development **无**。2.2 限定技术 SEO 已完成；当前运营观察，不开新版本。
-- 最近完成：已将 `7c19945`、`2b540b3` 两个治理提交推送到 `origin/main`；2026-09-27 再次只读复核 GSC sitemap、首页、`/products/`、`/bridal-gloves/`、`/opera-gloves/` 与搜索效果，结果与前次相同：sitemap 成功并发现 9 URL；0 已索引、3 个旧 noindex 排除、8 个已发现未索引；3 个月点击/曝光仍为 0。未启动索引请求或代码修改。
-- 当前等待：Google 索引/数据；首页旧抓取记录仍为 2026-09-18 noindex，核心分类尚未抓取。Vercel Ready 且 SEO/RFQ 开启、支付关闭；PayPal 企业申请进度未确认。
-- **唯一下一任务：2026 年 10 月 2 日做一次有范围的只读 SEO observation**；该日期尚未到达，本次不能提前代替。届时若没有 Google 抓取、索引或效果数据变化，检查 sitemap 与核心 URL；若仍无数据且无技术错误，继续观察，不启动 2.3。
-- 可准备：复用已批准工厂资料整理采购事实缺口和首批 6–10 产品清单；资料/负责人到位且需要成套开发才启动候选 2.3.0“英文采购内容与询价转化”。
-- 下一对话先读 AGENTS.md，再按其中顺序读 PROJECT_STATUS.md、HANDOFF.md、ROADMAP.md、PROJECT_WORKFLOW.md；不要恢复旧 V1 队列或按聊天次数升版本。建议新建对话，治理整理已结束，下一任务是运营观察。
+- Production **2.3.0**；当前代码 `349201d` 已推送到 `origin/main`，Vercel check success，线上 28 URL surface 已复核。
+- 最近完成：修复旧 sitemap/索引边界、解除本轮批准的核心服务页和 15 个 PDP 的正式索引 gate、补齐 canonical/metadata/schema/OG、允许 `/api/media/`、加入 claimed-crawler 观察、RFQ/contact 事件骨架、IndexNow key 和 28 URL 提交；修复目录收藏按钮的嵌套交互语义，并标明生成视觉为 editorial。
+- GSC 现场：历史索引状态仍是 0 indexed/11 not indexed，首页旧 crawl 明确为 2026-09-18 noindex；首页与 Opera live test 已显示可编入。首页、Opera、Products、Bridal、Kids、Veils、Custom、Factory 的一次请求已进入队列；Contact 与一个 PDP 请求遇到 GSC 稍后重试错误，没有重复提交。
+- 当前事实：生产 sitemap 28/28 200、index/follow、自 canonical、SSR H1；Vercel 可见日志确认过一个呈现 Googlebot UA 的 200 请求（2026-09-27 01:55:11 CST，短留存窗口）。这不是“全站已收录”，也不是对 UA 的反向 DNS 认证。
+- 当前外部配置：IndexNow endpoint 已返回 202；Bing Webmaster 尚未登记 jsmeilai.com；GA4/GTM/Vercel Analytics/Speed Insights 未启用；社交 profile、UTM 持久化、长期日志留存和真实 factory photo 事实审核仍待账号/负责人。
+- Payment 保持 **BLOCKED / awaiting real payment information**；不改支付开关，不伪造价格、库存、MOQ、交期或支付资料。
+
+## 唯一下一任务
+
+并行推进持续获客与证据运营：有权限时完成 Bing 验证/sitemap、GA4 consent/measurement 或 Vercel Analytics 决策，核验 WhatsApp 与真实社交账号，补齐已批准商业事实；随后在产生新 GSC crawl/index/performance 数据时做一次有范围观察。不要因为 Google 延迟再次启动一个等待型开发版本。
+
+下一次对话仍先读 `AGENTS.md`、本页、`PROJECT_STATUS.md`、`ROADMAP.md`、`PROJECT_WORKFLOW.md`，并以当前 Git/生产证据为准。

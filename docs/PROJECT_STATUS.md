@@ -1,70 +1,93 @@
 # JS Meilai 当前项目状态
 
-核对日期：2026-09-27（Asia/Shanghai）；本次补充 GSC 只读 SEO observation，平台事实沿用最近一次有证据的实查，除非另有注明。这是当前状态唯一入口；由根目录 AGENTS.md 规定读取顺序。先读本页，再读 HANDOFF.md、ROADMAP.md 和 PROJECT_WORKFLOW.md。历史版本事实见 RELEASE_HISTORY.md；执行规则见 PROJECT_WORKFLOW.md。
+核对日期：2026-09-27（Asia/Shanghai）。本页是当前状态唯一入口；旧阶段文档保留作历史证据，不覆盖本页的生产、Git、平台和现场 HTTP 事实。执行顺序仍由根目录 [`AGENTS.md`](../AGENTS.md) 规定。
 
 ## 版本与阶段
 
-- **Production: 2.2.0**，是历史 2.2 的规范表达，包含已上线的 2.1.5 UI 能力，不重命名历史版本。
-- **Development: 无在开发版本**。当前工作是项目治理与运营核查，不产生 2.2.1，不启动 2.3.0。
-- **2.2 已完成限定的技术 SEO 发布范围**，不是全站所有页面 SEO 完成，也不代表 Google 已收录、支付上线或多语言 SEO 完成。
-- 阶段：**上线运营 + SEO observation + 外部等待**。不是纯等待：可以整理采购事实、明确询价负责人、筛选真实外链目标；目前没有必要改代码。
-- package.json / package-lock.json 的 2.1.0 是滞后包元数据，不作为生产版本证据。本次不为版本美化触发网站构建；下次实际软件 release 时同步包版本、发布记录和部署证据。
+- **Production: 2.3.0**。当前生产代码对应 `main`/`origin/main` 的 `349201d`，Vercel commit check 为 success；线上最终复核已通过。
+- **Development / Current work: 无（2.3.0 已完成，进入持续运营）**。后续是 SEO、外部获客、事实补充和账号配置的运营工作，不把“等待 Google 报告更新”当成开发阶段。
+- `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
+- Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
+
+## 本轮交付边界
+
+2.3 将旧的“只读观察”改为可抓取、可发现、可询盘的正式英文 B2B surface：
+
+- 正式 sitemap 为 28 个 URL：13 个核心/指南页面 + 15 个基于批准目录、资料完整度筛选的 PDP；其余 21 个目录产品仍可在目录中浏览，但 PDP 保持 `noindex`、不进 sitemap。
+- `/custom-manufacturing/`、`/factory/`、`/contact/` 和受控 `/costume-gloves/` 已在正式生产模式可索引。About、manufacturing capability、quality control 内容合并在 `/factory/`，OEM/ODM 合并在 `/custom-manufacturing/`，没有为凑数量创建薄页。
+- 15 个首批 PDP 使用真实 Supabase 产品与云媒体，并只公开已核对的 family、occasion、颜色、手指/年龄方向、装饰或定制字段；material、length、MOQ、sample、lead time、stock、certification、price、review 等未确认字段明确留在询价确认。
+- Product、Breadcrumb、Organization、WebSite、Guide 相关结构化数据和 OG/Twitter 元数据已上线；Product JSON-LD 不包含伪造 `Offer`、库存、评价或评分。
+- robots 明确允许 `/api/media/`，同时限制 `/api/`、账户、后台、购物车和 checkout；加入隐私安全的 claimed-crawler 观察标记。
 
 ## 当前事实
 
-| 领域 | 状态和证据边界 |
+| 领域 | 当前状态与证据边界 |
 | --- | --- |
-| Git / main | 本次核查前工作树干净；已将治理提交 `7c19945`、`2b540b3` 推送到 `origin/main`，当前 main 与远端同步于 `2b540b3`。该推送只包含治理文档，不等于新的生产版本发布；未来任务重新检查 ahead/behind，不照抄本行。 |
-| Vercel | GitHub 最新 Production deployment `6520058115` 为 success（2026-09-18 07:55:29Z），SHA 为 `55ab484`；Vercel commit status 同为 success。域名今天返回 Vercel 200。用户打开授权浏览器后，直接确认 Production Ready、同一 SHA 和 www.jsmeilai.com 绑定；6h 概览错误率 0%（89 edge requests / 11 function invocations，仅此窗口）。生产设置实查 SEO_INDEXING_ENABLED=true、COMMERCE_RFQ_ENABLED=true、PAYPAL_CHECKOUT_ENABLED=false。连接器/CLI 曾 403，但浏览器已解除本次核查阻塞。 |
-| 域名 | `https://www.jsmeilai.com/` HTTPS 200；HTTP apex 与 HTTPS apex 最终跳转到该 canonical host 200。未改 DNS；未重新验证注册商续费和所有邮件 DNS。 |
-| Supabase | `JSMeilai` / `lkpufupiddbmqzdgpbxo` / 东京，API 实查 ACTIVE_HEALTHY。13 张 public 表均启用 RLS；不等于本次完整权限渗透验收。list_projects 只返回别的项目，但按仓库项目 ID 直接读取成功，不能误用其他项目。 |
-| Product | SQL 实查 36 active 产品、173 个 product-media 对象；六类分布：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。所有产品有 description，但扩展 specifications 均为空；基础材质/颜色等不因此被视为空。变体与库存记录均为 0。后台 CRUD/库存机制有 2.1 验收，不能称已有确认库存。 |
-| SEO | 今天 9 个 sitemap URL 全部 200、一个 title/description/H1、正确自引用 canonical、index/follow。robots 指向正式 sitemap。factory、custom-manufacturing、contact、抽样 PDP 仍 noindex 且无 canonical；costume 仍独立 noindex gate。保持既有边界，不批量解除。 |
-| Search Console | **2026-09-27 本次实查并复核**：sitemap `/sitemap.xml` 状态成功，2026-09-26 最近读取，已发现 9 个网页、0 个视频；索引报告上次更新 2026-09-21，0 已索引、11 未索引（3 个“被 noindex 标记排除”、8 个“已发现—尚未编入索引”）。首页 Inspection 仍为 2026-09-18 07:41:23 抓取的旧 noindex 记录；`/products/`、`/bridal-gloves/`、`/opera-gloves/` 均为“已发现—尚未编入索引”，抓取日期不适用。效果报告最新更新约 4.5 小时前，3 个月窗口 0 点击、0 曝光、0% CTR、平均排名 0、无查询。2026-09-27 复核结果未变；未重复提交 sitemap 或索引请求，未看到新技术异常。2026-10-02 尚未到达，不能提前声称已执行该日期观察。 |
-| 搜索可见性 | 用户报告普通 Google 搜索尚无官网结果；今天搜索工具 `site:jsmeilai.com` 无结果，仅为弱信号，不证明未收录，也不是 Google URL Inspection。GSC 今日报告及首页 Inspection 尚未收录；报告有数据截止延迟，不声称实时覆盖所有 URL。 |
-| Multilingual | 2.1.5 的 English、简体中文、Deutsch、Français、Italiano UI 与持久化已实现并随最新代码部署。大量正文和产品英文；没有独立语言 URL / hreflang / localized canonical / 多语言 sitemap。今天所查页面无 hreflang。不是完整本地化。 |
-| RFQ / Email | 2.1 记录已验证持久化、幂等、后台状态和 Resend delivered。今天 SQL：RFQ 0、订单 0、失败通知 0；零失败不等于链路已重新验收。生产 RFQ 开关今天实查为 true。本次未提交询价、未发邮件、未登录后台写数据；最新投递和跟进履约未验证。 |
-| Payment | 今天 Vercel Production 设置实查 `PAYPAL_CHECKOUT_ENABLED=false`；代码具备 create/capture/webhook/金额校验/幂等，未完成商户真实验收。本次仅查看开关，未调用付款或更改配置。生产支付保持未验收，不得称可收款。经营者材料、KYC/审核与结算待本人确认。 |
-| Growth | 台账与模板已存在，但目前是 6 种候选类型，尚无真实站点域名/联系人资格核查；不能称已有可直接投放的六家名单。仓库无本站已发布外链证据，本次未对外发送/提交。 |
+| Git / main | `main` 与 `origin/main` 同步到 `349201d`；工作树在文档提交前应保持干净。2.3 代码沿 `9e68f5e`、`3a29adc`、`314e955`、`a6290e5`、`349201d` 连续推送，未重写旧历史。 |
+| Vercel / production | `349201d` 的 Vercel commit status 为 success（本次实查）；`https://www.jsmeilai.com/` 及正式页面已返回新 2.3 HTML。当前可见 API 未提供可稳定引用的 deployment ID，因此以 commit status + live probe 作为部署证据。 |
+| 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；无斜杠核心路径 308 到 trailing slash。 |
+| Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
+| 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为对应本轮内容/UX 修正的固定时间 `2026-09-26T18:42:00.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
+| 生产索引健康 | 以 Googlebot UA 与普通 UA **模拟请求**审计 sitemap 全部 28 URL：均 200、`index, follow`、自指向 canonical、一个 H1、SSR 正文、标准 `<a href>` 内链；无 `X-Robots-Tag`。`/privacy/`、`/terms/`、`/shipping/`、`/returns/` 和非 curated PDP 有意 `noindex`；`/wedding-gloves/` 一跳 308 到 `/bridal-gloves/`。 |
+| Robots / media | `robots.txt` 200，允许 `/` 和 `/api/media/`，sitemap 指向正式 URL；私有 API/后台/账户/购物车/checkout 继续 disallow。旧版本曾用 `Disallow: /api/` 覆盖媒体路径，这是本轮修复的真实技术问题。 |
+| Rendering / UA / mobile | 对首页、产品 hub、核心分类、custom、factory、contact、curated PDP 做普通、移动、Googlebot、Google-InspectionTool UA **模拟请求**，HTML hash 一致；SSR 直接含主要正文和 H1，没有 locale/cookie/geo/User-Agent 分流。移动导航保留完整产品、工厂、指南和 RFQ 入口。 |
+| 性能与 capacity | 本次 28 URL probe 无 403、429、5xx、timeout；网络计时 p50 约 1.47s、最大约 3.43s，动态页面样本约 0.4–1.2s TTFB。产品/PDP 使用 `no-store` Supabase 请求，当前不是阻塞，但规模扩大前应评估受控 revalidate/缓存。 |
+| Googlebot 证据 | Vercel 可见短保留日志中，2026-09-26T17:55:11.656Z UTC（上海 2026-09-27 01:55:11.656）有一个呈现 Googlebot UA 的 `/kids-dress-gloves/` 请求：200、完成约 332ms、函数约 236ms；相邻首页、hub、分类和 PDP 也为 200。UA 可伪造，故表述为“观察到呈现 Googlebot UA 的请求”，不是反向 DNS 认证。更久历史在 Hobby 日志中不可见。 |
+| GSC 历史索引状态 | 本次进入 GSC 前台仍看到旧报告：sitemap 2026-09-26 最近读取、旧索引报告 0 indexed / 11 not indexed（3 noindex、8 discovered-not-indexed）；效果近 3 个月 0 clicks、0 impressions。首页旧记录明确为 2026-09-18 07:41:23 Googlebot 智能手机版抓到 `noindex`；这不是当前 live HTML。 |
+| GSC live test / 请求 | 2026-09-27：`/` 和 `/opera-gloves/` live test 显示“网址可编入 Google”；首页与 Opera 各请求一次并成功进入优先抓取队列。`/products/`、`/bridal-gloves/`、`/kids-dress-gloves/`、`/wedding-veils/`、`/custom-manufacturing/`、`/factory/` 各请求一次并成功；Contact 与一个首批 PDP 尝试时 GSC 返回“提交请求时出现问题，请稍后重试”，未继续重试。live test/请求不等于已收录；Google-selected canonical 和新 crawl date 仍未验证。 |
+| 0 indexed 的根因判断 | **A 确定**：GSC 保存的是旧 noindex crawl record，且旧代码把 PDP、factory/custom/contact/costume gate 留在 noindex；**B 高概率**：新域名、旧 sitemap 仅 9 URL、无外部权威/零 impressions，crawl demand 较低；**C 有贡献**：旧 PDP 文案模板化、信息增量和内链图较弱，本轮已做 15 页高质量 tranche；**D 未发现证据**：当前无错误状态或 timeout；**E 当前未发现**：canonical、robots、SSR、UA 版本一致。剩余 0 indexed 是历史报告刷新 + Google scheduling/priority 的组合，不可简化为“纯技术无异常所以等”。 |
+| Metadata / schema | 所有 28 indexable URL 有唯一 title、description、canonical、OG/Twitter；OG image 为 1200×630 PNG。15 PDP 输出 Product + Breadcrumb，Guide 输出 Article/HowTo + Breadcrumb；没有 Offer/price/stock/review/rating。线上 SSR JSON-LD 已解析检查，未把该检查表述为 Google Rich Results Test 通过。无 verified social profile，因此不伪造 `sameAs`。 |
+| Multilingual | 当前有 2.1.5 的 en、简中、de、fr、it 客户端 UI 和持久化选择；SEO 仍只有英文独立 URL。没有 server-rendered locale URL、localized canonical、双向 hreflang、`x-default` 或语言 sitemap，故不宣称完整多语言 SEO，也没有制造机械薄页。 |
+| RFQ / contact | 生产 RFQ 开关为 true；页面提供表单、邮箱、电话和已批准号码的 WhatsApp CTA，未在本轮提交真实询盘或发送邮件。数据库当前没有新增 RFQ；不把没有测试写入的状态称为 lead。 |
+| Analytics / attribution | 代码有隐私门控的 `rfq_submit`、`contact_click`、`whatsapp_click`、`product_family_view`、`sample_request` 事件骨架，但没有 GA4 measurement ID、consent UI、GTM、Vercel Web Analytics 或 Speed Insights 数据；UTM 只做链接约定，尚未捕获/持久化。 |
+| Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted（不代表已被 Bing/Google 索引）。Bing Webmaster 当前账号没有 jsmeilai.com，sitemap/站点验证尚未完成。IndexNow 不等同于 Google Indexing API。 |
+| 外部获客 | LinkedIn、Facebook、Instagram、TikTok、Pinterest、YouTube 和目录目前没有已核验 profile/link 证据；仓库外链台账仍是 qualify-first 草稿，没有发送、群发或已发布 backlink。稳定落地页为产品族、指南、custom、contact，待账号和合规核验后使用。 |
+| Payment | `PAYPAL_CHECKOUT_ENABLED=false`；没有假 checkout、价格、账户或支付渠道。待经营者约 5 天后提供真实支付资料、KYC/收单/结算条件并完成受控验收。 |
+
+## 运营已知事项
+
+- Supabase Security Advisor 上次有证据的状态（2026-09-22）仍提示 leaked-password protection 未启用；本轮未重新检查套餐或修改安全设置，不把旧提示写成已解决，也不把它误判为 2.3 索引阻塞。
+- 163 管理员激活是历史待办，本轮未复核；它不影响公开英文站、RFQ 或当前 SEO surface。
+- 产品媒体由 `/api/media/` 映射到云对象，当前有 alt 和稳定 aspect box，但源对象名不是 SEO 描述性文件名、图片走 `unoptimized`；公共 derivative/CDN 和更细的 gallery alt 是后续资产优化，不是当前 Web indexing blocker。
+- 15 个 PDP 有可展开的 sizing/customisation 说明，但尚未发布事实完整的 FAQ/FAQPage；待真实规格批准后再扩充，不用模板问题凑内容。
+- 产品目录依赖 request-scoped Supabase 读取；本次线上数据完整，但未来数据库短暂故障可能让 200 页面变薄，后续应在目录扩大前评估受控缓存或经审核的降级策略。
 
 ## 已知问题与待办分类
 
 ### 可以现在继续做
 
-- 读取已有 FACTORY_QUESTIONS / W01 资料，复用已批准事实，形成优先产品规格缺口表；由经营者确认未知项。不要重复索要已有资料。
-- 明确询价负责人、备用人、首次回复目标和每日后台/邮箱核对流程；目前不能从零询价推导“需要 CRM 重构”。
-- 筛选 3–5 个真实、相关、允许公司资料投稿的行业目标，核对规则后制作逐站草稿。未获具体发送授权不发信。
-- 有权限的账号下只读复核 GSC；同步本地治理文档到远端时单独记录 Git 与可能触发的部署结果。
+- 在有权限的 Bing 账号导入或验证 `www.jsmeilai.com`，提交 `/sitemap.xml`，并保存验证结果。
+- 提供真实 GA4 measurement ID 和同意方案，或决定启用 Vercel Analytics/Speed Insights；随后把现有事件骨架接入并做一次 RFQ/联系方式测试。
+- 核验 WhatsApp 号码由谁接收、回复负责人和 SLA；补充真实社交 profile URL 后再加 `sameAs` 或社交落地链接。
+- 从现有工厂资料确认 material、尺寸、MOQ、sample、包装、lead time 和负责人，逐项批准下一批 PDP；不批量解锁 21 个 gated 页面。
+- 按行业目录规则筛选 3–5 个真实目标，先做逐站草稿；没有用户明确发送授权，不提交表单或发消息。
+- 若目录规模增长，评估 request-scoped cache/revalidate 和更长期的 Vercel Log Drain/Observability 方案。
 
 ### 外部等待
 
-- Google 抓取、索引与报告积累；不承诺收录日期。
-- PayPal 商户审核仅在经营者已提交申请后才称“等待审核”；现在申请完成与否未确认。
-- 第三方外链/目录审核仅在实际提交后才开始等待；目前尚未进入此状态。
+- Google 重新抓取、索引报告和 Search performance 数据；live test 可用不承诺收录时间。
+- Bing 站点验证/导入、sitemap 读取和 IndexNow 后续发现。
+- 真实支付资料、商户/KYC/收单审核和结算条件。
+- 真实 RFQ、邮件回复和买家反馈，才能形成转化数据。
 
 ### 真正阻塞（只阻塞对应工作）
 
-- 本次 GSC / Vercel 浏览器访问已由用户解决，不再列为阻塞；连接器/CLI 权限异常只影响将来使用对应工具，不能据此要求重建平台。
-- 新商业承诺、认证、MOQ/交期、可售库存：需要对应真实证据和经营者确认；不阻塞现有 RFQ 站运行。
-- 支付启用：经营者身份/企业材料、审核、收单和结算条件、真实验收缺一不可。
+- 未确认的商业事实只阻塞相应产品字段发布，不阻塞英文核心站、技术 SEO 或询盘入口。
+- Bing、GA4、社交和长期日志需要账号/权限，只阻塞对应第三方配置，不阻塞 2.3 生产站。
+- Payment 的真实商户资料和受控验收只阻塞在线收款，不阻塞前段获客。
 
 ### 暂时不值得做
 
-- 因没有首次索引而每天改 metadata、重复提交首页、批量解锁 PDP、全站重构或增加版本。
-- 尚无市场/翻译负责人时一次生成四种语言索引页；把薄英文正文放大成五套。
-- 在没有商户条件和买家付款需求时继续打磨 PayPal，或重建已通过验收的后台。
-
-## 运营关注
-
-Supabase Security Advisor 今天唯一提示：泄露密码保护未启用。见 [官方说明](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection)。历史记录说明套餐限制，本次未重新核对套餐价格或购买升级；该项进入 Operations 决策，不虚报已解决，也不直接阻断 2.2。
-
-163 管理员激活仅有历史待办，今天未复核。发信域不等于可收件邮箱。不要把 notification_status=accepted 写成 delivered；投递必须由邮件平台确认。
+- 每天修改 metadata、重复提交同一个 URL、重复提交 sitemap、用 Indexing API 处理普通网页，或把 live test 当已收录。
+- 在没有事实负责人和目标市场前一次生成五套语言 SEO 页，或把 21 个 gated PDP 批量解锁。
+- 没有 verified profile、目录规则和发送授权时购买/群发外链。
+- 为了保留短期 Googlebot 日志而立刻引入数据库 crawl 事件表；先用现有 proxy marker + Vercel 请求详情，长期留存由平台方案决定。
 
 ## 本次可复核证据
 
-- Git：`git fetch origin`、`git log`、`git status`；无 2.x release tag，历史 phase tags 保留，不追补假标签。
-- GitHub：`repos/yumao3623/glove-factory-website/commits/55ab484/status`；`deployments/6520058115/statuses`。
-- [生产部署记录](https://vercel.com/creen-ai/glove-factory-website/DxMa5Bp78UUstjDXGJT1TDqN81JF)；[生产站点](https://www.jsmeilai.com/)。
-- 本次平台证据摘要：[2026-09-22 平台实查](evidence/2026-09-22-platform-review.md)。本次 HTTP 精简证据：`evidence/2026-09-22-production-readonly.json`。原 `seo:audit` 受 Node fetch 网络失败未完成；curl fallback 核对以上项目通过，不宣称整个原审计或 63 项测试本次重新通过。
-- Supabase：按上述项目 ID 只读 get_project/list_tables、产品分组与业务计数 SQL、security advisor。只存汇总，不存客户数据或密钥。
-- 历史详细验收按 RELEASE_HISTORY.md 的来源链接查阅；最新证据不能由旧聊天替代。
+- Git / build：`349201d`；`npm run lint`、`npm run typecheck`、`npm test`（66/66）、formal `npm run build` 均通过。
+- 线上 probe：`docs/evidence/2026-09-27-2.3-production.json`；包括 sitemap、robots、URL normalization、UA hash、legal/noindex 边界和 schema 摘要。
+- 生产站点：[https://www.jsmeilai.com/](https://www.jsmeilai.com/)、[sitemap.xml](https://www.jsmeilai.com/sitemap.xml)、[robots.txt](https://www.jsmeilai.com/robots.txt)。
+- GSC 现场证据：本次浏览器中的 URL Inspection/live test；新报告尚未刷新 indexed state，不能用旧截图替代新 live HTML。
+- IndexNow：官方 endpoint 返回 HTTP 202；key 文件为仓库 `public/057cf023d52f25be2f9aebe3189740fe.txt`。
+- Vercel 日志：Hobby 短留存窗口中的 claimed-Googlebot 请求；没有宣称可回溯的完整历史。
