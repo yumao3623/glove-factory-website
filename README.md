@@ -84,7 +84,7 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 - `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
 - `COMMERCE_RFQ_ENABLED=true`、`RESEND_API_KEY`、`EMAIL_FROM`、`RFQ_RECIPIENT`：询价存储及通知邮件。
 - `ADMIN_EMAILS`：已授权管理员邮箱；必须先完成邮箱验证才有后台权限。
-- `PAYPAL_CHECKOUT_ENABLED=false`：2.1 保持关闭，完成商户及真实支付验收后再开启。
+- `PAYPAL_CHECKOUT_ENABLED=false`：2.3 继续保持关闭，等待真实商户资料、KYC/收单条件和受控支付验收后再开启。
 
 忘记密码从 `/account/` 进入。管理员邀请工具为 `node --env-file=.env.local --import tsx scripts/send-admin-access.ts <管理员邮箱>`；正式邀请前确认应用 URL 为生产域名。密码由收件人自己设置。
 
