@@ -115,7 +115,7 @@
     "unconfirmedFieldsKeptOutOfClaims": ["material", "length", "MOQ", "sample", "lead time", "stock", "certifications", "price", "reviews", "ratings"],
     "unconfirmedMeasurementNameHandling": "When runtime length_cm is null, cm tokens are removed from the public product name, title and image alt; confirmed lengths are preserved.",
     "seoLanguage": "English URLs only; client locale UI exists but no hreflang/locale sitemap.",
-    "analytics": "Privacy-gated event scaffold only; no GA4 measurement ID, consent UI, GTM, Vercel Analytics or Speed Insights data.",
+    "analytics": "GA4 Property JS Meilai | jsmeilai.com and Web Data Stream https://www.jsmeilai.com created; stream ID 15854461548 and Measurement ID G-PP1JPPV9FD saved in Vercel Production. Consent remains default-denied and GA4 loads only after Allow; production deployment and event/realtime verification are tracked in the current handoff. Vercel Analytics/Speed Insights remain disabled.",
     "payment": "BLOCKED / awaiting real payment information"
   }
 }
