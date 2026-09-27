@@ -4,7 +4,7 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前应用代码基线为 `b07227b`；其后 `f6978b2` 与 `6a9ce85` 均为外部获客/GSC 观察文档提交。最新 Vercel Production deployment `8qZxNe94jQetGobHM…`（commit `6a9ce85`）已 Ready，域名继续绑定 www.jsmeilai.com。
+- **Production: 2.3.0**。当前应用代码基线为 `b07227b`，对应的 Vercel Production deployment 已 Ready；其后 `f6978b2`、`6a9ce85`、`0ee2cbf` 及后续同步均为外部获客/GSC 观察文档提交，不改变应用代码基线。域名继续绑定 www.jsmeilai.com。
 - **Development / Current work: 外部获客执行包已准备，进入账号选择与首批发布前置阶段**。GA4、Bing 和归因基础保持生产可用；本轮新增渠道优先级、UTM registry、首批英文内容和发布检查。LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram 已完成研究，但没有代替经营者创建账号或发布。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
@@ -24,7 +24,7 @@
 | 领域 | 当前状态与证据边界 |
 | --- | --- |
 | Git / main | d7f8126 已从归因分支 fast-forward 合并到 main 并推送 origin/main；随后 3c0fce4、ea86197、7613474 和 b07227b 完成 GA4 fail-closed、生产记录、专用 Property 配置记录与首屏事件竞态修复。 |
-| Vercel / production | Source main、commit b07227b 的 deployment BwgXUvNPMjH1mvChcpCfGThUSSVa 已实查 Ready；Production 环境变量 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PP1JPPV9FD 生效，域名 www.jsmeilai.com 正常。 |
+| Vercel / production | Source main、应用代码 commit b07227b 的 deployment BwgXUvNPMjH1mvChcpCfGThUSSVa 已实查 Ready；后续仅文档同步提交自动生成 docs-only Production deployments。Production 环境变量 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PP1JPPV9FD 生效，域名 www.jsmeilai.com 正常。 |
 | 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；当前 HTTP apex 观测为两跳（HTTP apex → HTTPS apex → HTTPS www），HTTPS apex 为一跳，属于 Vercel 域名设置优化而非索引阻塞；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为最终产品名清理与 sitemap 修正对应的固定时间 `2026-09-26T19:08:58.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
