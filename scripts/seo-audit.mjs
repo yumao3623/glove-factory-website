@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Small dependency-free crawl guard for the JS Meilai 2.3 production surface.
+ * Small dependency-free crawl guard for the JS Meilai 2.4 production surface.
  *
  * It deliberately checks the URLs the site publishes in sitemap.xml instead
  * of guessing routes. Run it against a local server or the production host:
@@ -32,7 +32,7 @@ async function request(path, { reportError = true } = {}) {
   const localPath = mode === "preview" && parsedPath.origin !== origin ? `${parsedPath.pathname}${parsedPath.search}` : parsedPath.toString();
   const url = new URL(localPath, `${origin}/`);
   try {
-    const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(8000), headers: { "user-agent": "jsmeilai-seo-audit/2.3" } });
+    const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(8000), headers: { "user-agent": "jsmeilai-seo-audit/2.4" } });
     return { url: url.toString(), response, body: await response.text() };
   } catch (error) {
     if (reportError) fail(`${url}: ${error instanceof Error ? error.message : String(error)}`);

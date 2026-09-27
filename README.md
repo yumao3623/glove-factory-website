@@ -1,6 +1,6 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.3.0**（包含 2.1.5 五语言 UI），已进入持续 SEO、获客和询盘运营；没有在开发的新版本。package.json 的版本字段不能单独作为部署判定，当前生产代码和线上证据以 [PROJECT_STATUS](docs/PROJECT_STATUS.md) 为准。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.4.0**（包含 2.1.5 五语言 UI、consented GA4 与 UTM attribution），外部获客扩张以网站成熟度审计为前置条件。package.json 的版本字段不能单独作为部署判定，当前生产代码和线上证据以 [PROJECT_STATUS](docs/PROJECT_STATUS.md) 为准。
 
 新任务先读根目录 [AGENTS.md](AGENTS.md)，再按其中顺序读 [当前状态](docs/PROJECT_STATUS.md)、[当前交接](docs/HANDOFF.md)、[近期路线](docs/ROADMAP.md)、[固定工作规则](docs/PROJECT_WORKFLOW.md)。历史只需读 [版本简史](docs/RELEASE_HISTORY.md)，详细验收按其中链接追溯。
 
@@ -78,13 +78,13 @@ research/               关键词、竞品、搜索引擎优化和视觉研究�
 复制 `.env.example` 为 `.env.local` 并按实际环境配置；环境文件不进入 Git。
 
 - `NEXT_PUBLIC_APP_URL`、`NEXT_PUBLIC_SITE_URL`：本地开发地址；生产均为 `https://www.jsmeilai.com`。
-- `SEO_INDEXING_ENABLED=true`：2.3 正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
-- `SEO_COSTUME_INDEXING_ENABLED`：历史兼容变量；2.3 正式生产沿用统一的 `SEO_INDEXING_ENABLED`，`/costume-gloves/` 与其他已审页面共享索引边界，不再由旧 gate 单独控制。
+- `SEO_INDEXING_ENABLED=true`：正式索引开关；只有同时配置精确的 `NEXT_PUBLIC_SITE_URL=https://www.jsmeilai.com` 才会切换到正式 robots/canonical 行为，默认保持 noindex。
+- `SEO_COSTUME_INDEXING_ENABLED`：历史兼容变量；当前生产沿用统一的 `SEO_INDEXING_ENABLED`，`/costume-gloves/` 与其他已审页面共享索引边界，不再由旧 gate 单独控制。
 - Supabase URL、anon key、服务端 service-role key：账户、后台、目录和受保护媒体所需。
 - `COMMERCE_CATALOG_ENABLED=true`：读取数据库目录；关闭时不会展示历史静态产品。
 - `COMMERCE_RFQ_ENABLED=true`、`RESEND_API_KEY`、`EMAIL_FROM`、`RFQ_RECIPIENT`：询价存储及通知邮件。
 - `ADMIN_EMAILS`：已授权管理员邮箱；必须先完成邮箱验证才有后台权限。
-- `PAYPAL_CHECKOUT_ENABLED=false`：2.3 继续保持关闭，等待真实商户资料、KYC/收单条件和受控支付验收后再开启。
+- `PAYPAL_CHECKOUT_ENABLED=false`：继续保持关闭，等待真实商户资料、KYC/收单条件和受控支付验收后再开启。
 
 忘记密码从 `/account/` 进入。管理员邀请工具为 `node --env-file=.env.local --import tsx scripts/send-admin-access.ts <管理员邮箱>`；正式邀请前确认应用 URL 为生产域名。密码由收件人自己设置。
 

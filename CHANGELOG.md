@@ -6,12 +6,13 @@
 
 - 2026-09-28：完成外部获客执行包：筛选 LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram、Europages 和 Kompass 的优先级与账户门槛，建立 UTM registry、落地页映射和首批英文内容草稿；本轮没有创建账号、发送消息、发布外链或购买付费资源。Bing sitemap 本次实查成功发现 28 个 URL；GA4 实时快照记录 1 个活跃用户。
 - 2026-09-28：使用已授权的 `yumao3623@gmail.com` 重新观察 GSC：0 indexed、11 not indexed、0 clicks/0 impressions；索引报告和 sitemap 仍是旧数据（sitemap 仅发现 9 个 URL），没有新的确认抓取、索引或曝光证据，未重复提交未变化 URL。
-- 2026-09-28：创建独立 `JS Meilai | jsmeilai.com` GA4 Property 与 `JS Meilai Web | www.jsmeilai.com` Web Data Stream（`https://www.jsmeilai.com`，stream ID `15854461548`，Measurement ID `G-PP1JPPV9FD`）；在 Vercel Production 保存 `NEXT_PUBLIC_GA_MEASUREMENT_ID`，保持默认拒绝 consent，并在 Ready 部署中验证默认拒绝、Allow 后加载、页面访问、UTM attribution 与 product_family_view。旧 `G-4EZW646Z1F` 明确属于 `majuscape.fun`，未复用。
-- 2026-09-28：修复首屏 GA4 脚本加载竞态：`product_family_view` 会等待 consented GA4 ready 信号后再发送，避免首屏产品族事件在用户已同意时被跳过。
-- 2026-09-28：接入 env-gated 的默认拒绝 GA4 consent 横幅、可重新打开的分析设置和隐私说明；通过 GSC 只读 OAuth 将 `https://www.jsmeilai.com/` 导入 Bing Webmaster，并提交正式 sitemap。核验发现现有 `G-4EZW646Z1F` 属于其他站点，已移除错误 fallback，避免跨站数据污染。
-- 2026-09-27：为既有 RFQ/contact/WhatsApp/product-family 事件骨架增加 consent + `gtag` 双门控的 UTM、落地页和 session 级首触/末触归因准备；未配置 GA4 时保持惰性，不改变当前生产数据收集边界。
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。
 - 2026-09-24：确认并保留 `docs/PROJECT_STATUS.md`、`docs/ROADMAP.md`、`docs/HANDOFF.md`、`docs/PROJECT_WORKFLOW.md`、`docs/RELEASE_HISTORY.md` 作为持续交接体系；补充本变更记录文件。
+
+## 2.4.0
+
+- 2026-09-28：将 2.3 之后已完成并在生产验收的 consented GA4、UTM 首触/末触 attribution、配置缺失时 fail-closed 和 GA4-ready 事件门控正式归档为 2.4.0；独立 Property/Stream 使用 `G-PP1JPPV9FD`，不复用属于 `majuscape.fun` 的旧 ID。
+- 2026-09-28：完成版本/状态审计，修正 package、治理入口、路线图、交接、release history、analytics 注释与历史规格的当前状态；28/15/21 页面边界、RFQ 和支付边界未改变。
 
 ## 2.3.0
 

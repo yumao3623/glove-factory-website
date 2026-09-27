@@ -1,5 +1,7 @@
 # RFQ / B2B Conversion Specification
 
+> **Historical specification**: this file is the RFQ V1 design baseline. Production now has persistence, validation, rate limiting, idempotency, status events, notifications and a protected quote path; payment and full CRM/fulfilment remain disabled. Use [`PROJECT_STATUS.md`](PROJECT_STATUS.md) for current truth.
+
 V1 is lead generation, not ecommerce. There is no cart, checkout, payment, account or consumer order flow.
 
 ## Stakeholder preview boundary

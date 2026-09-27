@@ -27,9 +27,9 @@ declare global {
 }
 
 /**
- * Keep event call sites ready for GA4 without collecting data today. A future
- * consented GA4 loader can set the flag and provide `window.gtag`; until both
- * exist this function is deliberately inert.
+ * Keep event call sites behind the explicitly consented, configured GA4 loader.
+ * Until both consent and `window.gtag` exist this function remains deliberately
+ * inert, which also keeps local and preview builds fail-closed.
  */
 export function trackEvent(event: AnalyticsEvent, params: AnalyticsParams = {}) {
   if (typeof window === "undefined" || window.__jsmeilaiAnalyticsConsent !== true || typeof window.gtag !== "function") return;

@@ -1,5 +1,7 @@
 # JS Meilai 国际手套独立站成熟电商需求文档
 
+> **历史需求基线**：本文记录 2026-09-12 的产品范围与验收目标，不是当前完成度清单。当前真实实现、开关和未完成项以 [`PROJECT_STATUS.md`](PROJECT_STATUS.md) 为准；支付仍保持 `BLOCKED / awaiting real payment information`。
+
 **版本：** 0.2（中文修订版）　**日期：** 2026-09-12　**状态：** 直接执行基线
 
 ## 一、项目目标与范围
