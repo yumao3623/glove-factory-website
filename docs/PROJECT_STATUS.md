@@ -4,7 +4,7 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前已验证生产代码提交为 b07227b；Vercel Production deployment BwgXUvNPMjH1mvChcpCfGThUSSVa 为 Ready，域名继续绑定 www.jsmeilai.com。
+- **Production: 2.3.0**。当前应用代码基线为 `b07227b`；其后 `f6978b2` 与 `6a9ce85` 均为外部获客/GSC 观察文档提交。最新 Vercel Production deployment `8qZxNe94jQetGobHM…`（commit `6a9ce85`）已 Ready，域名继续绑定 www.jsmeilai.com。
 - **Development / Current work: 外部获客执行包已准备，进入账号选择与首批发布前置阶段**。GA4、Bing 和归因基础保持生产可用；本轮新增渠道优先级、UTM registry、首批英文内容和发布检查。LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram 已完成研究，但没有代替经营者创建账号或发布。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。

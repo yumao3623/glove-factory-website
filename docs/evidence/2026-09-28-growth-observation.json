@@ -3,7 +3,10 @@
   "scope": "growth-channel-observation",
   "production": {
     "codeBaseline": "b07227b",
-    "latestDeployment": "9744c66",
+    "latestDeployment": "6a9ce85",
+    "latestDeploymentStatus": "Ready",
+    "latestDeploymentId": "8qZxNe94jQetGobHMRjKspQ4iK98",
+    "latestDeploymentUrl": "https://glove-factory-website-ixxf0xxkh-creen-ai.vercel.app/",
     "landingPageProbe": [
       {
         "path": "/custom-manufacturing/",
