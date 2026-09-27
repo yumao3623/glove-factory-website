@@ -4,8 +4,8 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前已验证生产部署提交为 `d7f8126`；`main`/`origin/main` 另包含状态文档提交 `3ef3014`，Vercel 对 `d7f8126` 的 Production 部署显示 Ready，线上域名已绑定。
-- **Development / Current work: Bing 已完成；GA4 正确 property 待确认**。Bing 已通过 GSC 只读导入并提交 sitemap。曾误把现有 `G-4EZW646Z1F` 视为 jsmeilai stream，已立即移除 fallback；该 ID 实查属于 `majuscape.fun`，当前生产保持 GA4 不加载。
+- **Production: 2.3.0**。当前已验证生产部署提交为 `3c0fce4`；`main`/`origin/main` 已同步，Vercel Production 显示 Ready，线上域名已绑定。
+- **Development / Current work: Bing 已完成；GA4 正确 property 待确认**。Bing 已通过 GSC 只读导入并提交 sitemap。曾误把现有 `G-4EZW646Z1F` 视为 jsmeilai stream，已立即移除 fallback；该 ID 实查属于 `majuscape.fun`，当前生产已验证不显示 consent 横幅、不加载 GA4。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
 
@@ -24,7 +24,7 @@
 | 领域 | 当前状态与证据边界 |
 | --- | --- |
 | Git / main | `d7f8126` 已从归因分支 fast-forward 合并到 `main` 并推送 `origin/main`；随后状态文档提交为 `3ef3014`。工作树干净。 |
-| Vercel / production | 浏览器实查 Vercel 部署 `3RYD9JYq5MVN95EZjcLhYdNL3AUt`：Source `main`、commit `d7f8126`、Environment Production、Status Ready、Domain `www.jsmeilai.com`。Vercel API 列表权限返回 403，但 dashboard 证据可见。 |
+| Vercel / production | 浏览器实查 Vercel Production deployment：Source `main`、commit `3c0fce4`、Status Ready、Domains `www.jsmeilai.com` 与 `glove-factory-website.vercel.app`；生产首页实查无 analytics consent 横幅，证明 env-gated fail-closed 修复已生效。 |
 | 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；当前 HTTP apex 观测为两跳（HTTP apex → HTTPS apex → HTTPS www），HTTPS apex 为一跳，属于 Vercel 域名设置优化而非索引阻塞；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为最终产品名清理与 sitemap 修正对应的固定时间 `2026-09-26T19:08:58.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
