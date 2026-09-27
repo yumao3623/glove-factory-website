@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-28",
+  "scope": "2.4.0 version and project-state audit",
+  "git": {
+    "releaseCommit": "9377f2a",
+    "branch": "main",
+    "remote": "origin/main"
+  },
+  "vercel": {
+    "deploymentId": "5puQvXGJf3msMhfv4g3VLG2aMn4p",
+    "deploymentUrl": "https://glove-factory-website-h6ajxuciz-creen-ai.vercel.app",
+    "status": "READY",
+    "environment": "Production",
+    "source": "9377f2a"
+  },
+  "production": {
+    "origin": "https://www.jsmeilai.com",
+    "sitemapStatus": 200,
+    "sitemapUrlCount": 28,
+    "robotsStatus": 200,
+    "indexableProbeStatus": 200,
+    "apiAuthSessionStatus": 401,
+    "apiAdminProductsStatus": 401
+  },
+  "boundaries": {
+    "curatedPdpCount": 15,
+    "gatedPdpCount": 21,
+    "activeSupabaseProductCount": 36,
+    "payment": "BLOCKED / awaiting real payment information"
+  },
+  "notes": [
+    "This evidence records the release deployment and read-only production probes; it does not claim Google indexing or new impressions.",
+    "GA4, Bing and historical Google observations remain bounded by the evidence described in PROJECT_STATUS.md."
+  ]
+}

@@ -10,7 +10,7 @@
 | 2.1.5 | 五语言 UI、核心界面文案、语言选择与刷新持久化。保留此已发生版本名，不能改名/删除。没有完整内容本地化及语言 SEO。 | `d878f14` → `99317f2` → `24645ad` → `55ab484`（2026-09-18）；[范围记录](V2_1_5_LOCALE_UI.md)。 |
 | 2.2（当前统一表达 2.2.0） | 限定正式索引开关、9 URL sitemap、canonical/robots/指南内容与技术审计；GSC 验证/sitemap 提交/首页索引请求历史已完成。外链仅台账和模板，非发布；Google 收录不是 release DoD。 | `db853bf`、`fa36a45` 与截至 `2f92a54` 的验收文档（2026-09-18）；[SEO/GSC 手册](V2_2_SEO_GSC_RUNBOOK.md)。 |
 | 2.3.0 | B2B 成熟度升级：28 URL 正式 sitemap、15 个 curated PDP、factory/custom/contact/costume 索引边界、SSR/内链/移动语义、canonical/robots/OG/schema、`/api/media/` 抓取修复、claimed-crawler 观察、RFQ/获客事件骨架和 IndexNow 提交；最终生产映射已移除未确认的标题尺寸词。Payment 仍 blocked；多语言 SEO、GA4、Bing property 和外部发送仍需账号/事实。 | `9e68f5e` → `3a29adc` → `314e955` → `a6290e5` → `349201d` → `ac404cf` → `6a08d52` → `b43ce31`；Vercel commit status success；生产 28/28 probe 与 GSC live/request 证据见 `docs/PROJECT_STATUS.md` 和 `docs/evidence/2026-09-27-2.3-production.json`。 |
-| 2.4.0 | consented GA4 与 UTM 首触/末触 attribution 生产能力：独立 `jsmeilai.com` Property/Stream、默认拒绝并在同意后加载、配置缺失 fail-closed、GA4-ready 事件门控；同时完成版本与状态文档纠偏。保留 28/15/21 页面边界，Payment 仍 blocked，多语言 SEO 仍未完成。 | `d7f8126` → `7bb286b` → `3c0fce4` → `b07227b`；Production 现场已验证 `G-PP1JPPV9FD` page_view/contact_click/whatsapp_click 与 consent 行为；本轮发布后补充精确 Vercel deployment 证据。 |
+| 2.4.0 | consented GA4 与 UTM 首触/末触 attribution 生产能力：独立 `jsmeilai.com` Property/Stream、默认拒绝并在同意后加载、配置缺失 fail-closed、GA4-ready 事件门控；同时完成版本与状态文档纠偏。保留 28/15/21 页面边界，Payment 仍 blocked，多语言 SEO 仍未完成。 | `d7f8126` → `7bb286b` → `3c0fce4` → `b07227b`；Production 现场已验证 `G-PP1JPPV9FD` page_view/contact_click/whatsapp_click 与 consent 行为；Vercel Production deployment `5puQvXGJf3msMhfv4g3VLG2aMn4p`（Ready，source `9377f2a`）；线上探针见 `docs/evidence/2026-09-28-2.4-audit.json`。 |
 
 ## 必须保留的差异
 
