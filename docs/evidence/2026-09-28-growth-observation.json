@@ -1,0 +1,81 @@
+{
+  "observedAt": "2026-09-28T01:05:11+08:00",
+  "scope": "growth-channel-observation",
+  "production": {
+    "codeBaseline": "b07227b",
+    "latestDeployment": "9744c66",
+    "landingPageProbe": [
+      {
+        "path": "/custom-manufacturing/",
+        "status": 200,
+        "canonical": "https://www.jsmeilai.com/custom-manufacturing/",
+        "utmInCanonical": false,
+        "ssrRfqSignal": true
+      },
+      {
+        "path": "/factory/",
+        "status": 200,
+        "canonical": "https://www.jsmeilai.com/factory/",
+        "utmInCanonical": false,
+        "ssrRfqSignal": true
+      },
+      {
+        "path": "/contact/",
+        "status": 200,
+        "canonical": "https://www.jsmeilai.com/contact/",
+        "utmInCanonical": false,
+        "ssrRfqSignal": true
+      },
+      {
+        "path": "/guides/materials/",
+        "status": 200,
+        "canonical": "https://www.jsmeilai.com/guides/materials/",
+        "utmInCanonical": false,
+        "ssrRfqSignal": true
+      }
+    ]
+  },
+  "ga4": {
+    "property": "JS Meilai | jsmeilai.com",
+    "measurementId": "G-PP1JPPV9FD",
+    "observation": "Current realtime snapshot, not a net-new period comparison",
+    "activeUsers30m": 1,
+    "activeUsers5m": 1,
+    "visiblePageViews": {
+      "Opera, Evening & Formal Gloves | JS Meilai": 4,
+      "Occasion Gloves & Wedding Veils Manufacturer": 2,
+      "Bridal & Wedding Gloves for Sourcing | JS Meilai": 1
+    },
+    "visibleEvents": {
+      "page_view": 7,
+      "user_engagement": 6,
+      "product_family_view": 3,
+      "scroll": 2,
+      "click": 1,
+      "contact_click": 1
+    },
+    "previouslyObserved": [
+      "whatsapp_click"
+    ],
+    "attribution": "UTM first/last attribution remains production-verified; current realtime table does not expose campaign detail in this snapshot"
+  },
+  "bing": {
+    "site": "https://www.jsmeilai.com/",
+    "sitemap": "https://www.jsmeilai.com/sitemap.xml",
+    "submittedAt": "2026-09-27",
+    "lastCrawled": "2026-09-27",
+    "status": "success",
+    "discoveredUrls": 28,
+    "errors": 0,
+    "warnings": 0
+  },
+  "gsc": {
+    "status": "not_observed",
+    "reason": "Current browser account p142769@siswa.ukm.edu.my has no access to https://www.jsmeilai.com/",
+    "requiredUserAction": "Sign in with the Search Console account that owns or can read the property, previously yumao3623@gmail.com, or grant the current account access."
+  },
+  "externalPublishing": {
+    "status": "not_executed",
+    "reason": "No verified social profiles, market selection, WhatsApp owner, or public legal identity confirmation"
+  }
+}

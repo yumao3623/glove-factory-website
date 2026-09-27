@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-09-28：完成外部获客执行包：筛选 LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram、Europages 和 Kompass 的优先级与账户门槛，建立 UTM registry、落地页映射和首批英文内容草稿；本轮没有创建账号、发送消息、发布外链或购买付费资源。Bing sitemap 本次实查成功发现 28 个 URL；GA4 实时快照记录 1 个活跃用户。
 - 2026-09-28：创建独立 `JS Meilai | jsmeilai.com` GA4 Property 与 `JS Meilai Web | www.jsmeilai.com` Web Data Stream（`https://www.jsmeilai.com`，stream ID `15854461548`，Measurement ID `G-PP1JPPV9FD`）；在 Vercel Production 保存 `NEXT_PUBLIC_GA_MEASUREMENT_ID`，保持默认拒绝 consent，并在 Ready 部署中验证默认拒绝、Allow 后加载、页面访问、UTM attribution 与 product_family_view。旧 `G-4EZW646Z1F` 明确属于 `majuscape.fun`，未复用。
 - 2026-09-28：修复首屏 GA4 脚本加载竞态：`product_family_view` 会等待 consented GA4 ready 信号后再发送，避免首屏产品族事件在用户已同意时被跳过。
 - 2026-09-28：接入 env-gated 的默认拒绝 GA4 consent 横幅、可重新打开的分析设置和隐私说明；通过 GSC 只读 OAuth 将 `https://www.jsmeilai.com/` 导入 Bing Webmaster，并提交正式 sitemap。核验发现现有 `G-4EZW646Z1F` 属于其他站点，已移除错误 fallback，避免跨站数据污染。
