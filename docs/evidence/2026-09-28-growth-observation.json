@@ -70,9 +70,38 @@
     "warnings": 0
   },
   "gsc": {
-    "status": "not_observed",
-    "reason": "Current browser account p142769@siswa.ukm.edu.my has no access to https://www.jsmeilai.com/",
-    "requiredUserAction": "Sign in with the Search Console account that owns or can read the property, previously yumao3623@gmail.com, or grant the current account access."
+    "status": "observed",
+    "account": "yumao3623@gmail.com",
+    "property": "https://www.jsmeilai.com/",
+    "overview": {
+      "webSearchClicks": 0,
+      "indexedPages": 0,
+      "notIndexedPages": 11,
+      "breadcrumbsValid": 6,
+      "breadcrumbsInvalid": 0
+    },
+    "indexReport": {
+      "lastUpdated": "2026-09-21",
+      "notIndexedReasons": {
+        "excludedByNoindex": 3,
+        "discoveredCurrentlyNotIndexed": 8
+      }
+    },
+    "sitemapReport": {
+      "submitted": "2026-09-18",
+      "lastRead": "2026-09-26",
+      "status": "success",
+      "discoveredPages": 9
+    },
+    "performanceReport": {
+      "lastUpdated": "4.5 hours ago",
+      "dateRange": "2026-09-16 to 2026-09-24",
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": "0%",
+      "averagePosition": 0
+    },
+    "conclusion": "No new confirmed Google indexed, impression, or current crawl evidence. The visible reports remain historical/stale relative to the current 28-URL production sitemap; do not resubmit unchanged URLs."
   },
   "externalPublishing": {
     "status": "not_executed",
