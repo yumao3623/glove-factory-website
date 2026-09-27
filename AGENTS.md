@@ -44,6 +44,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 只有在代码、Git、部署和生产验收都对应完成时，才能把版本写成已发布。`package.json` 的版本字段、准备好的代码、main 推送、Vercel Ready 和生产可用必须分别说明，不能混为一谈。
 
+对话续接规则：同一开发阶段或同一版本的连续工作优先继续当前对话；一个正式版本完成并进入新的 minor/major 产品阶段时，默认建议新建 Codex 对话。Patch 和纯运营观察按上下文规模判断；不得仅因为当前上下文还在就一直建议继续同一个对话。
+
 ## 每次任务完成前
 
 按实际变化更新 `PROJECT_STATUS.md`、`HANDOFF.md`、`ROADMAP.md`；形成正式完成记录时更新 `CHANGELOG.md`。如果建议新建对话，必须先完成这些更新，确保下一轮不依赖当前聊天。纯核查或无状态变化时不要制造流水账或版本。

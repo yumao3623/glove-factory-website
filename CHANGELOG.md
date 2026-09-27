@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-09-28：根据当前生产探针、代码检查和 2.4.0 状态，明确下一阶段先通过产品与询盘运营 readiness gate；补充正式版本完成后新建对话、同阶段继续当前对话的长期规则。修正 `typecheck` 在未生成 Next.js 路由类型时的可复现失败；不改变生产运行时或公开 URL 边界。
 - 2026-09-28：完成外部获客执行包：筛选 LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram、Europages 和 Kompass 的优先级与账户门槛，建立 UTM registry、落地页映射和首批英文内容草稿；本轮没有创建账号、发送消息、发布外链或购买付费资源。Bing sitemap 本次实查成功发现 28 个 URL；GA4 实时快照记录 1 个活跃用户。
 - 2026-09-28：使用已授权的 `yumao3623@gmail.com` 重新观察 GSC：0 indexed、11 not indexed、0 clicks/0 impressions；索引报告和 sitemap 仍是旧数据（sitemap 仅发现 9 个 URL），没有新的确认抓取、索引或曝光证据，未重复提交未变化 URL。
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。

@@ -49,6 +49,7 @@ npm start
 | `npm run build` | 创建生产构建 |
 | `npm start` | 启动已完成的生产构建 |
 | `npm run lint` | 运行 ESLint |
+| `npm run typegen` | 生成 Next.js 路由类型 |
 | `npm run typecheck` | 运行 TypeScript 类型检查 |
 | `npm test` | 运行 Node 测试套件 |
 | `npm run seo:audit -- --origin <URL> --mode <preview\|production>` | 按 sitemap 逐页检查状态码、robots、title、description、canonical、H1 和正式索引边界 |

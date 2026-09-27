@@ -5,8 +5,8 @@
 ## 版本与阶段
 
 - **Production：2.4.0（本轮发布）**。2.3.0 完成 indexable B2B surface；其后已上线并验收的 consented GA4、UTM 首触/末触 attribution 和事件就绪门控构成完整的新能力，按仓库 MINOR 规则纠正为 2.4.0。
-- **Development：无正在开发的新版本**。本轮是审计、版本纠偏和文档收敛；外部获客扩张暂停，等待网站成熟度与真实商业资料门槛。
-- **Current work：运营观察与产品资料准备，不新增版本**。观察 GA4/Bing/Google 数据、确认 WhatsApp 责任人、整理产品事实；不重复提交未变化 URL。
+- **Development：无正在开发的新正式版本**。本轮在 2.4.0 基线上补充产品/获客 readiness gate 和可复现性维护；2.5.0 尚未启动，外部获客扩张暂停，等待网站成熟度与真实商业资料门槛。
+- **Current work：产品资料、受控 admin/RFQ 验收准备与运营观察，不新增正式版本**。观察 GA4/Bing/Google 数据、确认 WhatsApp 责任人、整理产品事实；不重复提交未变化 URL。
 - `package.json` 与 lock 根包版本应为 `2.4.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，不阻塞 SEO、RFQ、内容或渠道准备。
 
@@ -51,7 +51,7 @@
 
 - contact、RFQ 和 WhatsApp CTA 存在；WhatsApp 号码技术上可用，但接收人、回复负责人和响应 SLA 尚未确认。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态：`npm test` 69/69、typecheck、lint、production build 均通过；本次代码变更后需重新执行。生产 API 对未授权 admin 返回 401，RLS 保持数据库边界。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过。生产 API 对未授权 admin 返回 401，RLS 保持数据库边界。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 
@@ -65,6 +65,7 @@
 - `lib/analytics.ts` 和 SEO audit 脚本的 2.3/“未来 GA4”注释已纠正。
 - `REQUIREMENTS_MATURITY_COMMERCE.md` 与 `RFQ_SPEC.md` 明确标为历史需求/规格基线，避免将旧 preview 文字当成当前生产事实。
 - 旧 release/ADR/验收文档保留作历史证据；没有把历史状态删除或重写为当前状态。旧计划中“重复 Request Indexing、批量开放 gated PDP、伪造商业字段、立刻启用支付”不再是有效工作项。
+- 本轮根据生产探针和代码检查补充 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)：当前核心缺口是买家资料与询盘跟进责任，不是继续扩张薄页面或直接生成五语言站；同时明确同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
 
 ## 待办分类
 
@@ -93,6 +94,7 @@
 - 在没有目标市场和翻译/事实负责人前生成完整五语言 SEO 站。
 - 批量解锁 21 个 gated PDP、购买/群发垃圾外链、启用无真实资料的支付。
 - 为追求指标而启用 Vercel Analytics/Speed Insights 或建立新后台系统，除非有明确运营问题。
+- 在 readiness gate 通过前直接启动 2.5.0 的完整多语言实现或扩大多个外部渠道。
 
 ## 证据入口
 
