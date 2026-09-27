@@ -5,6 +5,7 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { canonicalUrl, getSiteOrigin, siteOrganization } from "@/lib/site";
 import { siteRobots } from "@/lib/stakeholder-preview";
+import { Ga4Consent } from "@/components/analytics/ga4-consent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,5 +23,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       siteOrganization,
     ],
   };
-  return <html lang="en" data-scroll-behavior="smooth"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} /><LocaleProvider><SkipLink /><SiteHeader />{children}<SiteFooter /></LocaleProvider></body></html>;
+  return <html lang="en" data-scroll-behavior="smooth"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} /><LocaleProvider><SkipLink /><SiteHeader />{children}<SiteFooter /><Ga4Consent /></LocaleProvider></body></html>;
 }

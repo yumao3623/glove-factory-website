@@ -21,7 +21,8 @@ export function readAttribution(search: string, pathname = "/"): Attribution {
 declare global {
   interface Window {
     __jsmeilaiAnalyticsConsent?: boolean;
-    gtag?: (command: "event", eventName: string, params?: AnalyticsParams) => void;
+    dataLayer?: unknown[];
+    gtag?: (command: "event" | "config" | "js" | "consent", eventName: string | Date, params?: AnalyticsParams | Record<string, string>) => void;
   }
 }
 
