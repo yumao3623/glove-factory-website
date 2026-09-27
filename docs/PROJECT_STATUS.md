@@ -5,7 +5,7 @@
 ## 版本与阶段
 
 - **Production: 2.3.0**。当前已验证生产部署提交为 `d7f8126`；`main`/`origin/main` 另包含状态文档提交 `3ef3014`，Vercel 对 `d7f8126` 的 Production 部署显示 Ready，线上域名已绑定。
-- **Development / Current work: GA4 consent 决策与 Bing OAuth 授权等待用户**。UTM/落地页事件归因基础已部署，但因为尚未接入 `gtag` 和 consent UI，生产仍不会采集 analytics。
+- **Development / Current work: GA4/Bing 配置已完成，等待最新 Vercel 部署验收**。GA4 consent UI 和 `G-4EZW646Z1F` 加载器已推送；Bing 已通过 GSC 只读导入并提交 sitemap。仍需确认最新代码部署后的生产横幅和 GA4 请求。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
 
@@ -39,8 +39,8 @@
 | Metadata / schema | 所有 28 indexable URL 有唯一 title、description、canonical、OG/Twitter；OG image 为 1200×630 PNG。15 PDP 输出 Product + Breadcrumb，Guide 输出 Article/HowTo + Breadcrumb；没有 Offer/price/stock/review/rating。线上 SSR JSON-LD 已解析检查，未把该检查表述为 Google Rich Results Test 通过。无 verified social profile，因此不伪造 `sameAs`。 |
 | Multilingual | 当前有 2.1.5 的 en、简中、de、fr、it 客户端 UI 和持久化选择；SEO 仍只有英文独立 URL。没有 server-rendered locale URL、localized canonical、双向 hreflang、`x-default` 或语言 sitemap，故不宣称完整多语言 SEO，也没有制造机械薄页。 |
 | RFQ / contact | 生产 RFQ 开关为 true；页面提供表单、邮箱、电话和已批准号码的 WhatsApp CTA，未在本轮提交真实询盘或发送邮件。数据库当前没有新增 RFQ；不把没有测试写入的状态称为 lead。 |
-| Analytics / attribution | 本轮代码新增隐私门控的 UTM/落地页归因读取与 session 级首触/末触事件参数并已随 `d7f8126` 部署；只有 `__jsmeilaiAnalyticsConsent=true` 且存在 `gtag` 才会读取/写入并发送。现有 GA4 属性 Measurement ID `G-4EZW646Z1F` 已实查但尚未接入；GA4 页面显示尚未收到网站数据，Vercel Web Analytics/Speed Insights 也未启用。 |
-| Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted（不代表已被 Bing/Google 索引）。已登录的 Bing Webmaster 账号当前只有 `folveta.com`；添加站点可走 GSC 导入，但该流程要求 Google OAuth 授予 Search Console 只读权限，尚未接受，因此 `jsmeilai.com` 尚未验证或提交 sitemap。 |
+| Analytics / attribution | GA4 consent UI 和动态加载器已推送，Measurement ID 为 `G-4EZW646Z1F`；默认不加载，用户允许后才设置 `gtag`、读取 UTM/落地页 session 归因并发送事件。生产横幅和实时 GA4 数据待最新 Vercel 部署验收。Vercel Web Analytics/Speed Insights 仍未启用。 |
+| Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted。Bing 已通过 `yumao3623@gmail.com` 的 GSC 只读导入添加 `https://www.jsmeilai.com/`，并提交 `https://www.jsmeilai.com/sitemap.xml`；当前页面显示已导入、正在处理，错误 0、警告 0、已发现 URL 0。 |
 | 外部获客 | LinkedIn、Facebook、Instagram、TikTok、Pinterest、YouTube 和目录目前没有已核验 profile/link 证据；仓库外链台账仍是 qualify-first 草稿，没有发送、群发或已发布 backlink。稳定落地页为产品族、指南、custom、contact，待账号和合规核验后使用。 |
 | Payment | `PAYPAL_CHECKOUT_ENABLED=false`；没有假 checkout、价格、账户或支付渠道。待经营者约 5 天后提供真实支付资料、KYC/收单/结算条件并完成受控验收。 |
 
