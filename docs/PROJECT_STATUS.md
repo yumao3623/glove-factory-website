@@ -4,8 +4,8 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前生产代码提交为 `b43ce31`；`main`/`origin/main` 在其后包含治理文档提交，Vercel 对代码部署检查为 success，线上最终复核已通过。
-- **Development / Current work: d7f8126 已合并并推送，等待 Vercel 部署核验**。本轮增加了只在 consent + 已配置 `gtag` 时生效的 UTM/落地页事件归因基础；GA4 代码仍未接入，生产是否已切换到 d7f8126 需 Vercel 权限或新的部署证据确认。
+- **Production: 2.3.0**。当前已验证生产部署提交为 `d7f8126`；`main`/`origin/main` 另包含状态文档提交 `3ef3014`，Vercel 对 `d7f8126` 的 Production 部署显示 Ready，线上域名已绑定。
+- **Development / Current work: GA4 consent 决策与 Bing OAuth 授权等待用户**。UTM/落地页事件归因基础已部署，但因为尚未接入 `gtag` 和 consent UI，生产仍不会采集 analytics。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
 
@@ -23,8 +23,8 @@
 
 | 领域 | 当前状态与证据边界 |
 | --- | --- |
-| Git / main | `codex/utm-attribution-foundation` 的 `d7f8126` 已 fast-forward 合并到 `main` 并推送 `origin/main`；Production 仍按最后已验证部署记录为 `b43ce31`，未取得 Vercel 新部署状态前不改写生产版本。工作树干净。 |
-| Vercel / production | `b43ce31` 的 Vercel commit status 为 success（本次实查）；部署 URL/status 记录在本轮 evidence JSON，`https://www.jsmeilai.com/` 及正式页面已返回新 2.3 HTML，commit status + live probe 仍是主要部署证据。 |
+| Git / main | `d7f8126` 已从归因分支 fast-forward 合并到 `main` 并推送 `origin/main`；随后状态文档提交为 `3ef3014`。工作树干净。 |
+| Vercel / production | 浏览器实查 Vercel 部署 `3RYD9JYq5MVN95EZjcLhYdNL3AUt`：Source `main`、commit `d7f8126`、Environment Production、Status Ready、Domain `www.jsmeilai.com`。Vercel API 列表权限返回 403，但 dashboard 证据可见。 |
 | 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；当前 HTTP apex 观测为两跳（HTTP apex → HTTPS apex → HTTPS www），HTTPS apex 为一跳，属于 Vercel 域名设置优化而非索引阻塞；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为最终产品名清理与 sitemap 修正对应的固定时间 `2026-09-26T19:08:58.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
@@ -39,7 +39,7 @@
 | Metadata / schema | 所有 28 indexable URL 有唯一 title、description、canonical、OG/Twitter；OG image 为 1200×630 PNG。15 PDP 输出 Product + Breadcrumb，Guide 输出 Article/HowTo + Breadcrumb；没有 Offer/price/stock/review/rating。线上 SSR JSON-LD 已解析检查，未把该检查表述为 Google Rich Results Test 通过。无 verified social profile，因此不伪造 `sameAs`。 |
 | Multilingual | 当前有 2.1.5 的 en、简中、de、fr、it 客户端 UI 和持久化选择；SEO 仍只有英文独立 URL。没有 server-rendered locale URL、localized canonical、双向 hreflang、`x-default` 或语言 sitemap，故不宣称完整多语言 SEO，也没有制造机械薄页。 |
 | RFQ / contact | 生产 RFQ 开关为 true；页面提供表单、邮箱、电话和已批准号码的 WhatsApp CTA，未在本轮提交真实询盘或发送邮件。数据库当前没有新增 RFQ；不把没有测试写入的状态称为 lead。 |
-| Analytics / attribution | 本轮代码新增隐私门控的 UTM/落地页归因读取与 session 级首触/末触事件参数；只有 `__jsmeilaiAnalyticsConsent=true` 且存在 `gtag` 才会读取/写入并发送。已在现有 Google Analytics 账号中实查到 GA4 属性 Measurement ID `G-4EZW646Z1F`，页面显示尚未收到网站数据；仓库尚未接入该 ID，也没有 consent UI、GTM、Vercel Web Analytics 或 Speed Insights。 |
+| Analytics / attribution | 本轮代码新增隐私门控的 UTM/落地页归因读取与 session 级首触/末触事件参数并已随 `d7f8126` 部署；只有 `__jsmeilaiAnalyticsConsent=true` 且存在 `gtag` 才会读取/写入并发送。现有 GA4 属性 Measurement ID `G-4EZW646Z1F` 已实查但尚未接入；GA4 页面显示尚未收到网站数据，Vercel Web Analytics/Speed Insights 也未启用。 |
 | Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted（不代表已被 Bing/Google 索引）。已登录的 Bing Webmaster 账号当前只有 `folveta.com`；添加站点可走 GSC 导入，但该流程要求 Google OAuth 授予 Search Console 只读权限，尚未接受，因此 `jsmeilai.com` 尚未验证或提交 sitemap。 |
 | 外部获客 | LinkedIn、Facebook、Instagram、TikTok、Pinterest、YouTube 和目录目前没有已核验 profile/link 证据；仓库外链台账仍是 qualify-first 草稿，没有发送、群发或已发布 backlink。稳定落地页为产品族、指南、custom、contact，待账号和合规核验后使用。 |
 | Payment | `PAYPAL_CHECKOUT_ENABLED=false`；没有假 checkout、价格、账户或支付渠道。待经营者约 5 天后提供真实支付资料、KYC/收单/结算条件并完成受控验收。 |
