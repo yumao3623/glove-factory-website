@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const CONSENT_KEY = "jsmeilai-analytics-consent-v1";
-const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-4EZW646Z1F";
+const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 type Consent = "granted" | "denied" | null;
 
@@ -20,6 +20,8 @@ export function Ga4Consent() {
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  if (!MEASUREMENT_ID) return null;
 
   function choose(value: Exclude<Consent, null>) {
     window.localStorage.setItem(CONSENT_KEY, value);
