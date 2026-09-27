@@ -4,8 +4,8 @@
 
 ## 版本与阶段
 
-- **Production: 2.3.0**。当前生产代码基线为 `3c0fce4`；本轮新增 GA4 Production 配置后将由 `main` 触发部署，线上域名继续绑定。
-- **Development / Current work: Bing 与 GA4 基础配置已完成**。Bing 已通过 GSC 只读导入并提交 sitemap。已创建独立的 `JS Meilai | jsmeilai.com` GA4 Property 和 `JS Meilai Web | www.jsmeilai.com` Web Data Stream（网址 `https://www.jsmeilai.com`，Measurement ID `G-PP1JPPV9FD`）；旧的 `G-4EZW646Z1F` 仍属于 `majuscape.fun`，没有复用。Vercel Production 已加入 `NEXT_PUBLIC_GA_MEASUREMENT_ID`，待新部署完成后做 consent 与事件现场验证。
+- **Production: 2.3.0**。当前已验证生产代码提交为 b07227b；Vercel Production deployment BwgXUvNPMjH1mvChcpCfGThUSSVa 为 Ready，域名继续绑定 www.jsmeilai.com。
+- **Development / Current work: GA4、Bing 与归因基础已完成，进入持续获客与数据观察**。Bing 已通过 GSC 只读导入并提交 sitemap。已创建独立的 JS Meilai | jsmeilai.com GA4 Property 和 JS Meilai Web | www.jsmeilai.com Web Data Stream（网址 https://www.jsmeilai.com，Measurement ID G-PP1JPPV9FD）；旧的 G-4EZW646Z1F 仍属于 majuscape.fun，没有复用。Vercel Production 已加入新 ID，并已在 Ready 部署中现场验证默认拒绝、Allow 后加载、UTM attribution 和 product_family_view。
 - `package.json` 与 lock 根包版本为 `2.3.0`；包字段、Git push、Vercel Ready 和线上验收分别记录，不互相替代。
 - Payment 仍为 **`BLOCKED / awaiting real payment information`**，不阻塞站内完善、索引、外链准备或 RFQ。
 
@@ -23,8 +23,8 @@
 
 | 领域 | 当前状态与证据边界 |
 | --- | --- |
-| Git / main | `d7f8126` 已从归因分支 fast-forward 合并到 `main` 并推送 `origin/main`；随后 `3c0fce4` 与 `ea86197` 完成 GA4 fail-closed 与生产状态记录。本轮 GA4 配置记录将在本次交接提交中更新。 |
-| Vercel / production | Source `main`、commit `3c0fce4` 的旧部署已实查 Ready；本轮已在 Vercel Production 保存 `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PP1JPPV9FD`，新部署完成后更新最终 commit 与页面验证证据。 |
+| Git / main | d7f8126 已从归因分支 fast-forward 合并到 main 并推送 origin/main；随后 3c0fce4、ea86197、7613474 和 b07227b 完成 GA4 fail-closed、生产记录、专用 Property 配置记录与首屏事件竞态修复。 |
+| Vercel / production | Source main、commit b07227b 的 deployment BwgXUvNPMjH1mvChcpCfGThUSSVa 已实查 Ready；Production 环境变量 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PP1JPPV9FD 生效，域名 www.jsmeilai.com 正常。 |
 | 域名与版本 | `https://www.jsmeilai.com/` 200；HTTP apex、HTTP www、HTTPS apex 最终归一到 HTTPS www；当前 HTTP apex 观测为两跳（HTTP apex → HTTPS apex → HTTPS www），HTTPS apex 为一跳，属于 Vercel 域名设置优化而非索引阻塞；无斜杠核心路径 308 到 trailing slash。 |
 | Supabase / 产品 | 本次只读实查 36 个 active 产品、173 个媒体对象：bridal 12、opera 11、costume 3、kids 4、veils 1、arm sleeves 5。15 个 curated slug 均能从当前生产数据解析；未来下架或改 slug 时需同步 sitemap 与部署。 |
 | 生产 sitemap | `GET /sitemap.xml` 200，28/28 URL；全部为 canonical host + trailing slash。最终 `lastmod` 为最终产品名清理与 sitemap 修正对应的固定时间 `2026-09-26T19:08:58.000Z`，不在未来；sitemap 外的 legal/utility 页面不参与索引。 |
@@ -39,7 +39,7 @@
 | Metadata / schema | 所有 28 indexable URL 有唯一 title、description、canonical、OG/Twitter；OG image 为 1200×630 PNG。15 PDP 输出 Product + Breadcrumb，Guide 输出 Article/HowTo + Breadcrumb；没有 Offer/price/stock/review/rating。线上 SSR JSON-LD 已解析检查，未把该检查表述为 Google Rich Results Test 通过。无 verified social profile，因此不伪造 `sameAs`。 |
 | Multilingual | 当前有 2.1.5 的 en、简中、de、fr、it 客户端 UI 和持久化选择；SEO 仍只有英文独立 URL。没有 server-rendered locale URL、localized canonical、双向 hreflang、`x-default` 或语言 sitemap，故不宣称完整多语言 SEO，也没有制造机械薄页。 |
 | RFQ / contact | 生产 RFQ 开关为 true；页面提供表单、邮箱、电话和已批准号码的 WhatsApp CTA，未在本轮提交真实询盘或发送邮件。数据库当前没有新增 RFQ；不把没有测试写入的状态称为 lead。 |
-| Analytics / attribution | 已创建 `JS Meilai | jsmeilai.com` Property 与 `https://www.jsmeilai.com` Web Data Stream（stream ID `15854461548`，Measurement ID `G-PP1JPPV9FD`），并在 Vercel Production 配置新 ID。代码保持默认拒绝：未同意前不加载 GA4，Allow 后才加载；`product_family_view` 已加入 GA4-ready 竞态保护，现有 `rfq_submit`、`contact_click`、`whatsapp_click`、`product_family_view`、`sample_request` 及 UTM attribution 均保留。已在新 Property 实时报告看到 Production 活跃用户、page_view、contact_click 与 whatsapp_click；本次 ready 修复部署后再补产品族事件证据。Vercel Web Analytics/Speed Insights 仍未启用。 |
+| Analytics / attribution | 已创建 `JS Meilai | jsmeilai.com` Property 与 https://www.jsmeilai.com Web Data Stream（stream ID 15854461548，Measurement ID G-PP1JPPV9FD），并在 Vercel Production 配置新 ID。代码保持默认拒绝：未同意前不加载 GA4，Allow 后才加载；product_family_view 已加入 GA4-ready 竞态保护。Ready 生产部署现场证据：未同意时 dataLayer=0、gtag 未定义且无 GA 脚本；Allow 后加载 G-PP1JPPV9FD，带 UTM 的 /opera-gloves/ 成功记录 product_family_view 和 session first/last attribution。此前同一新 Property 实时报告已看到 Production 活跃用户、page_view、contact_click 与 whatsapp_click；RFQ 事件路径已代码核验但未提交真实询盘。Vercel Web Analytics/Speed Insights 仍未启用。 |
 | Bing / IndexNow | IndexNow key 文件线上 200 且内容匹配；最终生产 28 个 canonical URL 已向官方 IndexNow endpoint 提交一次，HTTP 202 accepted。Bing 已通过 `yumao3623@gmail.com` 的 GSC 只读导入添加 `https://www.jsmeilai.com/`，并提交 `https://www.jsmeilai.com/sitemap.xml`；页面显示已导入、正在处理，错误 0、警告 0、已发现 URL 0。 |
 | 外部获客 | LinkedIn、Facebook、Instagram、TikTok、Pinterest、YouTube 和目录目前没有已核验 profile/link 证据；仓库外链台账仍是 qualify-first 草稿，没有发送、群发或已发布 backlink。稳定落地页为产品族、指南、custom、contact，待账号和合规核验后使用。 |
 | Payment | `PAYPAL_CHECKOUT_ENABLED=false`；没有假 checkout、价格、账户或支付渠道。待经营者约 5 天后提供真实支付资料、KYC/收单/结算条件并完成受控验收。 |
@@ -59,7 +59,7 @@
 ### 可以现在继续做
 
 - 观察 Bing sitemap 处理和后续 URL 发现，保留已提交证据。
-- 在新 GA4 Production 部署完成后，做一次不发送真实询盘的 consent、页面访问、UTM 与事件代码/实时报告核验；不把 `G-4EZW646Z1F` 接入 jsmeilai。
+- 继续观察 GA4 实时/历史数据、Bing sitemap 处理和 Google 新抓取/索引证据；必要时做不发送真实询盘的代码核验，不把 G-4EZW646Z1F 接入 jsmeilai。
 - 核验 WhatsApp 号码由谁接收、回复负责人和 SLA；补充真实社交 profile URL 后再加 `sameAs` 或社交落地链接。
 - 从现有工厂资料确认 material、尺寸、MOQ、sample、包装、lead time 和负责人，逐项批准下一批 PDP；不批量解锁 21 个 gated 页面。
 - 按行业目录规则筛选 3–5 个真实目标，先做逐站草稿；没有用户明确发送授权，不提交表单或发消息。
@@ -87,7 +87,7 @@
 
 ## 本次可复核证据
 
-- Git / build：`b43ce31`；`npm run lint`、`npm run typecheck`、`npm test`（67/67）、formal `npm run build` 均通过。
+- Git / build：历史 SEO 验收基线为 b43ce31；当前 GA4 生产代码为 b07227b，npm run lint、npm run typecheck、npm test（69/69）、formal npm run build 均通过。
 - 线上 probe：`docs/evidence/2026-09-27-2.3-production.json`；包括 sitemap、robots、URL normalization、UA hash、legal/noindex 边界和 schema 摘要。
 - 生产站点：[https://www.jsmeilai.com/](https://www.jsmeilai.com/)、[sitemap.xml](https://www.jsmeilai.com/sitemap.xml)、[robots.txt](https://www.jsmeilai.com/robots.txt)。
 - GSC 现场证据：本次浏览器中的 URL Inspection/live test；新报告尚未刷新 indexed state，不能用旧截图替代新 live HTML。

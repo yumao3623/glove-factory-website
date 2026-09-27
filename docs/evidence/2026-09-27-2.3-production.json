@@ -115,7 +115,48 @@
     "unconfirmedFieldsKeptOutOfClaims": ["material", "length", "MOQ", "sample", "lead time", "stock", "certifications", "price", "reviews", "ratings"],
     "unconfirmedMeasurementNameHandling": "When runtime length_cm is null, cm tokens are removed from the public product name, title and image alt; confirmed lengths are preserved.",
     "seoLanguage": "English URLs only; client locale UI exists but no hreflang/locale sitemap.",
-    "analytics": "GA4 Property JS Meilai | jsmeilai.com and Web Data Stream https://www.jsmeilai.com created; stream ID 15854461548 and Measurement ID G-PP1JPPV9FD saved in Vercel Production. Consent remains default-denied and GA4 loads only after Allow; production deployment and event/realtime verification are tracked in the current handoff. Vercel Analytics/Speed Insights remain disabled.",
+    "analytics": "Dedicated GA4 Property/stream and Measurement ID G-PP1JPPV9FD are saved in Vercel Production. Latest Ready deployment b07227b verified fresh default denial (no GA4 script/dataLayer), Allow-only loading, UTM session attribution, and product_family_view. Earlier realtime evidence in the dedicated Property showed production page_view/contact_click/whatsapp_click; Vercel Analytics/Speed Insights remain disabled.",
     "payment": "BLOCKED / awaiting real payment information"
+  },
+  "latestProductionVerification": {
+    "verifiedAt": "2026-09-28T00:52:35+08:00",
+    "deployment": {
+      "commit": "b07227b",
+      "deploymentId": "BwgXUvNPMjH1mvChcpCfGThUSSVa",
+      "status": "Ready",
+      "host": "https://www.jsmeilai.com"
+    },
+    "freshDefaultDenied": {
+      "consentStorage": null,
+      "analyticsConsentFlag": null,
+      "dataLayerLength": 0,
+      "gtagType": "undefined",
+      "googleTagManagerScripts": []
+    },
+    "afterAllow": {
+      "consentStorage": "granted",
+      "analyticsConsentFlag": true,
+      "gtagType": "function",
+      "measurementId": "G-PP1JPPV9FD",
+      "googleTagManagerScriptLoaded": true
+    },
+    "utmAndProductFamilyEvent": {
+      "url": "https://www.jsmeilai.com/opera-gloves/?utm_source=codex&utm_medium=verification&utm_campaign=ga4-setup",
+      "event": "product_family_view",
+      "params": {
+        "family": "opera-gloves",
+        "source_route": "/opera-gloves/",
+        "utm_source": "codex",
+        "utm_medium": "verification",
+        "utm_campaign": "ga4-setup",
+        "first_utm_source": "codex",
+        "first_utm_medium": "verification",
+        "first_utm_campaign": "ga4-setup",
+        "landing_page": "/opera-gloves/",
+        "page_path": "/opera-gloves/"
+      },
+      "sessionAttributionStored": true
+    },
+    "rfqSafety": "No real RFQ was submitted; rfq_submit remains code-verified for received/duplicate/stored_email_pending/error/network_error outcomes."
   }
 }

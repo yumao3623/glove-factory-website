@@ -1,13 +1,13 @@
 # 近期 Roadmap
 
-更新：2026-09-27。2.3.0 已完成并进入持续运营；以下只保留有业务价值、具备启动条件的工作。Google 抓取延迟本身不创建版本，也不暂停站内完善或外部获客。
+更新：2026-09-28。2.3.0 已完成并进入持续运营；以下只保留有业务价值、具备启动条件的工作。Google 抓取延迟本身不创建版本，也不暂停站内完善或外部获客。
 
 ## 当前运营阶段：2.3 之后的持续获客与证据运营
 
 当前并行线：
 
 - 维护 28 个正式 indexable URL、15 个 curated PDP 和 21 个 gated catalogue preview；只有新的批准事实、真实搜索/询盘信号或技术异常才改代码。
-- 完成 Bing Webmaster property/sitemap、GA4 或 Vercel Analytics 选择、同意流程、WhatsApp 接收人和真实社交 profile 后，使用 `/custom-manufacturing/`、产品族、指南和 `/contact/` 做有 UTM 约定的合规推广。
+- Bing Webmaster property/sitemap、专用 GA4 Property、默认拒绝 consent、UTM attribution 与核心事件已完成；下一步是核验 WhatsApp 接收人/响应负责人和真实社交 profile 后，使用 `/custom-manufacturing/`、产品族、指南和 `/contact/` 做有 UTM 约定的合规推广。
 - 从 GSC、Vercel 短留存日志和真实 RFQ 记录收集：Technical indexing health、Googlebot crawl evidence、indexed URLs、impressions、clicks、leads/RFQs。live test 和 IndexNow 202 都不等于 indexed。
 - 继续维护产品事实确认表；下架/改 slug 时必须同步 `data/seo-index.ts`、Supabase active row、sitemap 和生产部署。
 
@@ -27,7 +27,7 @@
 
 **目标：** 让 LinkedIn、行业目录、社交内容和合作推广能回到稳定 landing page，并在获同意后量化 RFQ、email、WhatsApp 和产品族行为。
 
-**启动条件：** 经营者提供 GA4 measurement ID/consent 决策或启用 Vercel Analytics；核验社交账号与 WhatsApp；选出真实目录/媒体目标并批准逐站发送；明确 UTM 保存和隐私边界。
+**启动条件：** 专用 GA4 measurement ID、consent 决策和 UTM 保存已完成；核验社交账号与 WhatsApp；选出真实目录/媒体目标并批准逐站发送；明确 UTM 保存和隐私边界。
 
 **范围 / DoD：** 允许列表 UTM 读取与合规持久化；事件去重；RFQ 结果区分 received/duplicate/pending/error；落地页、OG、文案和联系人一致；完成一次受控测试并保留数据证据；不发送未经授权的第三方消息。
 
