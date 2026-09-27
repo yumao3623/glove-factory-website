@@ -39,6 +39,7 @@ export function Ga4Consent() {
         window.gtag("js", new Date());
         window.gtag("config", MEASUREMENT_ID);
         window.__jsmeilaiAnalyticsConsent = true;
+        window.dispatchEvent(new Event("jsmeilai-analytics-ready"));
       }} />
       <Script id="jsmeilai-ga4-config" strategy="afterInteractive">{`window.dataLayer = window.dataLayer || []; window.gtag = window.gtag || function(){window.dataLayer.push(arguments);}; window.gtag('consent','default',{analytics_storage:'granted'});`}</Script>
     </>}
