@@ -13,7 +13,7 @@
 ## 代码、部署与数据基线
 
 - Git 主线为 `main`；2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，随后是治理文档提交。没有伪造历史 release tag。
-- 当前生产域名为 `https://www.jsmeilai.com/`。本轮发布提交为 `9377f2a`；Vercel Production deployment `5puQvXGJf3msMhfv4g3VLG2aMn4p`（`https://glove-factory-website-h6ajxuciz-creen-ai.vercel.app`）已 Ready，生产探针见 [2.4 audit evidence](evidence/2026-09-28-2.4-audit.json)。
+- 当前生产域名为 `https://www.jsmeilai.com/`。2.4.0 应用发布提交为 `9377f2a`；随后 `c75701a` 的文档与开发脚本维护提交已推送，Vercel 状态为 success（部署记录：[5XQeDo2wtWj4wJKqQVYodc9AuX43](https://vercel.com/creen-ai/glove-factory-website/5XQeDo2wtWj4wJKqQVYodc9AuX43)）。本次 docs-only 部署后的生产 smoke 仍为核心页面 200、sitemap 28 URL、未授权 admin API 401；生产探针见 [2.4 audit evidence](evidence/2026-09-28-2.4-audit.json)。
 - Vercel Production 已有独立 GA4 Measurement ID `G-PP1JPPV9FD`，以及 Supabase、Resend、管理员和 RFQ 相关生产变量；`SEO_INDEXING_ENABLED=true`、目录/RFQ 开关为 true，PayPal checkout 为 false。
 - Supabase 匿名读取显示 36 个 active products、137 个生产引用媒体 URL；本地媒体 manifest 有 173 个对象。匿名角色无法读取 RFQ、订单、客户和变体表，符合 RLS 边界；本轮没有使用管理员会话写入数据。
 
