@@ -2,19 +2,19 @@
 
 核对日期：2026-09-28。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
 
-## 当前阶段：2.4.0 运行观察与产品/获客 readiness gate
+## 当前阶段：2.4.0 readiness 已关闭，进入范围输入与运营观察
 
-**目标**：让代码、生产、版本和运营事实保持一致，补齐买家资料与询盘运营的最小闭环，再用 GA4/Bing/Google 的真实数据判断是否值得扩大获客。当前最重要的产品问题是采购信号与跟进责任仍不完整，不是缺少更多薄页面。
+**目标**：确认 2.4.0 已满足 B2B manufacturer / supplier / RFQ 模式的技术和公开运营最低条件；之后按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排正式 minor，不把 To C 库存或完整商业字段倒灌到当前网站。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界不变；RFQ、consent、UTM attribution 和独立 GA4 不回归；生产未认证 admin/RFQ 边界及管理员只读 UX 验证完成，隔离 Supabase 产品/媒体/库存/订单夹具 11/11、RFQ/报价状态夹具 3/3 且清理完成；没有重复搜索提交或未确认商业事实。整体 gate 仍需产品资料、运营责任和目标市场事实。完整条件见 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于本版本统一 gate。2.4.0 readiness 已关闭。
 
-## 候选 2.5.0：一个目标市场的 SSR 多语言内容切片（尚未启动）
+## 候选 2.5.0：B2B 品牌基础与买家体验优化（尚未启动）
 
-**进入条件**：先通过产品资料、询盘运营和目标市场三项 readiness gate；确认目标国家/语言、翻译和法律负责人、产品事实及 URL/metadata 方案。没有这些事实时不生成语言薄页。
+**进入条件**：确认长期品牌域名 ownership/DNS，明确一个优先买家市场或证明当前英文 B2B 路径已足够，具备企业邮箱/WhatsApp 运营决策；不要求全量产品一次补齐零售字段。
 
-**范围**：选择一个市场实现服务端 locale URL、翻译后的核心内容/PDP 数据、localized canonical、双向 hreflang、x-default、语言 sitemap、语言感知 RFQ 文案与验收；不一次生成五套薄页。
+**范围**：在确认域名后完成一次性品牌/canonical/redirect/GA4-UTM/账号基础设施规划，并结合 B2B 信息架构、产品发现、PDP/RFQ 转化和 SEO 内容结构做一轮可验收优化；若目标市场已确定，再纳入一个 SSR locale slice、localized metadata、hreflang 和语言 sitemap。
 
-**完成条件**：SSR/metadata/canonical/hreflang/sitemap、产品资料和 RFQ 路径通过生产验证，且现有英文 URL/28 URL 边界无回归。
+**完成条件**：品牌域名和账号迁移无 attribution/SEO 回归；B2B buyer journey、PDP/RFQ、UTM/GA4 和英文 28 URL 边界通过生产验收；若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。
 
 ## 候选 2.6.0：买家运营与支付（条件式）
 
@@ -22,19 +22,19 @@
 
 ## 渠道执行门槛
 
-LinkedIn、Alibaba、Made-in-China、Global Sources、YouTube、Pinterest/Instagram、Europages、Kompass 的研究、UTM registry 和草稿保留，但当前是**准备态**。通过 readiness gate 后可选择一个渠道做小范围事实审核发布，并在 GA4 中观察首触/末触与 RFQ；不购买付费资源、不群发、不发布未经确认的 profile 或商业字段。
+LinkedIn、Alibaba、Made-in-China、Global Sources、YouTube、Pinterest/Instagram、Europages、Kompass 的研究、UTM registry 和草稿可继续保留。小范围实验只需要事实审核、账号负责人、公开身份和可接收的 RFQ 跟进；大规模投入应等长期域名/邮箱/WhatsApp 基础设施稳定。
 
 ## 后续阶段依赖顺序
 
-- 先完成产品事实、询盘跟进责任和一个目标市场的法律/翻译负责人；这些是 2.4 readiness 的业务 gate。
-- 若确认长期品牌域名，应在大规模获客前完成一次性域名/身份基础设施迁移，再做最终 UI/SEO 重构；这样 canonical、GSC/Bing、IndexNow、GA4/UTM、企业邮箱和 CTA 不会重复迁移。域名尚未确定，当前不迁移。
-- 企业邮箱与正式 WhatsApp 责任应在域名和公开身份确定后、渠道账号/广泛获客前接入；它们可与迁移准备并行，但需要用户提供账号和运营授权。
-- Cornelia James 与 `ai-website-cloner-template` 先作为研究工具/参考，视觉 diff、信息架构和转化模式的实现放到品牌基础设施稳定后的正式 minor；不复制第三方代码、文案、图片或商标。
-- 多语言不预设为下一 minor。待 gate 通过后，根据目标市场和产品资料决定是一个 SSR locale slice，还是先做买家运营/产品资料能力。
+- B2B 站点和 RFQ 先按当前英文能力运行；产品事实、询盘跟进责任和目标市场负责人按需要补齐，不再作为 2.4.0 总 gate。
+- `meilaigloves.com` 只有在购买并取得 DNS 控制权后才进入迁移；迁移应早于大量获客、企业邮箱、正式社交/B2B 账号和最终 UI/SEO 定稿。
+- 企业邮箱和正式 WhatsApp 在域名/公开身份确定后、渠道账号和扩大获客前接入；当前 CTA 和旧域名继续可用。
+- Cornelia James 与 `ai-website-cloner-template` 先作为研究参考；正式视觉/SEO 实现放到品牌基础设施稳定后的 2.5.0，不复制代码、文案、图片或商标。
+- 多语言不预设为下一 minor；它只有在目标市场和责任人确定后才进入 2.5.0 的可选 slice。
 
 ## 明确不做
 
-- 不批量解锁 21 个 gated PDP，不用模板制造产品/指南/语言薄页。
+- 不批量解锁 21 个 gated PDP；按独立 SEO 文案、内部链接和搜索价值逐项审核。
 - 不重复提交未变化 Google URL，不使用 Google Indexing API 处理普通网页。
-- 不伪造价格、库存、MOQ、交期、认证、客户案例、社交账号或支付能力。
+- 不伪造价格、库存、MOQ、交期、认证、客户案例、社交账号或支付能力；B2B 缺失字段保持 unknown/on request。
 - 不因正常数据延迟重新推翻 2.3/2.4 的技术 SEO 修复。

@@ -1,14 +1,15 @@
 # 产品与获客 readiness gate
 
 核对日期：2026-09-28（Asia/Shanghai）。
+状态：**CLOSED（B2B RFQ readiness，2026-09-28）**。技术和当前商业模式所需的 gate 已完成；域名、邮箱、WhatsApp、目标市场、多语言和 Payment 是后续范围条件。
 
 本 gate 连接 2.4.0 的生产观察与下一正式产品阶段。它不是一个新版本，也不把准备中的渠道内容写成已发布事实。
 
 ## 当前结论
 
-2.4.0 的技术入口已经具备小规模验证条件：生产 sitemap 有 28 个 URL，15 个 PDP 已按证据开放索引，RFQ 服务和 consented GA4 已上线。受控 Supabase 验收已覆盖真实 Auth、产品/媒体/变体/库存/发布/订单 RLS 11/11，以及 RFQ 状态和报价取消 3/3，所有夹具已清理。整体 readiness gate 仍未通过，因为公开产品事实、WhatsApp 运营责任、目标市场及翻译/法律负责人尚未确认，且没有真实通知投递证据。
+2.4.0 readiness gate 已完成其主要作用。当前生产产品是 B2B manufacturer / supplier / RFQ catalogue，不是要求逐 SKU 实时库存的 To C 零售系统。技术验收、公开英文 B2B 路径、RFQ 状态层、admin 边界和数据安全均已有证据；剩余事项是按功能范围管理的业务输入，不再作为整个 2.4.0 的统一阻塞。
 
-因此，下一正式版本候选仍为 **2.5.0**，但在下面的进入条件满足前不启动实现，不把“多语言”本身当作当前第一优先级。
+2.4.0 gate 关闭后，2.5.0 仍未启动。下一 minor 不预设为多语言；最合理的候选是围绕已确认长期品牌和一个明确买家市场完成 B2B buyer experience / UI-SEO / domain foundation，只有在目标语言事实齐备时才纳入一个 SSR locale slice。
 
 ## 本轮自动验证结果
 
@@ -17,48 +18,61 @@
 - 隔离 RFQ smoke 已验证 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 和通知失败后的状态标记；前台已对 202 返回显示单独提示。没有真实生产询盘、邮件或报价写入证据。
 - 独立唯一 marker 夹具通过 RFQ `reviewing` 状态事件、管理员报价创建并推进 `quoted`、批准未支付报价取消及事件检查 3/3，清理完成。此项验证的是 Supabase/RPC 业务状态层，不是浏览器端提交或真实 Resend 投递。
 - 真实集成脚本已在显式 opt-in 下完成并清理；它关闭了产品/媒体/变体/库存/发布/订单 RLS 的技术夹具缺口，但不关闭 Resend 真实投递或浏览器管理员写路径证据。
-- 15 个可索引 PDP 的事实完整性仍未达到公开资料 gate：当前 material、length、size、decoration 等字段没有足够的已确认证据，未确认值继续按 on-request 或 gated 处理。
-- 历史 Human Review 曾记录 `+60 1114166916` 为公开电话/WhatsApp，但当前接收人、运营负责人和响应 SLA 仍未重新确认；这是一个待用户确认的具体运营事实，不应由代码推断。
+- 15 个可索引 PDP 不因缺少逐 SKU stock、MOQ 或完整 material composition 而被判定为不可运营。它们已具备稳定身份、批准媒体、来源证据、B2B 采购语境、RFQ context 和 unknown/on-request 表达；这是当前 B2B 模式可接受的公开边界。
+- 历史 Human Review 曾记录 `+60 1114166916` 为公开电话/WhatsApp，但当前接收人、运营负责人和 SLA 未确认；这只阻塞 WhatsApp 运营承诺，不阻塞英文 RFQ 站。
 
-## 进入 2.5.0 前必须完成
+## 当前 B2B 上线最低条件
 
-### 产品资料
+- 稳定的产品身份、产品族、已批准媒体和来源/授权记录。
+- 可核验的可见风格事实；未知的 material、size、MOQ、sample、lead time、packaging、certification 和 stock 必须明确保持 unknown/on request。
+- 产品卡片/PDP 能把买家带入 RFQ，并传递 product identity、family、source route，不输出虚构价格、库存或商业承诺。
+- RFQ 保存、状态、报价 RPC、失败提示、admin 访问边界和 RLS 已通过本轮受控验证。
 
-- 从真实工厂资料中批准下一批可公开字段，逐项保留来源和确认状态。
-- 只在资料完整且页面内容有独立采购价值时解锁 PDP；其余页面继续 gated/noindex。
-- 不补写价格、库存、MOQ、交期、认证、产能、客户、评价或支付承诺。
+## 15 个可索引 PDP 与 21 个 gated PDP
 
-### 询盘与运营
+15 个当前 PDP 可以继续作为 indexable B2B sourcing pages；它们的可索引依据是独立的审核文案、稳定的身份/图片/来源和明确的询价路径，不是完整零售 SKU 字段。
 
-- 在受控管理员会话中验收产品发布、媒体、RFQ 状态和报价 UX；不改变公开 URL 边界。
-- 用测试或经授权的真实流程确认 RFQ 保存、通知、幂等和后台状态流转；没有授权时不发送真实询盘或邮件。
-- 确认 WhatsApp/电话的接收人、负责人和响应 SLA；在此之前不把渠道发布写成已完成。
+其余 21 个 PDP 目前全部已进入 catalogue preview，但没有进入首批 `data/seo-editorial.ts` 和 `data/seo-index.ts` 的独立 SEO 文案/索引名单。它们的真实 gating 原因是“尚未完成逐页 SEO/内容审核和索引优先级选择”，不是库存缺失，也不是 B2B 询价无法使用。
 
-### 目标市场
+21 个记录如下：
+- `bridal-gloves-733063602867` — Short Sheer Lace Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-733010943271` — Short Fingerless Sheer Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-819967426657` — Rhinestone Fishnet Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-956309661690` — 55 cm Satin Evening Gloves：等待独立 SEO 文案/索引审核。
+- `kids-dress-gloves-1002636896918` — Checked Tulle Girls’ Dress Gloves：等待独立 SEO 文案/索引审核。
+- `costume-gloves-691557112631` — Vintage Lace Stage Arm Sleeves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-730371444820` — Long Satin Evening Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-950693682364` — Short Eyelash Lace Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-728194389811` — Vintage Black Sheer Lace Opera Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-728592614367` — Bow Lace Short Formal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-728659873446` — Polka Dot Bow Lace Formal Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-732419024504` — Pearl Beaded Tulle Bridal Arm Sleeves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-732561509757` — Long Floral Tulle Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-741321749838` — Long Bow Lace Satin Formal Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-728600712961` — Long Full-Finger Lace Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-732867076935` — Fingerless Floral Lace Formal Arm Sleeves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-733406564887` — Long Fingerless Floral Lace Bridal Gloves：等待独立 SEO 文案/索引审核。
+- `opera-gloves-741154552428` — Rhinestone Bow Lace Formal Gloves：等待独立 SEO 文案/索引审核。
+- `kids-dress-gloves-788133828087` — Girls’ White Satin Lace Bow Gloves：等待独立 SEO 文案/索引审核。
+- `costume-gloves-819969614484` — Fingerless Glossy Costume Gloves：等待独立 SEO 文案/索引审核。
+- `bridal-gloves-977246337453` — White Mesh Lace Bow Bridal Gloves：等待独立 SEO 文案/索引审核。
 
-- 选择一个明确国家/语言市场。
-- 确认翻译、法律文本和产品事实的负责人。
-- 再决定 locale URL、metadata、canonical、hreflang、语言 sitemap 与 RFQ 文案的 SSR 方案。
+它们可以继续作为 catalogue/RFQ preview；只有在逐页内容审核完成、页面具备独立搜索价值且不产生重复/薄页风险时，才逐项加入 indexable tranche。
 
-### 渠道实验
+## 2.4.0 gate 关闭标准与后续范围
 
-- 账号、管理员、公开公司身份、素材授权和发布权限齐备后，只选一个渠道做小范围实验。
-- 使用现有落地页和 UTM registry，记录发布 URL、负责人、时间、访问和 RFQ 证据。
-- 不购买付费目录、不群发、不批量建外链，也不在没有账号和身份确认时发布现有草稿。
+本 gate 现已关闭：B2B RFQ 网站不需要实时 SKU 库存、完整零售商业字段、企业邮箱、正式 WhatsApp 责任、目标市场 locale 或 Payment 才能运营。
 
-## 通过标准
-
-满足产品资料、询盘运营和目标市场三项进入条件后，才打开 2.5.0 的代码范围。2.5.0 的完成条件是一个目标市场的 SSR 内容切片通过生产验收，同时英文 28 URL、15/21 PDP 边界、RFQ、consent 和 attribution 不回归。渠道实验可以与代码工作并行，但必须单独记录为运营事实，不作为版本完成证明。
-
-## 未来基础设施与研究顺序
-
-- 新域名一旦确定，应在扩大流量前完成一次性迁移规划（旧域名 301、canonical/sitemap/robots、GSC/Bing、IndexNow、GA4/UTM 和社交链接）；当前不要迁移，也不要在未选定长期品牌前做最终视觉重构。
-- 企业邮箱依赖长期域名，应在域名决定后、扩大获客和注册 B2B/支付账号前接入，并配置 SPF/DKIM/DMARC；当前不创建虚假地址。
-- WhatsApp 号码、接收人和 SLA 是运营事实，应在公开渠道实验前确认；页面 CTA 暂不替换历史记录中的号码。
-- `ai-website-cloner-template` 适合在研究阶段做授权页面的截图、token、交互和视觉 diff 流程，不应作为生产代码或复制内容/资产的工具；Cornelia James 只作为信息架构、展示、信任和转化模式参考。实现研究成果应放在品牌/域名和产品事实稳定后的正式 minor。
+后续范围条件：
+- `meilaigloves.com` 购买并取得 DNS 控制权后，才进入域名迁移；迁移完成前继续使用 `jsmeilai.com`。
+- 企业邮箱在长期域名确定后、正式 B2B/社交/支付账号注册和扩大获客前配置。
+- WhatsApp 在公开渠道实验前确认号码、接收人和 SLA。
+- 多语言在目标市场、翻译、法律和产品事实负责人确定后再做 SSR slice。
+- Payment、库存扣减、订单履约和 To C checkout 等留到真实在线交易需求出现时。
+- Cornelia James 与 `ai-website-cloner-template` 继续作为研究参考；正式 UI/SEO 实现应在品牌域名确认后进入新的 minor。
 
 ## 当前可继续与当前应等待
 
-现在可以继续做：后台验收准备、产品事实整理、现有页面/UTM/GA4 的小规模观察，以及不改变公开边界的可复现性和文档维护。
+可以继续：产品资料逐项补充、GA4/搜索观察、研究 B2B UI/SEO、准备一次小范围 UTM 渠道实验。
 
-需要等待：真实产品/工厂字段、公开身份、WhatsApp 负责人、目标市场与翻译/法律负责人、第三方搜索引擎数据和支付资料。支付仍只阻塞在线收款，不阻塞英文 RFQ 站点或本 gate。
+需要等待：域名 ownership/DNS、企业邮箱、WhatsApp 运营事实、目标市场与翻译/法律负责人、支付资料。它们各自只阻塞对应功能，不再阻塞 2.4.0 B2B readiness。

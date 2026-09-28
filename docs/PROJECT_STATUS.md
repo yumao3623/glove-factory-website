@@ -5,10 +5,10 @@
 ## 版本与阶段
 
 - **Production：2.4.0（本轮发布）**。2.3.0 完成 indexable B2B surface；其后已上线并验收的 consented GA4、UTM 首触/末触 attribution 和事件就绪门控构成完整的新能力，按仓库 MINOR 规则纠正为 2.4.0。
-- **Development：无正在开发的新正式版本**。本轮在 2.4.0 基线上补充产品/获客 readiness gate 和可复现性维护；2.5.0 尚未启动，外部获客扩张暂停，等待网站成熟度与真实商业资料门槛。
-- **Current work：产品资料、受控 admin/RFQ 验收准备与运营观察，不新增正式版本**。观察 GA4/Bing/Google 数据、确认 WhatsApp 责任人、整理产品事实；不重复提交未变化 URL。
+- **Development：无正在开发的新正式版本**。2.4.0 readiness gate 已关闭；2.5.0 尚未启动，等待明确的品牌/市场输入和正式范围。
+- **Current work：2.4.0 关闭后的运营观察与范围输入整理**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
 - `package.json` 与 lock 根包版本应为 `2.4.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
-- **Payment：`BLOCKED / awaiting real payment information`**，不阻塞 SEO、RFQ、内容或渠道准备。
+- **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
 ## 代码、部署与数据基线
 
@@ -19,11 +19,17 @@
 
 ## 产品范围与完成度
 
-- 前台真实路由包括首页、产品 hub、六个产品族、15 个正式可索引 PDP、custom manufacturing、factory、contact、guides、legal 和 utility 页面。生产 sitemap 仍为 **28 个 URL**；**15 个 curated PDP** 保持可索引，**21 个资料不足 PDP** 继续 gated/noindex，不为数量批量开放。
+- 前台真实路由包括首页、产品 hub、六个产品族、15 个正式可索引 PDP、custom manufacturing、factory、contact、guides、legal 和 utility 页面。生产 sitemap 仍为 **28 个 URL**；**15 个 curated PDP** 保持可索引，**21 个 catalogue preview PDP** 继续 gated/noindex；它们等待逐页 SEO 文案、内部链接和索引优先级审核，不是因为 B2B 必须先有实时库存。
 - 28 个正式 URL 已有 SSR 主体、H1、self-canonical、index/follow、内链和结构化数据；生产探针未发现新的 403、429、5xx、timeout、canonical、SSR 或 robots 异常。
-- 36 个 active 产品可供目录展示，但资料深度不一致。生产不编造价格、库存、MOQ、交期、认证、评价、评分或 Offer；缺失字段仍应通过 RFQ 确认。
-- `/factory/`、`/custom-manufacturing/`、`/contact/` 和两篇 guide 已形成基础采购路径；仍缺事实完整的材料/尺寸/MOQ/sample/包装/交期/质量证据、FAQ 和可公开的信任资料。没有必要为 SEO 制造薄页面。
-- 产品媒体可显示且有 alt/aspect box；对象名、gallery alt、衍生图和缓存策略仍可优化，但不是当前索引阻塞。
+- 36 个 active 产品可供 B2B 目录展示。当前网站的上线必需事实是稳定产品身份、产品族、已批准图片/来源、可核验的可见风格事实、RFQ context 和明确的未知字段表达；material composition、exact size、MOQ、sample、lead time、packaging、certification 和 stock 可在询价/项目中逐项确认，不是整个 B2B 网站的统一阻塞。
+- `/factory/`、`/custom-manufacturing/`、`/contact/` 和两篇 guide 已形成 B2B 采购路径。页面明确 availability/feasibility 按产品和项目确认，不把生产能力写成现货库存或固定商业承诺。
+- 产品媒体可显示且有 alt/aspect box；对象名、gallery alt、衍生图和缓存策略仍可优化，但不是当前 B2B RFQ 运营阻塞。
+
+## 库存定位
+
+- 当前 inventory 表和后台能力只承担受控运营/未来交易准备，不是 B2B catalogue 的公开库存来源。生产没有可靠的逐 SKU 实时库存，不能写入 500 件或任何虚构数字。
+- 当前产品状态应理解为 `available for inquiry`、`made-to-order` 或 `customizable subject to review`；公开 PDP、Product schema 和 RFQ context 不输出数量、价格或 stock。
+- 真实库存、预留、订单扣减、客户地址、checkout、退款和履约状态，等未来明确进入 To C/在线交易后再扩展。
 
 ## 后台、账户与运营能力
 
@@ -49,7 +55,7 @@
 
 ## 转化、隐私、安全与支付
 
-- contact、RFQ 和 WhatsApp CTA 存在；仓库历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前状态仍缺少对该号码的实时接收人、回复负责人和响应 SLA 的重新确认，因此本轮没有把历史号码证据升级为当前运营承诺。没有正式社交 profile，也没有对外发布社交链接。
+- contact、RFQ 和 WhatsApp CTA 存在；历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前接收人、回复负责人和 SLA 未重新确认。这只阻塞 WhatsApp 运营承诺和渠道发布，不阻塞 B2B RFQ 网站。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
 - 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过；隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
@@ -65,36 +71,40 @@
 - `lib/analytics.ts` 和 SEO audit 脚本的 2.3/“未来 GA4”注释已纠正。
 - `REQUIREMENTS_MATURITY_COMMERCE.md` 与 `RFQ_SPEC.md` 明确标为历史需求/规格基线，避免将旧 preview 文字当成当前生产事实。
 - 旧 release/ADR/验收文档保留作历史证据；没有把历史状态删除或重写为当前状态。旧计划中“重复 Request Indexing、批量开放 gated PDP、伪造商业字段、立刻启用支付”不再是有效工作项。
-- 本轮根据生产探针和代码检查补充 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)：当前核心缺口是买家资料与询盘跟进责任，不是继续扩张薄页面或直接生成五语言站；同时明确同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
+- 本轮根据当前 B2B 模式关闭 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)：后续重点转为品牌域名、账号身份、买家体验研究和范围选择，不把 To C 库存或未确认商业字段倒灌到英文 RFQ 站；同时继续遵守同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
 
 ## 待办分类
 
 ### 可以现在继续做
 
-- 完成一次受控管理员后台验收，确认产品发布、媒体、RFQ 状态和报价 UX；不改变公开 URL 边界。
-- 从真实工厂资料批准下一批 PDP 字段，或为一个目标市场准备 SSR 多语言 slice。
-- 确认 WhatsApp 接收人/负责人/SLA，补充经过核验的社交 profile 后再加 profile 链接或 sameAs。
-- 观察 GA4/Bing/Google 的历史数据变化，并用现有 UTM registry 做小范围、事实审核后的渠道实验。
+- 观察 GA4/Bing/Google 和真实 RFQ 反馈；选择一个经过事实审核、带 UTM 的小范围渠道实验。
+- 继续补充产品资料；按产品/项目逐项确认 material、尺寸、MOQ、sample、lead time、packaging 和 certification，不等待全量一次齐备。
+- 在 `meilaigloves.com` 完成购买并取得 DNS 控制权后，准备一次性域名迁移；域名未确认前不迁移。
+- 研究 B2B UI/UX/SEO 模式，准备下一正式 minor 的范围，不复制第三方品牌或资产。
 
 ### 外部等待
 
-- Google 重新抓取、索引报告和 Search performance 数据。
-- Bing 后续索引/点击数据、真实 RFQ 回复和邮件反馈。
-- 真实支付商户资料、KYC、收单和结算条件。
+- `meilaigloves.com` ownership / DNS confirmation。
+- 企业邮箱域名、发件人和账号资料。
+- WhatsApp 当前号码接收人、运营负责人、工作时间和 SLA。
+- 一个目标市场及其翻译/法律负责人。
+- Google/Bing 后续索引与搜索数据。
 
 ### 真正阻塞（只阻塞对应工作）
 
-- 未确认产品/工厂事实只阻塞相应字段、PDP 解锁和内容发布，不阻塞现有英文核心站或 RFQ 入口。
-- WhatsApp 负责人/社交 profile 只阻塞对应公开 CTA/渠道发布。
-- 支付资料只阻塞在线收款。
+- 域名 ownership 只阻塞迁移、最终品牌 canonical、企业邮箱和依赖域名的正式账号；不阻塞当前网站运营。
+- WhatsApp 责任只阻塞公开 WhatsApp 运营承诺和渠道发布；不阻塞 RFQ 表单。
+- 目标市场/翻译/法律负责人只阻塞 localized SSR、hreflang 和多语言 RFQ；不阻塞英文 B2B 站。
+- 支付资料只阻塞 To C checkout、收款和履约。
+- 真实测试邮箱只阻塞真实 Resend 投递证据；不阻塞已完成的代码和受控状态验证。
 
 ### 暂时不值得做
 
-- 重复提交未变化 Google URL/sitemap、Google Indexing API、把 live test 当已收录。
-- 在没有目标市场和翻译/事实负责人前生成完整五语言 SEO 站。
-- 批量解锁 21 个 gated PDP、购买/群发垃圾外链、启用无真实资料的支付。
-- 为追求指标而启用 Vercel Analytics/Speed Insights 或建立新后台系统，除非有明确运营问题。
-- 在 readiness gate 通过前直接启动 2.5.0 的完整多语言实现或扩大多个外部渠道。
+- 不重复已经完成的 admin/RLS/RFQ fixture 验收。
+- 不为 B2B 网站制造逐 SKU 库存，不把所有产品设为 500 件。
+- 不因 material、MOQ、lead time 等未知就关闭整个产品目录；未知值继续按 on-request/项目确认表达。
+- 不在品牌域名未确定前做最终 UI/SEO 全站重构。
+- 不启动 Payment、完整 To C 电商或大规模多语言薄页。
 
 ## 证据入口
 

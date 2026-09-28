@@ -33,6 +33,10 @@ This is a catalogue schema for a static, B2B lead-generation site. It is not an 
 | `lead_time` | structured value | no | Sample and bulk lead time separately; status required. |
 | `capacity` | structured value | no | Optional factory-level fact; `UNKNOWN` until approved. |
 
+## B2B availability boundary
+
+The current site is a B2B catalogue and RFQ surface. It does not require reliable per-SKU stock to launch or to keep a product discoverable. Public availability is expressed through inquiry, made-to-order and project review language; inventory quantities remain private operational data and must never be fabricated for catalogue, SEO, structured data or customer-facing pages. Real stock reservation, order decrement, checkout and fulfilment belong to a future To C / online-trade scope.
+
 ## Unknown-value contract
 
 Every operational field uses one of `CONFIRMED`, `PENDING_CONFIRMATION`, `UNKNOWN`, `NOT_APPLICABLE`. A missing value is not rendered as a plausible default. The UI may show a neutral “Available on request” only when the field is intentionally withheld and the copy is approved; it must not imply a numeric promise.
