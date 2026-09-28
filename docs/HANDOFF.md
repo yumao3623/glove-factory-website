@@ -10,6 +10,7 @@
 - RFQ、后台、账户、目录、报价和支付适配器的真实范围已重新核对；支付仍冻结。
 - 本轮依据生产 28 URL SEO audit、未授权 admin 401、69/69 测试和 build/lint/product validation 结果，补充产品与获客 readiness gate；修正 Next 路由类型未生成时 `typecheck` 的可复现维护失败。
 - 本轮进一步完成隔离 RFQ 链路 smoke：验证 201 保存、202 通知待处理、非法来源 403 和通知失败状态标记；前台补充 202 的明确提示。生产未执行真实询盘或邮件发送。
+- 本轮再次核对生产 admin 路径矩阵：products、requests、variants、quotes、media、media preview 和 publish 的未认证请求均为 401；`/admin/` 仍等待管理员本人完成登录后再验收 UX 和真实状态流转。
 
 ## 当前等待
 
@@ -17,6 +18,7 @@
 - Google 的索引/曝光和 Bing 的后续数据继续观察，不重复提交未变化 URL。
 - 等真实产品/工厂事实、WhatsApp 负责人和一个目标市场的翻译/法律负责人，才能解锁下一阶段内容或渠道。
 - 历史 Human Review 曾确认 `+60 1114166916` 为公开号码；当前仍只差确认该号码的现任接收人、回复负责人和响应 SLA，不能把历史记录视为当前运营验收。
+- `scripts/verify-commerce-live.mjs` 保留为可选真实集成验证，但会创建并删除 Supabase 测试夹具；除非获得明确授权，本轮不运行。
 
 ## 唯一下一任务
 
