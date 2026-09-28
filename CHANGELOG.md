@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-09-28：在显式 opt-in 且确认夹具隔离/清理安全后，完成 Supabase commerce live fixture 11/11 以及 RFQ/报价状态夹具 3/3；所有测试记录已清理，不发送真实邮件、不创建真实报价或业务记录。readiness gate 的技术子门槛已通过，业务资料、运营责任、目标市场和真实通知投递仍待确认。
 - 2026-09-28：完成隔离 RFQ readiness smoke（成功保存、通知待处理、非法来源拒绝和状态标记），并修复前台在 `STORED_EMAIL_PENDING` 时的提示，明确告知询价已保存但通知尚待处理；未执行真实询盘、邮件或管理员写入。
 - 2026-09-28：根据当前生产探针、代码检查和 2.4.0 状态，明确下一阶段先通过产品与询盘运营 readiness gate；补充正式版本完成后新建对话、同阶段继续当前对话的长期规则。修正 `typecheck` 在未生成 Next.js 路由类型时的可复现失败；不改变生产运行时或公开 URL 边界。
 - 2026-09-28：完成外部获客执行包：筛选 LinkedIn、Alibaba.com、Made-in-China.com、Global Sources、YouTube、Pinterest/Instagram、Europages 和 Kompass 的优先级与账户门槛，建立 UTM registry、落地页映射和首批英文内容草稿；本轮没有创建账号、发送消息、发布外链或购买付费资源。Bing sitemap 本次实查成功发现 28 个 URL；GA4 实时快照记录 1 个活跃用户。

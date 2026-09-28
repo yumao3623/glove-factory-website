@@ -27,8 +27,8 @@
 
 ## 后台、账户与运营能力
 
-- 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；本轮再次对 products、requests、variants、quotes、media、media preview、publish 等生产未认证路径逐项得到 401，同源写入和 Supabase RLS 生效。随后使用已确认的管理员会话完成了 `/admin/` 只读验收：36 个 active products 能加载，产品编辑可读出 4 张私有媒体，媒体预览成功返回 Supabase signed URL；RFQ、订单/报价和变体/库存当前均为 0 条，因此没有可安全操作的真实状态夹具，写路径仍待受控测试。
-- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；本轮用隔离的 fake Supabase/Resend 链路验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。管理员会话下后台 RFQ 列表正常显示空状态，前台已修复 202 场景提示，避免把“已保存但通知待处理”误显示为普通成功。生产开关为 true，但未提交真实 RFQ，故没有新的 lead 或邮件成功证据；RFQ 状态流转和报价创建仍没有真实或受控测试夹具。
+- 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；生产未认证 admin 路径逐项得到 401，同源写入和 Supabase RLS 生效。已确认的管理员会话完成 `/admin/` 只读验收：36 个 active products、4 张私有媒体和 Supabase signed preview 正常；RFQ、订单/报价及变体/库存当前均为 0 条。显式 opt-in 的隔离 Supabase 夹具完成真实 Auth、产品、媒体、变体、库存、发布、订单 RLS 和清理验证 11/11；另用唯一 marker 的 RFQ/报价夹具验证 reviewing → quoted、报价取消和状态事件 3/3，均已清理，未改变真实业务记录。该证据关闭了核心数据/RLS/状态 RPC 的技术风险，但不替代浏览器写路径与真实通知投递验收。
+- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；隔离 smoke 验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。唯一 marker 的 live Supabase 夹具进一步验证 RFQ 状态事件、管理员报价创建、quoted → cancelled 以及清理完成（3/3）。管理员会话下后台 RFQ 列表正常显示空状态，前台已修复 202 场景提示。生产开关为 true，但未提交真实 RFQ，故没有新的 lead、真实邮件投递或真实报价证据；Resend 生产投递和浏览器端管理员写路径仍需单独授权/验收。
 - 账户支持邮箱会话、确认、重置和订单历史；Google OAuth 代码存在但生产未开启。购物车是本地询价清单，checkout 是报价/支付边界页面，不是已启用的消费者结账。
 - 当前缺少完整 CMS、内容页编辑器、多角色/审计 UI、CRM/SLA 报表、履约工作流、客户地址/数据库购物车和管理员运营看板。对当前轻量 B2B RFQ 定位，这些是部分能力或后续选择，不应冒充已完成。
 
@@ -51,7 +51,7 @@
 
 - contact、RFQ 和 WhatsApp CTA 存在；仓库历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前状态仍缺少对该号码的实时接收人、回复负责人和响应 SLA 的重新确认，因此本轮没有把历史号码证据升级为当前运营承诺。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过；隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401，管理员会话下只读后台和媒体 signed preview 已通过。仓库的 `scripts/verify-commerce-live.mjs` 可覆盖真实 Auth、产品、媒体、变体、库存、发布、订单 RLS 和清理，但因会在 Supabase 创建/删除测试夹具且要求显式 opt-in，本轮未运行。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过；隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 
