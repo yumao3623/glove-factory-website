@@ -27,8 +27,8 @@
 
 ## 后台、账户与运营能力
 
-- 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；admin API 对未认证请求返回 401，同源写入和 Supabase RLS 生效。真实管理员验收本轮未使用管理员登录，因此 UX/权限细节仍需一次受控运营验收。
-- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；生产开关为 true。未提交真实 RFQ，故没有新的 lead 或邮件成功证据。
+- 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；本轮生产 smoke 对 products、requests、variants、quotes、media、publish 等未认证路径均得到 401，同源写入和 Supabase RLS 生效。真实管理员验收本轮未使用管理员登录，因此 UX/权限细节仍需一次受控运营验收。
+- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；本轮用隔离的 fake Supabase/Resend 链路验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。前台已修复 202 场景提示，避免把“已保存但通知待处理”误显示为普通成功。生产开关为 true，但未提交真实 RFQ，故没有新的 lead 或邮件成功证据。
 - 账户支持邮箱会话、确认、重置和订单历史；Google OAuth 代码存在但生产未开启。购物车是本地询价清单，checkout 是报价/支付边界页面，不是已启用的消费者结账。
 - 当前缺少完整 CMS、内容页编辑器、多角色/审计 UI、CRM/SLA 报表、履约工作流、客户地址/数据库购物车和管理员运营看板。对当前轻量 B2B RFQ 定位，这些是部分能力或后续选择，不应冒充已完成。
 
@@ -49,9 +49,9 @@
 
 ## 转化、隐私、安全与支付
 
-- contact、RFQ 和 WhatsApp CTA 存在；WhatsApp 号码技术上可用，但接收人、回复负责人和响应 SLA 尚未确认。没有正式社交 profile，也没有对外发布社交链接。
+- contact、RFQ 和 WhatsApp CTA 存在；仓库历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前状态仍缺少对该号码的实时接收人、回复负责人和响应 SLA 的重新确认，因此本轮没有把历史号码证据升级为当前运营承诺。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过。生产 API 对未授权 admin 返回 401，RLS 保持数据库边界。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过；隔离 RFQ smoke 覆盖 201/202/403 结果。生产 API 对未授权 admin 返回 401，RLS 保持数据库边界。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 

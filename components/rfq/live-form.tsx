@@ -36,7 +36,7 @@ export function LiveRfqForm() {
       const result = await response.json().catch(() => ({})) as { status?: string };
       const outcome = result.status === "RECEIVED" && response.status === 201 ? "received" : result.status === "RECEIVED" ? "duplicate" : result.status === "STORED_EMAIL_PENDING" ? "stored_email_pending" : response.ok ? "accepted" : "error";
       trackEvent("rfq_submit", { family: String(payload.productFamily), source_route: window.location.pathname, outcome });
-      setStatus(response.ok ? t("form.received") : t("form.submitError"));
+      setStatus(response.ok ? result.status === "STORED_EMAIL_PENDING" ? t("form.savedEmailPending") : t("form.received") : t("form.submitError"));
       if (response.ok) { form.reset(); submission.current = null; }
     } catch {
       trackEvent("rfq_submit", { family: String(payload.productFamily), source_route: window.location.pathname, outcome: "network_error" });
