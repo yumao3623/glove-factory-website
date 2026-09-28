@@ -6,7 +6,7 @@
 
 **目标**：让代码、生产、版本和运营事实保持一致，补齐买家资料与询盘运营的最小闭环，再用 GA4/Bing/Google 的真实数据判断是否值得扩大获客。当前最重要的产品问题是采购信号与跟进责任仍不完整，不是缺少更多薄页面。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界不变；RFQ、consent、UTM attribution 和独立 GA4 不回归；生产未认证 admin/RFQ 边界验证完成，并明确真实管理员会话及任何真实夹具集成测试仍待受控授权；没有重复搜索提交或未确认商业事实。完整条件见 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界不变；RFQ、consent、UTM attribution 和独立 GA4 不回归；生产未认证 admin/RFQ 边界及管理员只读 UX 验证完成，真实写入/状态流转夹具仍待受控授权；没有重复搜索提交或未确认商业事实。完整条件见 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)。
 
 ## 候选 2.5.0：一个目标市场的 SSR 多语言内容切片（尚未启动）
 
