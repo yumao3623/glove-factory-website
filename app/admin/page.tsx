@@ -4,7 +4,7 @@ import { ProductForm } from "@/components/admin/product-form";
 import { VariantForm } from "@/components/admin/variant-form";
 import { RequestsDashboard } from "@/components/admin/requests-dashboard";
 import { getAdminUser } from "@/lib/commerce/admin";
-export const metadata = { title: "Admin", robots: { index: false, follow: false } };
+export const metadata = { title: "管理员后台", robots: { index: false, follow: false } };
 export default async function AdminPage() {
   const admin = await getAdminUser();
   return <main id="main-content" className="mx-auto min-h-[70vh] max-w-[1200px] px-5 py-16 sm:px-8 lg:py-24">
