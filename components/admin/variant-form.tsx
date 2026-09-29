@@ -11,7 +11,7 @@ const stockOf = (variant: Variant) => (Array.isArray(variant.inventory) ? varian
 
 async function readRecords(signal?: AbortSignal) {
   const responses = await Promise.all([fetch("/api/admin/products/", { cache: "no-store", signal }), fetch("/api/admin/variants/", { cache: "no-store", signal })]);
-  if (responses.some(response => !response.ok)) throw new Error("Unable to load products and stock. Check your session and try again.");
+  if (responses.some(response => !response.ok)) throw new Error("无法加载产品和库存，请检查管理员会话。");
   const [products, variants] = await Promise.all(responses.map(response => response.json()));
   return { products: (products.data ?? []) as Product[], variants: (variants.data ?? []) as Variant[] };
 }
@@ -39,27 +39,27 @@ export function VariantForm() {
   async function submit(event: FormEvent) {
     event.preventDefault();
     const quantity = Number(form.quantity), reserved = Number(form.reserved);
-    if (!form.product_id || !Number.isInteger(quantity) || !Number.isInteger(reserved) || quantity < 0 || reserved < 0 || reserved > quantity) { setMessage("Choose a product and valid whole-number stock values. Reserved stock cannot exceed quantity."); return; }
+    if (!form.product_id || !Number.isInteger(quantity) || !Number.isInteger(reserved) || quantity < 0 || reserved < 0 || reserved > quantity) { setMessage("请选择产品并填写有效的整数库存，已预留数量不能超过库存数量。"); return; }
     setBusy(true); setMessage("");
     try {
       const response = await fetch("/api/admin/variants/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: form.id, product_id: form.product_id, sku: form.sku, color: form.color, size: form.size, retail_price_minor: form.retail === "" ? null : Math.round(Number(form.retail) * 100), wholesale_price_minor: form.wholesale === "" ? null : Math.round(Number(form.wholesale) * 100), currency: form.currency, active: form.active, quantity, reserved }) });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "Unable to save variant.");
-      setRecords(await readRecords()); setForm({ ...empty, product_id: form.product_id }); setMessage("Variant and stock saved.");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "Unable to reach the stock service."); }
+      if (!response.ok) throw new Error(data.error ?? "无法保存变体。");
+      setRecords(await readRecords()); setForm({ ...empty, product_id: form.product_id }); setMessage("变体和库存已保存。");
+    } catch (error) { setMessage(error instanceof Error ? error.message : "库存服务暂时不可用。"); }
     finally { setBusy(false); }
   }
   const set = (key: keyof typeof empty, value: string | boolean) => setForm(current => ({ ...current, [key]: value }));
   return <section className="mt-10 grid gap-8 border border-stone-200 bg-white p-6">
-    <div><p className="section-label text-stone-500">Inventory</p><h2 className="mt-2 font-serif text-3xl text-[#0d2b3f]">Variants and stock</h2><p className="mt-3 text-sm text-stone-600">Leave a price blank if it needs a quote. Enter only confirmed stock.</p></div>
+    <div><p className="section-label text-stone-500">库存管理</p><h2 className="mt-2 font-serif text-3xl text-[#0d2b3f]">变体与库存</h2><p className="mt-3 text-sm text-stone-600">价格待报价时留空；这里只填写已经确认的库存。</p></div>
     <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
-      <label className="text-sm sm:col-span-2">Product<select required value={form.product_id} onChange={event => set("product_id", event.target.value)} className={control}><option value="" disabled>Choose a saved product</option>{records.products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)}</select></label>
-      {([['sku', 'SKU'], ['color', 'Colour'], ['size', 'Size'], ['retail', `Retail price (${form.currency})`], ['wholesale', `Wholesale price (${form.currency})`], ['quantity', 'Quantity'], ['reserved', 'Reserved']] as const).map(([key, label]) => <label key={key} className="text-sm">{label}<input required={key === 'sku' || key === 'quantity' || key === 'reserved'} type={['retail', 'wholesale', 'quantity', 'reserved'].includes(key) ? 'number' : 'text'} min="0" step={key === 'retail' || key === 'wholesale' ? '0.01' : '1'} value={form[key]} onChange={event => set(key, event.target.value)} className={control} /></label>)}
-      <label className="text-sm">Currency<select value={form.currency} onChange={event => set("currency", event.target.value)} className={control}>{['USD', 'EUR', 'GBP', 'CNY'].map(currency => <option key={currency}>{currency}</option>)}</select></label>
-      <label className="flex items-center gap-2 text-sm sm:col-span-2"><input type="checkbox" checked={form.active} onChange={event => set("active", event.target.checked)} />Active variant</label>
-      <div className="flex gap-4 sm:col-span-2"><button disabled={busy || !records.products.length} className="w-fit bg-[#0d2b3f] px-5 py-3 text-sm text-white disabled:opacity-50">{busy ? 'Saving…' : form.id ? 'Save variant' : 'Add variant'}</button>{form.id && <button type="button" onClick={() => setForm({ ...empty, product_id: form.product_id })} className="text-sm underline">Cancel editing</button>}</div>
+      <label className="text-sm sm:col-span-2">产品<select required value={form.product_id} onChange={event => set("product_id", event.target.value)} className={control}><option value="" disabled>选择已保存的产品</option>{records.products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)}</select></label>
+      {([['sku', '货号（SKU）'], ['color', '颜色'], ['size', '尺码'], ['retail', `零售价格 (${form.currency})`], ['wholesale', `批发价格 (${form.currency})`], ['quantity', '数量'], ['reserved', '已预留']] as const).map(([key, label]) => <label key={key} className="text-sm">{label}<input required={key === 'sku' || key === 'quantity' || key === 'reserved'} type={['retail', 'wholesale', 'quantity', 'reserved'].includes(key) ? 'number' : 'text'} min="0" step={key === 'retail' || key === 'wholesale' ? '0.01' : '1'} value={form[key]} onChange={event => set(key, event.target.value)} className={control} /></label>)}
+      <label className="text-sm">货币<select value={form.currency} onChange={event => set("currency", event.target.value)} className={control}>{['USD', 'EUR', 'GBP', 'CNY'].map(currency => <option key={currency}>{currency}</option>)}</select></label>
+      <label className="flex items-center gap-2 text-sm sm:col-span-2"><input type="checkbox" checked={form.active} onChange={event => set("active", event.target.checked)} />启用此变体</label>
+      <div className="flex gap-4 sm:col-span-2"><button disabled={busy || !records.products.length} className="w-fit bg-[#0d2b3f] px-5 py-3 text-sm text-white disabled:opacity-50">{busy ? '保存中…' : form.id ? '保存变体' : '添加变体'}</button>{form.id && <button type="button" onClick={() => setForm({ ...empty, product_id: form.product_id })} className="text-sm underline">取消编辑</button>}</div>
       {message && <p className="text-sm text-stone-600 sm:col-span-2" role="status">{message}</p>}
     </form>
-    <div className="divide-y divide-stone-200 border-y border-stone-200">{records.variants.map(variant => <button type="button" key={variant.id} onClick={() => edit(variant)} className="flex w-full items-center justify-between gap-4 py-3 text-left hover:bg-stone-50"><span><strong className="font-medium text-[#0d2b3f]">{variant.sku}</strong><span className="ml-3 text-sm text-stone-600">{variant.color} {variant.size}</span></span><span className="text-xs text-stone-500">Edit · {variant.currency} · stock {stockOf(variant).quantity}</span></button>)}</div>
+    <div className="divide-y divide-stone-200 border-y border-stone-200">{records.variants.map(variant => <button type="button" key={variant.id} onClick={() => edit(variant)} className="flex w-full items-center justify-between gap-4 py-3 text-left hover:bg-stone-50"><span><strong className="font-medium text-[#0d2b3f]">{variant.sku}</strong><span className="ml-3 text-sm text-stone-600">{variant.color} {variant.size}</span></span><span className="text-xs text-stone-500">编辑 · {variant.currency} · 库存 {stockOf(variant).quantity}</span></button>)}</div>
   </section>;
 }

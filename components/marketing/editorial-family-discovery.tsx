@@ -30,7 +30,7 @@ export function EditorialFamilyDiscovery() {
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="section-label text-stone-600"><LocalizedText k="home.exploreRange" fallback="Explore the range" /></p>
-            <h2 className="mt-3 max-w-[13ch] font-serif text-4xl leading-[0.98] sm:text-5xl lg:text-6xl">
+            <h2 className="mt-3 max-w-[15ch] font-serif text-4xl leading-[1] tracking-[-.02em] sm:text-5xl lg:text-[3.25rem]">
               <LocalizedText k="home.rangeTitle" fallback="Six directions for an occasionwear range." />
             </h2>
           </div>

@@ -1,12 +1,18 @@
 # JS Meilai 路线图
 
-核对日期：2026-09-28。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
+核对日期：2026-09-29。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
 
-## 当前阶段：2.5.0 初始 slice 已发布，进入英文 B2B 运营观察
+## 当前阶段：2.5.0 生产稳定；2.6.0 本地体验整改待发布
 
 **目标**：在 `jsmeilai.com` 上持续改善 B2B manufacturer / supplier / RFQ 的买家路径和可发现性；按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排后续范围，不把 To C 库存或完整商业字段倒灌到当前网站。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。2.6.0 还需按仓库发布规则完成授权发布与生产验收。
+
+## 2.6.0：全站买家体验整改（本地完成，尚未发布）
+
+**范围**：根据 2026-09-29 的真实使用截图，统一全站搜索、导航、目录筛选、六大分类页、产品详情页、联系入口、账户资料和管理员中文操作；修复标题比例、按钮触达、无结果反馈、移动端菜单与真实联系方式优先级。支付保持关闭，未知商业事实继续按询价确认。
+
+**验证**：`npm test` 69/69、`npm run typecheck`、lint、production build 均通过；本地浏览器覆盖桌面/移动端、搜索提交、无结果、筛选、六大分类、PDP、联系、账户和管理员未登录门。证据见 [2.6.0 UX evidence](evidence/2026-09-29-2.6-ux.json)。
 
 ## 2.5.0：B2B 买家体验与搜索结构（已发布初始 slice）
 

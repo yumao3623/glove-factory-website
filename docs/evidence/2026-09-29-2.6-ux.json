@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-29",
+  "version": "2.6.0",
+  "environment": "local development at http://localhost:3005",
+  "production": {
+    "url": "https://www.jsmeilai.com/",
+    "version": "2.5.0",
+    "deployed": false
+  },
+  "browserChecks": [
+    { "path": "/", "viewport": "1280x900", "result": "loaded; no console errors or runtime overlay" },
+    { "path": "/products/", "viewport": "1280x900", "result": "search dialog submits to /products/?search=bridal; no-results state shows 0 products and recovery action" },
+    { "path": "/products/", "viewport": "390x844", "result": "mobile filters open/close, real counts render, menu opens with search/account/catalogue/contact routes" },
+    { "path": "/products/bridal-gloves-sheer-lace-long-001/", "viewport": "1280x900", "result": "PDP title, matching gallery and enquiry actions render" },
+    { "path": "/contact/", "viewport": "1280x900", "result": "direct email, phone and WhatsApp routes appear before structured enquiry form" },
+    { "path": "/account/", "viewport": "1280x900", "result": "optional account copy and sign-in/create-account path render" },
+    { "path": "/admin/", "viewport": "1280x900", "result": "unauthenticated gate and visible admin labels render in Chinese" },
+    { "path": "/bridal-gloves/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/opera-gloves/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/costume-gloves/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/kids-dress-gloves/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/wedding-veils/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/arm-sleeves/", "viewport": "1280x900", "result": "category route loaded" }
+  ],
+  "commands": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "test": "69/69 passed",
+    "build": "passed"
+  },
+  "screenshots": {
+    "before": ["home-before.png", "products-before.png"],
+    "after": ["home-after.png", "products-no-results-after.png", "products-mobile-after.png", "mobile-menu-after.png", "pdp-after.png", "contact-after.png", "account-after.png"]
+  },
+  "research": [
+    "Cornelia James homepage and navigation were opened for layout and interaction reference.",
+    "JCodesMore/ai-website-cloner-template README and repository structure were opened as an implementation reference; no third-party assets or copy were imported."
+  ]
+}

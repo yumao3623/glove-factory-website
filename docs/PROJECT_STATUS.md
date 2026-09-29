@@ -1,13 +1,13 @@
 # JS Meilai 当前项目状态
 
-核对日期：2026-09-28（Asia/Shanghai）。本页是当前状态唯一入口，优先级高于旧阶段文档、聊天记录和未更新的运营计划。当前判断同时基于仓库代码/Git、生产 HTTP、Vercel 环境与部署、Supabase 匿名可见数据及已记录的第三方现场证据；无法用当前权限复核的事项明确标为历史或未验证。
+核对日期：2026-09-29（America/Los_Angeles）。本页是当前状态唯一入口，优先级高于旧阶段文档、聊天记录和未更新的运营计划。当前判断同时基于仓库代码/Git、生产 HTTP、Vercel 环境与部署、Supabase 匿名可见数据、浏览器实查和本轮视觉证据；无法用当前权限复核的事项明确标为历史或未验证。
 
 ## 版本与阶段
 
-- **Production：2.5.0（本轮已发布）**。2.3.0 的 indexable B2B surface 与 2.4.0 的 consented GA4/UTM attribution 继续保留；本轮新增首页采购入口/三步 sourcing path 与产品 hub `ItemList` 搜索结构，已通过生产探针与 SEO audit。
-- **Development：无正在开发的新正式版本**。2.5.0 初始 buyer-experience slice 已发布；后续 2.5 扩展按真实搜索/询盘反馈和业务输入触发，不把域名、邮箱、WhatsApp 或 Payment 设为统一 gate。
-- **Current work：2.5.0 发布后的英文 B2B 运营观察与范围输入整理**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
-- `package.json` 与 lock 根包版本应为 `2.5.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
+- **Production：2.5.0（仍为当前生产版本）**。2.3.0 的 indexable B2B surface 与 2.4.0 的 consented GA4/UTM attribution 继续保留；2.5.0 的首页采购入口、三步 sourcing path 与产品 hub `ItemList` 搜索结构继续在线。
+- **Development：2.6.0 UX remediation（本地完成，尚未发布）**。本轮依据真实使用截图整改全站导航搜索、目录筛选/无结果、账户资料、中文管理员后台、联系入口、六大分类页、产品详情页及移动端交互；不重新开启已关闭的 readiness gate。
+- **Current work：2.6.0 发布前复核**。本地代码、构建、测试和浏览器证据已完成，生产仍保持 2.5.0；下一步只做审阅、必要返工和经授权的发布，不把本地结果描述为生产结果。
+- `package.json` 与 lock 根包版本为 `2.6.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
 ## 代码、部署与数据基线
@@ -57,7 +57,7 @@
 
 - contact、RFQ 和 WhatsApp CTA 存在；历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前接收人、回复负责人和 SLA 未重新确认。这只阻塞 WhatsApp 运营承诺和渠道发布，不阻塞 B2B RFQ 网站。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint、production build 和 `validate:products` 均通过；隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint 和 production build 均通过；本轮新增浏览器实查覆盖搜索、无结果、六大分类页、PDP、联系、账户、管理员未登录门、桌面和移动端导航/筛选。隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 
@@ -72,6 +72,7 @@
 - `REQUIREMENTS_MATURITY_COMMERCE.md` 与 `RFQ_SPEC.md` 明确标为历史需求/规格基线，避免将旧 preview 文字当成当前生产事实。
 - 旧 release/ADR/验收文档保留作历史证据；没有把历史状态删除或重写为当前状态。旧计划中“重复 Request Indexing、批量开放 gated PDP、伪造商业字段、立刻启用支付”不再是有效工作项。
 - 本轮根据当前 B2B 模式关闭 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)，并完成 2.5.0 初始 buyer-experience slice：后续重点转为英文 B2B 运营观察、买家反馈和逐页内容选择，不把 To C 库存或未确认商业字段倒灌到英文 RFQ 站；同时继续遵守同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
+- 本轮 2.6.0 体验整改保留 2.5.0 生产发布历史，未迁移域名、未启用支付、未写入真实客户/询盘数据。搜索弹层提交、目录无结果恢复、真实筛选计数、移动菜单、账户资料 API、联系页直接联系方式和管理员中文可见文案已在本地浏览器验证；具体截图与路径见 [2.6.0 UX evidence](evidence/2026-09-29-2.6-ux.json)。
 
 ## 待办分类
 
@@ -111,4 +112,5 @@
 - [Production](https://www.jsmeilai.com/)、[sitemap](https://www.jsmeilai.com/sitemap.xml)、[robots](https://www.jsmeilai.com/robots.txt)
 - [固定工作规则](PROJECT_WORKFLOW.md)、[交接](HANDOFF.md)、[路线图](ROADMAP.md)、[版本历史](RELEASE_HISTORY.md)
 - [2.4 发布审计](evidence/2026-09-28-2.4-audit.json)、[2.3 生产探针](evidence/2026-09-27-2.3-production.json)
+- [2.6.0 UX 浏览器与视觉证据](evidence/2026-09-29-2.6-ux.json)
 - [GA4/UTM 源码](../lib/analytics.ts) 与 [consent loader](../components/analytics/ga4-consent.tsx)
