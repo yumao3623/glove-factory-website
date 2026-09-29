@@ -2,19 +2,19 @@
 
 核对日期：2026-09-28。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
 
-## 当前阶段：2.4.0 readiness 已关闭，进入范围输入与运营观察
+## 当前阶段：2.5.0 初始 slice 已发布，进入英文 B2B 运营观察
 
-**目标**：确认 2.4.0 已满足 B2B manufacturer / supplier / RFQ 模式的技术和公开运营最低条件；之后按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排正式 minor，不把 To C 库存或完整商业字段倒灌到当前网站。
+**目标**：在 `jsmeilai.com` 上持续改善 B2B manufacturer / supplier / RFQ 的买家路径和可发现性；按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排后续范围，不把 To C 库存或完整商业字段倒灌到当前网站。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于本版本统一 gate。2.4.0 readiness 已关闭。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。
 
-## 2.5.0：B2B 买家体验与搜索结构（本轮已启动）
+## 2.5.0：B2B 买家体验与搜索结构（已发布初始 slice）
 
 **进入条件**：当前无需购买新域名即可启动。先明确一个优先买家市场或证明当前英文 B2B 路径已足够；企业邮箱和 WhatsApp 运营决策按实际接入范围确认，不作为 UI/SEO、产品发现或内容工作的总前置条件。不要求全量产品一次补齐零售字段。
 
 **范围**：本轮先在 `https://www.jsmeilai.com/` 上交付首屏采购入口、三步 sourcing path、产品发现和产品 hub `ItemList` 搜索结构；继续按页审核 21 个 gated PDP 是否具备独立搜索价值；若目标市场已确定，再纳入一个 SSR locale slice、localized metadata、hreflang 和语言 sitemap。未来若购买 `meilaigloves.com`，再单独规划一次性品牌/canonical/redirect/GA4-UTM/账号迁移，不提前为它设计或改动现站。
 
-**完成条件**：首屏 CTA 在桌面/移动可见且可达 RFQ；采购路径、六系列发现、PDP/RFQ 内链与 `ItemList` 结构化数据通过本地和生产验证；UTM/GA4 与英文 28 URL 边界不回归；可独立交付的 UI/SEO 内容改进不等待未来域名、邮箱、WhatsApp 或支付。若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。未来域名迁移另设范围，不与本轮网站建设混合。
+**完成条件**：首屏 CTA 在桌面/移动可见且可达 RFQ；采购路径、六系列发现、PDP/RFQ 内链与 `ItemList` 结构化数据通过本地和生产验证；UTM/GA4 与英文 28 URL 边界不回归；可独立交付的 UI/SEO 内容改进不等待未来域名、邮箱、WhatsApp 或支付。本轮初始 slice 已满足并发布。若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。未来域名迁移另设范围，不与本轮网站建设混合。
 
 ## 候选 2.6.0：买家运营与支付（条件式）
 

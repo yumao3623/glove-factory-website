@@ -9,7 +9,7 @@
 
 2.4.0 readiness gate 已完成其主要作用。当前生产产品是 B2B manufacturer / supplier / RFQ catalogue，不是要求逐 SKU 实时库存的 To C 零售系统。技术验收、公开英文 B2B 路径、RFQ 状态层、admin 边界和数据安全均已有证据；剩余事项是按功能范围管理的业务输入，不再作为整个 2.4.0 的统一阻塞。
 
-2.4.0 gate 关闭后，2.5.0 仍未启动。当前不需要购买新域名即可在 `jsmeilai.com` 上继续完成 B2B buyer experience、UI/SEO 和内容改进；下一 minor 不预设为多语言，只有在目标语言事实齐备时才纳入一个 SSR locale slice。未来 `meilaigloves.com` 仍是未购买的候选，只在取得 ownership/DNS 后另行评估迁移。
+2.4.0 gate 关闭后，2.5.0 初始 buyer-experience slice 已在 `jsmeilai.com` 上发布：首屏采购入口、三步 sourcing path、五语言 UI 文案和产品 hub `ItemList` 已通过生产验证。后续 2.5 扩展仍不需要购买新域名；下一步多语言仍不预设，只有在目标语言事实齐备时才纳入一个 SSR locale slice。未来 `meilaigloves.com` 仍是未购买的候选，只在取得 ownership/DNS 后另行评估迁移。
 
 ## 本轮自动验证结果
 

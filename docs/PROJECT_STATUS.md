@@ -4,16 +4,16 @@
 
 ## 版本与阶段
 
-- **Production：2.4.0（本轮发布）**。2.3.0 完成 indexable B2B surface；其后已上线并验收的 consented GA4、UTM 首触/末触 attribution 和事件就绪门控构成完整的新能力，按仓库 MINOR 规则纠正为 2.4.0。
-- **Development：2.5.0 buyer-experience slice（本轮已启动，尚未形成新的生产版本证据）**。范围是当前 `jsmeilai.com` 上的首屏采购入口、采购路径和产品 hub 搜索结构；不包含域名迁移、完整多语言 SEO、支付或真实账号接入。
-- **Current work：在 `jsmeilai.com` 上继续做 B2B buyer experience、内容和 SEO 的小范围交付，并同步整理范围输入**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
+- **Production：2.5.0（本轮已发布）**。2.3.0 的 indexable B2B surface 与 2.4.0 的 consented GA4/UTM attribution 继续保留；本轮新增首页采购入口/三步 sourcing path 与产品 hub `ItemList` 搜索结构，已通过生产探针与 SEO audit。
+- **Development：无正在开发的新正式版本**。2.5.0 初始 buyer-experience slice 已发布；后续 2.5 扩展按真实搜索/询盘反馈和业务输入触发，不把域名、邮箱、WhatsApp 或 Payment 设为统一 gate。
+- **Current work：2.5.0 发布后的英文 B2B 运营观察与范围输入整理**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
 - `package.json` 与 lock 根包版本应为 `2.4.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
 ## 代码、部署与数据基线
 
-- Git 主线为 `main`；2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，随后是治理文档提交。没有伪造历史 release tag。
-- 当前生产域名为 `https://www.jsmeilai.com/`。2.4.0 应用发布提交为 `9377f2a`；本轮 `cfeec58` 是 2.4.0 基线上的 RFQ 状态提示维护提交，`1a84b5c` 记录了本轮已认证 admin 验收，二者均已推送并通过 Vercel（应用部署记录：[8bjZw5PHo1FHo6YHhhsTfZLQSVqD](https://vercel.com/mao-yu/glove-factory-website/8bjZw5PHo1FHo6YHhhsTfZLQSVqD)，最新文档部署：[41jP42auqM1cAFZT9ueH312p5sdM](https://vercel.com/mao-yu/glove-factory-website/41jP42auqM1cAFZT9ueH312p5sdM)）。生产 smoke 仍为核心页面/PDP 200、sitemap/robots 200、未授权 admin API 401；生产探针见 [2.4 audit evidence](evidence/2026-09-28-2.4-audit.json)。
+- Git 主线为 `main`；2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，本轮 2.5.0 为 `1e4215f`。没有伪造历史 release tag。
+- 当前生产域名为 `https://www.jsmeilai.com/`。2.5.0 已由提交 `1e4215f` 推送并通过 Vercel 部署（部署记录：[14cyyy1f1t9KoEj7V5rSHJeKS5dx](https://vercel.com/mao-yu/glove-factory-website/14cyyy1f1t9KoEj7V5rSHJeKS5dx)）；生产 smoke 与本轮 SEO audit 均通过：28/28 URL、首页/产品 hub/15 个 PDP、sitemap/robots 200，未授权 admin API 仍为 401。
 - Vercel Production 已有独立 GA4 Measurement ID `G-PP1JPPV9FD`，以及 Supabase、Resend、管理员和 RFQ 相关生产变量；`SEO_INDEXING_ENABLED=true`、目录/RFQ 开关为 true，PayPal checkout 为 false。
 - Supabase 匿名读取显示 36 个 active products、137 个生产引用媒体 URL；本地媒体 manifest 有 173 个对象。匿名角色无法读取 RFQ、订单、客户和变体表，符合 RLS 边界；本轮没有使用管理员会话写入数据。
 
@@ -71,7 +71,7 @@
 - `lib/analytics.ts` 和 SEO audit 脚本的 2.3/“未来 GA4”注释已纠正。
 - `REQUIREMENTS_MATURITY_COMMERCE.md` 与 `RFQ_SPEC.md` 明确标为历史需求/规格基线，避免将旧 preview 文字当成当前生产事实。
 - 旧 release/ADR/验收文档保留作历史证据；没有把历史状态删除或重写为当前状态。旧计划中“重复 Request Indexing、批量开放 gated PDP、伪造商业字段、立刻启用支付”不再是有效工作项。
-- 本轮根据当前 B2B 模式关闭 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)：后续重点转为品牌域名、账号身份、买家体验研究和范围选择，不把 To C 库存或未确认商业字段倒灌到英文 RFQ 站；同时继续遵守同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
+- 本轮根据当前 B2B 模式关闭 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)，并完成 2.5.0 初始 buyer-experience slice：后续重点转为英文 B2B 运营观察、买家反馈和逐页内容选择，不把 To C 库存或未确认商业字段倒灌到英文 RFQ 站；同时继续遵守同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
 
 ## 待办分类
 
