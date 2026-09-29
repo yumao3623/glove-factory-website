@@ -6,7 +6,7 @@
 
 - 2.3.0 的 28 个正式 URL、15 个 curated PDP、21 个 gated PDP 边界保持不变。
 - consented GA4、UTM 首触/末触 attribution 和事件 ready gate 已在生产可用；独立 Measurement ID 为 `G-PP1JPPV9FD`。
-- 本轮完成全量状态审计：将实际已上线能力纠正为 2.4.0 候选发布，并收敛版本、状态、路线图、变更记录和历史规格的漂移。
+- 上一轮完成全量状态审计：将实际已上线能力纠正为 2.4.0，并收敛版本、状态、路线图、变更记录和历史规格的漂移。
 - RFQ、后台、账户、目录、报价和支付适配器的真实范围已重新核对；支付仍冻结。
 - 本轮依据生产 28 URL SEO audit、未授权 admin 401、69/69 测试和 build/lint/product validation 结果，补充产品与获客 readiness gate；修正 Next 路由类型未生成时 `typecheck` 的可复现维护失败。
 - 本轮进一步完成隔离 RFQ 链路 smoke：验证 201 保存、202 通知待处理、非法来源 403 和通知失败状态标记；前台补充 202 的明确提示。生产未执行真实询盘或邮件发送。

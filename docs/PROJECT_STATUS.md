@@ -7,7 +7,7 @@
 - **Production：2.5.0（本轮已发布）**。2.3.0 的 indexable B2B surface 与 2.4.0 的 consented GA4/UTM attribution 继续保留；本轮新增首页采购入口/三步 sourcing path 与产品 hub `ItemList` 搜索结构，已通过生产探针与 SEO audit。
 - **Development：无正在开发的新正式版本**。2.5.0 初始 buyer-experience slice 已发布；后续 2.5 扩展按真实搜索/询盘反馈和业务输入触发，不把域名、邮箱、WhatsApp 或 Payment 设为统一 gate。
 - **Current work：2.5.0 发布后的英文 B2B 运营观察与范围输入整理**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
-- `package.json` 与 lock 根包版本应为 `2.4.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
+- `package.json` 与 lock 根包版本应为 `2.5.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
 ## 代码、部署与数据基线
