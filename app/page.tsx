@@ -21,6 +21,7 @@ export default function HomePage() {
     <main id="main-content" tabIndex={-1} className="overflow-hidden bg-[#f8f6f2]">
       <RefinedHero />
       <EditorialFamilyDiscovery />
+      <SourcingPath />
       <MaterialMoment />
       <FactoryBridge />
       <CustomBridge />
@@ -32,11 +33,11 @@ export default function HomePage() {
 function RefinedHero() {
   return (
     <section className="relative isolate overflow-hidden bg-[#e7e9e8] text-[#111416]">
-      <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.84fr_1.16fr]">
-        <div className="order-2 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:min-h-[39rem] lg:px-12 lg:py-14">
+      <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.98fr_1.02fr]">
+        <div className="order-2 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:min-h-[36rem] lg:px-12 lg:py-14">
           <div>
             <p className="section-label text-[#274c68]"><LocalizedText k="home.eyebrow" /></p>
-            <h1 className="mt-8 max-w-[10ch] font-serif text-[clamp(3.4rem,6vw,6.6rem)] leading-[0.88] tracking-[-0.045em] text-balance">
+            <h1 className="mt-8 max-w-[18ch] font-serif text-[clamp(3.2rem,5.3vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-balance">
               <LocalizedText k="home.title" />
             </h1>
             <p className="mt-8 max-w-md text-[1.05rem] leading-7 text-[#3e464b]">
@@ -47,10 +48,10 @@ function RefinedHero() {
             <Button asChild size="lg" className="min-h-12 rounded-none bg-[#111416] px-6 text-white hover:bg-[#274c68]">
               <a href="#families"><LocalizedText k="home.explore" /> <ArrowRightIcon data-icon="inline-end" /></a>
             </Button>
-            <span className="max-w-[14rem] text-xs leading-5 text-[#5c676d]"><LocalizedText k="home.exploreNote" /></span>
+            <a href="#rfq" className="inline-flex min-h-11 items-center text-sm font-medium text-[#111416] underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0d2b3f]"><LocalizedText k="common.startEnquiry" /></a>
           </div>
         </div>
-        <div className="relative order-1 min-h-[22rem] lg:order-2 lg:min-h-[39rem]">
+        <div className="relative order-1 min-h-[22rem] lg:order-2 lg:min-h-[36rem]">
           <EditorialImage
             priority
             src={generatedEditorialMedia.hero.src}
@@ -69,13 +70,39 @@ function RefinedHero() {
   );
 }
 
+function SourcingPath() {
+  const steps = [
+    { number: "01", title: "home.sourcingStep1", copy: "home.sourcingStep1Copy" },
+    { number: "02", title: "home.sourcingStep2", copy: "home.sourcingStep2Copy" },
+    { number: "03", title: "home.sourcingStep3", copy: "home.sourcingStep3Copy" },
+  ] as const;
+  return (
+    <section aria-labelledby="sourcing-path-title" className="border-b border-[#c9ced0] bg-[#f7f5f1]">
+      <div className="mx-auto max-w-[1380px] px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-[.78fr_1.22fr] lg:items-end">
+          <h2 id="sourcing-path-title" className="max-w-[12ch] font-serif text-4xl leading-[.98] tracking-[-.03em] sm:text-5xl"><LocalizedText k="home.sourcingTitle" /></h2>
+          <p className="max-w-xl text-sm leading-7 text-stone-700"><LocalizedText k="home.sourcingCopy" /></p>
+        </div>
+        <ol className="mt-12 grid gap-0 border-y border-stone-300 md:grid-cols-3">
+          {steps.map((step, index) => (
+            <li key={step.number} className={`flex min-h-48 flex-col py-6 md:px-7 ${index > 0 ? "border-t border-stone-300 md:border-l md:border-t-0" : ""}`}>
+              <span className="font-mono text-xs tracking-[.16em] text-stone-500">{step.number}</span>
+              <h3 className="mt-8 font-serif text-2xl leading-tight text-[#0d2b3f]"><LocalizedText k={step.title} /></h3>
+              <p className="mt-3 max-w-xs text-sm leading-6 text-stone-700"><LocalizedText k={step.copy} /></p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 function MaterialMoment() {
   return (
     <section className="relative isolate overflow-hidden border-y border-[#c9ced0] bg-[#f4f5f4]">
       <div className="relative mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[0.68fr_1.32fr] lg:items-center lg:px-10 lg:py-20">
         <div className="max-w-md">
-          <p className="section-label text-[#274c68]"><LocalizedText k="home.materials" /></p>
-          <h2 className="mt-4 font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.materialTitle" /></h2>
+          <h2 className="font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.materialTitle" /></h2>
           <p className="mt-6 leading-7 text-[#4c5559]">
             <LocalizedText k="home.materialCopy" />
           </p>
@@ -120,15 +147,14 @@ function FactoryBridge() {
       />
       <div className="relative mx-auto flex max-w-[1380px] flex-col justify-between gap-8 px-5 py-14 sm:px-8 md:min-h-[28rem] md:flex-row md:items-end lg:px-10 lg:py-20">
         <div>
-          <p className="section-label text-[#a8c2d3]"><LocalizedText k="home.factoryEyebrow" /></p>
-          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.factoryTitle" /></h2>
+          <h2 className="max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.factoryTitle" /></h2>
         </div>
         <div className="max-w-sm md:pb-1">
           <p className="leading-7 text-[#d2dde4]">
             <LocalizedText k="home.factoryCopy" />
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-4">
-            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]"><a href="#rfq"><LocalizedText k="home.factoryCta" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
+            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1c2b35]"><a href="#rfq"><LocalizedText k="common.startEnquiry" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
             <Link href="/factory/" className="inline-flex min-h-11 items-center underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"><LocalizedText k="home.factoryLink" /></Link>
           </div>
         </div>
@@ -149,13 +175,12 @@ function CustomBridge() {
       />
       <div className="relative mx-auto grid max-w-[1380px] gap-8 px-5 py-16 sm:px-8 lg:min-h-[34rem] lg:grid-cols-[1fr_0.82fr] lg:items-center lg:px-10 lg:py-20">
         <div>
-          <p className="section-label text-[#c6d8e1]"><LocalizedText k="home.customEyebrow" /></p>
-          <h2 className="mt-4 max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.customTitle" /></h2>
+          <h2 className="max-w-[11ch] font-serif text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"><LocalizedText k="home.customTitle" /></h2>
           <p className="mt-5 max-w-md leading-7 text-[#e0e8ec]">
             <LocalizedText k="home.customCopy" />
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]"><a href="#rfq"><LocalizedText k="home.customCta" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
+            <Button asChild variant="outline" size="lg" className="min-h-11 rounded-none border-white/70 bg-transparent px-5 text-white hover:bg-white hover:text-[#1f2d35]"><a href="#rfq"><LocalizedText k="common.startEnquiry" /> <ArrowRightIcon data-icon="inline-end" /></a></Button>
             <Link href="/custom-manufacturing/" className="inline-flex min-h-11 items-center underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"><LocalizedText k="home.customLink" /></Link>
           </div>
         </div>
@@ -171,7 +196,6 @@ function RfqBand() {
     <section id="rfq" className="bg-black text-white">
       <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-10 lg:py-24">
         <div>
-          <p className="section-label text-stone-400"><LocalizedText k="home.enquiry" /></p>
           <h2 className="mt-3 max-w-md font-serif text-4xl leading-[0.98] sm:text-5xl"><LocalizedText k="home.enquiryTitle" /></h2>
           <p className="mt-5 max-w-sm leading-7 text-stone-300">
             <LocalizedText k="home.enquiryCopy" />

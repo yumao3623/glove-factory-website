@@ -9,7 +9,7 @@
 
 2.4.0 readiness gate 已完成其主要作用。当前生产产品是 B2B manufacturer / supplier / RFQ catalogue，不是要求逐 SKU 实时库存的 To C 零售系统。技术验收、公开英文 B2B 路径、RFQ 状态层、admin 边界和数据安全均已有证据；剩余事项是按功能范围管理的业务输入，不再作为整个 2.4.0 的统一阻塞。
 
-2.4.0 gate 关闭后，2.5.0 仍未启动。下一 minor 不预设为多语言；最合理的候选是围绕已确认长期品牌和一个明确买家市场完成 B2B buyer experience / UI-SEO / domain foundation，只有在目标语言事实齐备时才纳入一个 SSR locale slice。
+2.4.0 gate 关闭后，2.5.0 仍未启动。当前不需要购买新域名即可在 `jsmeilai.com` 上继续完成 B2B buyer experience、UI/SEO 和内容改进；下一 minor 不预设为多语言，只有在目标语言事实齐备时才纳入一个 SSR locale slice。未来 `meilaigloves.com` 仍是未购买的候选，只在取得 ownership/DNS 后另行评估迁移。
 
 ## 本轮自动验证结果
 
@@ -64,12 +64,12 @@
 本 gate 现已关闭：B2B RFQ 网站不需要实时 SKU 库存、完整零售商业字段、企业邮箱、正式 WhatsApp 责任、目标市场 locale 或 Payment 才能运营。
 
 后续范围条件：
-- `meilaigloves.com` 购买并取得 DNS 控制权后，才进入域名迁移；迁移完成前继续使用 `jsmeilai.com`。
-- 企业邮箱在长期域名确定后、正式 B2B/社交/支付账号注册和扩大获客前配置。
-- WhatsApp 在公开渠道实验前确认号码、接收人和 SLA。
+- `meilaigloves.com` 暂不购买；只有取得 ownership/DNS 后才进入独立迁移评估，当前继续使用 `jsmeilai.com`，不改变 canonical 或配置未来跳转。
+- 企业邮箱在需要真实发件身份、正式 B2B/社交账号注册或扩大获客前配置；它不阻塞当前 UI/SEO、产品资料或英文 RFQ。
+- WhatsApp 在公开渠道实验前确认号码、接收人和 SLA；它不阻塞当前网站建设。
 - 多语言在目标市场、翻译、法律和产品事实负责人确定后再做 SSR slice。
 - Payment、库存扣减、订单履约和 To C checkout 等留到真实在线交易需求出现时。
-- Cornelia James 与 `ai-website-cloner-template` 继续作为研究参考；正式 UI/SEO 实现应在品牌域名确认后进入新的 minor。
+- Cornelia James 与 `ai-website-cloner-template` 继续作为研究参考；UI/SEO 实现可以在当前 `jsmeilai.com` 上按小范围、可验证的 minor/patch 交付，不复制代码、文案、图片或商标。
 
 ## 当前可继续与当前应等待
 

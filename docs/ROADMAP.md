@@ -8,13 +8,13 @@
 
 **DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于本版本统一 gate。2.4.0 readiness 已关闭。
 
-## 候选 2.5.0：B2B 品牌基础与买家体验优化（尚未启动）
+## 2.5.0：B2B 买家体验与搜索结构（本轮已启动）
 
-**进入条件**：确认长期品牌域名 ownership/DNS，明确一个优先买家市场或证明当前英文 B2B 路径已足够，具备企业邮箱/WhatsApp 运营决策；不要求全量产品一次补齐零售字段。
+**进入条件**：当前无需购买新域名即可启动。先明确一个优先买家市场或证明当前英文 B2B 路径已足够；企业邮箱和 WhatsApp 运营决策按实际接入范围确认，不作为 UI/SEO、产品发现或内容工作的总前置条件。不要求全量产品一次补齐零售字段。
 
-**范围**：在确认域名后完成一次性品牌/canonical/redirect/GA4-UTM/账号基础设施规划，并结合 B2B 信息架构、产品发现、PDP/RFQ 转化和 SEO 内容结构做一轮可验收优化；若目标市场已确定，再纳入一个 SSR locale slice、localized metadata、hreflang 和语言 sitemap。
+**范围**：本轮先在 `https://www.jsmeilai.com/` 上交付首屏采购入口、三步 sourcing path、产品发现和产品 hub `ItemList` 搜索结构；继续按页审核 21 个 gated PDP 是否具备独立搜索价值；若目标市场已确定，再纳入一个 SSR locale slice、localized metadata、hreflang 和语言 sitemap。未来若购买 `meilaigloves.com`，再单独规划一次性品牌/canonical/redirect/GA4-UTM/账号迁移，不提前为它设计或改动现站。
 
-**完成条件**：品牌域名和账号迁移无 attribution/SEO 回归；B2B buyer journey、PDP/RFQ、UTM/GA4 和英文 28 URL 边界通过生产验收；若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。
+**完成条件**：首屏 CTA 在桌面/移动可见且可达 RFQ；采购路径、六系列发现、PDP/RFQ 内链与 `ItemList` 结构化数据通过本地和生产验证；UTM/GA4 与英文 28 URL 边界不回归；可独立交付的 UI/SEO 内容改进不等待未来域名、邮箱、WhatsApp 或支付。若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。未来域名迁移另设范围，不与本轮网站建设混合。
 
 ## 候选 2.6.0：买家运营与支付（条件式）
 
@@ -27,9 +27,9 @@ LinkedIn、Alibaba、Made-in-China、Global Sources、YouTube、Pinterest/Instag
 ## 后续阶段依赖顺序
 
 - B2B 站点和 RFQ 先按当前英文能力运行；产品事实、询盘跟进责任和目标市场负责人按需要补齐，不再作为 2.4.0 总 gate。
-- `meilaigloves.com` 只有在购买并取得 DNS 控制权后才进入迁移；迁移应早于大量获客、企业邮箱、正式社交/B2B 账号和最终 UI/SEO 定稿。
-- 企业邮箱和正式 WhatsApp 在域名/公开身份确定后、渠道账号和扩大获客前接入；当前 CTA 和旧域名继续可用。
-- Cornelia James 与 `ai-website-cloner-template` 先作为研究参考；正式视觉/SEO 实现放到品牌基础设施稳定后的 2.5.0，不复制代码、文案、图片或商标。
+- `meilaigloves.com` 只保留为未来候选；只有购买并取得 DNS 控制权后才进入独立迁移评估。当前不购买、不迁移、不改 canonical、不配置跳转，也不把未来域名邮箱写进公开页面。
+- 企业邮箱在需要真实发件身份、正式 B2B/社交账号或扩大获客前接入；WhatsApp 在公开渠道实验前确认号码、接收人和 SLA。二者按功能范围接入，不能阻塞当前 UI/SEO、产品资料或英文 RFQ 站。
+- Cornelia James 与 `ai-website-cloner-template` 继续作为研究参考；正式视觉/SEO 实现可在现有 `jsmeilai.com` 上按小范围交付，不复制代码、文案、图片或商标。
 - 多语言不预设为下一 minor；它只有在目标市场和责任人确定后才进入 2.5.0 的可选 slice。
 
 ## 明确不做

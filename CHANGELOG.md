@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+- 2026-09-29：启动 2.5.0 B2B buyer-experience slice：修正首页桌面首屏标题/CTA，新增三步采购路径并补齐五语言 UI 文案；产品 hub 为当前索引边界生成 `ItemList` 结构化数据。已完成本地浏览器回归、SEO preview audit、lint、typecheck、69/69 tests 和 production build；尚待生产部署与探针。
+- 2026-09-29：根据预算决定，继续使用 `jsmeilai.com` 开展 UI、SEO、内容和获客；`meilaigloves.com` 暂不购买，仅保留为未来候选。已修正当前路线图、状态、交接和 readiness 文档，不改变 canonical、跳转、公开邮箱或生产账号。
 - 2026-09-28：根据当前 B2B manufacturer / supplier / RFQ 模式关闭 2.4.0 readiness gate。确认逐 SKU 实时库存、完整 MOQ/交期/材质、企业邮箱、WhatsApp、域名、locale 和 Payment 分别属于可选补充或后续功能范围，不再作为整个英文 RFQ 网站的统一 blocker；21 个 gated PDP 的原因收敛为逐页 SEO 文案和索引优先级审核。
 - 2026-09-28：在显式 opt-in 且确认夹具隔离/清理安全后，完成 Supabase commerce live fixture 11/11 以及 RFQ/报价状态夹具 3/3；所有测试记录已清理，不发送真实邮件、不创建真实报价或业务记录。readiness gate 的技术子门槛已通过，业务资料、运营责任、目标市场和真实通知投递仍待确认。
 - 2026-09-28：完成隔离 RFQ readiness smoke（成功保存、通知待处理、非法来源拒绝和状态标记），并修复前台在 `STORED_EMAIL_PENDING` 时的提示，明确告知询价已保存但通知尚待处理；未执行真实询盘、邮件或管理员写入。

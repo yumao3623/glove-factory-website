@@ -5,8 +5,8 @@
 ## 版本与阶段
 
 - **Production：2.4.0（本轮发布）**。2.3.0 完成 indexable B2B surface；其后已上线并验收的 consented GA4、UTM 首触/末触 attribution 和事件就绪门控构成完整的新能力，按仓库 MINOR 规则纠正为 2.4.0。
-- **Development：无正在开发的新正式版本**。2.4.0 readiness gate 已关闭；2.5.0 尚未启动，等待明确的品牌/市场输入和正式范围。
-- **Current work：2.4.0 关闭后的运营观察与范围输入整理**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
+- **Development：2.5.0 buyer-experience slice（本轮已启动，尚未形成新的生产版本证据）**。范围是当前 `jsmeilai.com` 上的首屏采购入口、采购路径和产品 hub 搜索结构；不包含域名迁移、完整多语言 SEO、支付或真实账号接入。
+- **Current work：在 `jsmeilai.com` 上继续做 B2B buyer experience、内容和 SEO 的小范围交付，并同步整理范围输入**。当前定位是 B2B manufacturer / supplier / RFQ；产品资料、WhatsApp、域名、邮箱和渠道账号按功能范围推进，不再把它们合并成一个无限期 gate。
 - `package.json` 与 lock 根包版本应为 `2.4.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
@@ -79,12 +79,12 @@
 
 - 观察 GA4/Bing/Google 和真实 RFQ 反馈；选择一个经过事实审核、带 UTM 的小范围渠道实验。
 - 继续补充产品资料；按产品/项目逐项确认 material、尺寸、MOQ、sample、lead time、packaging 和 certification，不等待全量一次齐备。
-- 在 `meilaigloves.com` 完成购买并取得 DNS 控制权后，准备一次性域名迁移；域名未确认前不迁移。
+- 继续在 `jsmeilai.com` 上补充页面、产品资料、SEO 内链和小范围获客准备；`meilaigloves.com` 只保留为未来候选，不购买、不迁移、不改变当前 canonical。
 - 研究 B2B UI/UX/SEO 模式，准备下一正式 minor 的范围，不复制第三方品牌或资产。
 
 ### 外部等待
 
-- `meilaigloves.com` ownership / DNS confirmation。
+- `meilaigloves.com` ownership / DNS confirmation（只影响未来迁移评估，不影响当前网站建设）。
 - 企业邮箱域名、发件人和账号资料。
 - WhatsApp 当前号码接收人、运营负责人、工作时间和 SLA。
 - 一个目标市场及其翻译/法律负责人。
@@ -92,7 +92,7 @@
 
 ### 真正阻塞（只阻塞对应工作）
 
-- 域名 ownership 只阻塞迁移、最终品牌 canonical、企业邮箱和依赖域名的正式账号；不阻塞当前网站运营。
+- 未来域名 ownership 只阻塞迁移、未来 canonical/redirect、依赖该域名的企业邮箱和正式账号；不阻塞 `jsmeilai.com` 上的 UI、SEO、内容、询盘和当前运营。
 - WhatsApp 责任只阻塞公开 WhatsApp 运营承诺和渠道发布；不阻塞 RFQ 表单。
 - 目标市场/翻译/法律负责人只阻塞 localized SSR、hreflang 和多语言 RFQ；不阻塞英文 B2B 站。
 - 支付资料只阻塞 To C checkout、收款和履约。
@@ -103,7 +103,7 @@
 - 不重复已经完成的 admin/RLS/RFQ fixture 验收。
 - 不为 B2B 网站制造逐 SKU 库存，不把所有产品设为 500 件。
 - 不因 material、MOQ、lead time 等未知就关闭整个产品目录；未知值继续按 on-request/项目确认表达。
-- 不在品牌域名未确定前做最终 UI/SEO 全站重构。
+- 不把未来域名迁移与当前 UI/SEO 混成全站重构；在 `jsmeilai.com` 上继续做有范围、可验证的买家体验和搜索改进。
 - 不启动 Payment、完整 To C 电商或大规模多语言薄页。
 
 ## 证据入口

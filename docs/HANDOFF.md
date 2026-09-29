@@ -16,12 +16,13 @@
 
 ## 当前等待
 
-- 本轮 2.4.0 版本纠偏已经通过测试、main、Vercel Ready 和生产探针；`c75701a`/`0faa9bc` 的治理提交、`cfeec58` 的 RFQ 状态提示维护提交及 `1a84b5c` 的已认证 admin 验收记录均已推送并通过 Vercel，生产 smoke 保持 28 URL/核心页面 200/admin 401，不代表 2.5.0 已启动或已发布。
+- 2.4.0 版本纠偏已有生产证据；本轮 2.5.0 buyer-experience slice 尚在本地验证，待部署后补充生产 smoke，不能把本地通过写成已上线。
 - Google 的索引/曝光和 Bing 的后续数据继续观察，不重复提交未变化 URL。
-- 等 `meilaigloves.com` ownership/DNS、企业邮箱、WhatsApp 负责人/SLA、目标市场与翻译/法律负责人；这些分别阻塞迁移、正式账号、渠道运营或 locale，不阻塞当前英文 B2B RFQ 站。
+- `jsmeilai.com` 继续作为正式网站域名；`meilaigloves.com` 暂不购买，仅保留未来候选。未来 ownership/DNS 只阻塞迁移评估，不阻塞当前英文 B2B RFQ 站、UI、SEO、内容或获客准备。
+- 企业邮箱、WhatsApp 负责人/SLA、目标市场与翻译/法律负责人仍待确认；这些分别只阻塞真实发件身份、公开 WhatsApp 运营、渠道责任或 localized SSR，不阻塞当前网站改进。
 - 历史 Human Review 曾确认 `+60 1114166916` 为公开号码；当前负责人/SLA 仍未确认，只阻塞 WhatsApp 运营承诺。
 - live commerce 技术夹具已完成并清理；真实 Resend 投递仍未验证，但属于通知运营证据，不再阻塞 2.4.0 B2B readiness。
 
 ## 唯一下一任务
 
-2.4.0 readiness gate 已关闭。下一任务是等待 `meilaigloves.com` ownership/DNS 或用户提供品牌、邮箱、WhatsApp、目标市场事实，再定义 2.5.0；在此之前继续英文 B2B 运营观察和小范围事实审核渠道实验，不重复基础技术验收。
+2.5.0 buyer-experience slice 已在本轮启动，下一任务是完成其生产部署/探针并把首屏采购入口、三步 sourcing path 和产品 hub `ItemList` 证据写入发布记录；不把未来域名、邮箱、WhatsApp 或 Payment 设为这些工作的总前置条件。待目标市场/运营责任事实齐备后，再决定是否追加 2.5.0 的 locale 或账号工作。
