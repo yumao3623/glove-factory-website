@@ -1,3 +1,4 @@
+import { experienceTranslation } from "./experience-i18n";
 export const localeList = ["en", "zh-CN", "de-DE", "fr-FR", "it-IT"] as const;
 export type Locale = (typeof localeList)[number];
 
@@ -818,5 +819,5 @@ export function isLocale(value: string | null | undefined): value is Locale {
 }
 
 export function translate(locale: Locale, key: string, fallback?: string): string {
-  return translations[locale][key] ?? translations.en[key] ?? fallback ?? key;
+  return experienceTranslation(locale, key) ?? translations[locale][key] ?? translations.en[key] ?? fallback ?? key;
 }

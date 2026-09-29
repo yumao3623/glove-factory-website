@@ -34,14 +34,16 @@ export async function POST(request: Request) {
   if (stored.error) {
     if (data.idempotencyKey && stored.error.includes("23505")) {
       const previous = await supabaseRest<Array<{ email: string; notification_status: string }>>(`rfq_requests?select=email,notification_status&idempotency_key=eq.${encodeURIComponent(String(data.idempotencyKey))}`, {}, true);
-      if (previous.data?.[0]?.email === data.email) return NextResponse.json({ status: "RECEIVED", message: "Your enquiry was already received. No duplicate was created." }, { status: 200 });
+      const previousRequest = previous.data?.[0];
+      const notificationStatus = previousRequest?.notification_status;
+      if (previousRequest?.email === data.email) return NextResponse.json({ status: notificationStatus === "failed" || notificationStatus === "pending" ? "STORED_EMAIL_PENDING" : "RECEIVED", message: "Your enquiry was already saved. No duplicate was created." }, { status: 200 });
     }
     return NextResponse.json({ status: "STORAGE_FAILED", message: "Your enquiry could not be saved. Please try again." }, { status: 502 });
   }
   const storedId = Array.isArray(stored.data) ? (stored.data[0] as { id?: string } | undefined)?.id : undefined;
   const config = getCommerceConfig();
   let email;
-  try { email = await sendCommerceEmail({ to: config.rfqRecipient, subject: `New RFQ from ${String(data.company ?? "buyer")}`, replyTo: String(data.email), idempotencyKey: `rfq-${storedId}`, html: `<p>New RFQ received.</p><p>Contact: ${htmlEscape(data.name)}</p><p>Company: ${htmlEscape(data.company)}</p><p>Country: ${htmlEscape(data.country)}</p><p>Product family: ${htmlEscape(data.productFamily)}</p><p>Quantity: ${htmlEscape(data.quantityDescription)}</p><p>${htmlEscape(data.message)}</p><p>Selected products: ${htmlEscape(JSON.stringify(data.productContext))}</p><p>Review this request in your JS Meilai admin workspace.</p>` }); }
+  try { email = await sendCommerceEmail({ to: config.rfqRecipient, subject: `New RFQ from ${String(data.company || data.name || "buyer")}`, replyTo: String(data.email), idempotencyKey: `rfq-${storedId}`, html: `<p>New RFQ received.</p><p>Contact: ${htmlEscape(data.name)}</p><p>Company: ${htmlEscape(data.company)}</p><p>Country: ${htmlEscape(data.country)}</p><p>Product family: ${htmlEscape(data.productFamily)}</p><p>Quantity: ${htmlEscape(data.quantityDescription)}</p><p>${htmlEscape(data.message)}</p><p>Selected products: ${htmlEscape(JSON.stringify(data.productContext))}</p><p>Review this request in your JS Meilai admin workspace.</p>` }); }
   catch { email = { configured: true as const, error: "Provider request failed" }; }
   if (!email.configured || email.error) {
     if (storedId) await supabaseRest(`rfq_requests?id=eq.${encodeURIComponent(storedId)}`, { method: "PATCH", body: JSON.stringify({ notification_status: "failed", notification_error: email.error ?? "not configured" }) }, true);

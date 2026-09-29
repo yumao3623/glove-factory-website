@@ -12,10 +12,11 @@ export async function sendAuthEmail(type: EmailAction, email: string, password?:
     headers: { apikey: c.supabaseServiceRoleKey, Authorization: `Bearer ${c.supabaseServiceRoleKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ type, email: email.trim().toLowerCase(), ...(password ? { password } : {}) }),
   });
-  const data = await response.json().catch(() => ({})) as { hashed_token?: string; verification_type?: string; code?: string };
+  const data = await response.json().catch(() => ({})) as { hashed_token?: string; verification_type?: string; code?: string | number; error_code?: string; msg?: string };
   // Do not reveal whether an email exists. A recovery request for an unknown address is a no-op.
   if (!response.ok) {
-    if (["user_not_found", "email_exists"].includes(data.code ?? "")) return { configured: true, accepted: true };
+    const duplicateOrUnknown = [data.code, data.error_code].some((code) => ["user_not_found", "email_exists"].includes(String(code ?? ""))) || /already been registered/i.test(data.msg ?? "");
+    if (duplicateOrUnknown) return { configured: true, accepted: true };
     return { configured: true, error: "We could not send an account email. Please try again later." };
   }
   if (!data.hashed_token) return { configured: true, error: "The account link could not be created." };

@@ -34,7 +34,7 @@
 ## 后台、账户与运营能力
 
 - 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；生产未认证 admin 路径逐项得到 401，同源写入和 Supabase RLS 生效。已确认的管理员会话完成 `/admin/` 只读验收：36 个 active products、4 张私有媒体和 Supabase signed preview 正常；RFQ、订单/报价及变体/库存当前均为 0 条。显式 opt-in 的隔离 Supabase 夹具完成真实 Auth、产品、媒体、变体、库存、发布、订单 RLS 和清理验证 11/11；另用唯一 marker 的 RFQ/报价夹具验证 reviewing → quoted、报价取消和状态事件 3/3，均已清理，未改变真实业务记录。该证据关闭了核心数据/RLS/状态 RPC 的技术风险，但不替代浏览器写路径与真实通知投递验收。
-- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；隔离 smoke 验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。唯一 marker 的 live Supabase 夹具进一步验证 RFQ 状态事件、管理员报价创建、quoted → cancelled 以及清理完成（3/3）。管理员会话下后台 RFQ 列表正常显示空状态，前台已修复 202 场景提示。生产开关为 true，但未提交真实 RFQ，故没有新的 lead、真实邮件投递或真实报价证据；Resend 生产投递和浏览器端管理员写路径仍需单独授权/验收。
+- RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；隔离 smoke 验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。2026-09-29 使用唯一授权收件地址 `yumao3623@gmail.com` 完成真实 RFQ：公司留空仍返回 201，通知状态为 accepted，收件箱已收到 `New RFQ from Codex QA`；测试行已在投递核对后删除。管理员会话下后台 RFQ 列表正常显示空状态，前台已修复 202 场景提示。
 - 账户支持邮箱会话、确认、重置和订单历史；Google OAuth 代码存在但生产未开启。购物车是本地询价清单，checkout 是报价/支付边界页面，不是已启用的消费者结账。
 - 当前缺少完整 CMS、内容页编辑器、多角色/审计 UI、CRM/SLA 报表、履约工作流、客户地址/数据库购物车和管理员运营看板。对当前轻量 B2B RFQ 定位，这些是部分能力或后续选择，不应冒充已完成。
 
@@ -57,7 +57,7 @@
 
 - contact、RFQ 和 WhatsApp CTA 存在；历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前接收人、回复负责人和 SLA 未重新确认。这只阻塞 WhatsApp 运营承诺和渠道发布，不阻塞 B2B RFQ 网站。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint 和 production build 均通过；本轮新增浏览器实查覆盖搜索、无结果、六大分类页、PDP、联系、账户、管理员未登录门、桌面和移动端导航/筛选。隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint 和 production build 均通过；本轮新增浏览器实查覆盖搜索、无结果（含 hydration/runtime error 核查）、六大分类页、PDP、联系、账户、管理员未登录门、桌面和移动端导航/筛选，以及收藏找回、询盘选项编辑/删除。隔离 RFQ smoke 覆盖 201/202/403 结果，生产 admin 路径矩阵保持 401；真实 RFQ 投递证据和测试行清理见 [2.6 UX evidence](evidence/2026-09-29-2.6-ux.json)。账户测试地址已有已确认账户，注册接口已修复“邮箱已注册”误报并返回通用确认提示。`scripts/verify-commerce-live.mjs` 使用 `integration-${randomUUID()}` marker、独立测试账号和 storage 路径，异常时打印清理告警，finally 删除订单/产品/媒体/测试账号，不调用邮件、报价或 RFQ；正确 `.env.local` 下本轮实际通过 11/11 且 `cleanupComplete=true`。RFQ/报价状态另有唯一 marker 的 Supabase 夹具 3/3 且清理完成；这些是受控技术验收，不是生产业务动作。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 
@@ -72,7 +72,7 @@
 - `REQUIREMENTS_MATURITY_COMMERCE.md` 与 `RFQ_SPEC.md` 明确标为历史需求/规格基线，避免将旧 preview 文字当成当前生产事实。
 - 旧 release/ADR/验收文档保留作历史证据；没有把历史状态删除或重写为当前状态。旧计划中“重复 Request Indexing、批量开放 gated PDP、伪造商业字段、立刻启用支付”不再是有效工作项。
 - 本轮根据当前 B2B 模式关闭 [产品与获客 readiness gate](PRODUCT_READINESS_GATE.md)，并完成 2.5.0 初始 buyer-experience slice：后续重点转为英文 B2B 运营观察、买家反馈和逐页内容选择，不把 To C 库存或未确认商业字段倒灌到英文 RFQ 站；同时继续遵守同阶段续接对话、正式 minor/major 阶段新建对话的长期规则。
-- 本轮 2.6.0 体验整改保留 2.5.0 生产发布历史，未迁移域名、未启用支付、未写入真实客户/询盘数据。搜索弹层提交、目录无结果恢复、真实筛选计数、移动菜单、账户资料 API、联系页直接联系方式和管理员中文可见文案已在本地浏览器验证；具体截图与路径见 [2.6.0 UX evidence](evidence/2026-09-29-2.6-ux.json)。
+- 本轮 2.6.0 体验整改保留 2.5.0 生产发布历史，未迁移域名、未启用支付；真实 RFQ 测试行已清理，未保留客户业务数据。搜索弹层提交、目录无结果恢复、真实筛选计数、移动菜单、账户资料 API、联系页直接联系方式、管理员中文可见文案、可管理收藏和询盘选项编辑已在本地浏览器验证；公司字段已改为普通询盘可选。具体截图、收件箱证据与路径见 [2.6.0 UX evidence](evidence/2026-09-29-2.6-ux.json)。
 
 ## 待办分类
 
@@ -97,7 +97,7 @@
 - WhatsApp 责任只阻塞公开 WhatsApp 运营承诺和渠道发布；不阻塞 RFQ 表单。
 - 目标市场/翻译/法律负责人只阻塞 localized SSR、hreflang 和多语言 RFQ；不阻塞英文 B2B 站。
 - 支付资料只阻塞 To C checkout、收款和履约。
-- 真实测试邮箱只阻塞真实 Resend 投递证据；不阻塞已完成的代码和受控状态验证。
+- 真实测试邮箱的本轮 RFQ 投递证据已完成；后续只需在扩大通知测试范围时另行取得收件人授权。
 
 ### 暂时不值得做
 

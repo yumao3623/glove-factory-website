@@ -12,7 +12,8 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const base = pageMetadata(catalogueTitle, catalogueDescription, "/products/");
   return hasFacet ? { ...base, robots: facetRobots } : base;
 }
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const params = await searchParams;
   const products = await getCommerceCatalogue();
   const listedProducts = isIndexableProduction ? products.filter((product) => isIndexableProductSlug(product.slug)) : products;
   const itemList = {
@@ -28,5 +29,6 @@ export default async function Page() {
       url: canonicalUrl(`/products/${product.slug}/`).toString(),
     })),
   };
-  return <main id="main-content" tabIndex={-1}><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} /><CatalogBrowser products={products} /></main>;
+  const initialSelected: Record<string, string[]> = Object.fromEntries(Object.entries(params).filter(([key, value]) => key !== "search" && value !== undefined).map(([key, value]) => [key, (Array.isArray(value) ? value : [value]).filter((item): item is string => typeof item === "string")]));
+  return <main id="main-content" tabIndex={-1}><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} /><CatalogBrowser products={products} initialSearch={typeof params.search === "string" ? params.search : ""} initialSelected={initialSelected} /></main>;
 }

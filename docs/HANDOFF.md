@@ -14,7 +14,7 @@
 - 在确认夹具具备唯一 marker、隔离范围、finally 清理且不触发邮件/真实报价后，已显式 opt-in 运行 `scripts/verify-commerce-live.mjs`：真实 Auth、产品、媒体、变体、库存、发布、订单 RLS 和清理 11/11 通过；另一个唯一 marker 的 RFQ/报价夹具验证 reviewing → quoted、报价取消及状态事件 3/3，全部清理完成。没有真实 RFQ、邮件、报价或业务记录被保留。
 - 根据当前 B2B manufacturer / supplier / RFQ 模式重新分类：2.4.0 readiness gate 已关闭。逐 SKU 实时库存、完整 MOQ/交期/材质、企业邮箱、WhatsApp、域名、locale 和 Payment 不再作为整个网站的统一 blocker。
 - 本轮完成并发布 2.5.0 buyer-experience slice：首屏 H1/CTA、三步 sourcing path、五语言 UI 文案和产品 hub `ItemList` 结构化数据；提交 `1e4215f`，Vercel 部署 `14cyyy1f1t9KoEj7V5rSHJeKS5dx`，生产 SEO audit 28/28 通过。
-- 2.6.0 体验整改已在本地完成：桌面搜索弹层和真实结果/无结果恢复、目录真实筛选计数、六大分类页与 PDP 的版式、联系页直接联系方式、账户资料维护、中文管理员界面，以及移动端筛选/菜单均已实现并用浏览器实查；截图和路径证据见 [2.6 UX evidence](evidence/2026-09-29-2.6-ux.json)。
+- 2.6.0 体验整改已在本地完成：桌面搜索弹层和真实结果/无结果恢复、目录真实筛选计数、六大分类页与 PDP 的版式、联系页直接联系方式、账户资料维护、中文管理员界面、移动端筛选/菜单、可管理收藏、询盘选项编辑，以及公司字段可选均已实现并用浏览器实查；无结果页的 hydration mismatch 也已修复。授权地址 `yumao3623@gmail.com` 已收到真实 RFQ 通知，测试行随后清理；证据见 [2.6 UX evidence](evidence/2026-09-29-2.6-ux.json)。
 
 ## 当前等待
 
@@ -24,7 +24,7 @@
 - `jsmeilai.com` 继续作为正式网站域名；`meilaigloves.com` 暂不购买，仅保留未来候选。未来 ownership/DNS 只阻塞迁移评估，不阻塞当前英文 B2B RFQ 站、UI、SEO、内容或获客准备。
 - 企业邮箱、WhatsApp 负责人/SLA、目标市场与翻译/法律负责人仍待确认；这些分别只阻塞真实发件身份、公开 WhatsApp 运营、渠道责任或 localized SSR，不阻塞当前网站改进。
 - 历史 Human Review 曾确认 `+60 1114166916` 为公开号码；当前负责人/SLA 仍未确认，只阻塞 WhatsApp 运营承诺。
-- live commerce 技术夹具已完成并清理；真实 Resend 投递仍未验证，但属于通知运营证据，不再阻塞 2.4.0 B2B readiness。
+- live commerce 技术夹具已完成并清理；本轮真实 RFQ Resend 投递已由授权收件箱确认，账户测试地址已有已确认账户，注册接口对重复地址返回通用确认提示。尚未进行生产发布或真实管理员业务写入。
 
 ## 唯一下一任务
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Heart, Search, SlidersHorizontal, X } from "lucide-react";
 import { useLocale } from "@/components/i18n/locale-provider";
@@ -10,9 +10,18 @@ import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 import { displayFamily, displayMeta } from "@/lib/product-display";
 import { isIndexableProductSlug } from "@/data/seo-index";
 import { getSeoProductDescription } from "@/data/seo-editorial";
+import { LocalizedText } from "@/components/i18n/localized-text";
 
-type Props = { products: readonly ApprovedCatalogueProduct[] };
+type Props = { products: readonly ApprovedCatalogueProduct[]; initialSearch?: string; initialSelected?: Record<string, string[]> };
 type Facet = { key: string; label: string; values: string[] };
+type SavedProduct = { id: string; name: string; slug: string };
+const favoriteDataKey = "jsmeilai-favorites-data";
+const browserStateEvent = "jsmeilai:browser-state";
+const subscribeBrowserState = (notify: () => void) => { if (typeof window === "undefined") return () => undefined; window.addEventListener("storage", notify); window.addEventListener("jsmeilai:favorites", notify); window.addEventListener(browserStateEvent, notify); return () => { window.removeEventListener("storage", notify); window.removeEventListener("jsmeilai:favorites", notify); window.removeEventListener(browserStateEvent, notify); }; };
+const favoritesSnapshot = () => typeof window === "undefined" ? "[]" : window.localStorage.getItem("jsmeilai-favorites") ?? "[]";
+const favoriteDataSnapshot = () => typeof window === "undefined" ? "[]" : window.localStorage.getItem(favoriteDataKey) ?? "[]";
+const recentSnapshot = () => typeof window === "undefined" ? "[]" : window.localStorage.getItem("jsmeilai-recent") ?? "[]";
+const FACET_KEYS = ["family", "material", "length", "fingerStyle", "color", "occasion", "decoration", "ageGroup"];
 const COLOUR_TAXONOMY = ["black", "white", "ivory", "nude", "champagne", "red", "pink", "blue", "green", "purple", "brown", "gold", "silver", "custom"];
 const MATERIAL_TAXONOMY = ["satin", "silk", "lace", "tulle", "velvet", "cotton", "mesh"];
 const LABELS: Record<string, string> = { black: "Black", white: "White", ivory: "Ivory", nude: "Nude", champagne: "Champagne", red: "Red", pink: "Pink", blue: "Blue", green: "Green", purple: "Purple", brown: "Brown", gold: "Gold", silver: "Silver", custom: "Custom colour", satin: "Satin", silk: "Silk", lace: "Lace", tulle: "Tulle", velvet: "Velvet", cotton: "Cotton", mesh: "Mesh", "full-finger": "Full finger", fingerless: "Fingerless", "half-finger": "Half finger", adult: "Adult", kids: "Kids", mixed: "Mixed" };
@@ -51,7 +60,7 @@ function matchesFacet(available: string[], pick: string, key: string) {
   return available.some((value) => key === "color" ? normalize(value) === target || normalize(value).includes(target) : normalize(value) === target);
 }
 
-export function CatalogBrowser({ products }: Props) {
+export function CatalogBrowser({ products, initialSearch = "", initialSelected = {} }: Props) {
   const { t } = useLocale();
   const labelFor = (value: string) => t(`facet.${value.toLowerCase()}`, fallbackLabel(value));
   const facets: Facet[] = [
@@ -64,27 +73,27 @@ export function CatalogBrowser({ products }: Props) {
     { key: "decoration", label: t("catalog.decoration"), values: valuesFor(products, "decoration") },
     { key: "ageGroup", label: t("catalog.ageGroup"), values: valuesFor(products, "ageGroup") },
   ].map((facet) => ({ ...facet, values: facet.values.filter((value) => products.some((product) => matchesFacet(availableFor(product, facet.key), value, facet.key))) })).filter((facet) => facet.values.length > 0);
-  const [selected, setSelected] = useState<Record<string, string[]>>(() => {
-    if (typeof window === "undefined") return {};
-    const params = new URLSearchParams(window.location.search);
-    const restored: Record<string, string[]> = {};
-    facets.forEach((facet) => {
-      const values = params.getAll(facet.key).filter((value) => facet.values.includes(value));
-      if (values.length) restored[facet.key] = values;
-    });
-    return restored;
-  });
+  const [selected, setSelected] = useState<Record<string, string[]>>(() => Object.fromEntries(Object.entries(initialSelected).flatMap(([key, values]) => { const facet = facets.find((item) => item.key === key); const valid = facet ? values.filter((value) => facet.values.includes(value)) : []; return valid.length ? [[key, valid]] : []; })));
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sort, setSort] = useState("featured");
   const [visibleCount, setVisibleCount] = useState(16);
-  const [search, setSearch] = useState(() => typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("search") ?? "");
-  const [favorites, setFavorites] = useState<string[]>(() => typeof window === "undefined" ? [] : JSON.parse(window.localStorage.getItem("jsmeilai-favorites") ?? "[]") as string[]);
-  const [recent, setRecent] = useState<string[]>(() => typeof window === "undefined" ? [] : JSON.parse(window.localStorage.getItem("jsmeilai-recent") ?? "[]") as string[]);
-  function toggleFavorite(id: string) { const next = favorites.includes(id) ? favorites.filter((item) => item !== id) : [...favorites, id]; setFavorites(next); window.localStorage.setItem("jsmeilai-favorites", JSON.stringify(next)); }
-  function markRecent(id: string) { const next = [id, ...recent.filter((item) => item !== id)].slice(0, 6); setRecent(next); window.localStorage.setItem("jsmeilai-recent", JSON.stringify(next)); }
+  const [search, setSearch] = useState(initialSearch);
+  const favoritesRaw = useSyncExternalStore(subscribeBrowserState, favoritesSnapshot, () => "[]");
+  const favoriteDataRaw = useSyncExternalStore(subscribeBrowserState, favoriteDataSnapshot, () => "[]");
+  const recentRaw = useSyncExternalStore(subscribeBrowserState, recentSnapshot, () => "[]");
+  let favorites: string[] = [];
+  let favoriteData: SavedProduct[] = [];
+  let recent: string[] = [];
+  try { favorites = JSON.parse(favoritesRaw) as string[]; } catch { favorites = []; }
+  try { favoriteData = JSON.parse(favoriteDataRaw) as SavedProduct[]; } catch { favoriteData = []; }
+  try { recent = JSON.parse(recentRaw) as string[]; } catch { recent = []; }
+  function toggleFavorite(product: ApprovedCatalogueProduct) { const id = product.id; const next = favorites.includes(id) ? favorites.filter((item) => item !== id) : [...favorites, id]; const records = favoriteData.some((item) => item.id === id) ? favoriteData.filter((item) => item.id !== id) : [...favoriteData, { id, name: product.productName, slug: product.slug }]; window.localStorage.setItem("jsmeilai-favorites", JSON.stringify(next)); window.localStorage.setItem(favoriteDataKey, JSON.stringify(records)); window.dispatchEvent(new Event("jsmeilai:favorites")); }
+  function markRecent(id: string) { const next = [id, ...recent.filter((item) => item !== id)].slice(0, 6); window.localStorage.setItem("jsmeilai-recent", JSON.stringify(next)); window.dispatchEvent(new Event(browserStateEvent)); }
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
+    FACET_KEYS.forEach((key) => params.delete(key));
+    params.delete("search");
     Object.entries(selected).forEach(([key, values]) => values.forEach((value) => params.append(key, value)));
     if (search.trim()) params.set("search", search.trim());
     const query = params.toString();
@@ -132,9 +141,10 @@ export function CatalogBrowser({ products }: Props) {
         </aside>
         <div>
           {active.length ? <div className="mb-5 flex flex-wrap gap-2">{active.map((item) => <button key={`${item.key}-${item.value}`} type="button" onClick={() => toggle(item.key, item.value)} className="inline-flex items-center gap-2 border border-stone-400 bg-white px-3 py-2 text-xs">{labelFor(item.value)}<X size={12} /></button>)}</div> : null}
+          {favoriteData.length ? <div className="mb-5 flex flex-wrap items-center gap-3"><span className="text-sm text-stone-600">{favoriteData.length} <LocalizedText k="saved.title" fallback="Saved products" /></span><Link href="/cart/#saved-products" className="text-sm underline"><LocalizedText k="saved.title" fallback="Manage saved products" /></Link></div> : null}
           {recent.length ? <div className="mb-8 border-y border-stone-300 py-5"><p className="section-label text-stone-500">{t("catalog.recent")}</p><div className="mt-3 flex flex-wrap gap-2">{recent.map((id) => { const item = products.find((product) => product.id === id); return item ? <Link key={id} href={`/products/${item.slug}/`} className="border border-stone-300 bg-white px-3 py-2 text-xs hover:border-[#0d2b3f]">{item.productName}</Link> : null; })}</div></div> : null}
           {filtered.length ? <>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 lg:grid-cols-4">{filtered.slice(0, visibleCount).map((product, index) => { const imageSrc = approvedProductImage(product.primaryImage); return <article key={product.id} className="group relative"><Link href={`/products/${product.slug}/`} rel={isIndexableProductSlug(product.slug) ? undefined : "nofollow"} onClick={() => markRecent(product.id)} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0d2b3f]"><div className="relative aspect-[4/5] overflow-hidden bg-stone-200"><Image src={imageSrc} alt={product.primaryImage.altText} fill unoptimized={typeof imageSrc === "string"} className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority={index === 0} loading={index === 0 ? undefined : "lazy"} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 50vw" /></div><p className="mt-3 text-[10px] uppercase tracking-[.1em] text-stone-500">{displayFamily(product)}</p><h3 className="mt-1 font-serif text-xl leading-tight">{product.productName}</h3><p className="mt-1 text-xs text-stone-600">{displayMeta(product)}</p></Link><button type="button" aria-label={favorites.includes(product.id) ? "Remove from favourites" : "Add to favourites"} onClick={() => toggleFavorite(product.id)} className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#0d2b3f] shadow-sm"><Heart size={16} fill={favorites.includes(product.id) ? "currentColor" : "none"} /></button></article>; })}</div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 lg:grid-cols-4">{filtered.slice(0, visibleCount).map((product, index) => { const imageSrc = approvedProductImage(product.primaryImage); return <article key={product.id} className="group relative"><Link href={`/products/${product.slug}/`} rel={isIndexableProductSlug(product.slug) ? undefined : "nofollow"} onClick={() => markRecent(product.id)} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0d2b3f]"><div className="relative aspect-[4/5] overflow-hidden bg-stone-200"><Image src={imageSrc} alt={product.primaryImage.altText} fill unoptimized={typeof imageSrc === "string"} className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" priority={index === 0} loading={index === 0 ? undefined : "lazy"} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 50vw" /></div><p className="mt-3 text-[10px] uppercase tracking-[.1em] text-stone-500">{displayFamily(product)}</p><h3 className="mt-1 font-serif text-xl leading-tight">{product.productName}</h3><p className="mt-1 text-xs text-stone-600">{displayMeta(product)}</p></Link><button type="button" aria-label={favorites.includes(product.id) ? t("saved.remove") : t("saved.add")} onClick={() => toggleFavorite(product)} className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#0d2b3f] shadow-sm"><Heart size={16} fill={favorites.includes(product.id) ? "currentColor" : "none"} /></button></article>; })}</div>
             {filtered.length > visibleCount ? <div className="mt-12 text-center"><button type="button" onClick={() => setVisibleCount((count) => count + 16)} className="inline-flex min-h-11 items-center border border-[#0d2b3f] px-6 text-sm font-medium text-[#0d2b3f] hover:bg-[#0d2b3f] hover:text-white">{t("catalog.loadMore")}</button></div> : null}
           </> : <div className="border-y border-stone-300 py-20 text-center"><h2 className="font-serif text-3xl">{t("catalog.noMatch")}</h2><p className="mx-auto mt-3 max-w-md text-stone-600">{search.trim() ? t("catalog.noResultsFor", `No results for “${search.trim()}”. Try another term or browse all products.`) : t("catalog.tryRemoving")}</p><button type="button" onClick={() => { clear(); setSearch(""); }} className="mt-6 underline">{t("catalog.clearAll")}</button></div>}
         </div>

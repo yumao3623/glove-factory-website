@@ -9,19 +9,27 @@
   },
   "browserChecks": [
     { "path": "/", "viewport": "1280x900", "result": "loaded; no console errors or runtime overlay" },
-    { "path": "/products/", "viewport": "1280x900", "result": "search dialog submits to /products/?search=bridal; no-results state shows 0 products and recovery action" },
+    { "path": "/products/", "viewport": "1280x900", "result": "search dialog submits to /products/?search=bridal; no-results state shows 0 products and recovery action without hydration/runtime errors; UTM query parameters remain intact" },
     { "path": "/products/", "viewport": "390x844", "result": "mobile filters open/close, real counts render, menu opens with search/account/catalogue/contact routes" },
     { "path": "/products/bridal-gloves-sheer-lace-long-001/", "viewport": "1280x900", "result": "PDP title, matching gallery and enquiry actions render" },
     { "path": "/contact/", "viewport": "1280x900", "result": "direct email, phone and WhatsApp routes appear before structured enquiry form" },
-    { "path": "/account/", "viewport": "1280x900", "result": "optional account copy and sign-in/create-account path render" },
+    { "path": "/account/", "viewport": "1280x900", "result": "optional account copy and sign-in/create-account path render; authorized test address receives the generic existing-account confirmation prompt" },
     { "path": "/admin/", "viewport": "1280x900", "result": "unauthenticated gate and visible admin labels render in Chinese" },
     { "path": "/bridal-gloves/", "viewport": "1280x900", "result": "category route loaded" },
     { "path": "/opera-gloves/", "viewport": "1280x900", "result": "category route loaded" },
     { "path": "/costume-gloves/", "viewport": "1280x900", "result": "category route loaded" },
     { "path": "/kids-dress-gloves/", "viewport": "1280x900", "result": "category route loaded" },
     { "path": "/wedding-veils/", "viewport": "1280x900", "result": "category route loaded" },
-    { "path": "/arm-sleeves/", "viewport": "1280x900", "result": "category route loaded" }
+    { "path": "/arm-sleeves/", "viewport": "1280x900", "result": "category route loaded" },
+    { "path": "/cart/", "viewport": "1280x900", "result": "saved product is recoverable through the cart anchor; enquiry item quantity/options can be edited and removed" },
+    { "path": "/contact/?from=list#rfq", "viewport": "1280x900", "result": "real RFQ POST returned 201 with company omitted; UI distinguishes saved enquiry from notification delivery" }
   ],
+  "realEmailTest": {
+    "recipient": "yumao3623@gmail.com",
+    "rfq": { "status": 201, "notification": "accepted", "delivered": true, "evidence": "/Users/maoyu/Desktop/截屏2026-09-29 下午12.12.02.png", "testRecordCleaned": true },
+    "account": { "status": 200, "message": "Check your email to confirm your account. If you already have an account, sign in or reset your password.", "existingConfirmedAccount": true, "inboxLinkVerification": "not required for this already-confirmed test account" },
+    "scope": "No other recipient was used. The RFQ test row was deleted after delivery verification."
+  },
   "commands": {
     "lint": "passed",
     "typecheck": "passed",
@@ -30,7 +38,7 @@
   },
   "screenshots": {
     "before": ["home-before.png", "products-before.png"],
-    "after": ["home-after.png", "products-no-results-after.png", "products-mobile-after.png", "mobile-menu-after.png", "pdp-after.png", "contact-after.png", "account-after.png"]
+    "after": ["home-after.png", "products-no-results-after.png", "products-mobile-after.png", "mobile-menu-after.png", "pdp-after.png", "contact-after.png", "account-after.png", "cart-after.png", "account-signup-after.png"]
   },
   "research": [
     "Cornelia James homepage and navigation were opened for layout and interaction reference.",

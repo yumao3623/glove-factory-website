@@ -37,9 +37,8 @@ export function validateRfq(payload: RfqPayload): RfqValidation {
   const idempotencyKey = text(payload.idempotencyKey);
 
   if (!name) errors.name = "Name is required.";
-  if (!company) errors.company = "Company is required.";
   if (!country) errors.country = "Country is required.";
-  if (!emailPattern.test(email)) errors.email = "Enter a valid business email.";
+  if (!emailPattern.test(email)) errors.email = "Enter a valid email.";
   if (!families.has(productFamily)) errors.productFamily = "Choose a product family.";
   if (!quantity) errors.quantity = "Quantity is required.";
   if (!message) errors.message = "Message is required.";
