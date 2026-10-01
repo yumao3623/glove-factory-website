@@ -1,18 +1,18 @@
 # JS Meilai 路线图
 
-核对日期：2026-09-29。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
+核对日期：2026-10-01。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
 
-## 当前阶段：2.5.0 生产稳定；2.6.0 本地体验整改待发布
+## 当前阶段：2.5.0 生产稳定；2.6.0 全站体验整改收尾
 
 **目标**：在 `jsmeilai.com` 上持续改善 B2B manufacturer / supplier / RFQ 的买家路径和可发现性；按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排后续范围，不把 To C 库存或完整商业字段倒灌到当前网站。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。2.6.0 还需按仓库发布规则完成授权发布与生产验收。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。2.6.0 的实现、六分类视觉、桌面/移动关键路径、搜索/筛选/收藏/询盘编辑、账户别名和支付边界已有最终本地证据；发布前仍需一次已登录管理员 Chrome 读路径。
 
-## 2.6.0：全站买家体验整改（本地完成，尚未发布）
+## 2.6.0：全站买家体验整改（用户验收未通过，继续实施）
 
 **范围**：根据 2026-09-29 的真实使用截图，统一全站搜索、导航、目录筛选、六大分类页、产品详情页、联系入口、账户资料和管理员中文操作；修复标题比例、按钮触达、无结果反馈、移动端菜单与真实联系方式优先级；补齐收藏找回、询盘选项编辑/删除和公司字段可选。支付保持关闭，未知商业事实继续按询价确认。
 
-**验证**：`npm test` 69/69、`npm run typecheck`、lint、production build 均通过；本地浏览器覆盖桌面/移动端、搜索提交、无结果且无 hydration/runtime 错误、筛选、六大分类、PDP、联系、账户、收藏/询盘管理和管理员未登录门；授权邮箱已确认真实 RFQ 通知送达，测试行已清理。证据见 [2.6.0 UX evidence](evidence/2026-09-29-2.6-ux.json)。
+**验证**：`npm test` 69/69、`npm run typecheck`、lint（0 warning）、production build 均通过；本地浏览器覆盖桌面/移动端、搜索提交、无结果且无 hydration/runtime 错误、筛选/排序/收藏、六大分类逐页、PDP、联系、账户别名、询盘选项编辑、支付关闭反馈和管理员未登录门；授权邮箱已确认真实 RFQ 通知送达，测试行已清理。证据见 [2.6.0 UX final](evidence/2026-10-01-2.6-ux-final.json)。
 
 ## 2.5.0：B2B 买家体验与搜索结构（已发布初始 slice）
 
@@ -22,7 +22,7 @@
 
 **完成条件**：首屏 CTA 在桌面/移动可见且可达 RFQ；采购路径、六系列发现、PDP/RFQ 内链与 `ItemList` 结构化数据通过本地和生产验证；UTM/GA4 与英文 28 URL 边界不回归；可独立交付的 UI/SEO 内容改进不等待未来域名、邮箱、WhatsApp 或支付。本轮初始 slice 已满足并发布。若包含 locale，再额外验收 SSR/metadata/canonical/hreflang/sitemap。未来域名迁移另设范围，不与本轮网站建设混合。
 
-## 候选 2.6.0：买家运营与支付（条件式）
+## 后续候选：买家运营与支付（条件式，不预设版本）
 
 仅在真实支付商户资料、KYC/收单/结算政策、退款/运输事实和受控验收条件齐备后，重新评估 payment、客户地址、报价转订单和履约能力。没有这些资料时保持 fail-closed，不为版本制造支付工作。
 

@@ -1,12 +1,12 @@
 import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 
 export const familyLabels: Record<ApprovedCatalogueProduct["productFamily"], string> = {
-  "bridal-gloves": "Bridal｜Wedding gloves",
-  "opera-gloves": "Opera｜Evening gloves",
-  "costume-gloves": "Costume｜Stage gloves",
-  "kids-dress-gloves": "Kids｜Girls dress gloves",
-  "wedding-veils": "Wedding｜Bridal veils",
-  "arm-sleeves": "Arm sleeves｜Occasion accessories",
+  "bridal-gloves": "Bridal and Wedding gloves",
+  "opera-gloves": "Opera, Evening and Formal gloves",
+  "costume-gloves": "Costume and Stage gloves",
+  "kids-dress-gloves": "Kids and Girls dress gloves",
+  "wedding-veils": "Wedding and Bridal veils",
+  "arm-sleeves": "Arm sleeves and Occasion accessories",
 };
 
 const materialMap: Record<string, string> = { satin: "Satin", silk: "Silk", lace: "Lace", tulle: "Tulle", velvet: "Velvet", cotton: "Cotton", mesh: "Mesh" };

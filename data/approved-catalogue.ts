@@ -16,6 +16,20 @@ export type ApprovedCatalogueProduct = ProductRecord & {
 const productionAssets = assetManifest.productionAssets as ProductionAsset[];
 const records = approvedRecords as unknown as ProductRecord[];
 
+// The accepted source record for this style mixes a white reference photo with
+// the black product direction. Keep the source audit record intact, but publish
+// only the black views until the supplier confirms a single colour set.
+const publicImageOrder: Record<string, string[]> = {
+  "bridal-gloves-sheer-lace-long-001": [
+    "bridal-gloves-sheer-lace-long-001-5a1e1a90a5bf-web",
+    "bridal-gloves-sheer-lace-long-001-4abaae73fda2-web",
+  ],
+};
+
+export function isPublicMediaCuratedProduct(product: Pick<ProductRecord, "id"> & Partial<Pick<ProductRecord, "slug">>): boolean {
+  return Boolean(publicImageOrder[product.id] || (product.slug && publicImageOrder[product.slug]));
+}
+
 export function isApprovedProduct(record: Pick<ProductRecord, "status">): boolean {
   return record.status === "APPROVED";
 }
@@ -32,10 +46,17 @@ function productionImageFor(record: ProductRecord, image: AssetReference): Appro
 }
 
 function collectionImagesFor(record: ProductRecord): readonly ApprovedCatalogueImage[] {
-  return record.images
+  const approvedImages = record.images
     .filter((image) => image.status === "CONFIRMED" && image.role !== "thumbnail" && image.path?.startsWith("/products/"))
     .map((image) => productionImageFor(record, image))
     .filter((image): image is ApprovedCatalogueImage => image !== null);
+  const curatedOrder = publicImageOrder[record.id];
+  if (!curatedOrder) return approvedImages;
+  const selected = curatedOrder
+    .map((assetId) => approvedImages.find((image) => image.assetId === assetId))
+    .filter((image): image is ApprovedCatalogueImage => image !== undefined);
+  if (!selected.length) return approvedImages;
+  return selected.map((image, index) => index === 0 ? { ...image, role: "primary" } : image);
 }
 
 function toApprovedCatalogueProduct(record: ProductRecord): ApprovedCatalogueProduct | null {

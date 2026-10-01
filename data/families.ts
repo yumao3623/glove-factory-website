@@ -12,7 +12,7 @@ export type FamilyEntry = {
 export const families: FamilyEntry[] = [
   {
     slug: "bridal-gloves",
-    title: "Bridal｜Wedding Gloves",
+    title: "Bridal and Wedding Gloves",
     route: "/bridal-gloves/",
     buyerUse: "Bridal ranges and ceremony-led assortments.",
     detail: "The first collection template in this checkpoint.",
@@ -20,7 +20,7 @@ export const families: FamilyEntry[] = [
   },
   {
     slug: "opera-gloves",
-    title: "Opera｜Evening｜Formal Gloves",
+    title: "Opera, Evening and Formal Gloves",
     route: "/opera-gloves/",
     buyerUse: "Formalwear and long-glove programmes.",
     detail: "Long-glove references for formalwear sourcing conversations.",
@@ -28,7 +28,7 @@ export const families: FamilyEntry[] = [
   },
   {
     slug: "costume-gloves",
-    title: "Costume｜Stage Gloves",
+    title: "Costume and Stage Gloves",
     route: "/costume-gloves/",
     buyerUse: "Stage, performance and supported costume ranges.",
     detail: "Scope-controlled stage and supported costume directions.",
@@ -36,7 +36,7 @@ export const families: FamilyEntry[] = [
   },
   {
     slug: "kids-dress-gloves",
-    title: "Kids｜Girls Dress Gloves",
+    title: "Kids and Girls Dress Gloves",
     route: "/kids-dress-gloves/",
     buyerUse: "Girls' dress and formal-occasion programmes.",
     detail: "Girls' dress and special-occasion references.",
@@ -44,7 +44,7 @@ export const families: FamilyEntry[] = [
   },
   {
     slug: "wedding-veils",
-    title: "Wedding｜Bridal Veils",
+    title: "Wedding and Bridal Veils",
     route: "/wedding-veils/",
     buyerUse: "Bridal veil ranges and accessory coordination.",
     detail: "A focused veil edit for wedding accessory sourcing.",
@@ -52,7 +52,7 @@ export const families: FamilyEntry[] = [
   },
   {
     slug: "arm-sleeves",
-    title: "Arm Sleeves｜Occasion Accessories",
+    title: "Arm Sleeves and Occasion Accessories",
     route: "/arm-sleeves/",
     buyerUse: "Fingerless sleeves and coordinated occasion accessories.",
     detail: "A separate direction for sleeve-led silhouettes and accessory programmes.",

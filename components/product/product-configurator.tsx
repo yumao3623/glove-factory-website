@@ -1,26 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/locale-provider";
-import { addEnquiryItem, parseEnquiryList, readEnquirySnapshot, writeEnquiryList } from "@/lib/enquiry-list";
+import { addEnquiryItem, enquiryItemKey, parseEnquiryList, readEnquirySnapshot, writeEnquiryList } from "@/lib/enquiry-list";
 import type { ApprovedCatalogueProduct } from "@/data/approved-catalogue";
 
 export function ProductConfigurator({ product }: { product: ApprovedCatalogueProduct }) {
   const { t } = useLocale();
-  const colors = product.color?.status === "CONFIRMED" ? product.color.value ?? [] : [];
-  const sizes = product.size?.status === "CONFIRMED" ? product.size.value ?? [] : [];
+  const colors = useMemo(() => product.color?.status === "CONFIRMED" ? product.color.value ?? [] : [], [product.color]);
+  const sizes = useMemo(() => product.size?.status === "CONFIRMED" ? product.size.value ?? [] : [], [product.size]);
   const [color, setColor] = useState(colors[0] ?? "To be confirmed");
   const [size, setSize] = useState(sizes[0] ?? "To be confirmed");
   const [quantity, setQuantity] = useState(1);
   const [addons, setAddons] = useState<string[]>([]);
   const [added, setAdded] = useState(false);
   const [error, setError] = useState("");
+  const [editingKey, setEditingKey] = useState<string | null>(null);
   const addonOptions: Array<[string, string]> = [["Custom packaging", "product.packaging"], ["Brand logo", "product.logo"], ["Colour sample", "product.colourSample"], ["Size sample", "product.sizeSample"]];
+  useEffect(() => { const timer = window.setTimeout(() => { const edit = new URLSearchParams(window.location.search).get("edit"); if (!edit) return; const existing = parseEnquiryList(readEnquirySnapshot()).find((item) => item.productId === product.id && decodeURIComponent(edit) === enquiryItemKey(item)); if (existing) { setEditingKey(edit); setColor(existing.color ?? colors[0] ?? "To be confirmed"); setSize(existing.size ?? sizes[0] ?? "To be confirmed"); setQuantity(existing.quantity); setAddons(existing.addons ?? []); } }, 0); return () => window.clearTimeout(timer); }, [product.id, colors, sizes]);
   function toggleAddon(addon: string) { setAddons((current) => current.includes(addon) ? current.filter((item) => item !== addon) : [...current, addon]); }
   function addToCart() {
     try {
-      writeEnquiryList(addEnquiryItem(parseEnquiryList(readEnquirySnapshot()), { productId: product.id, productName: product.productName, productSlug: product.slug, family: product.productFamily, quantity, color, size, addons }));
+      const item = { productId: product.id, productName: product.productName, productSlug: product.slug, family: product.productFamily, quantity, color, size, addons };
+      const current = parseEnquiryList(readEnquirySnapshot());
+      writeEnquiryList(editingKey ? current.map((entry) => enquiryItemKey(entry) === decodeURIComponent(editingKey) ? item : entry) : addEnquiryItem(current, item));
     } catch { setError("Your browser could not save this list. Please allow local storage."); return; }
     setAdded(true);
   }

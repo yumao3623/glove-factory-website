@@ -225,7 +225,7 @@ export const translations: Record<Locale, TranslationMap> = {
     "nav.kidsGloves": "儿童礼服手套",
     "nav.veils": "婚礼头纱",
     "nav.armSleeves": "袖套及礼服配饰",
-    "nav.oem": "OEM｜ODM",
+    "nav.oem": "OEM / ODM",
     "nav.privateLabel": "自有品牌",
     "nav.materialsColours": "材质与颜色",
     "nav.samplingPackaging": "打样与包装",

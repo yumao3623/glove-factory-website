@@ -6,8 +6,21 @@ import { sendCommerceEmail } from "@/lib/commerce/email-rest";
 import { isSameOrigin } from "@/lib/commerce/auth";
 import { clientAddress, consumeLimit } from "@/lib/commerce/request-limit";
 import { getCommerceConfig } from "@/lib/commerce/config";
+import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
+
+async function verifiedCustomerId() {
+  const token = (await cookies()).get("sm_access_token")?.value;
+  const config = getCommerceConfig();
+  if (!token || !config.supabaseUrl || !config.supabaseAnonKey) return undefined;
+  try {
+    const response = await fetch(`${config.supabaseUrl}/auth/v1/user`, { headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${token}` }, cache: "no-store" });
+    if (!response.ok) return undefined;
+    const user = await response.json() as { id?: string; email_confirmed_at?: string };
+    return user.id && user.email_confirmed_at ? user.id : undefined;
+  } catch { return undefined; }
+}
 
 const htmlEscape = (value: unknown) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char] ?? char));
 
@@ -28,7 +41,7 @@ export async function POST(request: Request) {
   if (!result.valid) return NextResponse.json({ message: "Please review the highlighted fields.", errors: result.errors }, { status: 400 });
   const data = result.data as Record<string, unknown>;
   let stored;
-  try { stored = await supabaseRest("rfq_requests", { method: "POST", headers: { Prefer: "return=representation" }, body: JSON.stringify({ contact_name: data.name, company_name: data.company, country: data.country, email: data.email, whatsapp: data.whatsapp ?? null, product_family: data.productFamily, quantity: data.quantityInteger, quantity_description: data.quantityDescription, consent_at: new Date().toISOString(), message: data.message, status: "new", idempotency_key: data.idempotencyKey ?? null, product_context: data.productContext ?? [] }) }, true); }
+  try { stored = await supabaseRest("rfq_requests", { method: "POST", headers: { Prefer: "return=representation" }, body: JSON.stringify({ customer_id: await verifiedCustomerId(), contact_name: data.name, company_name: data.company, country: data.country, email: data.email, whatsapp: data.whatsapp ?? null, product_family: data.productFamily, quantity: data.quantityInteger, quantity_description: data.quantityDescription, consent_at: new Date().toISOString(), message: data.message, status: "new", idempotency_key: data.idempotencyKey ?? null, product_context: data.productContext ?? [] }) }, true); }
   catch { return NextResponse.json({ status: "STORAGE_FAILED", message: "Your enquiry could not be saved. Please try again." }, { status: 502 }); }
   if (!stored.configured) return NextResponse.json({ status: "CONFIGURATION_REQUIRED", message: stored.error }, { status: 503 });
   if (stored.error) {

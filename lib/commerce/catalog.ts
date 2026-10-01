@@ -8,6 +8,11 @@ const families = new Set<ProductFamily>(["bridal-gloves", "opera-gloves", "costu
 export type PublishedRow = { id: string; slug: string; name: string; family: string; status?: string; material?: string | null; length_cm?: number | null; finger_style?: string | null; colors?: string[] | null; description?: string | null; image_urls?: string[] | null; sub_style?: string[] | null; occasion?: string[] | null; decoration?: string[] | null; age_group?: string | null; customizable_fields?: string[] | null; specifications?: ProductRecord["specifications"] | null; featured?: boolean | null; sort_order?: number | null };
 const confirmed = <T,>(value: T, source: string): SourcedValue<T> => ({ value, status: "CONFIRMED", source });
 const customFieldValues = new Set<CustomizableField["field"]>(["pattern", "color", "size", "logo", "packaging", "supplied-material"]);
+const publicImagePathOrder: Record<string, string[]> = {
+  // The accepted source mixes white and black references. Keep the public
+  // catalogue on the black set until the supplier confirms one colourway.
+  "bridal-gloves-sheer-lace-long-001": ["5a1e1a90a5bf", "4abaae73fda2"],
+};
 const strings = (value: unknown): string[] => Array.isArray(value) ? value.filter((item): item is string => typeof item === "string" && item.trim().length > 0).map((item) => item.trim()) : [];
 const publicProductName = (name: string, hasConfirmedLength: boolean): string => {
   if (hasConfirmedLength) return name;
@@ -34,7 +39,11 @@ export function mapPublishedProduct(row: PublishedRow): ApprovedCatalogueProduct
     } catch { return null; }
   }).filter((url): url is string => Boolean(url));
   if (!urls.length) return null;
-  const images: ApprovedCatalogueImage[] = urls.map((path, index) => ({ assetId: `supabase-${row.id}-${index}`, role: index === 0 ? "primary" : "detail", status: "CONFIRMED", source: "supabase:products", path, width: null, height: null, altText: `${productName} product image` }));
+  const curatedOrder = publicImagePathOrder[row.slug];
+  const publicUrls = curatedOrder
+    ? curatedOrder.map((fragment) => urls.find((url) => url.includes(fragment))).filter((url): url is string => Boolean(url))
+    : urls;
+  const images: ApprovedCatalogueImage[] = (publicUrls.length ? publicUrls : urls).map((path, index) => ({ assetId: `supabase-${row.id}-${index}`, role: index === 0 ? "primary" : "detail", status: "CONFIRMED", source: "supabase:products", path, width: null, height: null, altText: `${productName} product image` }));
   const occasion = strings(row.occasion);
   const decoration = strings(row.decoration);
   const ageGroup = row.age_group === "adult" || row.age_group === "kids" || row.age_group === "mixed" ? row.age_group : null;

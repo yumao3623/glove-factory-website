@@ -26,7 +26,7 @@ export function VariantForm() {
     const refresh = () => readRecords(controller.signal).then(data => {
       setRecords(data);
       setForm(current => ({ ...current, product_id: current.product_id || data.products[0]?.id || "" }));
-    }).catch(error => { if (!controller.signal.aborted) setMessage(error.message); });
+    }).catch(() => { if (!controller.signal.aborted) setMessage("无法加载产品和库存，请检查管理员会话。"); });
     void refresh();
     window.addEventListener("jsmeilai:products-updated", refresh);
     return () => { controller.abort(); window.removeEventListener("jsmeilai:products-updated", refresh); };
@@ -43,10 +43,10 @@ export function VariantForm() {
     setBusy(true); setMessage("");
     try {
       const response = await fetch("/api/admin/variants/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: form.id, product_id: form.product_id, sku: form.sku, color: form.color, size: form.size, retail_price_minor: form.retail === "" ? null : Math.round(Number(form.retail) * 100), wholesale_price_minor: form.wholesale === "" ? null : Math.round(Number(form.wholesale) * 100), currency: form.currency, active: form.active, quantity, reserved }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "无法保存变体。");
+      await response.json();
+      if (!response.ok) throw new Error("无法保存变体，请检查内容后重试。");
       setRecords(await readRecords()); setForm({ ...empty, product_id: form.product_id }); setMessage("变体和库存已保存。");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "库存服务暂时不可用。"); }
+    } catch { setMessage("无法保存变体，请检查内容后重试。"); }
     finally { setBusy(false); }
   }
   const set = (key: keyof typeof empty, value: string | boolean) => setForm(current => ({ ...current, [key]: value }));

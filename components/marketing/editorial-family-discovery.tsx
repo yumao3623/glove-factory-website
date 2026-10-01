@@ -4,8 +4,9 @@ import { ArrowUpRightIcon } from "lucide-react";
 import { LocalizedText } from "@/components/i18n/localized-text";
 import { EditorialImage } from "@/components/marketing/editorial-image";
 import { getApprovedCatalogueByFamily } from "@/data/approved-catalogue";
-import { generatedFamilyMedia } from "@/data/generated-family-media";
+import { approvedProductImage } from "@/components/product/approved-product-image";
 import { families, type FamilyEntry } from "@/data/families";
+import { generatedFamilyMedia } from "@/data/generated-family-media";
 
 type FamilyVisual = {
   family: FamilyEntry;
@@ -14,14 +15,12 @@ type FamilyVisual = {
   productId: string;
 };
 
-const familyVisuals: readonly FamilyVisual[] = families.map((family) => ({
-  family,
-  image: generatedFamilyMedia[family.slug].src,
-  alt: generatedFamilyMedia[family.slug].alt,
-  productId: getApprovedCatalogueByFamily(family.slug)[0]?.id ?? `family-${family.slug}`,
-}));
+const familyVisuals: readonly FamilyVisual[] = families.map((family) => {
+  const product = getApprovedCatalogueByFamily(family.slug)[0];
+  const image = product?.collectionImages.find((reference) => reference.path?.startsWith("/api/media/products/"));
+  return { family, image: image ? approvedProductImage(image) : generatedFamilyMedia[family.slug].src, alt: image?.altText ?? generatedFamilyMedia[family.slug].alt, productId: product?.id ?? `family-${family.slug}` };
+});
 
-const cardOffsets = ["lg:pt-0", "lg:pt-10", "lg:pt-4", "lg:pt-14", "lg:pt-7", "lg:pt-2"] as const;
 
 export function EditorialFamilyDiscovery() {
   return (
@@ -30,7 +29,7 @@ export function EditorialFamilyDiscovery() {
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="section-label text-stone-600"><LocalizedText k="home.exploreRange" fallback="Explore the range" /></p>
-            <h2 className="mt-3 max-w-[15ch] font-serif text-4xl leading-[1] tracking-[-.02em] sm:text-5xl lg:text-[3.25rem]">
+            <h2 className="mt-3 max-w-[23ch] font-serif text-4xl leading-[1.02] tracking-[-.02em] sm:text-5xl lg:text-[3.25rem]">
               <LocalizedText k="home.rangeTitle" fallback="Six directions for an occasionwear range." />
             </h2>
           </div>
@@ -38,9 +37,9 @@ export function EditorialFamilyDiscovery() {
             <LocalizedText k="home.rangeCopy" fallback="Start with a family, then bring materials, measurements and timing into the sourcing conversation." />
           </p>
         </div>
-        <div className="relative mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-12 lg:mt-16 lg:grid-cols-6 lg:items-start lg:gap-x-5 lg:pb-8">
-          {familyVisuals.map((visual, index) => (
-            <FamilyLink key={visual.family.slug} visual={visual} offset={cardOffsets[index]} />
+        <div className="relative mt-10 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:gap-x-6">
+          {familyVisuals.map((visual) => (
+            <FamilyLink key={visual.family.slug} visual={visual} offset="" />
           ))}
         </div>
       </div>
@@ -52,11 +51,12 @@ function FamilyLink({ visual, offset }: { visual: FamilyVisual; offset: string }
   const content = (
     <>
       <EditorialImage
+        priority
         src={visual.image}
         alt={visual.alt}
-        className="aspect-[4/5]"
+        className="aspect-[5/4]"
         imageClassName="object-cover transition-transform duration-500 motion-reduce:transition-none group-hover:scale-[1.035]"
-        sizes="(min-width: 1024px) 19vw, (min-width: 640px) 44vw, 46vw"
+        sizes="(min-width: 640px) 32vw, 46vw"
       />
       <div className="mt-3 border-t border-black/30 pt-3">
         <div className="flex items-start justify-between gap-3">

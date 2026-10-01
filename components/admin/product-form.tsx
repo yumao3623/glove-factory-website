@@ -25,15 +25,15 @@ export function ProductForm() {
   async function load() {
     const response = await fetch("/api/admin/products/", { cache: "no-store" });
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error ?? "无法加载产品。");
+    if (!response.ok) throw new Error("无法加载产品，请检查管理员会话。");
     setItems(Array.isArray(data.data) ? data.data : []);
   }
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/admin/products/", { cache: "no-store", signal: controller.signal })
-      .then(async response => { const data = await response.json(); if (!response.ok) throw new Error(data.error ?? "无法加载产品。"); return data; })
+      .then(async response => { const data = await response.json(); if (!response.ok) throw new Error("无法加载产品，请检查管理员会话。"); return data; })
       .then(data => setItems(Array.isArray(data.data) ? data.data : []))
-      .catch(error => { if (!controller.signal.aborted) setMessage(error.message); });
+      .catch(() => { if (!controller.signal.aborted) setMessage("无法加载产品，请检查管理员会话。"); });
     return () => controller.abort();
   }, []);
   function edit(product: Product) {
@@ -45,12 +45,12 @@ export function ProductForm() {
     event.preventDefault(); setBusy(true); setMessage("");
     try {
       const response = await fetch(editing ? `/api/admin/products/${editing.id}/` : "/api/admin/products/", { method: editing ? "PATCH" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, ...Object.fromEntries(["colors", "sub_style", "occasion", "decoration", "customizable_fields"].map(key => [key, String(form[key as keyof typeof form]).split(",").map(value => value.trim()).filter(Boolean)])), status: "draft" }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "无法保存产品。");
+      await response.json();
+      if (!response.ok) throw new Error("无法保存产品，请检查内容后重试。");
       setEditing(null); setForm({ ...empty }); setReview(null);
       await load(); window.dispatchEvent(new Event("jsmeilai:products-updated"));
       setMessage("草稿已保存，请在发布前复核详情。");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "无法保存产品。"); }
+    } catch { setMessage("无法保存产品，请检查内容后重试。"); }
     finally { setBusy(false); }
   }
   async function upload(file: File) {
@@ -59,10 +59,10 @@ export function ProductForm() {
       const body = new FormData(); body.set("file", file);
       const response = await fetch("/api/admin/media/", { method: "POST", body });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "上传失败。");
+      if (!response.ok) throw new Error("图片上传失败，请重试。");
       setForm(current => ({ ...current, image_urls: [...current.image_urls, data.path] }));
       setMessage("图片已上传，请保存草稿以关联图片。");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "上传失败。"); }
+    } catch { setMessage("图片上传失败，请重试。"); }
     finally { setBusy(false); }
   }
   async function publish() {
@@ -70,16 +70,16 @@ export function ProductForm() {
     setBusy(true); setMessage("");
     try {
       const response = await fetch(`/api/admin/products/${review.id}/publish/`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reviewed: true }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "无法发布产品。");
+      await response.json();
+      if (!response.ok) throw new Error("无法发布产品，请检查内容后重试。");
       setReview(null); setReviewed(false); await load(); setMessage("产品已发布到目录。");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "无法发布产品。"); }
+    } catch { setMessage("无法发布产品，请检查内容后重试。"); }
     finally { setBusy(false); }
   }
   async function archive(product: Product) {
     setBusy(true);
     try { const response = await fetch(`/api/admin/products/${product.id}/`, { method: "DELETE" }); if (!response.ok) throw new Error("无法归档产品。"); await load(); setMessage("产品已归档，可编辑后恢复为草稿。"); }
-    catch (error) { setMessage(error instanceof Error ? error.message : "无法归档产品。"); }
+    catch { setMessage("无法归档产品，请检查内容后重试。"); }
     finally { setBusy(false); }
   }
   return <div className="mt-10">
