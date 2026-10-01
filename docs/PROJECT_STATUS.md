@@ -6,7 +6,7 @@
 
 - **Production：2.5.0（仍为当前生产版本）**。2.3.0 的 indexable B2B surface 与 2.4.0 的 consented GA4/UTM attribution 继续保留；2.5.0 的首页采购入口、三步 sourcing path 与产品 hub `ItemList` 搜索结构继续在线。
 - **Development：2.6.0 UX remediation（继续整改，尚未通过用户体验验收，尚未发布）**。本轮依据真实使用截图整改全站导航搜索、目录筛选/无结果、账户资料、中文管理员后台、联系入口、六大分类页、产品详情页及移动端交互；不重新开启已关闭的 readiness gate。
-- **Current work：2.6.0 全站体验返工与真实身份验收收尾**。已补齐首页/六分类/PDP 的视觉和文案整改、真实搜索/筛选/排序/收藏/询盘编辑、账户别名登录与资料保存、RFQ hydration 修复及中文后台反馈；生产保持 2.5.0。仍需在用户 Chrome 的真实管理员会话中完成后台读路径，之后才能决定是否发布。
+- **Current work：2.6.0 全站体验返工与真实身份验收已完成本地收尾**。已补齐首页/六分类/PDP 的视觉和文案整改、真实搜索/筛选/排序/收藏/询盘编辑、账户别名登录与资料保存、RFQ hydration 修复及中文后台反馈；生产保持 2.5.0。用户 Chrome 的真实管理员会话已完成后台读路径核验，本轮未部署。
 - `package.json` 与 lock 根包版本为 `2.6.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
@@ -36,7 +36,7 @@
 - 后台真实存在且受保护：产品 CRUD、draft/archive/publish、媒体预览/上传、变体/库存记录、RFQ 状态、报价操作；生产未认证 admin 路径逐项得到 401，同源写入和 Supabase RLS 生效。历史已确认管理员会话曾完成 `/admin/` 技术只读验收：36 个 active products、4 张私有媒体和 Supabase signed preview 正常；RFQ、订单/报价及变体/库存当时均为 0 条。显式 opt-in 的隔离 Supabase 夹具完成真实 Auth、产品、媒体、变体、库存、发布、订单 RLS 和清理验证 11/11；另用唯一 marker 的 RFQ/报价夹具验证 reviewing → quoted、报价取消和状态事件 3/3，均已清理，未改变真实业务记录。该证据关闭了核心数据/RLS/状态 RPC 的技术风险，但不替代本轮用户 Chrome 的后台读路径与真实通知投递验收。
 - RFQ 已有服务端校验、限流、幂等、Supabase 持久化、状态事件、Resend 通知和受保护报价路径；隔离 smoke 验证了 201 成功保存、202 `STORED_EMAIL_PENDING`、非法来源 403 及通知失败后的状态标记。2026-09-29 使用唯一授权收件地址 `yumao3623@gmail.com` 完成真实 RFQ：公司留空仍返回 201，通知状态为 accepted，收件箱已收到 `New RFQ from Codex QA`；测试行已在投递核对后删除。管理员会话下后台 RFQ 列表正常显示空状态，前台已修复 202 场景提示。
 - 本轮新客户别名 `yumao3623+ux260930@gmail.com` 已完成注册、用户点击验证链接、登录和资料保存；`/account/orders/` 返回该账户自己的空询盘/报价状态。没有为本轮重复发送 RFQ 邮件。
-- 本轮真实 Chrome 管理员会话尚未完成：未登录门已在本地验证为中文；用户 Chrome 准备标签未被 CUA 暴露，且 request-header policy 失败，因此没有输入管理员凭据或绕过权限。历史隔离管理员 fixture 不替代这一步。
+- 本轮真实 Chrome 管理员会话已完成：已有管理员会话进入 `/admin/` 后显示“管理员已登录”，36 个真实产品、中文产品/变体/询盘/报价表单和空数据状态均已读取；产品搜索、已发布筛选、编辑后取消及四个分区锚点均实际操作。没有 RFQ 行可供状态变更，因此没有创建数据或重发通知；未输入新凭据，也未绕过权限。客户别名账户的后台权限仍由邮箱白名单隔离。
 - 账户支持邮箱会话、确认、重置和订单历史；Google OAuth 代码存在但生产未开启。购物车是本地询价清单，checkout 是报价/支付边界页面，不是已启用的消费者结账。
 - 当前缺少完整 CMS、内容页编辑器、多角色/审计 UI、CRM/SLA 报表、履约工作流、客户地址/数据库购物车和管理员运营看板。对当前轻量 B2B RFQ 定位，这些是部分能力或后续选择，不应冒充已完成。
 
@@ -59,7 +59,7 @@
 
 - contact、RFQ 和 WhatsApp CTA 存在；历史 Human Review 记录曾确认公开号码 `+60 1114166916`，但当前接收人、回复负责人和 SLA 未重新确认。这只阻塞 WhatsApp 运营承诺和渠道发布，不阻塞 B2B RFQ 网站。没有正式社交 profile，也没有对外发布社交链接。
 - consent 横幅默认拒绝分析 cookies；GA4 只在用户同意后加载。隐私/terms 页面存在，但多语言隐私文本和完整 consent 管理仍有限。
-- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint（0 warning）和 production build 均通过；本轮新增浏览器实查覆盖搜索、无结果（hydration/runtime error 已查明并修复）、一次真实 Supabase TLS fetch 抖动（安全 GET 重试已补并复查 36 产品）、六大分类页、PDP、联系、账户别名、管理员未登录门、支付边界、桌面/移动端导航/筛选，以及收藏找回、询盘选项编辑。证据见 [2026-10-01 2.6 UX final](evidence/2026-10-01-2.6-ux-final.json)；旧 [2026-09-29 evidence](evidence/2026-09-29-2.6-ux.json) 只作历史局部记录。隔离 RFQ smoke 覆盖 201/202/403，真实 RFQ 投递证据和测试行清理沿用授权收件箱截图。
+- 测试状态（本次实查）：`npm test` 69/69、`npm run typecheck`（含 Next typegen）、lint（0 warning）和 production build 均通过；本轮新增浏览器实查覆盖搜索、无结果（hydration/runtime error 已查明并修复）、一次真实 Supabase TLS fetch 抖动（安全 GET 重试已补并复查 36 产品）、六大分类页、PDP、联系、账户别名、管理员未登录门与已登录读路径、支付边界、桌面/移动端导航/筛选，以及收藏找回、询盘选项编辑和中文后台表单。证据见 [2026-10-01 2.6 UX final](evidence/2026-10-01-2.6-ux-final.json)；旧 [2026-09-29 evidence](evidence/2026-09-29-2.6-ux.json) 只作历史局部记录。隔离 RFQ smoke 覆盖 201/202/403，真实 RFQ 投递证据和测试行清理沿用授权收件箱截图。
 - Supabase leaked-password protection 的最后可引用证据是 2026-09-22 的历史提示，本轮没有管理员权限复核；它只影响账号安全加固，不是当前 SEO 阻塞。
 - `PAYPAL_CHECKOUT_ENABLED=false`；Stripe/Paddle/PayPal 适配器 fail-closed，未上线虚假价格、库存、shipping、checkout 或支付能力。
 
@@ -111,7 +111,7 @@
 
 ## 2026-10-01 用户验收收尾核对
 
-2026-09-29 的 2.6 UX JSON 为历史局部记录，不作为完成或发布依据。2026-10-01 已完成六分类逐页视觉截图、搜索/筛选/排序/收藏/询盘编辑、首页图片加载、PDP 混色媒体收窄、联系参数 hydration 修复、账户别名登录与资料保存、支付关闭反馈和移动端关键路径。仍缺用户 Chrome 中的真实管理员登录后读路径；开发版本保持 2.6.0，未发布。
+2026-09-29 的 2.6 UX JSON 为历史局部记录，不作为完成或发布依据。2026-10-01 已完成六分类逐页视觉截图、搜索/筛选/排序/收藏/询盘编辑、首页图片加载、PDP 混色媒体收窄、联系参数 hydration 修复、账户别名登录与资料保存、支付关闭反馈、移动端关键路径和用户 Chrome 已登录管理员读路径。开发版本 2.6.0 的本地验收项已完成；本轮未部署，生产仍为 2.5.0。
 
 ## 证据入口
 

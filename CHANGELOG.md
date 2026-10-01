@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- 2026-10-01：完成 2.6.0 全站体验整改的本地收尾：用户 Chrome 已登录管理员会话通过中文后台读路径、产品搜索/已发布筛选、编辑后取消、询盘/订单空状态和支付关闭反馈；产品表单的内部枚举值改为中文标签。Production 仍为 2.5.0，本轮未部署。
 - 2026-09-28：根据当前 B2B manufacturer / supplier / RFQ 模式关闭 2.4.0 readiness gate。确认逐 SKU 实时库存、完整 MOQ/交期/材质、企业邮箱、WhatsApp、域名、locale 和 Payment 分别属于可选补充或后续功能范围，不再作为整个英文 RFQ 网站的统一 blocker；21 个 gated PDP 的原因收敛为逐页 SEO 文案和索引优先级审核。
 - 2026-09-28：在显式 opt-in 且确认夹具隔离/清理安全后，完成 Supabase commerce live fixture 11/11 以及 RFQ/报价状态夹具 3/3；所有测试记录已清理，不发送真实邮件、不创建真实报价或业务记录。readiness gate 的技术子门槛已通过，业务资料、运营责任、目标市场和真实通知投递仍待确认。
 - 2026-09-28：完成隔离 RFQ readiness smoke（成功保存、通知待处理、非法来源拒绝和状态标记），并修复前台在 `STORED_EMAIL_PENDING` 时的提示，明确告知询价已保存但通知尚待处理；未执行真实询盘、邮件或管理员写入。

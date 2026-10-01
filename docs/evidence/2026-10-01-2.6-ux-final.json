@@ -6,7 +6,7 @@
     "url": "https://www.jsmeilai.com/",
     "version": "2.5.0",
     "deployed": false,
-    "releaseDecision": "Do not publish this 2.6.0 work until the authenticated administrator path is completed in the user's Chrome session."
+    "releaseDecision": "Authenticated administrator path completed in the user's Chrome session; 2.6.0 remains local and was not deployed in this turn. Production stays 2.5.0."
   },
   "implementation": [
     "The homepage, product hub, six collection pages, contact page, account pages and PDP now share a compact type scale, restrained spacing, consistent CTA treatment and enquiry-led B2B copy.",
@@ -15,7 +15,7 @@
     "The RFQ query defaults now hydrate consistently, preserving family and product references without a React hydration error.",
     "Supabase REST reads now retry one safe GET after a transient TLS/socket failure and return a user-safe error result instead of exposing a Next.js runtime overlay.",
     "Account API reads are scoped to the verified customer id/email; the new alias account can sign in, save profile details and view only its own enquiry/quote records.",
-    "Admin operation feedback is Chinese in the dashboard, product, variant and quote forms; unauthenticated admin access remains protected."
+    "Admin operation feedback is Chinese in the dashboard, product, variant and quote forms; the product editor maps internal finger-style and age values to Chinese labels while preserving stored enums; unauthenticated admin access remains protected."
   ],
   "browserChecks": [
     { "path": "/", "viewport": "1280x900", "result": "Homepage hero, six family cards, sourcing path and RFQ entry are visible in one coherent layout; full-page capture includes the material imagery.", "screenshots": ["docs/evidence/2026-10-01-2.6-ux/home-top.png", "docs/evidence/2026-10-01-2.6-ux/home-full.png"] },
@@ -31,7 +31,7 @@
     { "path": "/contact/?family=opera-gloves&product=Long%20Smooth%20Satin%20Opera%20Gloves#rfq", "viewport": "1280x900", "result": "Direct email/phone/WhatsApp appear before the form; family select is Opera gloves and the product reference is included. After the hydration fix, agent-browser errors were empty.", "screenshots": ["docs/evidence/2026-10-01-2.6-ux/contact.png"] },
     { "path": "/account/", "viewport": "1280x900", "result": "New alias account yumao3623+ux260930@gmail.com registered, user clicked the confirmation link, sign-in succeeded, the profile saved Contact name 'Codex UX QA' and Country 'Malaysia', and Sign out returned the signed-out state.", "screenshots": [] },
     { "path": "/account/orders/", "viewport": "1280x900", "result": "Authenticated alias session returned its own empty enquiry/quote state; no other customer's records were shown.", "screenshots": [] },
-    { "path": "/admin/", "viewport": "1280x900", "result": "Unauthenticated route visibly presents Chinese '产品与询盘管理' and '需要管理员登录' gate. Authenticated admin browser verification remains pending because the user's Chrome session did not expose the prepared tab and the CUA request-header policy failed; no credentials were entered or bypassed.", "screenshots": [] },
+    { "path": "/admin/", "viewport": "1280x900", "result": "Existing authenticated administrator session rendered Chinese '产品与询盘管理' with '管理员已登录', 36 real products, Chinese family/status labels and the four working section anchors. Product search narrowed the visible list to one result; the published filter and an existing product edit form were opened, then cancelled without mutation. Requests/orders returned real empty states, and the quote section stated that online payment is not open. No RFQ was created or resent; no credentials were entered or bypassed.", "screenshots": [], "visualCapture": "Authenticated Chrome screenshot captured during this turn; the durable site screenshots remain in docs/evidence/2026-10-01-2.6-ux/." },
     { "path": "/checkout/", "viewport": "1280x900", "result": "Checkout boundary clearly says online payment is not available, asks the buyer to send selected styles and quantities, and links to the enquiry list/contact team.", "screenshots": [] },
     { "path": "/", "viewport": "390x844", "result": "Mobile navigation drawer opened with Search, Account, Enquiry list, all six collections, guides and Contact. Mobile catalogue search for 'lace' returned 19 products and Load more was exercised without browser errors.", "screenshots": ["docs/evidence/2026-10-01-2.6-ux/mobile-home.png", "docs/evidence/2026-10-01-2.6-ux/mobile-products.png"] },
     { "path": "/products/", "viewport": "1280x900", "result": "Language selector changed the visible catalogue UI to Simplified Chinese and back to English; no browser errors." }
@@ -43,6 +43,7 @@
     "enquiryList": "PDP quantity 3 and Custom packaging were saved; the list showed the item and Edit options reopened the PDP with quantity/options prefilled.",
     "contact": "Query parameters selected the family and exposed the product reference in the RFQ form.",
     "payment": "No payment request or fake success state was triggered."
+    ,"admin": "Authenticated Chrome admin session passed Chinese navigation, real product data visibility, read-only search/status filtering, edit-and-cancel feedback, section anchors, empty RFQ/order states and closed-payment quote copy. There was no RFQ row available for a status mutation, so no business record was fabricated."
   },
   "realEmailTest": {
     "recipient": "yumao3623@gmail.com",
@@ -50,7 +51,7 @@
     "accountAlias": { "address": "yumao3623+ux260930@gmail.com", "verification": "user clicked the link", "signIn": "passed", "profileSave": "passed" },
     "scope": "No new RFQ email was sent in this pass."
   },
-  "browserErrors": { "contactHydrationIssue": "fixed", "catalogueTlsFetchIssue": "reproduced once, safe GET retry added, reload verified with 36 products and no errors", "noResultsConsoleErrors": [], "mobileConsoleErrors": [] },
+  "browserErrors": { "contactHydrationIssue": "fixed", "catalogueTlsFetchIssue": "reproduced once, safe GET retry added, reload verified with 36 products and no errors", "noResultsConsoleErrors": [], "mobileConsoleErrors": [], "adminSessionErrors": [] },
   "commands": {
     "npm test": "69/69 passed",
     "npm run lint": "passed with 0 warnings",
@@ -62,5 +63,5 @@
     "The local design-reference and design-taste-frontend skills informed the type scale, removal of decorative numbered markers, content hierarchy and screenshot review.",
     "The ai-website-cloner-template repository was used only as a structural implementation reference; no third-party brand assets, copy or images were imported."
   ],
-  "release": { "productionDeployed": false, "reason": "Authenticated admin workspace evidence is still pending; 2.6.0 remains development work." }
+  "release": { "productionDeployed": false, "reason": "Authenticated admin Chrome evidence is complete, but this turn did not deploy. Production remains 2.5.0 while the 2.6.0 release decision is kept separate from local verification." }
 }
