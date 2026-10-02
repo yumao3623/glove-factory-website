@@ -11,7 +11,7 @@
     "deployedCommit": "05a459d",
     "deploymentStatus": "success",
     "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/CPVG2emYoD77UdCmdu9aSZro9xNA",
-    "documentationCommit": "3e67d2a",
+    "documentationCommit": "a571feb",
     "releaseDecision": "2.6.0 code was finalized in 05a459d after the mobile search follow-up; Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after the final deployment."
   },
   "implementation": [
@@ -91,5 +91,5 @@
     "The local design-reference and design-taste-frontend skills informed the type scale, removal of decorative numbered markers, content hierarchy and screenshot review.",
     "The ai-website-cloner-template repository was used only as a structural implementation reference; no third-party brand assets, copy or images were imported."
   ],
-  "release": { "productionDeployed": true, "codeCommit": "05a459d", "releaseCommit": "dce0e8b", "documentationCommit": "3e67d2a", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was finalized at 05a459d after the mobile search follow-up; Vercel Git integration deployed successfully and production browser checks completed. Customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
+  "release": { "productionDeployed": true, "codeCommit": "05a459d", "releaseCommit": "dce0e8b", "documentationCommit": "a571feb", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was finalized at 05a459d after the mobile search follow-up; Vercel Git integration deployed successfully and production browser checks completed. Customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
 }

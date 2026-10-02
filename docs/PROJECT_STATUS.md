@@ -20,7 +20,7 @@
 
 ## 代码、部署与数据基线
 
-- Git 主线为 `main`；2.6.0 功能代码最后变更为 `05a459d`，发布文档基线为 `dce0e8b`，后续证据/交接同步为 `863e0b7` 和 `3e67d2a`，均已推送到 `origin/main`，最终 Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
+- Git 主线为 `main`；2.6.0 功能代码最后变更为 `05a459d`，发布文档基线为 `dce0e8b`，后续证据/交接同步为 `863e0b7`、`3e67d2a` 和 `a571feb`，均已推送到 `origin/main`，最终 Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
 - 当前生产域名为 `https://www.jsmeilai.com/`。2.5.0 已由提交 `1e4215f` 推送并通过 Vercel 部署（部署记录：[14cyyy1f1t9KoEj7V5rSHJeKS5dx](https://vercel.com/mao-yu/glove-factory-website/14cyyy1f1t9KoEj7V5rSHJeKS5dx)）；生产 smoke 与本轮 SEO audit 均通过：28/28 URL、首页/产品 hub/15 个 PDP、sitemap/robots 200，未授权 admin API 仍为 401。
 - Vercel Production 已有独立 GA4 Measurement ID `G-PP1JPPV9FD`，以及 Supabase、Resend、管理员和 RFQ 相关生产变量；`SEO_INDEXING_ENABLED=true`、目录/RFQ 开关为 true，PayPal checkout 为 false。
 - Supabase 匿名读取显示 36 个 active products、137 个生产引用媒体 URL；本地媒体 manifest 有 173 个对象。匿名角色无法读取 RFQ、订单、客户和变体表，符合 RLS 边界；本轮没有使用管理员会话写入数据。
