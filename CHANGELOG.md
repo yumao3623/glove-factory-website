@@ -4,7 +4,6 @@
 
 ## Unreleased
 
-- 2026-10-01：完成 2.6.0 全站体验整改的本地收尾：用户 Chrome 已登录管理员会话通过中文后台读路径、产品搜索/已发布筛选、编辑后取消、询盘/订单空状态和支付关闭反馈；产品表单的内部枚举值改为中文标签。Production 仍为 2.5.0，本轮未部署。
 - 2026-09-28：根据当前 B2B manufacturer / supplier / RFQ 模式关闭 2.4.0 readiness gate。确认逐 SKU 实时库存、完整 MOQ/交期/材质、企业邮箱、WhatsApp、域名、locale 和 Payment 分别属于可选补充或后续功能范围，不再作为整个英文 RFQ 网站的统一 blocker；21 个 gated PDP 的原因收敛为逐页 SEO 文案和索引优先级审核。
 - 2026-09-28：在显式 opt-in 且确认夹具隔离/清理安全后，完成 Supabase commerce live fixture 11/11 以及 RFQ/报价状态夹具 3/3；所有测试记录已清理，不发送真实邮件、不创建真实报价或业务记录。readiness gate 的技术子门槛已通过，业务资料、运营责任、目标市场和真实通知投递仍待确认。
 - 2026-09-28：完成隔离 RFQ readiness smoke（成功保存、通知待处理、非法来源拒绝和状态标记），并修复前台在 `STORED_EMAIL_PENDING` 时的提示，明确告知询价已保存但通知尚待处理；未执行真实询盘、邮件或管理员写入。
@@ -13,6 +12,10 @@
 - 2026-09-28：使用已授权的 `yumao3623@gmail.com` 重新观察 GSC：0 indexed、11 not indexed、0 clicks/0 impressions；索引报告和 sitemap 仍是旧数据（sitemap 仅发现 9 个 URL），没有新的确认抓取、索引或曝光证据，未重复提交未变化 URL。
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。
 - 2026-09-24：确认并保留 `docs/PROJECT_STATUS.md`、`docs/ROADMAP.md`、`docs/HANDOFF.md`、`docs/PROJECT_WORKFLOW.md`、`docs/RELEASE_HISTORY.md` 作为持续交接体系；补充本变更记录文件。
+
+## 2.6.0
+
+- 2026-10-01：发布全站买家体验整改。统一首页、产品 hub、六大分类、PDP、联系、账户和移动导航的 B2B 询盘路径；补齐真实搜索/无结果恢复、筛选/排序、收藏找回、询盘清单编辑、账户别名注册验证登录与资料保存、中文管理员后台读路径，并保持在线支付关闭。`dce0e8b` 已推送到 `origin/main`，Vercel Git 集成成功，正式站桌面/移动浏览器复验通过。授权 RFQ 投递沿用已收到的收件箱证据，没有重复发送或创建真实业务记录。
 
 ## 2.5.0
 

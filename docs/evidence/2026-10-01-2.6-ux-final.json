@@ -1,12 +1,15 @@
 {
   "date": "2026-10-01",
   "version": "2.6.0",
-  "environment": "local development at http://localhost:3005",
+  "environment": "local development at http://localhost:3005 and production at https://www.jsmeilai.com/",
   "production": {
     "url": "https://www.jsmeilai.com/",
-    "version": "2.5.0",
-    "deployed": false,
-    "releaseDecision": "Authenticated administrator path completed in the user's Chrome session; 2.6.0 remains local and was not deployed in this turn. Production stays 2.5.0."
+    "version": "2.6.0",
+    "deployed": true,
+    "deployedCommit": "dce0e8b",
+    "deploymentStatus": "success",
+    "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/FzdDbbo23KcHeJWf6VmsEQhwAKxX",
+    "releaseDecision": "2.6.0 was pushed to origin/main at dce0e8b, Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after deployment."
   },
   "implementation": [
     "The homepage, product hub, six collection pages, contact page, account pages and PDP now share a compact type scale, restrained spacing, consistent CTA treatment and enquiry-led B2B copy.",
@@ -52,6 +55,27 @@
     "scope": "No new RFQ email was sent in this pass."
   },
   "browserErrors": { "contactHydrationIssue": "fixed", "catalogueTlsFetchIssue": "reproduced once, safe GET retry added, reload verified with 36 products and no errors", "noResultsConsoleErrors": [], "mobileConsoleErrors": [], "adminSessionErrors": [] },
+  "productionBrowserChecks": {
+    "canonical": "https://www.jsmeilai.com/",
+    "deploymentCommit": "dce0e8b",
+    "desktop": [
+      { "path": "/", "result": "Production hero, B2B positioning, six collection links and RFQ form rendered; screenshot captured after deployment with no console errors." },
+      { "path": "/products/?search=lace", "result": "Search was opened from the header, submitted, and returned 19 products with real cards and facet counts; a saved product changed to Saved product." },
+      { "path": "/products/?search=zzzz-no-match-260930", "result": "Production returned 0 products and the readable No matching products recovery message with no Issue text or console errors." },
+      { "path": "/bridal-gloves/", "result": "Bridal Gloves rendered 4 collection cards; the first View product details action opened Long Sheer Lace Bridal Gloves." },
+      { "path": "/opera-gloves/", "result": "Opera Gloves rendered 4 collection cards; the first product action opened Long Smooth Satin Opera Gloves." },
+      { "path": "/costume-gloves/", "result": "Costume and Stage Gloves rendered 2 collection cards; the first product action opened Feather Lace Costume Wrist Cuffs." },
+      { "path": "/kids-dress-gloves/", "result": "Kids Dress Gloves rendered 2 collection cards; the first product action opened Girls' Satin Bow Dress Gloves." },
+      { "path": "/wedding-veils/", "result": "Wedding Veils rendered 1 collection card; the first product action opened Black Lace-Trim Veil." },
+      { "path": "/arm-sleeves/", "result": "Arm Sleeves and Accessories rendered 2 collection cards; the first product action opened Long Fingerless Satin Bridal Arm Sleeves." },
+      { "path": "/products/bridal-gloves-sheer-lace-long-001/", "result": "PDP quantity and Add to enquiry list worked; the enquiry list showed the product and quantity, then the temporary browser entry was removed." },
+      { "path": "/contact/?family=opera-gloves&product=Long%20Smooth%20Satin%20Opera%20Gloves#rfq", "result": "Product reference and Opera gloves family were selected, with confirmed email, phone and WhatsApp contact paths visible." },
+      { "path": "/checkout/", "result": "Production clearly stated online payment is not available and linked back to the enquiry list/contact team." },
+      { "path": "/admin/", "result": "The existing authenticated administrator session loaded 36 real products and Chinese 产品与询盘管理. Search, 已发布 filter, edit-and-cancel, 询盘与订单 empty states and 创建报价 payment-closed copy all worked; no RFQ or product mutation was made." },
+      { "path": "/account/", "result": "Production account entry showed the sign-in/create-account gate. The authorized alias registration, verification, sign-in and profile save remain verified in the local browser run on the deployed commit; no new production credential was entered." }
+    ],
+    "mobile": { "viewport": "390x844", "result": "Production mobile navigation drawer opened; its Search link reached the catalogue, and entering lace returned 19 products without console errors." }
+  },
   "commands": {
     "npm test": "69/69 passed",
     "npm run lint": "passed with 0 warnings",
@@ -63,5 +87,5 @@
     "The local design-reference and design-taste-frontend skills informed the type scale, removal of decorative numbered markers, content hierarchy and screenshot review.",
     "The ai-website-cloner-template repository was used only as a structural implementation reference; no third-party brand assets, copy or images were imported."
   ],
-  "release": { "productionDeployed": false, "reason": "Authenticated admin Chrome evidence is complete, but this turn did not deploy. Production remains 2.5.0 while the 2.6.0 release decision is kept separate from local verification." }
+  "release": { "productionDeployed": true, "commit": "dce0e8b", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was pushed and deployed through the repository's Vercel Git integration. Production browser checks completed after deployment; customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
 }
