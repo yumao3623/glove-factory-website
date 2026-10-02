@@ -6,11 +6,13 @@
     "url": "https://www.jsmeilai.com/",
     "version": "2.6.0",
     "deployed": true,
-    "codeCommit": "dce0e8b",
-    "deployedCommit": "863e0b7",
+    "codeCommit": "05a459d",
+    "releaseCommit": "dce0e8b",
+    "deployedCommit": "05a459d",
     "deploymentStatus": "success",
-    "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/6iXKV7rmzfuTS7W8mKk4eBycBwrV",
-    "releaseDecision": "2.6.0 code was pushed at dce0e8b; release evidence and handoff were committed at 863e0b7, Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after the final deployment."
+    "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/CPVG2emYoD77UdCmdu9aSZro9xNA",
+    "documentationCommit": "3e67d2a",
+    "releaseDecision": "2.6.0 code was finalized in 05a459d after the mobile search follow-up; Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after the final deployment."
   },
   "implementation": [
     "The homepage, product hub, six collection pages, contact page, account pages and PDP now share a compact type scale, restrained spacing, consistent CTA treatment and enquiry-led B2B copy.",
@@ -58,8 +60,8 @@
   "browserErrors": { "contactHydrationIssue": "fixed", "catalogueTlsFetchIssue": "reproduced once, safe GET retry added, reload verified with 36 products and no errors", "noResultsConsoleErrors": [], "mobileConsoleErrors": [], "adminSessionErrors": [] },
   "productionBrowserChecks": {
     "canonical": "https://www.jsmeilai.com/",
-    "codeCommit": "dce0e8b",
-    "deploymentCommit": "863e0b7",
+    "codeCommit": "05a459d",
+    "deploymentCommit": "05a459d",
     "desktop": [
       { "path": "/", "result": "Production hero, B2B positioning, six collection links and RFQ form rendered; screenshot captured after deployment with no console errors." },
       { "path": "/products/?search=lace", "result": "Search was opened from the header, submitted, and returned 19 products with real cards and facet counts; a saved product changed to Saved product." },
@@ -76,7 +78,7 @@
       { "path": "/admin/", "result": "The existing authenticated administrator session loaded 36 real products and Chinese 产品与询盘管理. Search, 已发布 filter, edit-and-cancel, 询盘与订单 empty states and 创建报价 payment-closed copy all worked; no RFQ or product mutation was made." },
       { "path": "/account/", "result": "Production account entry showed the sign-in/create-account gate. The authorized alias registration, verification, sign-in and profile save remain verified in the local browser run on the deployed commit; no new production credential was entered." }
     ],
-    "mobile": { "viewport": "390x844", "result": "Production mobile navigation drawer opened; its Search link reached the catalogue, and entering lace returned 19 products without console errors." }
+    "mobile": { "viewport": "390x844", "result": "Production mobile navigation drawer opened; its Search button opened the same input dialog as desktop, and entering lace returned 19 products without console errors." }
   },
   "commands": {
     "npm test": "69/69 passed",
@@ -89,5 +91,5 @@
     "The local design-reference and design-taste-frontend skills informed the type scale, removal of decorative numbered markers, content hierarchy and screenshot review.",
     "The ai-website-cloner-template repository was used only as a structural implementation reference; no third-party brand assets, copy or images were imported."
   ],
-  "release": { "productionDeployed": true, "codeCommit": "dce0e8b", "deploymentCommit": "863e0b7", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was pushed at dce0e8b and the final release evidence was pushed at 863e0b7; Vercel Git integration deployed successfully. Production browser checks completed after the final deployment; customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
+  "release": { "productionDeployed": true, "codeCommit": "05a459d", "releaseCommit": "dce0e8b", "documentationCommit": "3e67d2a", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was finalized at 05a459d after the mobile search follow-up; Vercel Git integration deployed successfully and production browser checks completed. Customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
 }
