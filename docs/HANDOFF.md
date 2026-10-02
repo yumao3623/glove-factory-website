@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-Production 2.6.0（提交 `dce0e8b`，已部署并完成正式站浏览器复验）；2.5.0 发布历史保留。最终证据见 [2026-10-01 2.6 UX final](evidence/2026-10-01-2.6-ux-final.json)。
+Production 2.6.0（代码提交 `dce0e8b`，最终部署提交 `863e0b7`，已部署并完成正式站浏览器复验）；2.5.0 发布历史保留。最终证据见 [2026-10-01 2.6 UX final](evidence/2026-10-01-2.6-ux-final.json)。
 
 2026-10-01 已完成 B2B 工厂经营就绪度审计和工厂老板会面资料准备。生产公开目录重新读取为 36 个 active 产品、六个产品族；审计报告、中文会面 `.docx`、预填产品/资料 `.xlsx` 和只读产品快照位于 `docs/audits/2026-10-01-b2b-readiness-and-factory-meeting-audit.md` 与 `docs/internal/2026-10-01-b2b-factory-meeting/`。本轮没有生产写入、付款、开户、域名迁移或部署。下一业务门槛是工厂确认事实/规则/授权和外部机构核实，不是立即启用 PayPal。
 

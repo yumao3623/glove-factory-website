@@ -6,10 +6,11 @@
     "url": "https://www.jsmeilai.com/",
     "version": "2.6.0",
     "deployed": true,
-    "deployedCommit": "dce0e8b",
+    "codeCommit": "dce0e8b",
+    "deployedCommit": "863e0b7",
     "deploymentStatus": "success",
-    "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/FzdDbbo23KcHeJWf6VmsEQhwAKxX",
-    "releaseDecision": "2.6.0 was pushed to origin/main at dce0e8b, Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after deployment."
+    "deploymentRecord": "https://vercel.com/mao-yu/glove-factory-website/6iXKV7rmzfuTS7W8mKk4eBycBwrV",
+    "releaseDecision": "2.6.0 code was pushed at dce0e8b; release evidence and handoff were committed at 863e0b7, Vercel Git integration reported success, and the canonical production site was rechecked in Chrome after the final deployment."
   },
   "implementation": [
     "The homepage, product hub, six collection pages, contact page, account pages and PDP now share a compact type scale, restrained spacing, consistent CTA treatment and enquiry-led B2B copy.",
@@ -57,7 +58,8 @@
   "browserErrors": { "contactHydrationIssue": "fixed", "catalogueTlsFetchIssue": "reproduced once, safe GET retry added, reload verified with 36 products and no errors", "noResultsConsoleErrors": [], "mobileConsoleErrors": [], "adminSessionErrors": [] },
   "productionBrowserChecks": {
     "canonical": "https://www.jsmeilai.com/",
-    "deploymentCommit": "dce0e8b",
+    "codeCommit": "dce0e8b",
+    "deploymentCommit": "863e0b7",
     "desktop": [
       { "path": "/", "result": "Production hero, B2B positioning, six collection links and RFQ form rendered; screenshot captured after deployment with no console errors." },
       { "path": "/products/?search=lace", "result": "Search was opened from the header, submitted, and returned 19 products with real cards and facet counts; a saved product changed to Saved product." },
@@ -87,5 +89,5 @@
     "The local design-reference and design-taste-frontend skills informed the type scale, removal of decorative numbered markers, content hierarchy and screenshot review.",
     "The ai-website-cloner-template repository was used only as a structural implementation reference; no third-party brand assets, copy or images were imported."
   ],
-  "release": { "productionDeployed": true, "commit": "dce0e8b", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was pushed and deployed through the repository's Vercel Git integration. Production browser checks completed after deployment; customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
+  "release": { "productionDeployed": true, "codeCommit": "dce0e8b", "deploymentCommit": "863e0b7", "vercelStatus": "success", "productionBrowserVerified": true, "reason": "The 2.6.0 code was pushed at dce0e8b and the final release evidence was pushed at 863e0b7; Vercel Git integration deployed successfully. Production browser checks completed after the final deployment; customer alias auth was not re-created in production because no production credential was supplied, while the authorized local alias flow remains verified." }
 }

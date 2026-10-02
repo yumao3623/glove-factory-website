@@ -12,7 +12,7 @@
 - 结论：当前站点可以继续经营 B2B RFQ 目录路径；产品事实、MOQ/样品/交期/报价/发货/售后规则和责任链仍需工厂/外部机构确认。PayPal 保持关闭，资料准备不等于批准启用。
 - 上述审计资料本身没有触发部署；随后按本对话明确授权完成 2.6.0 发布收尾，部署提交为 `dce0e8b`，Vercel Git 集成成功，正式站浏览器复验已完成。
 
-- **Production：2.6.0（`dce0e8b`，已部署并完成生产浏览器复验）**。2.5.0 的发布历史保留；2.3.0 的 indexable B2B surface、2.4.0 的 consented GA4/UTM attribution 和支付关闭边界继续保留。部署记录见 [Vercel](https://vercel.com/mao-yu/glove-factory-website/FzdDbbo23KcHeJWf6VmsEQhwAKxX)。
+- **Production：2.6.0（代码 `dce0e8b`，最终部署 `863e0b7`，已完成生产浏览器复验）**。2.5.0 的发布历史保留；2.3.0 的 indexable B2B surface、2.4.0 的 consented GA4/UTM attribution 和支付关闭边界继续保留。部署记录见 [Vercel](https://vercel.com/mao-yu/glove-factory-website/6iXKV7rmzfuTS7W8mKk4eBycBwrV)。
 - **Development：无未发布的 2.6.0 代码**。本轮整改已进入 Production；后续视觉反馈仍按现有产品范围处理，不重新开启已关闭的 readiness gate。
 - **Current work：2.6.0 发布收尾已完成**。首页、六分类、PDP、联系、账户、搜索/筛选/排序/收藏/询盘清单、中文管理员后台、支付关闭反馈和移动端导航已在正式站实际操作；生产管理员会话读取 36 个真实产品并完成搜索、发布筛选、编辑取消、询盘/报价路径复验。普通客户别名的注册、邮箱验证、登录和资料保存证据来自同一提交的本地授权验收；正式站账户入口已复验，但没有重新输入生产凭据。
 - `package.json` 与 lock 根包版本为 `2.6.0`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
@@ -20,7 +20,7 @@
 
 ## 代码、部署与数据基线
 
-- Git 主线为 `main`；2.6.0 代码与发布交接提交为 `dce0e8b`，已推送到 `origin/main` 并由 Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
+- Git 主线为 `main`；2.6.0 代码提交为 `dce0e8b`，发布证据/交接提交为 `863e0b7`，两者均已推送到 `origin/main`，最终 Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
 - 当前生产域名为 `https://www.jsmeilai.com/`。2.5.0 已由提交 `1e4215f` 推送并通过 Vercel 部署（部署记录：[14cyyy1f1t9KoEj7V5rSHJeKS5dx](https://vercel.com/mao-yu/glove-factory-website/14cyyy1f1t9KoEj7V5rSHJeKS5dx)）；生产 smoke 与本轮 SEO audit 均通过：28/28 URL、首页/产品 hub/15 个 PDP、sitemap/robots 200，未授权 admin API 仍为 401。
 - Vercel Production 已有独立 GA4 Measurement ID `G-PP1JPPV9FD`，以及 Supabase、Resend、管理员和 RFQ 相关生产变量；`SEO_INDEXING_ENABLED=true`、目录/RFQ 开关为 true，PayPal checkout 为 false。
 - Supabase 匿名读取显示 36 个 active products、137 个生产引用媒体 URL；本地媒体 manifest 有 173 个对象。匿名角色无法读取 RFQ、订单、客户和变体表，符合 RLS 边界；本轮没有使用管理员会话写入数据。
