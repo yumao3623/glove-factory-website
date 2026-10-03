@@ -13,6 +13,10 @@
 - 2026-09-24：将长期项目管理规则正式写入仓库根目录 `AGENTS.md`，明确启动读取顺序、事实来源、版本规则、状态维护、固定结束报告、对话续接判断和下一条可复制指令。
 - 2026-09-24：确认并保留 `docs/PROJECT_STATUS.md`、`docs/ROADMAP.md`、`docs/HANDOFF.md`、`docs/PROJECT_WORKFLOW.md`、`docs/RELEASE_HISTORY.md` 作为持续交接体系；补充本变更记录文件。
 
+## 2.6.2
+
+- 2026-10-02：完成六大分类页首屏 hero 定向维护。以当前正式站六张已批准产品首图为编辑参考，生成并接入六张统一 editorial 产品摄影 hero 资源；保留原产品轮廓、材质、长度、装饰和可生产方向，不改产品详情媒体、页面 URL 或业务逻辑。提交 `83e5f51`，Vercel deployment `CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ` success；六页桌面/移动正式站复验通过。
+
 ## 2.6.1
 
 - 2026-10-02：完成截图驱动的定向维护。删除首页及同类页面重复、装饰性 overline 小字；将蓝色 announcement bar 恢复为仅首页显示的多语言无缝 marquee；把 `Analytics settings` 从固定左下角移到 footer，保留首次 consent、重开、GA4 consent update、UTM attribution 和事件门控。提交 `050a317`，Vercel deployment `8PN9yjfY6pFJyPdLFCfPrHuZcnxN` success；桌面/移动正式站复验通过。

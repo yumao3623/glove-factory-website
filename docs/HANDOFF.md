@@ -4,11 +4,13 @@
 
 ## 当前状态
 
-Production 2.6.1（功能代码 `050a317`，Vercel deployment [8PN9yjfY6pFJyPdLFCfPrHuZcnxN](https://vercel.com/mao-yu/glove-factory-website/8PN9yjfY6pFJyPdLFCfPrHuZcnxN)，已部署并完成正式站桌面/移动浏览器复验）；2.6.0 与 2.5.0 发布历史保留。
+Production 2.6.2（功能代码 `83e5f51`，Vercel deployment [CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ](https://vercel.com/mao-yu/glove-factory-website/CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ)，已部署并完成六大分类页正式站桌面/移动浏览器复验）；2.6.1、2.6.0 与 2.5.0 发布历史保留。
 
 2026-10-01 已完成 B2B 工厂经营就绪度审计和工厂老板会面资料准备。生产公开目录重新读取为 36 个 active 产品、六个产品族；审计报告、中文会面 `.docx`、预填产品/资料 `.xlsx` 和只读产品快照位于 `docs/audits/2026-10-01-b2b-readiness-and-factory-meeting-audit.md` 与 `docs/internal/2026-10-01-b2b-factory-meeting/`。本轮没有生产写入、付款、开户、域名迁移或部署。下一业务门槛是工厂确认事实/规则/授权和外部机构核实，不是立即启用 PayPal。
 
 ## 本轮已完成
+
+2.6.2 六大分类页 hero 定向维护已完成：以当前生产页六张已批准产品首图为参考，生成并接入六张真实 editorial 产品摄影 hero；保留产品轮廓、材质、长度、装饰和可生产方向，只替换 hero 资源映射。六页正式站桌面 1440×900、移动 390×844 均已复验，lint/typecheck/test/build 全部通过。
 
 2.6.1 定向整改已完成：首页及同类页面删除无价值 overline 小字；announcement bar 只在首页显示并使用无缝横向 marquee；Analytics settings 改为 footer 入口，首次 consent、重开、GA4 consent update 和事件门控保持。桌面 1440×900、移动 390×844、首页与 bridal-gloves 内页已在正式站实查。lint/typecheck/test/build 均通过。
 
@@ -16,7 +18,7 @@ Production 2.6.1（功能代码 `050a317`，Vercel deployment [8PN9yjfY6pFJyPdLF
 
 ## 当前等待
 
-本轮没有待完成的本地 2.6.1 验收项。用户 Chrome 的现有管理员会话已在正式站 `/admin/` 读取中文导航、真实 36 产品数据、搜索/发布筛选、编辑后取消、询盘/订单空状态和报价支付边界；没有 RFQ 行可供状态变更，因此未创建数据或重发通知。2.6.0 已由 `05a459d` 推送并部署，正式站搜索、无结果、六分类逐页产品入口、PDP、联系、支付边界、移动搜索弹层和管理员路径均已复验；2.6.1 已由 `050a317` 推送并部署，三项定向整改已复验。普通客户别名的注册、验证、登录和资料保存已在同提交的本地授权流程完成；正式站账户入口已复验但未重新输入凭据。
+本轮没有待完成的本地 2.6.2 验收项。六大分类页 hero 已全部部署并完成正式站桌面/移动复验；2.6.1 的三项定向整改、2.6.0 的搜索/无结果/六分类/PDP/联系/支付边界/移动搜索弹层和管理员路径均保留既有证据。用户 Chrome 的现有管理员会话、普通客户别名注册验证登录资料保存和授权 RFQ 投递证据均不因本轮重复执行。
 
 ## 已有边界与证据
 
@@ -24,4 +26,4 @@ Production 2.6.1（功能代码 `050a317`，Vercel deployment [8PN9yjfY6pFJyPdLF
 
 ## 唯一下一任务
 
-2.6.1 发布与生产复验已完成。下一次继续当前对话即可处理同一范围内的用户视觉反馈；若形成新的正式 minor/major 版本，再按仓库规则新建对应发布对话。
+2.6.2 发布与生产复验已完成。下一次继续当前对话即可处理同一范围内的分类 hero 视觉反馈或真实产品图片修正；若形成新的正式 minor/major 版本，再按仓库规则新建对应发布对话。

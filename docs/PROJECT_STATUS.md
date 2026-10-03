@@ -12,16 +12,16 @@
 - 结论：当前站点可以继续经营 B2B RFQ 目录路径；产品事实、MOQ/样品/交期/报价/发货/售后规则和责任链仍需工厂/外部机构确认。PayPal 保持关闭，资料准备不等于批准启用。
 - 上述审计资料本身没有触发部署；随后按本对话明确授权完成 2.6.0 发布收尾，部署提交为 `dce0e8b`，Vercel Git 集成成功，正式站浏览器复验已完成。
 
-- **Production：2.6.1（功能代码 `050a317`，基于 2.6.0，已完成生产浏览器复验）**。2.6.0 与 2.5.0 的发布历史保留；2.3.0 的 indexable B2B surface、2.4.0 的 consented GA4/UTM attribution 和支付关闭边界继续保留。运行时代码部署记录见 [Vercel](https://vercel.com/mao-yu/glove-factory-website/8PN9yjfY6pFJyPdLFCfPrHuZcnxN)。
-- **Development：无未发布的 2.6.1 代码**。本轮三项定向整改已进入 Production；后续视觉反馈仍按现有产品范围处理，不重新开启已关闭的 readiness gate。
-- **Current work：2.6.1 定向整改已完成**。移除首页及同类页面的无价值 overline 小字；蓝色 announcement bar 仅首页显示并恢复无缝横向 marquee；Analytics settings 从常驻左下角移到 footer，首次 consent、重开、GA4 consent update 和 UTM/事件门控保持。正式站桌面/移动首页和多个内页均已实际复验。
-- `package.json` 与 lock 根包版本为 `2.6.1`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
+- **Production：2.6.2（功能代码 `83e5f51`，基于 2.6.1，已完成生产浏览器复验）**。2.6.1、2.6.0 与 2.5.0 的发布历史保留；2.3.0 的 indexable B2B surface、2.4.0 的 consented GA4/UTM attribution 和支付关闭边界继续保留。运行时代码部署记录见 [Vercel](https://vercel.com/mao-yu/glove-factory-website/CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ)。
+- **Development：无未发布的 2.6.2 代码**。六大分类页 hero 定向视觉维护已进入 Production；后续视觉反馈仍按现有产品范围处理，不重新开启已关闭的 readiness gate。
+- **Current work：2.6.2 六大分类页 hero 定向维护已完成**。六页均以当前批准产品首图为参考完成保真优化，统一为真实 editorial 产品摄影；没有改动页面结构、URL、分类文案或业务逻辑。正式站六页桌面/移动均已实际复验。
+- `package.json` 与 lock 根包版本为 `2.6.2`。包版本、Git 推送、Vercel Ready 和生产验收分别记录，不能互相替代。
 - **Payment：`BLOCKED / awaiting real payment information`**，只阻塞未来 To C/在线收款，不阻塞 B2B RFQ 网站。
 
 ## 代码、部署与数据基线
 
-- Git 主线为 `main`；2.6.1 功能代码为 `050a317`，2.6.0 功能基线为 `05a459d`，2.6.0 发布文档基线为 `dce0e8b`，相关证据/交接提交均已推送到 `origin/main`，Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
-- 当前生产域名为 `https://www.jsmeilai.com/`。2.6.1 已由提交 `050a317` 推送并通过 Vercel 部署（部署记录：[8PN9yjfY6pFJyPdLFCfPrHuZcnxN](https://vercel.com/mao-yu/glove-factory-website/8PN9yjfY6pFJyPdLFCfPrHuZcnxN)）；生产首页和 bridal-gloves 内页 200，首页 marquee、内页隐藏、footer consent 入口和桌面/移动布局均已复验。2.5.0 的 28/28 SEO audit 历史证据保留。
+- Git 主线为 `main`；2.6.2 功能代码为 `83e5f51`，2.6.1 功能代码为 `050a317`，2.6.0 功能基线为 `05a459d`，2.6.0 发布文档基线为 `dce0e8b`，相关证据/交接提交均已推送到 `origin/main`，Vercel Git 集成成功部署。2.3 之后的 GA4/UTM 提交链为 `d7f8126`、`7bb286b`、`3c0fce4`、`b07227b`，2.4.0 发布为 `9377f2a`，2.5.0 发布为 `1e4215f`。没有伪造历史 release tag。
+- 当前生产域名为 `https://www.jsmeilai.com/`。2.6.2 已由提交 `83e5f51` 推送并通过 Vercel 部署（部署记录：[CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ](https://vercel.com/mao-yu/glove-factory-website/CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ)）；六大分类页 hero 均使用新静态资源，桌面/移动布局与无水平溢出均已复验。2.6.1 的 announcement/consent 证据和 2.5.0 的 28/28 SEO audit 历史证据保留。
 - Vercel Production 已有独立 GA4 Measurement ID `G-PP1JPPV9FD`，以及 Supabase、Resend、管理员和 RFQ 相关生产变量；`SEO_INDEXING_ENABLED=true`、目录/RFQ 开关为 true，PayPal checkout 为 false。
 - Supabase 匿名读取显示 36 个 active products、137 个生产引用媒体 URL；本地媒体 manifest 有 173 个对象。匿名角色无法读取 RFQ、订单、客户和变体表，符合 RLS 边界；本轮没有使用管理员会话写入数据。
 
@@ -117,6 +117,12 @@
 - 不把未来域名迁移与当前 UI/SEO 混成全站重构；在 `jsmeilai.com` 上继续做有范围、可验证的买家体验和搜索改进。
 - 不启动 Payment、完整 To C 电商或大规模多语言薄页。
 
+## 2026-10-02 2.6.2 分类页 hero 定向核对
+
+本轮只处理六大分类页首屏 hero image：`/bridal-gloves/`、`/opera-gloves/`、`/costume-gloves/`、`/kids-dress-gloves/`、`/wedding-veils/`、`/arm-sleeves/`。每张图均以生产页当前已批准的首张产品媒体为参考，使用编辑式生成完成“原图保真优化”，保留原产品轮廓、材质、长度、装饰和可生产方向；生成结果存为 `assets/editorial/generated/collection-heroes/*-hero-v2.webp`，通过 `data/generated-collection-hero-media.ts` 接入现有 `CollectionHero`。只替换 hero 静态资源映射，沿用现有 aspect/object-cover 样式，不改变产品详情媒体、页面结构、URL、分类文案或业务逻辑。
+
+代码检查：`npm run lint`、`npm run typecheck`、`npm test` 69/69、`npm run build` 均通过。提交 `83e5f51` 已推送 `origin/main`，Vercel deployment `CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ` 状态 success。正式站六页逐页在桌面 1440×900 与移动 390×844 复验：hero src 指向新 hashed static asset，alt 正确，图片自然尺寸与容器匹配，无水平溢出、console error 或 consent dialog 干扰；截图证据保留在本次工作目录的临时验证文件中。
+
 ## 2026-10-02 2.6.1 定向整改核对
 
 本轮只处理截图中的三项问题：移除首页及同类页面的装饰性 overline 小字；恢复仅首页的三条多语言 announcement marquee；将 Analytics settings 从固定左下角移至 footer，并通过同一 GA4 consent 状态重开。`npm run lint`、`npm run typecheck`、`npm test` 69/69、`npm run build` 均通过。Production 提交 `050a317` 的 Vercel 状态为 success；正式站桌面 1440×900 和移动 390×844 均确认首页有蓝色 marquee、多个内页无 bar、没有常驻固定 Analytics settings，footer 入口可重新打开 consent，允许后 GA4 loader/flag 正常出现。
@@ -133,4 +139,5 @@
 - [2.6.0 UX 浏览器与视觉证据](evidence/2026-09-29-2.6-ux.json)
 - [2.6.0 UX 最终定向证据](evidence/2026-10-01-2.6-ux-final.json)
 - [2.6.1 Vercel Production deployment](https://vercel.com/mao-yu/glove-factory-website/8PN9yjfY6pFJyPdLFCfPrHuZcnxN)
+- [2.6.2 Vercel Production deployment](https://vercel.com/mao-yu/glove-factory-website/CmB4yRkN5fXaoDPmd7cXwUVJQ4yZ)
 - [GA4/UTM 源码](../lib/analytics.ts) 与 [consent loader](../components/analytics/ga4-consent.tsx)
