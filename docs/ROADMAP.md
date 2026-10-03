@@ -1,12 +1,18 @@
 # JS Meilai 路线图
 
-核对日期：2026-10-01。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
+核对日期：2026-10-02。只保留当前仍有价值的里程碑；历史已完成事项见 [RELEASE_HISTORY](RELEASE_HISTORY.md)。
 
-## 当前阶段：2.6.0 生产已发布；持续 B2B 买家反馈观察
+## 当前阶段：2.6.1 patch 已发布；持续 B2B 买家反馈观察
 
 **目标**：在 `jsmeilai.com` 上持续改善 B2B manufacturer / supplier / RFQ 的买家路径和可发现性；按域名、市场、邮箱、WhatsApp 和产品资料的实际依赖安排后续范围，不把 To C 库存或完整商业字段倒灌到当前网站。
 
-**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。2.6.0 的实现、六分类视觉、桌面/移动关键路径、搜索/筛选/收藏/询盘编辑、账户别名、中文管理员路径、支付边界和正式站浏览器复验已有证据；2.6.0 已以 `dce0e8b` 部署到 Production。
+**DoD**：2.4.0 的 package/Git/Vercel/production 证据一致；28/15/21 页面边界明确；RFQ、consent、UTM attribution、admin 边界、RLS 和受控状态夹具已验证；B2B 产品身份/媒体/来源/询价路径可运营；逐 SKU stock、MOQ、lead time、企业邮箱、WhatsApp、locale 和 Payment 不属于统一 gate。2.4.0 readiness 已关闭。2.6.0 的实现、六分类视觉、桌面/移动关键路径、搜索/筛选/收藏/询盘编辑、账户别名、中文管理员路径、支付边界和正式站浏览器复验已有证据；2.6.0 已以 `dce0e8b` 部署到 Production；2.6.1 的局部视觉/consent 整改以 `050a317` 部署并完成桌面/移动复验。
+
+## 2.6.1：定向视觉与 consent 维护（已发布并完成生产浏览器复验）
+
+**范围**：只处理截图中圈出的三项问题：移除首页及同类页面的装饰性 overline 小字；恢复仅首页的多语言 announcement marquee；把 Analytics settings 从常驻左下角移到 footer，同时保留首次 consent、重开和 GA4/UTM 行为。
+
+**验证**：提交 `050a317`，Vercel deployment `8PN9yjfY6pFJyPdLFCfPrHuZcnxN` 状态 success；`npm test` 69/69、typecheck、lint、production build 通过；正式站桌面 1440×900 和移动 390×844 检查首页 marquee、多个内页隐藏、footer 重开 consent、GA4 loader/flag 和无水平溢出。
 
 ## 2.6.0：全站买家体验整改（已发布并完成生产浏览器复验）
 

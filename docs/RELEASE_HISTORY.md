@@ -11,12 +11,13 @@
 | 2.2（当前统一表达 2.2.0） | 限定正式索引开关、9 URL sitemap、canonical/robots/指南内容与技术审计；GSC 验证/sitemap 提交/首页索引请求历史已完成。外链仅台账和模板，非发布；Google 收录不是 release DoD。 | `db853bf`、`fa36a45` 与截至 `2f92a54` 的验收文档（2026-09-18）；[SEO/GSC 手册](V2_2_SEO_GSC_RUNBOOK.md)。 |
 | 2.3.0 | B2B 成熟度升级：28 URL 正式 sitemap、15 个 curated PDP、factory/custom/contact/costume 索引边界、SSR/内链/移动语义、canonical/robots/OG/schema、`/api/media/` 抓取修复、claimed-crawler 观察、RFQ/获客事件骨架和 IndexNow 提交；最终生产映射已移除未确认的标题尺寸词。Payment 仍 blocked；多语言 SEO、GA4、Bing property 和外部发送仍需账号/事实。 | `9e68f5e` → `3a29adc` → `314e955` → `a6290e5` → `349201d` → `ac404cf` → `6a08d52` → `b43ce31`；Vercel commit status success；生产 28/28 probe 与 GSC live/request 证据见 `docs/PROJECT_STATUS.md` 和 `docs/evidence/2026-09-27-2.3-production.json`。 |
 | 2.4.0 | consented GA4 与 UTM 首触/末触 attribution 生产能力：独立 `jsmeilai.com` Property/Stream、默认拒绝并在同意后加载、配置缺失 fail-closed、GA4-ready 事件门控；同时完成版本与状态文档纠偏。保留 28/15/21 页面边界，Payment 仍 blocked，多语言 SEO 仍未完成。 | `d7f8126` → `7bb286b` → `3c0fce4` → `b07227b`；Production 现场已验证 `G-PP1JPPV9FD` page_view/contact_click/whatsapp_click 与 consent 行为；Vercel Production deployment `5puQvXGJf3msMhfv4g3VLG2aMn4p`（Ready，source `9377f2a`）；线上探针见 `docs/evidence/2026-09-28-2.4-audit.json`。 |
+| 2.6.1 | 定向视觉与 consent 维护：删除首页及同类页面装饰性 overline 小字；announcement marquee 仅首页显示；Analytics settings 移至 footer，保留 GA4 consent、UTM 和事件门控。 | `050a317`；Vercel deployment `8PN9yjfY6pFJyPdLFCfPrHuZcnxN`（Ready）；正式站桌面/移动浏览器复验通过。 |
 | 2.5.0 | B2B buyer-experience slice：首屏 H1/CTA 进入首屏、三步 sourcing path 连接目录/采购简报/项目确认、五语言 UI 文案补齐；产品 hub 为正式 15 个 PDP 生成 `ItemList`，不改变 28 URL/15/21 索引边界、canonical、域名或支付边界。 | `1e4215f`；Vercel deployment `14cyyy1f1t9KoEj7V5rSHJeKS5dx`（Ready）；生产 SEO audit 28/28 warnings/failures 0；生产定向探针首页/产品 hub/curated PDP/robots/sitemap 200。 |
 
 ## 必须保留的差异
 
 Git 实际顺序是：2.0 → 2.1 → **2.2 SEO 提交与验收** → **2.1.5 UI 提交** → **2.3 indexable B2B surface**；2.3 生产代码提交为 `b43ce31`，其后仅有治理文档提交。所以“准备 2.2 时插入 2.1.5”可作为用户阶段叙述保留，不能作为提交时间事实；2.3 是后续真实代码能力，不重写历史。
 
-package.json/lock 根包当前应与已验收发布为 2.4.0；没有 2.0/2.1/2.1.5/2.2/2.3/2.4 Git tag。不要假装从不存在的 tag 确认了生产版本；本次依据 release 范围、GitHub/Vercel commit status 及线上行为整理。
+package.json/lock 根包当前应与已验收发布为 2.6.1；没有 2.0/2.1/2.1.5/2.2/2.3/2.4 Git tag。不要假装从不存在的 tag 确认了生产版本；本次依据 release 范围、GitHub/Vercel commit status 及线上行为整理。
 
 旧文档出现“未接 Supabase”“RFQ 尚未上线”“GSC 未配置”“2.2 暂停”“2.3 必须多语言”等字句时，按其当时日期理解。当前决策以 PROJECT_STATUS.md / ROADMAP.md 为准。旧证据留在原处，不再复制长篇任务流水账。

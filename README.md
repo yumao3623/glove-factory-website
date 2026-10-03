@@ -1,6 +1,6 @@
 # JS Meilai 手套工厂网站
 
-JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.5.0**（包含 2.1.5 五语言 UI、consented GA4/UTM attribution、首屏采购入口、三步 sourcing path 和产品 hub `ItemList`），外部获客扩张仍以事实审核和可接收询盘为前提。package.json 的版本字段不能单独作为部署判定，当前生产代码和线上证据以 [PROJECT_STATUS](docs/PROJECT_STATUS.md) 为准。
+JS Meilai 的 B2B 产品展示网站，面向婚礼手套、礼服手套、儿童礼服手套、舞台手套、婚礼头纱和袖套等海外采购场景。项目使用 Next.js App Router、TypeScript、Tailwind CSS 和少量 shadcn/ui 组件。当前产品生产基线为 **2.6.1**（包含 2.1.5 五语言 UI、consented GA4/UTM attribution、首屏采购入口、三步 sourcing path 和产品 hub `ItemList`），外部获客扩张仍以事实审核和可接收询盘为前提。package.json 的版本字段不能单独作为部署判定，当前生产代码和线上证据以 [PROJECT_STATUS](docs/PROJECT_STATUS.md) 为准。
 
 新任务先读根目录 [AGENTS.md](AGENTS.md)，再按其中顺序读 [当前状态](docs/PROJECT_STATUS.md)、[当前交接](docs/HANDOFF.md)、[近期路线](docs/ROADMAP.md)、[固定工作规则](docs/PROJECT_WORKFLOW.md)。历史只需读 [版本简史](docs/RELEASE_HISTORY.md)，详细验收按其中链接追溯。
 
