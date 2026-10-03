@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon, Check } from "lucide-react";
 import { EditorialImage } from "@/components/marketing/editorial-image";
-import { approvedProductImage } from "@/components/product/approved-product-image";
 import { RfqForm } from "@/components/marketing/rfq-form";
 import { LiveRfqForm } from "@/components/rfq/live-form";
 import { LocalizedText } from "@/components/i18n/localized-text";
@@ -14,6 +13,7 @@ import { canonicalUrl } from "@/lib/site";
 import { ProductFamilyView } from "@/components/analytics/product-family-view";
 import { isIndexableProductSlug } from "@/data/seo-index";
 import { isIndexableProduction } from "@/lib/stakeholder-preview";
+import { generatedCollectionHeroMedia } from "@/data/generated-collection-hero-media";
 
 export type CollectionConfig = {
   family: ProductFamily;
@@ -38,17 +38,18 @@ export function CollectionPage({ config, products }: { config: CollectionConfig;
   const breadcrumbSchema = { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: canonicalUrl("/").toString() }, { "@type": "ListItem", position: 2, name: "Products", item: canonicalUrl("/products/").toString() }, { "@type": "ListItem", position: 3, name: config.title, item: canonicalUrl(`/${config.family}/`).toString() }] };
   const collectionSchema = { "@context": "https://schema.org", "@graph": [{ "@type": "CollectionPage", name: config.title, description: config.intro, url: canonicalUrl(`/${config.family}/`).toString(), isPartOf: { "@type": "WebSite", url: canonicalUrl("/").toString() } }, breadcrumbSchema] };
   return <main id="main-content" tabIndex={-1} className="overflow-hidden"><ProductFamilyView family={config.family} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-    <CollectionHero config={config} product={visibleProducts[0]} />
+    <CollectionHero config={config} />
     <CollectionRange config={config} products={visibleProducts} />
     <CollectionProcurement config={config} rfqEnabled={rfqEnabled} />
     <section id="rfq" className="bg-black text-white"><div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[.75fr_1.25fr] lg:px-10 lg:py-24"><div><h2 className="max-w-md font-serif text-4xl leading-[1.04] sm:text-5xl">{rfqEnabled ? <LocalizedText k="common.startWholesale" fallback="Start a wholesale conversation." /> : <LocalizedText k="common.reviewRange" fallback="Review the range without submitting a brief." />}</h2><p className="mt-5 max-w-sm leading-7 text-stone-300">{rfqEnabled ? <LocalizedText k="common.shareStyles" fallback="Share the styles, quantities and custom details you need us to review." /> : <LocalizedText k="common.previewOffline" fallback="This stakeholder preview keeps enquiry delivery and visitor-data collection offline." />}</p></div><div className="rfq-on-dark">{rfqEnabled ? <LiveRfqForm /> : <RfqForm />}</div></div></section>
   </main>;
 }
 
-function CollectionHero({ config, product }: { config: CollectionConfig; product: ApprovedCatalogueProduct | undefined }) {
+function CollectionHero({ config }: { config: CollectionConfig }) {
   const dark = config.layout === "opera";
   const tone = dark ? "bg-[#0d2b3f] text-white" : config.layout === "kids" ? "bg-[#f0e7df]" : "bg-white";
-  return <section className={tone}><div className="mx-auto max-w-[1280px] px-5 py-6 sm:px-8 lg:px-10"><Breadcrumb title={config.title} dark={dark} /><div className="grid gap-8 py-9 sm:py-11 lg:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-14 lg:py-12"><div><h1 className="max-w-[16ch] font-serif text-[clamp(2.8rem,5vw,4.8rem)] leading-[.96] tracking-[-.02em]">{config.title}</h1><p className={dark ? "mt-5 max-w-[42ch] leading-7 text-stone-200" : "mt-5 max-w-[42ch] leading-7 text-stone-600"}>{config.intro}</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg" className={dark ? "min-h-11 rounded-none bg-white px-5 text-black hover:bg-stone-200" : "min-h-11 rounded-none bg-[#0d2b3f] px-5 hover:bg-[#173f59]"}><a href="#collection"><LocalizedText k="common.exploreCollection" fallback="Explore the collection" /> <ArrowRightIcon data-icon="inline-end" /></a></Button><Link href="/contact/#rfq" className={dark ? "inline-flex min-h-11 items-center border border-white/60 px-5 text-sm hover:bg-white/10" : "inline-flex min-h-11 items-center border border-[#0d2b3f] px-5 text-sm text-[#0d2b3f] hover:bg-stone-100"}>Start an enquiry</Link></div></div>{product ? <EditorialImage src={approvedProductImage(product.primaryImage)} alt={product.primaryImage.altText} priority className="aspect-[5/3] lg:aspect-[1.25/1]" imageClassName="object-cover object-center" sizes="(min-width: 1024px) 58vw, 100vw" /> : null}</div></div></section>;
+  const hero = generatedCollectionHeroMedia[config.family];
+  return <section className={tone}><div className="mx-auto max-w-[1280px] px-5 py-6 sm:px-8 lg:px-10"><Breadcrumb title={config.title} dark={dark} /><div className="grid gap-8 py-9 sm:py-11 lg:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-14 lg:py-12"><div><h1 className="max-w-[16ch] font-serif text-[clamp(2.8rem,5vw,4.8rem)] leading-[.96] tracking-[-.02em]">{config.title}</h1><p className={dark ? "mt-5 max-w-[42ch] leading-7 text-stone-200" : "mt-5 max-w-[42ch] leading-7 text-stone-600"}>{config.intro}</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg" className={dark ? "min-h-11 rounded-none bg-white px-5 text-black hover:bg-stone-200" : "min-h-11 rounded-none bg-[#0d2b3f] px-5 hover:bg-[#173f59]"}><a href="#collection"><LocalizedText k="common.exploreCollection" fallback="Explore the collection" /> <ArrowRightIcon data-icon="inline-end" /></a></Button><Link href="/contact/#rfq" className={dark ? "inline-flex min-h-11 items-center border border-white/60 px-5 text-sm hover:bg-white/10" : "inline-flex min-h-11 items-center border border-[#0d2b3f] px-5 text-sm text-[#0d2b3f]"}>Start an enquiry</Link></div></div><EditorialImage src={hero.src} alt={hero.alt} priority className="aspect-[5/3] lg:aspect-[1.25/1]" imageClassName="object-cover object-center" sizes="(min-width: 1024px) 58vw, 100vw" /></div></div></section>;
 }
 
 function CollectionRange({ config, products }: { config: CollectionConfig; products: readonly ApprovedCatalogueProduct[] }) {
