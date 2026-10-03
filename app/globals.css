@@ -54,7 +54,7 @@ a { text-underline-offset: 4px; }
 .section-label { font-size: .6875rem; font-weight: 600; letter-spacing: 0; line-height: 1.4; text-transform: uppercase; }
 .rfq-on-dark form { border-color: #4a4742; }
 .announcement-bar { position: relative; overflow: hidden; background: var(--navy); color: #fff; }
-.announcement-track { display: flex; width: max-content; min-height: 2.25rem; align-items: center; animation: announcement-scroll 34s linear infinite; }
+.announcement-track { display: flex; width: max-content; min-height: 2.25rem; align-items: center; animation: announcement-scroll 34s linear infinite; will-change: transform; }
 .announcement-bar:hover .announcement-track, .announcement-bar:focus-within .announcement-track { animation-play-state: paused; }
 .announcement-item { display: inline-flex; align-items: center; gap: 1.5rem; padding: .45rem 1.5rem; font-size: .625rem; font-weight: 600; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; white-space: nowrap; }
 .announcement-dot { color: #a8c2d3; font-size: .85rem; }

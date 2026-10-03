@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const CONSENT_KEY = "jsmeilai-analytics-consent-v1";
 const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const SETTINGS_EVENT = "jsmeilai:open-analytics-settings";
 
 type Consent = "granted" | "denied" | null;
 
@@ -21,10 +22,17 @@ export function Ga4Consent() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const openSettings = () => setOpen(true);
+    window.addEventListener(SETTINGS_EVENT, openSettings);
+    return () => window.removeEventListener(SETTINGS_EVENT, openSettings);
+  }, []);
+
   if (!MEASUREMENT_ID) return null;
 
   function choose(value: Exclude<Consent, null>) {
     window.localStorage.setItem(CONSENT_KEY, value);
+    window.gtag?.("consent", "update", { analytics_storage: value === "granted" ? "granted" : "denied" });
     setConsent(value);
     setOpen(false);
     window.__jsmeilaiAnalyticsConsent = value === "granted";
@@ -50,6 +58,6 @@ export function Ga4Consent() {
         <button type="button" onClick={() => choose("granted")} className="min-h-10 bg-[#0d2b3f] px-4 text-sm text-white">Allow analytics</button>
         <button type="button" onClick={() => choose("denied")} className="min-h-10 border border-[#0d2b3f] px-4 text-sm">Decline</button>
       </div>
-    </div> : <button type="button" onClick={() => setOpen(true)} className="fixed bottom-4 left-4 z-[60] border border-stone-300 bg-white/95 px-3 py-2 text-xs text-stone-600 shadow-sm">Analytics settings</button>}
+    </div> : null}
   </>;
 }

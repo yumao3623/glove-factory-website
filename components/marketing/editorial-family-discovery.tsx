@@ -28,8 +28,7 @@ export function EditorialFamilyDiscovery() {
       <div className="relative mx-auto max-w-[1380px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
-            <p className="section-label text-stone-600"><LocalizedText k="home.exploreRange" fallback="Explore the range" /></p>
-            <h2 className="mt-3 max-w-[23ch] font-serif text-4xl leading-[1.02] tracking-[-.02em] sm:text-5xl lg:text-[3.25rem]">
+            <h2 className="max-w-[23ch] font-serif text-4xl leading-[1.02] tracking-[-.02em] sm:text-5xl lg:text-[3.25rem]">
               <LocalizedText k="home.rangeTitle" fallback="Six directions for an occasionwear range." />
             </h2>
           </div>

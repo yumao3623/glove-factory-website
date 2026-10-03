@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Menu, ShoppingBag, UserRound } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { useLocale } from "@/components/i18n/locale-provider";
@@ -18,13 +19,20 @@ const menus = [
 
 export function SiteHeader() {
   const { t } = useLocale();
+  const pathname = usePathname();
   const [open, setOpen] = useState<string | null>(null);
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLButtonElement>(null);
   const desktopActionsRef = useRef<HTMLDivElement>(null);
+  const notices = [t("announcement.1"), t("announcement.2"), t("announcement.3")];
   return <>
-    <div className="border-b border-[#d7dcdd] bg-[#0d2b3f] px-5 py-2 text-center text-[10px] font-medium uppercase tracking-[.12em] text-white sm:px-8">B2B sourcing · Enquiry-led catalogue · Online payment not available</div>
+    {pathname === "/" ? <div className="announcement-bar" aria-label="Site announcements">
+      <p className="sr-only">{notices.join(" • ")}</p>
+      <div className="announcement-track" aria-hidden="true">
+        {[...notices, ...notices].map((notice, index) => <span key={`${notice}-${index}`} className="announcement-item">{notice}<span className="announcement-dot" aria-hidden="true">•</span></span>)}
+      </div>
+    </div> : null}
     <header className="sticky top-0 z-40 border-b border-[#c9ced0] bg-[#f5f6f5]/95 backdrop-blur-sm">
       <div className="mx-auto flex min-h-[76px] max-w-[1400px] items-center justify-between gap-5 px-5 sm:px-8 lg:px-10">
         <Link href="/" className="font-serif text-[1.7rem] leading-none tracking-tight text-[#0d2b3f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0d2b3f]">{provisionalBrandDisplay}</Link>

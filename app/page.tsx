@@ -36,8 +36,7 @@ function RefinedHero() {
       <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.98fr_1.02fr]">
         <div className="order-1 flex flex-col justify-center px-5 py-10 sm:px-8 sm:py-14 lg:min-h-[32rem] lg:px-12 lg:py-12">
           <div>
-            <p className="section-label text-[#274c68]"><LocalizedText k="home.eyebrow" /></p>
-            <h1 className="mt-5 max-w-[18ch] font-serif text-[clamp(3rem,5vw,4.8rem)] leading-[0.97] tracking-[-0.035em] text-balance">
+            <h1 className="max-w-[18ch] font-serif text-[clamp(3rem,5vw,4.8rem)] leading-[0.97] tracking-[-0.035em] text-balance">
               <LocalizedText k="home.title" />
             </h1>
             <p className="mt-6 max-w-md text-[1.05rem] leading-7 text-[#3e464b]">
